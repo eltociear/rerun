@@ -102,11 +102,9 @@ fn double_hash(value: impl std::hash::Hash + Copy) -> [u64; 2] {
 
 /// Hash the given value.
 #[inline]
-fn hash_with_seed(value: impl std::hash::Hash, seed: u128) -> u64 {
-    use std::hash::Hash as _;
-    use std::hash::Hasher as _;
-    let mut hasher = ahash::AHasher::default();
-    seed.hash(&mut hasher);
+fn hash_with_seed(value: impl std::hash::Hash, seed: usize) -> u64 {
+    use std::hash::{BuildHasher as _, Hasher as _};
+    let mut hasher = ahash::RandomState::with_seed(seed).build_hasher();
     value.hash(&mut hasher);
     hasher.finish()
 }
@@ -114,8 +112,8 @@ fn hash_with_seed(value: impl std::hash::Hash, seed: u128) -> u64 {
 /// Hash the given value.
 #[inline]
 fn hash(value: impl std::hash::Hash) -> u64 {
-    use std::hash::Hasher as _;
-    let mut hasher = ahash::AHasher::default();
+    use std::hash::{BuildHasher as _, Hasher as _};
+    let mut hasher = ahash::RandomState::with_seed(0).build_hasher();
     value.hash(&mut hasher);
     hasher.finish()
 }

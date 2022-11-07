@@ -11,8 +11,8 @@
 /// Fast but high quality string hash
 #[inline]
 fn hash(value: impl std::hash::Hash) -> u64 {
-    use std::hash::Hasher as _;
-    let mut hasher = ahash::AHasher::default();
+    use std::hash::{BuildHasher as _, Hasher as _};
+    let mut hasher = ahash::RandomState::with_seed(0).build_hasher();
     value.hash(&mut hasher);
     hasher.finish()
 }
