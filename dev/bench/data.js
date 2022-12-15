@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1671124330349,
+  "lastUpdate": 1671127967850,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
@@ -1049,6 +1049,84 @@ window.BENCHMARK_DATA = {
             "name": "obj_batch_points_sequential/query",
             "value": 5665,
             "range": "± 4",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/Tuid::random",
+            "value": 37,
+            "range": "± 0",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "andreas@rerun.io",
+            "name": "Andreas Reich",
+            "username": "Wumpf"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "49268cfbad0e0a18340fd9e9dca2d83e2b9f4ede",
+          "message": "[re_renderer] Support non-uniform scale for meshes (#570)",
+          "timestamp": "2022-12-15T19:07:40+01:00",
+          "tree_id": "3a778c1036ce6cfdcd38cd60f2e8d51545d78d9a",
+          "url": "https://github.com/rerun-io/rerun/commit/49268cfbad0e0a18340fd9e9dca2d83e2b9f4ede"
+        },
+        "date": 1671127966988,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/batch/rects/insert",
+            "value": 1665448,
+            "range": "± 7312",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/batch/rects/query",
+            "value": 1301,
+            "range": "± 8",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_mono_points/insert",
+            "value": 1043099985,
+            "range": "± 7803329",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_mono_points/query",
+            "value": 327566,
+            "range": "± 1459",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points/insert",
+            "value": 97713707,
+            "range": "± 502133",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points/query",
+            "value": 10949,
+            "range": "± 59",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/insert",
+            "value": 22708759,
+            "range": "± 287987",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/query",
+            "value": 5921,
+            "range": "± 23",
             "unit": "ns/iter"
           },
           {
