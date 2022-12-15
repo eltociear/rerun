@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1671122242345,
+  "lastUpdate": 1671122604505,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
@@ -671,6 +671,84 @@ window.BENCHMARK_DATA = {
             "name": "obj_batch_points_sequential/query",
             "value": 8553,
             "range": "± 43",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/Tuid::random",
+            "value": 37,
+            "range": "± 0",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "emil@rerun.io",
+            "name": "Emil Ernerfeldt",
+            "username": "emilk"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "b8ee97d70b5608b8968a3f567a3a64cf81e3e7d1",
+          "message": "Make sure we do `cargo check --locked` on CI (#571)\n\n* Make sure we do `cargo check --locked` on CI\r\n\r\n* autoformat rust.yml\r\n\r\n* Get rid of unnecessary `git reset` in the benchmark job\r\n\r\n* spaces can be useful\r\n\r\n* Update Cargo.lock\r\n\r\nCo-authored-by: John Hughes <john@rerun.io>",
+          "timestamp": "2022-12-15T17:38:23+01:00",
+          "tree_id": "2a71bd60d3145383450939c251f3e98352d00c8b",
+          "url": "https://github.com/rerun-io/rerun/commit/b8ee97d70b5608b8968a3f567a3a64cf81e3e7d1"
+        },
+        "date": 1671122603654,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/batch/rects/insert",
+            "value": 1679394,
+            "range": "± 7546",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/batch/rects/query",
+            "value": 1305,
+            "range": "± 2",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_mono_points/insert",
+            "value": 1007245112,
+            "range": "± 6755222",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_mono_points/query",
+            "value": 365821,
+            "range": "± 4490",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points/insert",
+            "value": 98630388,
+            "range": "± 598357",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points/query",
+            "value": 11343,
+            "range": "± 30",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/insert",
+            "value": 23205981,
+            "range": "± 215132",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/query",
+            "value": 8558,
+            "range": "± 22",
             "unit": "ns/iter"
           },
           {
