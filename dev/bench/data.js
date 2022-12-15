@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1671119517417,
+  "lastUpdate": 1671119890519,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
@@ -376,6 +376,84 @@ window.BENCHMARK_DATA = {
           {
             "name": "obj_batch_points_sequential/Tuid::random",
             "value": 36,
+            "range": "± 0",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "andreas@rerun.io",
+            "name": "Andreas Reich",
+            "username": "Wumpf"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "6303a2e177db912197dd3d668c9a488373b1a6e3",
+          "message": "[re_renderer] Fix GLB/GLTF multi-primitive import, support albedo factor (#562)\n\n* fix incorrectly imported gltf indices\r\n* support for albedo multipliers on meshes\r\nand more general on material properties",
+          "timestamp": "2022-12-15T16:53:06+01:00",
+          "tree_id": "aba7c7814fc5057a9504fdd2a4180c1338196c9e",
+          "url": "https://github.com/rerun-io/rerun/commit/6303a2e177db912197dd3d668c9a488373b1a6e3"
+        },
+        "date": 1671119889703,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/batch/rects/insert",
+            "value": 1678778,
+            "range": "± 9868",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/batch/rects/query",
+            "value": 1298,
+            "range": "± 1",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_mono_points/insert",
+            "value": 1033450521,
+            "range": "± 4468602",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_mono_points/query",
+            "value": 380783,
+            "range": "± 2257",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points/insert",
+            "value": 97806210,
+            "range": "± 438597",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points/query",
+            "value": 11324,
+            "range": "± 39",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/insert",
+            "value": 23532298,
+            "range": "± 83380",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/query",
+            "value": 8563,
+            "range": "± 7",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/Tuid::random",
+            "value": 37,
             "range": "± 0",
             "unit": "ns/iter"
           }
