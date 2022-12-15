@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1671123303719,
+  "lastUpdate": 1671124048175,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
@@ -897,6 +897,84 @@ window.BENCHMARK_DATA = {
             "name": "obj_batch_points_sequential/query",
             "value": 5895,
             "range": "± 28",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/Tuid::random",
+            "value": 37,
+            "range": "± 0",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "emil@rerun.io",
+            "name": "Emil Ernerfeldt",
+            "username": "emilk"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "c32804850b857a93f5812a2f9eef71e5fd50202a",
+          "message": "Remove some vestigial uses of deprecated _visible flag (#573)\n\nWe removed the _visible flag a long time ago, but missed a few spots",
+          "timestamp": "2022-12-15T18:02:45+01:00",
+          "tree_id": "6576e18e320e8676a3c6058c0ad3e654cad41f31",
+          "url": "https://github.com/rerun-io/rerun/commit/c32804850b857a93f5812a2f9eef71e5fd50202a"
+        },
+        "date": 1671124047364,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/batch/rects/insert",
+            "value": 1678547,
+            "range": "± 5115",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/batch/rects/query",
+            "value": 1327,
+            "range": "± 3",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_mono_points/insert",
+            "value": 866830969,
+            "range": "± 5592118",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_mono_points/query",
+            "value": 340079,
+            "range": "± 1302",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points/insert",
+            "value": 87423551,
+            "range": "± 1635154",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points/query",
+            "value": 10927,
+            "range": "± 31",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/insert",
+            "value": 21714062,
+            "range": "± 261294",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/query",
+            "value": 5909,
+            "range": "± 13",
             "unit": "ns/iter"
           },
           {
