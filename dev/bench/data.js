@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1671133227043,
+  "lastUpdate": 1671134699824,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
@@ -1349,6 +1349,84 @@ window.BENCHMARK_DATA = {
             "name": "obj_batch_points_sequential/query",
             "value": 5848,
             "range": "± 82",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/Tuid::random",
+            "value": 37,
+            "range": "± 0",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "jeremy@rerun.io",
+            "name": "Jeremy Leibs",
+            "username": "jleibs"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "34965a930da306e1b571d4badea51b0df1a3795a",
+          "message": "Add new crate for querying / joining from the arrow_store (#558)\n\nFirst pass at implementing a polars-based join over Instance.\r\nInstance is currently a u64 due to some limitations in arrow2-convert. Will come back and make it 128-bit in the future.\r\n\r\nNew APIs: `re_query::query_entity_with_primary`, `re_query::get_component_with_instances`",
+          "timestamp": "2022-12-15T20:55:03+01:00",
+          "tree_id": "601f8e5c9207f33b206670ef6112d7529d72645c",
+          "url": "https://github.com/rerun-io/rerun/commit/34965a930da306e1b571d4badea51b0df1a3795a"
+        },
+        "date": 1671134698998,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/batch/rects/insert",
+            "value": 1675927,
+            "range": "± 6885",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/batch/rects/query",
+            "value": 1320,
+            "range": "± 0",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_mono_points/insert",
+            "value": 873307303,
+            "range": "± 5977008",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_mono_points/query",
+            "value": 332585,
+            "range": "± 3381",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points/insert",
+            "value": 88318736,
+            "range": "± 412985",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points/query",
+            "value": 10964,
+            "range": "± 40",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/insert",
+            "value": 22873371,
+            "range": "± 127888",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/query",
+            "value": 5911,
+            "range": "± 8",
             "unit": "ns/iter"
           },
           {
