@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1671194586041,
+  "lastUpdate": 1671196534426,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
@@ -2701,6 +2701,84 @@ window.BENCHMARK_DATA = {
             "name": "obj_batch_points_sequential/query",
             "value": 5690,
             "range": "± 28",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/Tuid::random",
+            "value": 37,
+            "range": "± 0",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "andreas@rerun.io",
+            "name": "Andreas Reich",
+            "username": "Wumpf"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "fff821a0b4918c0ab2baf52baef5675b6ea6778a",
+          "message": "[re_renderer] fix wrong extra line quad, fix point & line transformation order (#579)\n\n* fix line renderer adding incorrect extra quad per line strip\r\n* fix transform order in lines & point shader",
+          "timestamp": "2022-12-16T14:10:23+01:00",
+          "tree_id": "167d839561d28e2c2c19b4894452140609017328",
+          "url": "https://github.com/rerun-io/rerun/commit/fff821a0b4918c0ab2baf52baef5675b6ea6778a"
+        },
+        "date": 1671196533588,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/batch/rects/insert",
+            "value": 1961987,
+            "range": "± 82082",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/batch/rects/query",
+            "value": 1317,
+            "range": "± 5",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_mono_points/insert",
+            "value": 1038610999,
+            "range": "± 6044762",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_mono_points/query",
+            "value": 372981,
+            "range": "± 6288",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points/insert",
+            "value": 101992795,
+            "range": "± 472279",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points/query",
+            "value": 11328,
+            "range": "± 48",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/insert",
+            "value": 23853506,
+            "range": "± 207869",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/query",
+            "value": 5667,
+            "range": "± 21",
             "unit": "ns/iter"
           },
           {
