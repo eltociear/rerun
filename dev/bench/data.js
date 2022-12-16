@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1671206101598,
+  "lastUpdate": 1671207045498,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
@@ -3306,6 +3306,84 @@ window.BENCHMARK_DATA = {
           {
             "name": "obj_batch_points_sequential/Tuid::random",
             "value": 38,
+            "range": "± 0",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "jeremy@rerun.io",
+            "name": "Jeremy Leibs",
+            "username": "jleibs"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "d2cf10bfbdd8be1908ca23981a2c8184108ba2e0",
+          "message": "Proof-of-concept usage of an arrow-store query to populate a 2d view (#505)\n\n* Proof-of-concept usage of an arrow-store query to populate a 2d view\r\n* Add a component-based visitor with proper deserialization\r\n* Get UI working again by hacking in an ArrowObject to the type store",
+          "timestamp": "2022-12-16T17:05:36+01:00",
+          "tree_id": "6581a0f809fdecaa058c344366da336acee0eb70",
+          "url": "https://github.com/rerun-io/rerun/commit/d2cf10bfbdd8be1908ca23981a2c8184108ba2e0"
+        },
+        "date": 1671207044654,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/batch/rects/insert",
+            "value": 1663360,
+            "range": "± 9671",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/batch/rects/query",
+            "value": 1320,
+            "range": "± 11",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_mono_points/insert",
+            "value": 1005976957,
+            "range": "± 4768465",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_mono_points/query",
+            "value": 339183,
+            "range": "± 1887",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points/insert",
+            "value": 96265981,
+            "range": "± 979624",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points/query",
+            "value": 11275,
+            "range": "± 96",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/insert",
+            "value": 22272144,
+            "range": "± 474816",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/query",
+            "value": 5625,
+            "range": "± 35",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/Tuid::random",
+            "value": 37,
             "range": "± 0",
             "unit": "ns/iter"
           }
