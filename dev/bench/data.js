@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1671200632085,
+  "lastUpdate": 1671200941144,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
@@ -2927,6 +2927,80 @@ window.BENCHMARK_DATA = {
             "name": "obj_batch_points_sequential/query",
             "value": 5695,
             "range": "± 55",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/Tuid::random",
+            "value": 37,
+            "range": "± 0",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "name": "rerun-io",
+            "username": "rerun-io"
+          },
+          "committer": {
+            "name": "rerun-io",
+            "username": "rerun-io"
+          },
+          "id": "2956c8f19dd1cc2c00f611e62ee754b764962f9f",
+          "message": "Constrain what entities show up in each Space View",
+          "timestamp": "2022-12-12T12:44:52Z",
+          "url": "https://github.com/rerun-io/rerun/pull/580/commits/2956c8f19dd1cc2c00f611e62ee754b764962f9f"
+        },
+        "date": 1671200940163,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/batch/rects/insert",
+            "value": 1712930,
+            "range": "± 10703",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/batch/rects/query",
+            "value": 1345,
+            "range": "± 3",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_mono_points/insert",
+            "value": 881546682,
+            "range": "± 7732929",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_mono_points/query",
+            "value": 333691,
+            "range": "± 1835",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points/insert",
+            "value": 88363365,
+            "range": "± 439065",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points/query",
+            "value": 11405,
+            "range": "± 47",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/insert",
+            "value": 22461000,
+            "range": "± 216727",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/query",
+            "value": 5688,
+            "range": "± 17",
             "unit": "ns/iter"
           },
           {
