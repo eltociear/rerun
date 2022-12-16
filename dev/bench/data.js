@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1671184985582,
+  "lastUpdate": 1671185321590,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
@@ -2167,6 +2167,84 @@ window.BENCHMARK_DATA = {
             "name": "obj_batch_points_sequential/query",
             "value": 5669,
             "range": "± 14",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/Tuid::random",
+            "value": 37,
+            "range": "± 0",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "emil@rerun.io",
+            "name": "Emil Ernerfeldt",
+            "username": "emilk"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "1452cd70a13f9de0a6ec7a3e54b5efd2f3b8814d",
+          "message": "Improve tensor view (#572)\n\n* Handle multiple tensors in the same space view with some radio buttons\r\n\r\n* Unify how we show error texts\r\n\r\n* Clean up tensor view\r\n\r\n* Revert to the old visibility buttons. They are ugly, but readable\r\n\r\n* Improve tensor selection code\r\n\r\n* Better slider ui\r\n\r\n* Set self.selected_tensor to None",
+          "timestamp": "2022-12-16T11:03:51+01:00",
+          "tree_id": "0b8d3c2f8ee1fc6bb3a679bc1667e6b3380491b0",
+          "url": "https://github.com/rerun-io/rerun/commit/1452cd70a13f9de0a6ec7a3e54b5efd2f3b8814d"
+        },
+        "date": 1671185320797,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/batch/rects/insert",
+            "value": 1670001,
+            "range": "± 8380",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/batch/rects/query",
+            "value": 1314,
+            "range": "± 11",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_mono_points/insert",
+            "value": 897291386,
+            "range": "± 4638574",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_mono_points/query",
+            "value": 340885,
+            "range": "± 1601",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points/insert",
+            "value": 87777975,
+            "range": "± 377424",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points/query",
+            "value": 10916,
+            "range": "± 52",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/insert",
+            "value": 22099454,
+            "range": "± 261547",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/query",
+            "value": 5901,
+            "range": "± 31",
             "unit": "ns/iter"
           },
           {
