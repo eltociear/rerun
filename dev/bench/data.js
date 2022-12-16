@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1671187734736,
+  "lastUpdate": 1671188948253,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
@@ -2549,6 +2549,84 @@ window.BENCHMARK_DATA = {
             "name": "obj_batch_points_sequential/query",
             "value": 5893,
             "range": "± 9",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/Tuid::random",
+            "value": 37,
+            "range": "± 0",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "john@rerun.io",
+            "name": "John Hughes",
+            "username": "jondo2010"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "3247eed1915bae4485a2ff95f4b9053a0566420f",
+          "message": "Implement `get_registered_fields()` method on the Python SDK (#574)\n\n* Implement `get_registered_fields()` method on the Python SDK",
+          "timestamp": "2022-12-16T12:03:59+01:00",
+          "tree_id": "b2f7be2fd9d8c796185566542613a5d3e9af7153",
+          "url": "https://github.com/rerun-io/rerun/commit/3247eed1915bae4485a2ff95f4b9053a0566420f"
+        },
+        "date": 1671188947413,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/batch/rects/insert",
+            "value": 1940889,
+            "range": "± 99708",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/batch/rects/query",
+            "value": 1345,
+            "range": "± 2",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_mono_points/insert",
+            "value": 1015761145,
+            "range": "± 9090937",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_mono_points/query",
+            "value": 363535,
+            "range": "± 2619",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points/insert",
+            "value": 102389534,
+            "range": "± 436858",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points/query",
+            "value": 11361,
+            "range": "± 19",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/insert",
+            "value": 24034323,
+            "range": "± 250902",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/query",
+            "value": 5677,
+            "range": "± 8",
             "unit": "ns/iter"
           },
           {
