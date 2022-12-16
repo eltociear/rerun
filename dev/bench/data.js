@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1671201552066,
+  "lastUpdate": 1671204547018,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
@@ -3075,6 +3075,84 @@ window.BENCHMARK_DATA = {
             "name": "obj_batch_points_sequential/query",
             "value": 5692,
             "range": "± 9",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/Tuid::random",
+            "value": 37,
+            "range": "± 0",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "emil@rerun.io",
+            "name": "Emil Ernerfeldt",
+            "username": "emilk"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "144b57fdff6cb9232451565720ce435aa7042573",
+          "message": "Constrain what entities show up in each Space View (#580)\n\n* Better decide what objects goes into what SpaceView\r\n\r\n* UI: close menus when buttons in them are clicked\r\n\r\n* Hack it for arrow type\r\n\r\n* Move ViewCategory to own file\r\n\r\n* Remove Scene, and categorize only based on objects\r\n\r\n* Code cleanup\r\n\r\n* Add docstrings",
+          "timestamp": "2022-12-16T16:24:20+01:00",
+          "tree_id": "db1f75b070289ebc256efd7e485aa4590904f66d",
+          "url": "https://github.com/rerun-io/rerun/commit/144b57fdff6cb9232451565720ce435aa7042573"
+        },
+        "date": 1671204546247,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/batch/rects/insert",
+            "value": 1659648,
+            "range": "± 6673",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/batch/rects/query",
+            "value": 1327,
+            "range": "± 5",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_mono_points/insert",
+            "value": 873119748,
+            "range": "± 4478931",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_mono_points/query",
+            "value": 335591,
+            "range": "± 2006",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points/insert",
+            "value": 88480764,
+            "range": "± 435509",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points/query",
+            "value": 11379,
+            "range": "± 26",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/insert",
+            "value": 22258583,
+            "range": "± 254271",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/query",
+            "value": 5693,
+            "range": "± 31",
             "unit": "ns/iter"
           },
           {
