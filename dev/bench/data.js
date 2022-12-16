@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1671187047064,
+  "lastUpdate": 1671187734736,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
@@ -2471,6 +2471,84 @@ window.BENCHMARK_DATA = {
             "name": "obj_batch_points_sequential/query",
             "value": 5902,
             "range": "± 10",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/Tuid::random",
+            "value": 37,
+            "range": "± 0",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "andreas@rerun.io",
+            "name": "Andreas Reich",
+            "username": "Wumpf"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "d1122c1e49b799c2644ba3dd0550041ff046639b",
+          "message": "[re_renderer] Point cloud builder & point cloud batch transforms (#555)\n\n* points are now built with a point cloud builder!\r\nseparated color out of point info\r\n* point cloud builder optimization for single points",
+          "timestamp": "2022-12-16T11:43:53+01:00",
+          "tree_id": "3865dc75574005a839923733f6c00cfa23c14244",
+          "url": "https://github.com/rerun-io/rerun/commit/d1122c1e49b799c2644ba3dd0550041ff046639b"
+        },
+        "date": 1671187733886,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/batch/rects/insert",
+            "value": 1684312,
+            "range": "± 16209",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/batch/rects/query",
+            "value": 1313,
+            "range": "± 2",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_mono_points/insert",
+            "value": 1001617346,
+            "range": "± 3623551",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_mono_points/query",
+            "value": 327682,
+            "range": "± 2465",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points/insert",
+            "value": 96645749,
+            "range": "± 512600",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points/query",
+            "value": 10913,
+            "range": "± 55",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/insert",
+            "value": 23655533,
+            "range": "± 90064",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/query",
+            "value": 5893,
+            "range": "± 9",
             "unit": "ns/iter"
           },
           {
