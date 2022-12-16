@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1671219400617,
+  "lastUpdate": 1671227044078,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
@@ -4609,6 +4609,80 @@ window.BENCHMARK_DATA = {
             "name": "obj_batch_points_sequential/query",
             "value": 5662,
             "range": "± 9",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/Tuid::random",
+            "value": 37,
+            "range": "± 0",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "name": "rerun-io",
+            "username": "rerun-io"
+          },
+          "committer": {
+            "name": "rerun-io",
+            "username": "rerun-io"
+          },
+          "id": "ffe50e19ac6173a482559dbfe53ee5b4fe1f2bf3",
+          "message": "Make `puffin` a non-optional dependency",
+          "timestamp": "2022-12-12T12:44:52Z",
+          "url": "https://github.com/rerun-io/rerun/pull/587/commits/ffe50e19ac6173a482559dbfe53ee5b4fe1f2bf3"
+        },
+        "date": 1671227043202,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/batch/rects/insert",
+            "value": 1701072,
+            "range": "± 13302",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/batch/rects/query",
+            "value": 1345,
+            "range": "± 8",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_mono_points/insert",
+            "value": 897223932,
+            "range": "± 5002270",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_mono_points/query",
+            "value": 322901,
+            "range": "± 845",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points/insert",
+            "value": 86632993,
+            "range": "± 345137",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points/query",
+            "value": 11349,
+            "range": "± 54",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/insert",
+            "value": 22926965,
+            "range": "± 220262",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/query",
+            "value": 7849,
+            "range": "± 16",
             "unit": "ns/iter"
           },
           {
