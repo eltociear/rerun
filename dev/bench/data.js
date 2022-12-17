@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1671316875577,
+  "lastUpdate": 1671318614846,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
@@ -5127,6 +5127,80 @@ window.BENCHMARK_DATA = {
             "name": "obj_batch_points_sequential/query",
             "value": 5704,
             "range": "± 7",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/Tuid::random",
+            "value": 37,
+            "range": "± 0",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "name": "rerun-io",
+            "username": "rerun-io"
+          },
+          "committer": {
+            "name": "rerun-io",
+            "username": "rerun-io"
+          },
+          "id": "22d6dfa7d9101021dacaff6bdf4d7d0d190ffe0a",
+          "message": "re_datastore: introducing component bucket chunking",
+          "timestamp": "2022-12-12T12:44:52Z",
+          "url": "https://github.com/rerun-io/rerun/pull/584/commits/22d6dfa7d9101021dacaff6bdf4d7d0d190ffe0a"
+        },
+        "date": 1671318613993,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/batch/rects/insert",
+            "value": 216089,
+            "range": "± 444",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/batch/rects/query",
+            "value": 1333,
+            "range": "± 3",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_mono_points/insert",
+            "value": 965205764,
+            "range": "± 10703977",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_mono_points/query",
+            "value": 336165,
+            "range": "± 3335",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points/insert",
+            "value": 96671479,
+            "range": "± 589988",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points/query",
+            "value": 11376,
+            "range": "± 14",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/insert",
+            "value": 22901358,
+            "range": "± 280792",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/query",
+            "value": 5687,
+            "range": "± 12",
             "unit": "ns/iter"
           },
           {
