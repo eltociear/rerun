@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1671385153656,
+  "lastUpdate": 1671385220618,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
@@ -6881,6 +6881,108 @@ window.BENCHMARK_DATA = {
             "name": "arrow_batch_points/query",
             "value": 12623,
             "range": "± 39",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/Tuid::random",
+            "value": 37,
+            "range": "± 0",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "emil@rerun.io",
+            "name": "Emil Ernerfeldt",
+            "username": "emilk"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "7ca1e4a0adf5bd10d69f55d108128a984c36fef6",
+          "message": "Consistently use _ui suffix for functions using egui::Ui (#588)\n\n* Consistently use _ui suffix for functions using egui::Ui\r\n\r\n* Mention _ui naming convention in CONTRIBUTING.md",
+          "timestamp": "2022-12-18T18:32:24+01:00",
+          "tree_id": "d5abfce5c88b4f89ee0cce05ba13298334bf0da7",
+          "url": "https://github.com/rerun-io/rerun/commit/7ca1e4a0adf5bd10d69f55d108128a984c36fef6"
+        },
+        "date": 1671385219779,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/batch/rects/insert",
+            "value": 1683047,
+            "range": "± 9604",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/batch/rects/query",
+            "value": 1306,
+            "range": "± 4",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_mono_points/insert",
+            "value": 874630257,
+            "range": "± 6748002",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_mono_points/query",
+            "value": 330508,
+            "range": "± 769",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points/insert",
+            "value": 89059012,
+            "range": "± 379090",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points/query",
+            "value": 11382,
+            "range": "± 37",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/insert",
+            "value": 22227777,
+            "range": "± 161845",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/query",
+            "value": 5684,
+            "range": "± 23",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_mono_points/insert",
+            "value": 285862241,
+            "range": "± 488394",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_mono_points/query",
+            "value": 817007,
+            "range": "± 4360",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_batch_points/insert",
+            "value": 980791,
+            "range": "± 3082",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_batch_points/query",
+            "value": 12259,
+            "range": "± 38",
             "unit": "ns/iter"
           },
           {
