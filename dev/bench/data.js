@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1671386988345,
+  "lastUpdate": 1671387507365,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
@@ -7183,6 +7183,108 @@ window.BENCHMARK_DATA = {
             "name": "arrow_batch_points/query",
             "value": 11572,
             "range": "± 61",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/Tuid::random",
+            "value": 37,
+            "range": "± 0",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "emil@rerun.io",
+            "name": "Emil Ernerfeldt",
+            "username": "emilk"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "fc44e1f2a06947ca2c426f7f8ec84b8dd28a108b",
+          "message": "Make `puffin` a non-optional, native-only dependency (#587)\n\n* puffin is no longer an optional feature\r\n\r\n* Remove helper macros\r\n\r\n* Revert \"Remove helper macros\"\r\n\r\nThis reverts commit ffe50e19ac6173a482559dbfe53ee5b4fe1f2bf3.\r\n\r\n* Make puffin native-onkly",
+          "timestamp": "2022-12-18T19:12:21+01:00",
+          "tree_id": "69bc947c71345a30ccc2aeb3ee5905f744c73693",
+          "url": "https://github.com/rerun-io/rerun/commit/fc44e1f2a06947ca2c426f7f8ec84b8dd28a108b"
+        },
+        "date": 1671387506573,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/batch/rects/insert",
+            "value": 1694152,
+            "range": "± 14277",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/batch/rects/query",
+            "value": 679,
+            "range": "± 9",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_mono_points/insert",
+            "value": 885898765,
+            "range": "± 10476244",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_mono_points/query",
+            "value": 328006,
+            "range": "± 2050",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points/insert",
+            "value": 85272030,
+            "range": "± 584699",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points/query",
+            "value": 11319,
+            "range": "± 169",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/insert",
+            "value": 22626893,
+            "range": "± 370931",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/query",
+            "value": 7771,
+            "range": "± 26",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_mono_points/insert",
+            "value": 241264230,
+            "range": "± 858344",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_mono_points/query",
+            "value": 714520,
+            "range": "± 7196",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_batch_points/insert",
+            "value": 955130,
+            "range": "± 6539",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_batch_points/query",
+            "value": 11315,
+            "range": "± 134",
             "unit": "ns/iter"
           },
           {
