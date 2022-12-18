@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1671318614846,
+  "lastUpdate": 1671322195657,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
@@ -5207,6 +5207,32 @@ window.BENCHMARK_DATA = {
             "name": "obj_batch_points_sequential/Tuid::random",
             "value": 37,
             "range": "± 0",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "name": "rerun-io",
+            "username": "rerun-io"
+          },
+          "committer": {
+            "name": "rerun-io",
+            "username": "rerun-io"
+          },
+          "id": "7074f554def5aa68ca4dfad0e0a75d050a7034d9",
+          "message": "re_datastore: `get` should give you a row, not a [row]",
+          "timestamp": "2022-12-12T12:44:52Z",
+          "url": "https://github.com/rerun-io/rerun/pull/590/commits/7074f554def5aa68ca4dfad0e0a75d050a7034d9"
+        },
+        "date": 1671322194885,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/batch/rects/insert",
+            "value": 1718475,
+            "range": "± 9144",
             "unit": "ns/iter"
           }
         ]
