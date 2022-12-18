@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1671375706792,
+  "lastUpdate": 1671376364275,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
@@ -6323,6 +6323,80 @@ window.BENCHMARK_DATA = {
             "name": "obj_batch_points_sequential/Tuid::random",
             "value": 37,
             "range": "± 0",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "name": "rerun-io",
+            "username": "rerun-io"
+          },
+          "committer": {
+            "name": "rerun-io",
+            "username": "rerun-io"
+          },
+          "id": "b7e5fd5e01d9651b485e4fdfa92c867665e8ca4f",
+          "message": "re_datastore: `get` should give you a row, not a [row]",
+          "timestamp": "2022-12-12T12:44:52Z",
+          "url": "https://github.com/rerun-io/rerun/pull/590/commits/b7e5fd5e01d9651b485e4fdfa92c867665e8ca4f"
+        },
+        "date": 1671376363502,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/batch/rects/insert",
+            "value": 1671192,
+            "range": "± 13503",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/batch/rects/query",
+            "value": 679,
+            "range": "± 1",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_mono_points/insert",
+            "value": 867112979,
+            "range": "± 4858985",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_mono_points/query",
+            "value": 326783,
+            "range": "± 1359",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points/insert",
+            "value": 90902889,
+            "range": "± 347541",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points/query",
+            "value": 11348,
+            "range": "± 57",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/insert",
+            "value": 22425807,
+            "range": "± 176453",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/query",
+            "value": 5673,
+            "range": "± 12",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_mono_points/insert",
+            "value": 286361834,
+            "range": "± 737018",
             "unit": "ns/iter"
           }
         ]
