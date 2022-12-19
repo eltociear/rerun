@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1671450238965,
+  "lastUpdate": 1671450443000,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
@@ -9689,6 +9689,108 @@ window.BENCHMARK_DATA = {
             "name": "arrow_batch_points/query",
             "value": 11270,
             "range": "± 166",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/Tuid::random",
+            "value": 37,
+            "range": "± 0",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "emil@rerun.io",
+            "name": "Emil Ernerfeldt",
+            "username": "emilk"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "d2894108f2c4255f0b8eacabe67a971668c9ac16",
+          "message": "First-effort bar charts (#581)\n\n* First-effort bar charts\r\n\r\n* Simplify categorization query\r\n\r\n* rename plot view to time series view\r\n\r\n* Show type of selected space view when clicked\r\n\r\n* Tweaks\r\n\r\n* Fix docstrings and id\r\n\r\n* Add bar-chart example to plot demo\r\n\r\n* Don't show image previews of non-image tensors\r\n\r\n* Update egui with some plot improvements\r\n\r\n* Tweak plot demo to avoid corner-case with new timelines\r\n\r\n* Add line to changelog",
+          "timestamp": "2022-12-19T12:38:24+01:00",
+          "tree_id": "2472e790807f1b4618bd2115d74d6b71d8d033fc",
+          "url": "https://github.com/rerun-io/rerun/commit/d2894108f2c4255f0b8eacabe67a971668c9ac16"
+        },
+        "date": 1671450442092,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/batch/rects/insert",
+            "value": 185133,
+            "range": "± 816",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/batch/rects/query",
+            "value": 648,
+            "range": "± 1",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_mono_points/insert",
+            "value": 990445806,
+            "range": "± 5561116",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_mono_points/query",
+            "value": 359300,
+            "range": "± 4038",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points/insert",
+            "value": 96220525,
+            "range": "± 490459",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points/query",
+            "value": 11279,
+            "range": "± 12",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/insert",
+            "value": 23990018,
+            "range": "± 68710",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/query",
+            "value": 7884,
+            "range": "± 15",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_mono_points/insert",
+            "value": 29229733,
+            "range": "± 777108",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_mono_points/query",
+            "value": 743012,
+            "range": "± 3566",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_batch_points/insert",
+            "value": 105803,
+            "range": "± 91",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_batch_points/query",
+            "value": 11593,
+            "range": "± 24",
             "unit": "ns/iter"
           },
           {
