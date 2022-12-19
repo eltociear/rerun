@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1671472980195,
+  "lastUpdate": 1671475941432,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
@@ -11423,6 +11423,120 @@ window.BENCHMARK_DATA = {
             "name": "arrow_batch_points/query",
             "value": 11570,
             "range": "± 47",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/Tuid::random",
+            "value": 37,
+            "range": "± 0",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "cr.rey.clement@gmail.com",
+            "name": "Clement Rey",
+            "username": "teh-cmc"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "2a158fe909f7dcfea7800eae73fa4b6d275c6029",
+          "message": "re_datastore: native primary & secondary indices (#600)\n\n* arrow-less primary & secondary indices\r\n\r\n* first-class non-zeroable row indices\r\n\r\n* disable time range tracking for GC until we support GC\r\n\r\n* cranky\r\n\r\n* Revert \"disable time range tracking for GC until we support GC\"\r\n\r\nThis reverts commit 1a647ab01b3d1f2d049d9cda0ab60cf15be442d8.\r\n\r\n* addressed PR comments\r\n\r\n* this one becomes useless too",
+          "timestamp": "2022-12-19T19:44:55+01:00",
+          "tree_id": "b4557d1193d954db2448ba677cd6474854734002",
+          "url": "https://github.com/rerun-io/rerun/commit/2a158fe909f7dcfea7800eae73fa4b6d275c6029"
+        },
+        "date": 1671475939474,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/batch/rects/insert",
+            "value": 181319,
+            "range": "± 973",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/batch/rects/query",
+            "value": 676,
+            "range": "± 1",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/missing_components/primary",
+            "value": 268,
+            "range": "± 0",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/missing_components/secondaries",
+            "value": 327,
+            "range": "± 0",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_mono_points/insert",
+            "value": 1051365891,
+            "range": "± 12924667",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_mono_points/query",
+            "value": 354431,
+            "range": "± 8710",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points/insert",
+            "value": 99636448,
+            "range": "± 966716",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points/query",
+            "value": 11325,
+            "range": "± 7",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/insert",
+            "value": 23832315,
+            "range": "± 285728",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/query",
+            "value": 7868,
+            "range": "± 13",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_mono_points/insert",
+            "value": 25796488,
+            "range": "± 3080607",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_mono_points/query",
+            "value": 738621,
+            "range": "± 4625",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_batch_points/insert",
+            "value": 103729,
+            "range": "± 108",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_batch_points/query",
+            "value": 11512,
+            "range": "± 39",
             "unit": "ns/iter"
           },
           {
