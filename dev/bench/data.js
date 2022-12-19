@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1671462194933,
+  "lastUpdate": 1671462397039,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
@@ -10293,6 +10293,120 @@ window.BENCHMARK_DATA = {
             "name": "arrow_batch_points/query",
             "value": 11722,
             "range": "± 24",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/Tuid::random",
+            "value": 37,
+            "range": "± 0",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "cr.rey.clement@gmail.com",
+            "name": "Clement Rey",
+            "username": "teh-cmc"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "b11f0effb727f2d308649acbc2efb2a6773c13a6",
+          "message": "re_datastore: make sure querying for missing components is as cheap as possible (#596)\n\n* refactoring bench suite and adding datastore/missing_components/primary\r\n\r\n* adding datastore/missing_components/secondaries\r\n\r\n* addressing PR comments",
+          "timestamp": "2022-12-19T16:00:24+01:00",
+          "tree_id": "3df41e7beff1335d82ba39ffde13c763c78fbdd3",
+          "url": "https://github.com/rerun-io/rerun/commit/b11f0effb727f2d308649acbc2efb2a6773c13a6"
+        },
+        "date": 1671462395814,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/batch/rects/insert",
+            "value": 182977,
+            "range": "± 862",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/batch/rects/query",
+            "value": 689,
+            "range": "± 1",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/missing_components/primary",
+            "value": 265,
+            "range": "± 0",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/missing_components/secondaries",
+            "value": 338,
+            "range": "± 0",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_mono_points/insert",
+            "value": 952397839,
+            "range": "± 5550583",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_mono_points/query",
+            "value": 326301,
+            "range": "± 1553",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points/insert",
+            "value": 95117646,
+            "range": "± 531312",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points/query",
+            "value": 11344,
+            "range": "± 47",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/insert",
+            "value": 23189987,
+            "range": "± 292164",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/query",
+            "value": 7859,
+            "range": "± 8",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_mono_points/insert",
+            "value": 25967024,
+            "range": "± 1718161",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_mono_points/query",
+            "value": 761091,
+            "range": "± 3463",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_batch_points/insert",
+            "value": 106412,
+            "range": "± 121",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_batch_points/query",
+            "value": 11663,
+            "range": "± 36",
             "unit": "ns/iter"
           },
           {
