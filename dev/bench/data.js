@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1671448241782,
+  "lastUpdate": 1671448463476,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
@@ -9281,6 +9281,104 @@ window.BENCHMARK_DATA = {
             "name": "arrow_batch_points/query",
             "value": 11430,
             "range": "± 137",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/Tuid::random",
+            "value": 37,
+            "range": "± 0",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "name": "rerun-io",
+            "username": "rerun-io"
+          },
+          "committer": {
+            "name": "rerun-io",
+            "username": "rerun-io"
+          },
+          "id": "07783006f1591959262967b1675ad569193e80bf",
+          "message": "re_datastore: introduce clustering keys",
+          "timestamp": "2022-12-12T12:44:52Z",
+          "url": "https://github.com/rerun-io/rerun/pull/593/commits/07783006f1591959262967b1675ad569193e80bf"
+        },
+        "date": 1671448462414,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/batch/rects/insert",
+            "value": 332235,
+            "range": "± 3191",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/batch/rects/query",
+            "value": 678,
+            "range": "± 8",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_mono_points/insert",
+            "value": 1038011298,
+            "range": "± 9301839",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_mono_points/query",
+            "value": 382284,
+            "range": "± 4563",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points/insert",
+            "value": 98758879,
+            "range": "± 727053",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points/query",
+            "value": 11330,
+            "range": "± 83",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/insert",
+            "value": 23403922,
+            "range": "± 438586",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/query",
+            "value": 7694,
+            "range": "± 81",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_mono_points/insert",
+            "value": 36077787,
+            "range": "± 2066943",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_mono_points/query",
+            "value": 734308,
+            "range": "± 6679",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_batch_points/insert",
+            "value": 198331,
+            "range": "± 2193",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_batch_points/query",
+            "value": 11381,
+            "range": "± 141",
             "unit": "ns/iter"
           },
           {
