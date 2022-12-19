@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1671465616176,
+  "lastUpdate": 1671466578318,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
@@ -10742,6 +10742,116 @@ window.BENCHMARK_DATA = {
           {
             "name": "obj_batch_points_sequential/Tuid::random",
             "value": 38,
+            "range": "± 0",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "name": "rerun-io",
+            "username": "rerun-io"
+          },
+          "committer": {
+            "name": "rerun-io",
+            "username": "rerun-io"
+          },
+          "id": "f34c89bbefc4bae2a07c7f97a27f09710c2892e6",
+          "message": "PREVIEW: pysdk arrow",
+          "timestamp": "2022-12-12T12:44:52Z",
+          "url": "https://github.com/rerun-io/rerun/pull/586/commits/f34c89bbefc4bae2a07c7f97a27f09710c2892e6"
+        },
+        "date": 1671466577118,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/batch/rects/insert",
+            "value": 186772,
+            "range": "± 738",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/batch/rects/query",
+            "value": 681,
+            "range": "± 0",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/missing_components/primary",
+            "value": 262,
+            "range": "± 1",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/missing_components/secondaries",
+            "value": 332,
+            "range": "± 0",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_mono_points/insert",
+            "value": 997421927,
+            "range": "± 4212765",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_mono_points/query",
+            "value": 341971,
+            "range": "± 3756",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points/insert",
+            "value": 98457679,
+            "range": "± 340278",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points/query",
+            "value": 11420,
+            "range": "± 10",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/insert",
+            "value": 23396104,
+            "range": "± 251369",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/query",
+            "value": 6271,
+            "range": "± 5",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_mono_points/insert",
+            "value": 24791234,
+            "range": "± 1926091",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_mono_points/query",
+            "value": 750036,
+            "range": "± 2798",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_batch_points/insert",
+            "value": 105735,
+            "range": "± 388",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_batch_points/query",
+            "value": 11719,
+            "range": "± 45",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/Tuid::random",
+            "value": 37,
             "range": "± 0",
             "unit": "ns/iter"
           }
