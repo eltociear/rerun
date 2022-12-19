@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1671480523294,
+  "lastUpdate": 1671483186951,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
@@ -11651,6 +11651,120 @@ window.BENCHMARK_DATA = {
             "name": "arrow_batch_points/query",
             "value": 45269,
             "range": "± 99",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/Tuid::random",
+            "value": 37,
+            "range": "± 0",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "john@rerun.io",
+            "name": "John Hughes",
+            "username": "jondo2010"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "6ad17047de0c4d69a416a5bb0305176d46a8a75e",
+          "message": "Break out field_types into sub modules. (#601)\n\n* Break out field_types into sub modules.",
+          "timestamp": "2022-12-19T21:46:36+01:00",
+          "tree_id": "10b8898daeb5426bdf87d3714b5a380d11556390",
+          "url": "https://github.com/rerun-io/rerun/commit/6ad17047de0c4d69a416a5bb0305176d46a8a75e"
+        },
+        "date": 1671483185932,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/batch/rects/insert",
+            "value": 182575,
+            "range": "± 324",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/batch/rects/query",
+            "value": 687,
+            "range": "± 4",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/missing_components/primary",
+            "value": 270,
+            "range": "± 0",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/missing_components/secondaries",
+            "value": 328,
+            "range": "± 0",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_mono_points/insert",
+            "value": 893348635,
+            "range": "± 8319722",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_mono_points/query",
+            "value": 345495,
+            "range": "± 6584",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points/insert",
+            "value": 89015338,
+            "range": "± 241846",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points/query",
+            "value": 11291,
+            "range": "± 50",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/insert",
+            "value": 22964398,
+            "range": "± 259154",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/query",
+            "value": 7870,
+            "range": "± 18",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_mono_points/insert",
+            "value": 3311272214,
+            "range": "± 16430747",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_mono_points/query",
+            "value": 7655343,
+            "range": "± 72637",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_batch_points/insert",
+            "value": 1401220,
+            "range": "± 17205",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_batch_points/query",
+            "value": 46193,
+            "range": "± 100",
             "unit": "ns/iter"
           },
           {
