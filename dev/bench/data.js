@@ -1,122 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1672673261896,
+  "lastUpdate": 1672677609866,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
-      {
-        "commit": {
-          "author": {
-            "email": "jeremy@rerun.io",
-            "name": "Jeremy Leibs",
-            "username": "jleibs"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "97f81404eb02ea76c3fcaca80ec2c957d9891c13",
-          "message": "Use the same 1000/1000 bench configuration as for our old benchmarks (#602)",
-          "timestamp": "2022-12-19T21:02:02+01:00",
-          "tree_id": "2673fe169aa77cbb25ed91b6e9c376cc8bcd8a52",
-          "url": "https://github.com/rerun-io/rerun/commit/97f81404eb02ea76c3fcaca80ec2c957d9891c13"
-        },
-        "date": 1671480522339,
-        "tool": "cargo",
-        "benches": [
-          {
-            "name": "datastore/batch/rects/insert",
-            "value": 182464,
-            "range": "± 2111",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "datastore/batch/rects/query",
-            "value": 677,
-            "range": "± 1",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "datastore/missing_components/primary",
-            "value": 269,
-            "range": "± 0",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "datastore/missing_components/secondaries",
-            "value": 328,
-            "range": "± 0",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "obj_mono_points/insert",
-            "value": 959331741,
-            "range": "± 8196268",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "obj_mono_points/query",
-            "value": 351177,
-            "range": "± 2509",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "obj_batch_points/insert",
-            "value": 97231072,
-            "range": "± 451264",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "obj_batch_points/query",
-            "value": 11309,
-            "range": "± 22",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "obj_batch_points_sequential/insert",
-            "value": 23232666,
-            "range": "± 320752",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "obj_batch_points_sequential/query",
-            "value": 7840,
-            "range": "± 25",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "arrow_mono_points/insert",
-            "value": 3573984161,
-            "range": "± 6418099",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "arrow_mono_points/query",
-            "value": 7821805,
-            "range": "± 89889",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "arrow_batch_points/insert",
-            "value": 1326666,
-            "range": "± 4515",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "arrow_batch_points/query",
-            "value": 45269,
-            "range": "± 99",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "obj_batch_points_sequential/Tuid::random",
-            "value": 37,
-            "range": "± 0",
-            "unit": "ns/iter"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -7114,6 +7000,258 @@ window.BENCHMARK_DATA = {
           {
             "name": "obj_batch_points_sequential/Tuid::random",
             "value": 37,
+            "range": "± 0",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "cr.rey.clement@gmail.com",
+            "name": "Clement Rey",
+            "username": "teh-cmc"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "853b714d94902a3af1ec94893c094dd04ecb367e",
+          "message": "re_datastore: range queries (#609)\n\n* get is supposed to return a row, not a [row]\r\n\r\n* unwrap note\r\n\r\n* the bench too\r\n\r\n* self review\r\n\r\n* doc test also\r\n\r\n* and re_query ofc!\r\n\r\n* slicing is _very_ slow, don't do it if you don't have to\r\n\r\n* no more col_arrays in re_query\r\n\r\n* there's actually no need for concatenating at all\r\n\r\n* incrementally compute and cache bucket sizes\r\n\r\n* cleaning up and documenting existing limitations\r\n\r\n* introducing bucket retirement\r\n\r\n* issue ref\r\n\r\n* some more doc stuff\r\n\r\n* self-review\r\n\r\n* polars/fmt should always be there for tests\r\n\r\n* streamlining batch support\r\n\r\n* take list header into account\r\n\r\n* it's fine\r\n\r\n* self-review\r\n\r\n* just something i want to keep around for later\r\n\r\n* (un)wrapping lists is a bit slow... and slicing them is _extremely_ slow!\r\n\r\n* merge cmc/datastore/get_a_single_row (#590)\r\n\r\n* no more col_arrays in re_query\r\n\r\n* introducing the notion of clustering key, thankfully breaking all tests by design\r\n\r\n* making good use of that shiny new Instance component\r\n\r\n* merge cmc/datastore/get_rid_of_copies (#584)\r\n\r\n* missed one\r\n\r\n* introducing arrow_util with is_dense_array()\r\n\r\n* finding the clustering comp of the row... or creating it!\r\n\r\n* rebasin'\r\n\r\n* post rebase clean up\r\n\r\n* addressing PR comments, I hope\r\n\r\n* ensure that clustering components are properly sorted, failing the existing test suite\r\n\r\n* build_instances now generate sorted ids, thus greenlighting the test suite\r\n\r\n* missed a couple\r\n\r\n* addressed PR comments\r\n\r\n* going for the ArrayExt route\r\n\r\n* completing the quadrifecta of checks\r\n\r\n* the unavoidable typed error revolution is on its way, and it's early\r\n\r\n* where we're going we don't need polars\r\n\r\n* update everything for the new APIs\r\n\r\n* error for unsupported clustering key types\r\n\r\n* clean up and actually testing our error paths\r\n\r\n* move those nasty internal tests into their own dirty corner\r\n\r\n* finally some high-level tests in here\r\n\r\n* i happen to like where this is going\r\n\r\n* shuffling things\r\n\r\n* demonstrating that implicit instances are somehow broken\r\n\r\n* fully working implicit clustering keys, but demonstrating a sorting issue somewhere\r\n\r\n* there is still something weird going on tho\r\n\r\n* latest_at behaving as one would expect\r\n\r\n* automatically cache generated cluster instances\r\n\r\n* time to clean up en masse\r\n\r\n* still want to put some stress on the bucketing\r\n\r\n* make ArrayExt::is_dense a little more friendly, just in case...\r\n\r\n* TimeType::format_range\r\n\r\n* independent latest_at query and using appropriate types everywhere\r\n\r\n* re_query: use polars/fmt in tests\r\n\r\n* re_query: remove implicit instances\r\n\r\n* fixing the u32 vs u64 instance drama\r\n\r\n* really starting to like how this looks\r\n\r\n* cluster-aware polars helpers :>\r\n\r\n* cleanin up tests\r\n\r\n* continuing cleanup and doc\r\n\r\n* updating visuals for this brave new world\r\n\r\n* docs\r\n\r\n* self-review\r\n\r\n* bruh\r\n\r\n* bruh...\r\n\r\n* ...\r\n\r\n* outdated comment\r\n\r\n* no reason to search for it multiple times\r\n\r\n* polars_helpers => polars_util for consistency's sake\r\n\r\n* addressing PR comments and a couple other things\r\n\r\n* xxx\r\n\r\n* post-merge fixes\r\n\r\n* TimeInt should be nohash\r\n\r\n* high-level polar range tools + making first half of range impl pass\r\n\r\n* implement the streaming half\r\n\r\n* finally defeated all demons\r\n\r\n* still passes?\r\n\r\n* it looks like we've made it out alive\r\n\r\n* polars util: join however you wish\r\n\r\n* fixed formatting\r\n\r\n* point2d's PoVs working as expected\r\n\r\n* passing full ranges\r\n\r\n* docs and such part 1, the semantics are hell\r\n\r\n* fixing the filtering mess in tests\r\n\r\n* me stoopid\r\n\r\n* polars docs\r\n\r\n* addressing the clones\r\n\r\n* xxx\r\n\r\n* missed a gazillon conflict somehow\r\n\r\n* polars util spring cleaning\r\n\r\n* do indicate and demonstrate that range_components is _not_ a real streaming join\r\n\r\n* fixed some comments\r\n\r\n* bruh\r\n\r\n* screw it, going for the real deal: full streaming joins\r\n\r\n* YESgit sgit s FINALLY SEMANTICS I ACTUALLY LIKE\r\n\r\n* yep yep i like this\r\n\r\n* I hereby declare myself _satisfied_\r\n\r\n* initiating the great cleanup\r\n\r\n* add notes for upcoming terminology pr\r\n\r\n* bringing IndexRowNr into the mix and slowly starting to fix terminology mess\r\n\r\n* improving range_components ergonomics\r\n\r\n* putting it all in self-reviewable state\r\n\r\n* self-review\r\n\r\n* add bench\r\n\r\n* xxx\r\n\r\n* addressing PR comments\r\n\r\n* demonstrating nasty edge-case with streaming-joins\r\n\r\n* update streaming-join merging rules to fix said edge case\r\n\r\n* implement PoV-less, always-yield lower-level API + adapt higher-level one\r\n\r\n* addressing PR comments\r\n\r\n* self and not-so-self reviews",
+          "timestamp": "2023-01-02T17:28:34+01:00",
+          "tree_id": "034e9f074dde81fbe071f896070c80e6237c7294",
+          "url": "https://github.com/rerun-io/rerun/commit/853b714d94902a3af1ec94893c094dd04ecb367e"
+        },
+        "date": 1672677608964,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/insert/batch/rects/insert",
+            "value": 169114,
+            "range": "± 254",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/latest_at/batch/rects/query",
+            "value": 728,
+            "range": "± 1",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/latest_at/missing_components/primary",
+            "value": 306,
+            "range": "± 0",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/latest_at/missing_components/secondaries",
+            "value": 389,
+            "range": "± 0",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/range/batch/rects/query",
+            "value": 45077,
+            "range": "± 42",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_mono_points/insert",
+            "value": 992010058,
+            "range": "± 5381404",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_mono_points/query",
+            "value": 362032,
+            "range": "± 1396",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points/insert",
+            "value": 94465228,
+            "range": "± 465520",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points/query",
+            "value": 11294,
+            "range": "± 23",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/insert",
+            "value": 22838540,
+            "range": "± 256885",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/query",
+            "value": 7881,
+            "range": "± 28",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_classic/generate_messages",
+            "value": 4357290,
+            "range": "± 28474",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_classic/encode_log_msg",
+            "value": 10245119,
+            "range": "± 353308",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_classic/encode_total",
+            "value": 14569072,
+            "range": "± 349489",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_classic/decode_total",
+            "value": 35153401,
+            "range": "± 625964",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/generate_message_bundles",
+            "value": 25132270,
+            "range": "± 1545286",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/generate_messages",
+            "value": 101495966,
+            "range": "± 1395652",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/encode_log_msg",
+            "value": 128951170,
+            "range": "± 934009",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/encode_total",
+            "value": 260810335,
+            "range": "± 1917860",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/decode_log_msg",
+            "value": 145011501,
+            "range": "± 1074818",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/decode_message_bundles",
+            "value": 56050404,
+            "range": "± 1583016",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/decode_total",
+            "value": 199648350,
+            "range": "± 1916117",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_classic/generate_messages",
+            "value": 3580,
+            "range": "± 24",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_classic/encode_log_msg",
+            "value": 393309,
+            "range": "± 650",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_classic/encode_total",
+            "value": 396671,
+            "range": "± 556",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_classic/decode_total",
+            "value": 743895,
+            "range": "± 29862",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/generate_message_bundles",
+            "value": 243679,
+            "range": "± 324",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/generate_messages",
+            "value": 4562,
+            "range": "± 7",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/encode_log_msg",
+            "value": 265977,
+            "range": "± 626",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/encode_total",
+            "value": 534835,
+            "range": "± 1754",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/decode_log_msg",
+            "value": 205868,
+            "range": "± 325",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/decode_message_bundles",
+            "value": 1681,
+            "range": "± 7",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/decode_total",
+            "value": 212120,
+            "range": "± 598",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_mono_points/insert",
+            "value": 4052297893,
+            "range": "± 10555742",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_mono_points/query",
+            "value": 1647100,
+            "range": "± 10576",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_batch_points/insert",
+            "value": 1490507,
+            "range": "± 10297",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_batch_points/query",
+            "value": 16429,
+            "range": "± 33",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/Tuid::random",
+            "value": 38,
             "range": "± 0",
             "unit": "ns/iter"
           }
