@@ -118,8 +118,8 @@ use crate::{
 };
 
 use super::{
-    DrawData, FileResolver, FileSystem, LineVertex, RenderContext, Renderer, SharedRendererData,
-    WgpuResourcePools,
+    DrawData, DrawPhase, FileResolver, FileSystem, LineVertex, RenderContext, Renderer,
+    SharedRendererData, WgpuResourcePools,
 };
 
 pub mod gpu_data {
@@ -675,6 +675,7 @@ impl Renderer for LineRenderer {
 
     fn draw<'a>(
         &self,
+        _phase: DrawPhase,
         pools: &'a WgpuResourcePools,
         pass: &mut wgpu::RenderPass<'a>,
         draw_data: &Self::RendererDrawData,

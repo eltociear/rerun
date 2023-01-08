@@ -37,7 +37,7 @@ use crate::{
 };
 
 use super::{
-    DrawData, FileResolver, FileSystem, RenderContext, Renderer, SharedRendererData,
+    DrawData, DrawPhase, FileResolver, FileSystem, RenderContext, Renderer, SharedRendererData,
     WgpuResourcePools,
 };
 
@@ -513,6 +513,7 @@ impl Renderer for PointCloudRenderer {
 
     fn draw<'a>(
         &self,
+        _phase: DrawPhase,
         pools: &'a WgpuResourcePools,
         pass: &mut wgpu::RenderPass<'a>,
         draw_data: &Self::RendererDrawData,

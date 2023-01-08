@@ -1,3 +1,4 @@
+use ahash::HashMap;
 use anyhow::{Context, Ok};
 use parking_lot::RwLock;
 use std::sync::Arc;
@@ -7,7 +8,7 @@ use crate::{
     global_bindings::FrameUniformBuffer,
     renderer::{
         compositor::{Compositor, CompositorDrawData},
-        DrawData, Renderer,
+        DrawData, DrawPhase, Renderer,
     },
     wgpu_resources::{BufferDesc, GpuBindGroupHandleStrong, GpuTextureHandleStrong, TextureDesc},
     DebugLabel, Rgba,
@@ -17,18 +18,13 @@ type DrawFn = dyn for<'a, 'b> Fn(&'b RenderContext, &'a mut wgpu::RenderPass<'b>
     + Sync
     + Send;
 
-struct QueuedDraw {
-    draw_func: Box<DrawFn>,
-    sorting_index: u32,
-}
-
 /// The highest level rendering block in `re_renderer`.
 /// Used to build up/collect various resources and then send them off for rendering of  a single view.
 #[derive(Default)]
 pub struct ViewBuilder {
     /// Result of [`ViewBuilder::setup_view`] - needs to be `Option` sine some of the fields don't have a default.
     setup: Option<ViewTargetSetup>,
-    queued_draws: Vec<QueuedDraw>, // &mut wgpu::RenderPass
+    queued_draws: HashMap<DrawPhase, Vec<Box<DrawFn>>>,
 }
 
 struct ViewTargetSetup {
@@ -418,18 +414,27 @@ impl ViewBuilder {
     ) -> &mut Self {
         crate::profile_function!();
 
-        let draw_data = draw_data.clone();
+        // TODO: Should do this here to ensure the renderer exists
+        // let renderer: &D::Renderer = ctx.renderers.get_or_create(
+        //     &ctx.shared_renderer_data,
+        //     &mut ctx.gpu_resources,
+        //     &ctx.device,
+        //     &mut ctx.resolver,
+        // );
 
-        self.queued_draws.push(QueuedDraw {
-            draw_func: Box::new(move |ctx, pass| {
-                let renderer = ctx
-                    .renderers
-                    .get::<D::Renderer>()
-                    .context("failed to retrieve renderer")?;
-                renderer.draw(&ctx.gpu_resources, pass, &draw_data)
-            }),
-            sorting_index: D::Renderer::draw_order(),
-        });
+        for phase in D::Renderer::participated_phases() {
+            let draw_data = draw_data.clone();
+            self.queued_draws
+                .entry(*phase)
+                .or_default()
+                .push(Box::new(move |ctx, pass| {
+                    let renderer = ctx
+                        .renderers
+                        .get::<D::Renderer>()
+                        .context("failed to retrieve renderer")?;
+                    renderer.draw(*phase, &ctx.gpu_resources, pass, &draw_data)
+                }));
+        }
 
         self
     }
@@ -510,10 +515,10 @@ impl ViewBuilder {
                 &[],
             );
 
-            self.queued_draws
-                .sort_by(|a, b| a.sorting_index.cmp(&b.sorting_index));
-            for queued_draw in &self.queued_draws {
-                (queued_draw.draw_func)(ctx, &mut pass).context("drawing a view")?;
+            for items in self.queued_draws.values() {
+                for draw_func in items {
+                    (*draw_func)(ctx, &mut pass).context("drawing a view")?;
+                }
             }
         }
 
@@ -559,7 +564,12 @@ impl ViewBuilder {
             .get::<Compositor>()
             .context("get compositor")?;
         tonemapper
-            .draw(&ctx.gpu_resources, pass, &setup.tonemapping_draw_data)
+            .draw(
+                DrawPhase::Opaque,
+                &ctx.gpu_resources,
+                pass,
+                &setup.tonemapping_draw_data,
+            )
             .context("composite into main view")
     }
 }

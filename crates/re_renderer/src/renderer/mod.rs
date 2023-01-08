@@ -29,10 +29,10 @@ use crate::{
 
 /// GPU sided data used by a [`Renderer`] to draw things to the screen.
 ///
-/// Valid only for the frame in which it was created (typically uses temp allocations!)
+/// Valid only for the frame in which it was created (typically uses temp allocations!).
 /// TODO(andreas): Add a mechanism to validate this.
 pub trait DrawData {
-    type Renderer: Renderer<RendererDrawData = Self>;
+    type Renderer: Renderer<RendererDrawData = Self> + Send + Sync;
 }
 
 /// A Renderer encapsulate the knowledge of how to render a certain kind of primitives.
@@ -51,45 +51,49 @@ pub trait Renderer {
     ) -> Self;
 
     // TODO(andreas): Some Renderers need to create their own passes, need something like this for that.
-    // TODO(andreas): The harder part is that some of those might need to share them with others!
-    //                E.g. Shadow Mapping! Conceivable that there are special traits for those (distinguish "ShadowMappingAwareRenderer")
-    // fn record_custom_passes<'a>(
-    //     &self,
-    //     pools: &'a WgpuResourcePools,
-    //     pass: &mut wgpu::CommandEncoder,
-    //     draw_data: &Self::DrawData,
-    // ) -> anyhow::Result<()> {
-    // }
+    // TODO(andreas): The harder part is that some of those might need to share them with others! E.g. Shadow Mapping.
+    //                  (so far, all rendering happens directly to the output)
 
+    /// Called once per phase given by [`Renderer::participated_phases`].
     fn draw<'a>(
         &self,
+        phase: DrawPhase,
         pools: &'a WgpuResourcePools,
         pass: &mut wgpu::RenderPass<'a>,
         draw_data: &Self::RendererDrawData,
     ) -> anyhow::Result<()>;
 
-    /// Relative location in the rendering process when this renderer should be executed.
-    /// TODO(andreas): We might want to take [`DrawData`] into account for this.
-    ///                But this touches on the [`Renderer::draw`] method might be split in the future, which haven't designed yet.
-    fn draw_order() -> u32 {
-        DrawOrder::Opaque as u32
+    /// Combination of flags indicating in which phases [`Renderer::draw`] should be called.
+    fn participated_phases() -> &'static [DrawPhase] {
+        &[DrawPhase::Opaque]
     }
 }
 
-/// Assigns rough meaning to draw sorting indices
-#[allow(dead_code)]
-#[repr(u32)]
-enum DrawOrder {
+/// Determines a (very rough) order of rendering.
+///
+/// Currently we do not support sorting *within* a rendering phase!
+///
+/// Drawbacks:
+/// * no front-to-back order for opaque, meaning potentially lot of (discarded) overdraw
+/// * no back-to-front order for transparent, meaning rendering artifacts
+///   until we implement some form of order independent transparency
+///
+/// Advantages:
+/// * super simple, less data to transfer & compute (don't need to know distances)
+///     * allows fast path from database to gpu data, close to no data examination needed
+/// * faster in some cases
+/// * best possible batching, we invoke every renderer only once(ish) [`Renderer`],
+///     meaning minimal stage changes without the need for any sorting
+#[derive(Clone, Copy, Hash, PartialEq, Eq)]
+pub enum DrawPhase {
     /// Opaque objects, performing reads/writes to the depth buffer.
+    ///
     /// Typically they are order independent, so everything uses this same index.
-    Opaque = 30000,
+    Opaque,
 
-    /// Transparent objects. Each draw typically gets its own sorting index.
-    Transparent = 50000,
+    /// Background, rendering where depth wasn't written.
+    Background,
 
-    /// Backgrounds should always be rendered last.
-    Background = 70000,
-
-    /// Postprocessing effects that are applied before the final tonemapping step.
-    Postprocess = 90000,
+    /// Transparent objects. No depth buffer writes expected.
+    Transparent,
 }
