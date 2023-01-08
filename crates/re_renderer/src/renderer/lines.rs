@@ -170,7 +170,10 @@ struct LineStripBatch {
 #[derive(Clone)]
 pub struct LineDrawData {
     bind_group_all_lines: Option<GpuBindGroupHandleStrong>,
-    batches: Vec<LineStripBatch>,
+
+    opaque_batches: Vec<LineStripBatch>,
+    transparent_batches: Vec<LineStripBatch>,
+    always_front_batches: Vec<LineStripBatch>, // TODO: how to configure this.
 }
 
 impl DrawData for LineDrawData {
@@ -221,6 +224,11 @@ pub struct LineBatchInfo {
     /// The batch will start with the next vertex after the one the previous batch ended with.
     /// It is expected that this vertex is the first vertex of a new batch.
     pub line_vertex_count: u32,
+
+    /// If true, the entire batch will be rendered during the transparency phase.
+    ///
+    /// Only set this if necessary!
+    pub use_transparency_pass: bool,
 }
 
 /// Style information for a line strip.
@@ -229,7 +237,9 @@ pub struct LineStripInfo {
     /// Radius of the line strip in world space
     pub radius: Size,
 
-    /// srgb color. Alpha unused right now
+    /// srgb premultiplied color.
+    ///
+    /// Alpha is only correctly used if the batch is marked as being part of the transparency pass.
     pub color: Color32,
 
     /// Additional properties for the linestrip.
@@ -290,7 +300,7 @@ impl LineDrawData {
         if strips.is_empty() {
             return Ok(LineDrawData {
                 bind_group_all_lines: None,
-                batches: Vec::new(),
+                opaque_batches: Vec::new(),
             });
         }
 
@@ -298,6 +308,7 @@ impl LineDrawData {
             world_from_obj: glam::Mat4::IDENTITY,
             label: "all lines".into(),
             line_vertex_count: vertices.len() as _,
+            use_transparency_pass: false,
         }];
         let batches = if batches.is_empty() {
             &fallback_batches
@@ -479,7 +490,7 @@ impl LineDrawData {
         );
 
         // Process batches
-        let mut batches_internal = Vec::with_capacity(batches.len());
+        let mut opaque_batches = Vec::with_capacity(batches.len());
         {
             let allocation_size_per_uniform_buffer =
                 uniform_buffer_allocation_size::<gpu_data::BatchUniformBuffer>(&ctx.device);
@@ -531,7 +542,7 @@ impl LineDrawData {
                     &ctx.gpu_resources.samplers,
                 );
 
-                batches_internal.push(LineStripBatch {
+                opaque_batches.push(LineStripBatch {
                     bind_group,
                     // We spawn a quad for every vertex. Naturally, this yields one extra quad at the beginning of each batch,
                     // which is necessary to make line cap handling homogenous (each strip uses its first quad for both end and start cap)
@@ -550,13 +561,13 @@ impl LineDrawData {
 
         Ok(LineDrawData {
             bind_group_all_lines: Some(bind_group_all_lines),
-            batches: batches_internal,
+            opaque_batches,
         })
     }
 }
 
 pub struct LineRenderer {
-    render_pipeline: GpuRenderPipelineHandle,
+    render_pipeline_opaque: GpuRenderPipelineHandle,
     bind_group_layout_all_lines: GpuBindGroupLayoutHandle,
     bind_group_layout_batch: GpuBindGroupLayoutHandle,
 }
@@ -667,7 +678,7 @@ impl Renderer for LineRenderer {
         );
 
         LineRenderer {
-            render_pipeline,
+            render_pipeline_opaque: render_pipeline,
             bind_group_layout_all_lines,
             bind_group_layout_batch,
         }
@@ -675,7 +686,7 @@ impl Renderer for LineRenderer {
 
     fn draw<'a>(
         &self,
-        _phase: DrawPhase,
+        phase: DrawPhase,
         pools: &'a WgpuResourcePools,
         pass: &mut wgpu::RenderPass<'a>,
         draw_data: &Self::RendererDrawData,
@@ -684,12 +695,27 @@ impl Renderer for LineRenderer {
             return Ok(()); // No lines submitted.
         };
         let bind_group_line_data = pools.bind_groups.get_resource(bind_group_all_lines)?;
-        let pipeline = pools.render_pipelines.get_resource(self.render_pipeline)?;
+
+        let pipeline_handle = match phase {
+            DrawPhase::Opaque => self.render_pipeline_opaque,
+            DrawPhase::Transparent => self.render_pipeline_opaque,
+            DrawPhase::Background => unreachable!(),
+        };
+        let pipeline = pools.render_pipelines.get_resource(pipeline_handle)?;
 
         pass.set_pipeline(pipeline);
         pass.set_bind_group(1, bind_group_line_data, &[]);
 
-        for batch in &draw_data.batches {
+        for batch in &draw_data.opaque_batches {
+            if match phase {
+                DrawPhase::Opaque => true,
+                DrawPhase::Transparent => false,
+                DrawPhase::Background => unreachable!(),
+            } == batch.use_transparency_pass
+            {
+                continue;
+            }
+
             pass.set_bind_group(2, pools.bind_groups.get_resource(&batch.bind_group)?, &[]);
             pass.draw(batch.vertex_range.clone(), 0..1);
         }

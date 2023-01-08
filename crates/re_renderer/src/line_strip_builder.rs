@@ -33,6 +33,7 @@ where
             label: label.into(),
             world_from_obj: glam::Mat4::IDENTITY,
             line_vertex_count: 0,
+            use_transparency_pass: false,
         });
 
         LineBatchBuilder(self)
@@ -143,6 +144,7 @@ where
         LineStripBuilder {
             strips: &mut self.0.strips[old_len..],
             user_data: &mut self.0.strip_user_data[old_len..],
+            use_transparency_pass: &mut self.0.batches.last_mut().unwrap().use_transparency_pass,
         }
     }
 
@@ -185,6 +187,7 @@ where
         LineStripBuilder {
             strips: &mut self.0.strips[old_len..],
             user_data: &mut self.0.strip_user_data[old_len..],
+            use_transparency_pass: &mut self.0.batches.last_mut().unwrap().use_transparency_pass,
         }
     }
 
@@ -292,6 +295,7 @@ where
 pub struct LineStripBuilder<'a, PerStripUserData> {
     strips: &'a mut [LineStripInfo],
     user_data: &'a mut [PerStripUserData],
+    use_transparency_pass: &'a mut bool,
 }
 
 impl<'a, PerStripUserData> LineStripBuilder<'a, PerStripUserData>
@@ -310,6 +314,9 @@ where
     pub fn color(self, color: Color32) -> Self {
         for strip in self.strips.iter_mut() {
             strip.color = color;
+        }
+        if color.a() < 255 {
+            *self.use_transparency_pass = true;
         }
         self
     }

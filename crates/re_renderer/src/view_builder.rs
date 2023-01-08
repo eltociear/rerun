@@ -515,6 +515,7 @@ impl ViewBuilder {
                 &[],
             );
 
+            // TODO: WROOOONG. INCORRECT SORTING
             for items in self.queued_draws.values() {
                 for draw_func in items {
                     (*draw_func)(ctx, &mut pass).context("drawing a view")?;
