@@ -1,38 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1674571019695,
+  "lastUpdate": 1674579225740,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
-      {
-        "commit": {
-          "author": {
-            "email": "emil@rerun.io",
-            "name": "Emil Ernerfeldt",
-            "username": "emilk"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "646a564a4ec7d5d075b00733a464b63db74d17ec",
-          "message": "Dependency cleanup (#816)\n\n* Use workspace versions of wgpu and egui crates\r\n\r\n* Add document-features to re_renderer, re_query and re_tuid\r\n\r\n* Add a note about how we need to stop using patched crates\r\n\r\n* Clarify TODO",
-          "timestamp": "2023-01-20T08:15:24+01:00",
-          "tree_id": "a0a5fdd5aba7a539791895e3845d4af39b0ba7ba",
-          "url": "https://github.com/rerun-io/rerun/commit/646a564a4ec7d5d075b00733a464b63db74d17ec"
-        },
-        "date": 1674199185417,
-        "tool": "cargo",
-        "benches": [
-          {
-            "name": "datastore/insert/batch/rects/insert",
-            "value": 582018,
-            "range": "± 2405",
-            "unit": "ns/iter"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -899,6 +869,36 @@ window.BENCHMARK_DATA = {
             "name": "datastore/insert/batch/rects/insert",
             "value": 573169,
             "range": "± 2477",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "andreas@rerun.io",
+            "name": "Andreas Reich",
+            "username": "Wumpf"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "001b8df21c880abe79ed716919cb1b63349ab556",
+          "message": "Fix timeless data not correctly showing up in timeline. (#899)\n\nInstead of adding timeless data to all timelines, the time panel is now more aware of timeless data and takes it into account.",
+          "timestamp": "2023-01-24T17:51:21+01:00",
+          "tree_id": "7b4706ec42f03f1d9eefe5970d0d7396972a3481",
+          "url": "https://github.com/rerun-io/rerun/commit/001b8df21c880abe79ed716919cb1b63349ab556"
+        },
+        "date": 1674579224705,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/insert/batch/rects/insert",
+            "value": 584411,
+            "range": "± 20860",
             "unit": "ns/iter"
           }
         ]
