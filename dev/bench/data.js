@@ -1,38 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1674561425758,
+  "lastUpdate": 1674571019695,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
-      {
-        "commit": {
-          "author": {
-            "email": "emil@rerun.io",
-            "name": "Emil Ernerfeldt",
-            "username": "emilk"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "210fba86c979b4e11154bbaf30b9ebcdb82ffb20",
-          "message": "Add time histogram crate (#657)\n\n* First commit\r\n\r\n* less memory use\r\n\r\n* Better naming, and add tree8 + simple iterator\r\n\r\n* Fix multi-threaded memory-measurement\r\n\r\n* Add range to the query\r\n\r\n* sparseness test\r\n\r\n* Implement contraction\r\n\r\n* Implement removal\r\n\r\n* Use absolute indexing\r\n\r\n* Remove the other implementations\r\n\r\n* Add more tests\r\n\r\n* Docs\r\n\r\n* cleanup\r\n\r\n* Remove misleading comments\r\n\r\n* Some better naming and docs\r\n\r\n* Cleanup\r\n\r\n* Replace shell script with just-script\r\n\r\n* Use Relaxed\r\n\r\n* Explain the thread-local memory counting\r\n\r\n* Motivate weird u64_key_from_i64_key\r\n\r\n* Call it `root`\r\n\r\n* Document cutoff_size==0\r\n\r\n* Move up constant\r\n\r\n* Better comment\r\n\r\n* move stack pop\r\n\r\n* Document how to improve `remove` in the future\r\n\r\n* Document constants, and add some static assertions\r\n\r\n* Tree -> Node\r\n\r\n* Use SmallVec\r\n\r\n* Silence clippy",
-          "timestamp": "2023-01-20T07:59:42+01:00",
-          "tree_id": "35ac60a9ac50dd8f5de643ed9a8ca68ea51938cc",
-          "url": "https://github.com/rerun-io/rerun/commit/210fba86c979b4e11154bbaf30b9ebcdb82ffb20"
-        },
-        "date": 1674198271913,
-        "tool": "cargo",
-        "benches": [
-          {
-            "name": "datastore/insert/batch/rects/insert",
-            "value": 573679,
-            "range": "± 3596",
-            "unit": "ns/iter"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -899,6 +869,36 @@ window.BENCHMARK_DATA = {
             "name": "datastore/insert/batch/rects/insert",
             "value": 570001,
             "range": "± 2927",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "cr.rey.clement@gmail.com",
+            "name": "Clement Rey",
+            "username": "teh-cmc"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "56f56b7286aed596634d773c3c4b0efdc64ddce6",
+          "message": "added the actual sentinel file............... (#896)",
+          "timestamp": "2023-01-24T09:31:43-05:00",
+          "tree_id": "66d88fb466c207c7fb549bc1627881cbfb65bc63",
+          "url": "https://github.com/rerun-io/rerun/commit/56f56b7286aed596634d773c3c4b0efdc64ddce6"
+        },
+        "date": 1674571018695,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/insert/batch/rects/insert",
+            "value": 573169,
+            "range": "± 2477",
             "unit": "ns/iter"
           }
         ]
