@@ -1,38 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1674557798695,
+  "lastUpdate": 1674561425758,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
-      {
-        "commit": {
-          "author": {
-            "email": "jeremy@rerun.io",
-            "name": "Jeremy Leibs",
-            "username": "jleibs"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "cf68955e5fda622d9e2c3cfae424d769d433f963",
-          "message": "Make visible history work for Point3D (#820)\n\n* Make visible history work for Point3D",
-          "timestamp": "2023-01-19T22:32:24+01:00",
-          "tree_id": "0e8d51e0101177cfa993fc9003b9d0851a2f62d5",
-          "url": "https://github.com/rerun-io/rerun/commit/cf68955e5fda622d9e2c3cfae424d769d433f963"
-        },
-        "date": 1674164069878,
-        "tool": "cargo",
-        "benches": [
-          {
-            "name": "datastore/insert/batch/rects/insert",
-            "value": 557837,
-            "range": "± 6447",
-            "unit": "ns/iter"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -899,6 +869,36 @@ window.BENCHMARK_DATA = {
             "name": "datastore/insert/batch/rects/insert",
             "value": 557094,
             "range": "± 5993",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "emil@rerun.io",
+            "name": "Emil Ernerfeldt",
+            "username": "emilk"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "f62abd4e3992b7811f72c06fb43edaa944d41b43",
+          "message": "New rerun menu (#892)\n\n* Turn off background for buttons, dragvalues, comboboxes\r\n\r\n* Use a proper icon for the \"Add new blueprint\" button\r\n\r\n* Rearrange buttons in timeline panel\r\n\r\n* Turn on button-frames (when hovered)\r\n\r\n* Unify all menus under a common Rerun menu\r\n\r\n* Inline the old \"File\" and \"View\" menus under the new rerun menu\r\n\r\n* Tweak wording on menu options\r\n\r\n* Make the menu buttons look better\r\n\r\n* Wider default width of selection view\r\n\r\n* Tidy-up tensor blueprint view\r\n\r\n* Re-arrange the time control buttons\r\n\r\n* Update egui\r\n\r\n* lint fix\r\n\r\n* spelling\r\n\r\nCo-authored-by: Andreas Reich <andreas@rerun.io>\r\n\r\n* Remove rerun.io logo/link from top bar\r\n\r\n* Fix spacing in rerun menu\r\n\r\n* Make Rerun menu logo smaller\r\n\r\n* Fix warning in web build\r\n\r\nCo-authored-by: Andreas Reich <andreas@rerun.io>",
+          "timestamp": "2023-01-24T12:54:49+01:00",
+          "tree_id": "0c18714786abb424892318d12d703be3a1d76071",
+          "url": "https://github.com/rerun-io/rerun/commit/f62abd4e3992b7811f72c06fb43edaa944d41b43"
+        },
+        "date": 1674561424681,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/insert/batch/rects/insert",
+            "value": 570001,
+            "range": "± 2927",
             "unit": "ns/iter"
           }
         ]
