@@ -1,38 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1674581862783,
+  "lastUpdate": 1674598410518,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
-      {
-        "commit": {
-          "author": {
-            "email": "emil@rerun.io",
-            "name": "Emil Ernerfeldt",
-            "username": "emilk"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "2ad4848324d7660b7a5804acfa849994f0a87615",
-          "message": "Remove all use of crate cgmath (#840)",
-          "timestamp": "2023-01-20T11:25:49+01:00",
-          "tree_id": "1add6b1b55c4c88d378f143596018cb3e7d715c0",
-          "url": "https://github.com/rerun-io/rerun/commit/2ad4848324d7660b7a5804acfa849994f0a87615"
-        },
-        "date": 1674216195444,
-        "tool": "cargo",
-        "benches": [
-          {
-            "name": "datastore/insert/batch/rects/insert",
-            "value": 566078,
-            "range": "± 2155",
-            "unit": "ns/iter"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -899,6 +869,36 @@ window.BENCHMARK_DATA = {
             "name": "datastore/insert/batch/rects/insert",
             "value": 571248,
             "range": "± 12819",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "emil@rerun.io",
+            "name": "Emil Ernerfeldt",
+            "username": "emilk"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "339575eeca465daec25b5a91ccc5e364e4695103",
+          "message": "Hide the top-bar cpu/memory/latency labels in release builds (#897)\n\n* Hide the top-bar cpu/memory/latency labels in release builds\r\n\r\n* Tweak rerun menu button height so not to expand the top bar\r\n\r\n* Make the minimum app size high enough to fit rerun menu\r\n\r\n* Tweak selection panel width",
+          "timestamp": "2023-01-24T23:09:28+01:00",
+          "tree_id": "ae61cf5a4463dcd4022c2db5e19112e4a5e7c0f4",
+          "url": "https://github.com/rerun-io/rerun/commit/339575eeca465daec25b5a91ccc5e364e4695103"
+        },
+        "date": 1674598409497,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/insert/batch/rects/insert",
+            "value": 585380,
+            "range": "± 2507",
             "unit": "ns/iter"
           }
         ]
