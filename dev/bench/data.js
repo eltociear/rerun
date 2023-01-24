@@ -1,38 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1674556872187,
+  "lastUpdate": 1674557397475,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
-      {
-        "commit": {
-          "author": {
-            "email": "john@rerun.io",
-            "name": "John Hughes",
-            "username": "jondo2010"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "e80055dcf2dde4341960eb89fb5f91f6c66be675",
-          "message": "Rebuild Rect2D as a Union of Vec4D (#826)\n\n* Use Buffer<T> for Tensor payload\r\n* Add support for deriving Arrow for [T;SIZE]\r\n* Rework Vec2D, Vec3D and Vec4D to use [T] storage\r\n* Rework Rect2D to wrap a Vec4D, supporting all RectTypes as an Enum\r\n* Added missing components to Boxes2dPart\r\n* Fixed duck typing in log_rect/log_rects\r\n* No vec-allocation on fixed-size deserialization\r\nCo-authored-by: Jeremy Leibs <jeremy@rerun.io>",
-          "timestamp": "2023-01-19T17:34:10+01:00",
-          "tree_id": "d2c036e93a64480bedf6cde2d8b5914b0f354f85",
-          "url": "https://github.com/rerun-io/rerun/commit/e80055dcf2dde4341960eb89fb5f91f6c66be675"
-        },
-        "date": 1674146198441,
-        "tool": "cargo",
-        "benches": [
-          {
-            "name": "datastore/insert/batch/rects/insert",
-            "value": 584396,
-            "range": "± 8470",
-            "unit": "ns/iter"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -899,6 +869,36 @@ window.BENCHMARK_DATA = {
             "name": "datastore/insert/batch/rects/insert",
             "value": 561141,
             "range": "± 7703",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "andreas@rerun.io",
+            "name": "Andreas Reich",
+            "username": "Wumpf"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "6824669ba11a7e83a77b6cb036f11528033bce50",
+          "message": "selecting/hovering groups causes now select/hover highlight (#893)",
+          "timestamp": "2023-01-24T11:47:21+01:00",
+          "tree_id": "99159fb6b3c6c0b72ebfd02fbbfa0c0252d8202a",
+          "url": "https://github.com/rerun-io/rerun/commit/6824669ba11a7e83a77b6cb036f11528033bce50"
+        },
+        "date": 1674557396404,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/insert/batch/rects/insert",
+            "value": 552629,
+            "range": "± 7221",
             "unit": "ns/iter"
           }
         ]
