@@ -1,38 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1674557397475,
+  "lastUpdate": 1674557798695,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
-      {
-        "commit": {
-          "author": {
-            "email": "niko@grapic.co",
-            "name": "Nikolaus West",
-            "username": "nikolausWest"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "52b70551b4dc317019c28715e56c9ab2b4460906",
-          "message": "Stable diffusion example fixes (#831)\n\n* Add in fixes to huggingface_pipeline from main\r\n* Control SD model weights cache dir\r\n* Remove rerun from example requirements.txt\r\n* Remove reference to multiprocessing's requirements\r\n* Fix randn_tensor call\r\n* Fix comment in __call__\r\n* Improve prompt logging\r\n* Update default stable diffusion prompt",
-          "timestamp": "2023-01-19T18:56:30+01:00",
-          "tree_id": "630de2458589b76a1dc4ec98a7105a436a8f2fd3",
-          "url": "https://github.com/rerun-io/rerun/commit/52b70551b4dc317019c28715e56c9ab2b4460906"
-        },
-        "date": 1674151228534,
-        "tool": "cargo",
-        "benches": [
-          {
-            "name": "datastore/insert/batch/rects/insert",
-            "value": 565619,
-            "range": "± 3521",
-            "unit": "ns/iter"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -899,6 +869,36 @@ window.BENCHMARK_DATA = {
             "name": "datastore/insert/batch/rects/insert",
             "value": 552629,
             "range": "± 7221",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "andreas@rerun.io",
+            "name": "Andreas Reich",
+            "username": "Wumpf"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "de9cfe64b77d5bf17f18ad5da44b38e69f056be6",
+          "message": "Link to data blueprint / usages in Blueprint panel (#881)\n\n* fix what-is-selected-ui changes in buttons\r\n* no selected components are no longer an error\r\n* unify instance & object path buttons. show blueprint links when no space view context is known\r\n* object paths now also refer to where they show up",
+          "timestamp": "2023-01-24T11:53:37+01:00",
+          "tree_id": "8263e91e6d064af11690ede4e8b38eb529feb913",
+          "url": "https://github.com/rerun-io/rerun/commit/de9cfe64b77d5bf17f18ad5da44b38e69f056be6"
+        },
+        "date": 1674557797676,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/insert/batch/rects/insert",
+            "value": 557094,
+            "range": "± 5993",
             "unit": "ns/iter"
           }
         ]
