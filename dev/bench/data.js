@@ -1,38 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1674579225740,
+  "lastUpdate": 1674581862783,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
-      {
-        "commit": {
-          "author": {
-            "email": "emil@rerun.io",
-            "name": "Emil Ernerfeldt",
-            "username": "emilk"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "e649a5e963aeb444cab3cb18e9f8ecf0eb43535a",
-          "message": "Python SDK: Add `rerun.spawn_and_connect` (#821)\n\n* Python SDK: Add rerun.spawn_and_connect\r\n\r\n* Update all examples\r\n\r\n* Better docs\r\n\r\n* Update changelog\r\n\r\n* Python linting\r\n\r\n* Set start_new_session=True\r\n\r\n* Unify how we setup logging across all crates\r\n\r\n* Graceful shutdown of client connection\r\n\r\n* Add separate spawn_viewer function\r\n\r\n* py-lint\r\n\r\n* Update changelog date",
-          "timestamp": "2023-01-20T09:12:23+01:00",
-          "tree_id": "a19e5e9740dd1acf82bf53caf7e83590f81dd32d",
-          "url": "https://github.com/rerun-io/rerun/commit/e649a5e963aeb444cab3cb18e9f8ecf0eb43535a"
-        },
-        "date": 1674202474508,
-        "tool": "cargo",
-        "benches": [
-          {
-            "name": "datastore/insert/batch/rects/insert",
-            "value": 572154,
-            "range": "± 3784",
-            "unit": "ns/iter"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -899,6 +869,36 @@ window.BENCHMARK_DATA = {
             "name": "datastore/insert/batch/rects/insert",
             "value": 584411,
             "range": "± 20860",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "andreas@rerun.io",
+            "name": "Andreas Reich",
+            "username": "Wumpf"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "5aca22b884135b68ecf91af76fb1776e896857e1",
+          "message": "Fix invisible timeline handle and bad objectron example names (#902)\n\n* Fix timeline cursor invisible on hover\r\n* better object names in objectron",
+          "timestamp": "2023-01-24T18:35:25+01:00",
+          "tree_id": "3ac7fd452f143dbd2b9966b9bc3f3a425dacdfe8",
+          "url": "https://github.com/rerun-io/rerun/commit/5aca22b884135b68ecf91af76fb1776e896857e1"
+        },
+        "date": 1674581861706,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/insert/batch/rects/insert",
+            "value": 571248,
+            "range": "± 12819",
             "unit": "ns/iter"
           }
         ]
