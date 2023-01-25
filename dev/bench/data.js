@@ -1,38 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1674671707443,
+  "lastUpdate": 1674678849092,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
-      {
-        "commit": {
-          "author": {
-            "email": "jeremy@rerun.io",
-            "name": "Jeremy Leibs",
-            "username": "jleibs"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "ee29c1485487d6ae0fcc287c13c953494cbe90f3",
-          "message": "Convert F16 -> F32 on log (#855)",
-          "timestamp": "2023-01-20T16:06:47+01:00",
-          "tree_id": "6b64039625c951f81c50469141bf9a3c3ff02720",
-          "url": "https://github.com/rerun-io/rerun/commit/ee29c1485487d6ae0fcc287c13c953494cbe90f3"
-        },
-        "date": 1674227412429,
-        "tool": "cargo",
-        "benches": [
-          {
-            "name": "datastore/insert/batch/rects/insert",
-            "value": 562405,
-            "range": "± 1331",
-            "unit": "ns/iter"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -899,6 +869,36 @@ window.BENCHMARK_DATA = {
             "name": "datastore/insert/batch/rects/insert",
             "value": 569642,
             "range": "± 5618",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "cr.rey.clement@gmail.com",
+            "name": "Clement Rey",
+            "username": "teh-cmc"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "b65f99fbce6bc7d6925b870b08cf509cb0e64aa7",
+          "message": "analytics for everyone (#885)\n\n* analytics in release too\r\n\r\n* introducing tel.rerun.io\r\n\r\n* added release key\r\n\r\n* fixing git change detection\r\n\r\n* rerun analytics email <email>\r\n\r\n* Update the analytics disclaimer and details\r\n\r\n* versioned links in details subcommand\r\n\r\nCo-authored-by: Nikolaus West <niko@rerun.io>\r\nCo-authored-by: Emil Ernerfeldt <emil@rerun.io>\r\nCo-authored-by: Andreas Reich <andreas@rerun.io>",
+          "timestamp": "2023-01-25T21:27:19+01:00",
+          "tree_id": "db5b3e25b63aa0d646afb536af113f01c6eed650",
+          "url": "https://github.com/rerun-io/rerun/commit/b65f99fbce6bc7d6925b870b08cf509cb0e64aa7"
+        },
+        "date": 1674678848026,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/insert/batch/rects/insert",
+            "value": 570870,
+            "range": "± 2297",
             "unit": "ns/iter"
           }
         ]
