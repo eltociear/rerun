@@ -1,38 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1674678849092,
+  "lastUpdate": 1674679059701,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
-      {
-        "commit": {
-          "author": {
-            "email": "jeremy@rerun.io",
-            "name": "Jeremy Leibs",
-            "username": "jleibs"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "52feae25df85eecb1dc055c4ab28f1054df27632",
-          "message": "Patch meter into ArrowTensor for the time being (#858)\n\n* Patch meter into ArrowTensor for the time being\r\n\r\n* Clarify meter constructions in tensor.py\r\n\r\n* cranky",
-          "timestamp": "2023-01-20T17:30:47+01:00",
-          "tree_id": "839dcb96cc9f1808761d61e2c0b40d9e3a333f3b",
-          "url": "https://github.com/rerun-io/rerun/commit/52feae25df85eecb1dc055c4ab28f1054df27632"
-        },
-        "date": 1674232526875,
-        "tool": "cargo",
-        "benches": [
-          {
-            "name": "datastore/insert/batch/rects/insert",
-            "value": 571511,
-            "range": "± 2171",
-            "unit": "ns/iter"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -899,6 +869,36 @@ window.BENCHMARK_DATA = {
             "name": "datastore/insert/batch/rects/insert",
             "value": 570870,
             "range": "± 2297",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "emil@rerun.io",
+            "name": "Emil Ernerfeldt",
+            "username": "emilk"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "778891ffa74474e2a0950214e3a0b82adca53360",
+          "message": "Make multiprocessing example simpler with spawn/connect calls (#907)\n\n* Make multiprocessing example simpler with spawn/connect calls\r\n\r\n* py-format\r\n\r\n* Update docs and comments\r\n\r\n* py-format",
+          "timestamp": "2023-01-25T21:34:27+01:00",
+          "tree_id": "1165099fd2af512185eeb103921a7c87a3549541",
+          "url": "https://github.com/rerun-io/rerun/commit/778891ffa74474e2a0950214e3a0b82adca53360"
+        },
+        "date": 1674679058713,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/insert/batch/rects/insert",
+            "value": 581894,
+            "range": "± 3395",
             "unit": "ns/iter"
           }
         ]
