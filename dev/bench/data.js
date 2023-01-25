@@ -1,38 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1674611650358,
+  "lastUpdate": 1674634864531,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
-      {
-        "commit": {
-          "author": {
-            "email": "emil@rerun.io",
-            "name": "Emil Ernerfeldt",
-            "username": "emilk"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "8ee3dfa362e204501e6e056c1e2ed498365ce4e1",
-          "message": "Make `rr.init(\"my_app\", spawn_and_connect = True)` as a short form (#846)\n\n* Make `rr.init(\"my_app\", spawn_and_connect = True)` as a short form\r\n\r\n* Add dead simple example of how to use Rerun SDK\r\n\r\n* Update requirements files\r\n\r\n* pylint\r\n\r\n* make hello_world a main.py",
-          "timestamp": "2023-01-20T13:33:09+01:00",
-          "tree_id": "cf7db5d902f93927ef6d03a581a6a971418757dd",
-          "url": "https://github.com/rerun-io/rerun/commit/8ee3dfa362e204501e6e056c1e2ed498365ce4e1"
-        },
-        "date": 1674218194510,
-        "tool": "cargo",
-        "benches": [
-          {
-            "name": "datastore/insert/batch/rects/insert",
-            "value": 559926,
-            "range": "± 4903",
-            "unit": "ns/iter"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -899,6 +869,36 @@ window.BENCHMARK_DATA = {
             "name": "datastore/insert/batch/rects/insert",
             "value": 562934,
             "range": "± 5528",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "andreas@rerun.io",
+            "name": "Andreas Reich",
+            "username": "Wumpf"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "7d6aacf4fa64cf0b42fe5cdbc6672026c44352ea",
+          "message": "Space view generation heuristics now always look at latest available data. (#904)\n\nBefore they'd look at the current data, causing different space views when resetting the blueprint e.g. while looking at timeless data",
+          "timestamp": "2023-01-25T09:16:59+01:00",
+          "tree_id": "11f7e8ca3c24158698cf67a5f7ad103d8e9de15b",
+          "url": "https://github.com/rerun-io/rerun/commit/7d6aacf4fa64cf0b42fe5cdbc6672026c44352ea"
+        },
+        "date": 1674634863377,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/insert/batch/rects/insert",
+            "value": 580787,
+            "range": "± 2948",
             "unit": "ns/iter"
           }
         ]
