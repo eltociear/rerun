@@ -1,38 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1674679059701,
+  "lastUpdate": 1674688327322,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
-      {
-        "commit": {
-          "author": {
-            "email": "andreas@rerun.io",
-            "name": "Andreas Reich",
-            "username": "Wumpf"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "ff7ea25e4514fc29ad71447e43e8082508ba0ae0",
-          "message": "move selection state into dedicated struct (#857)",
-          "timestamp": "2023-01-20T17:58:13+01:00",
-          "tree_id": "3f5385c28730ac40f284e0c3e3fc656cfd8f2003",
-          "url": "https://github.com/rerun-io/rerun/commit/ff7ea25e4514fc29ad71447e43e8082508ba0ae0"
-        },
-        "date": 1674234022731,
-        "tool": "cargo",
-        "benches": [
-          {
-            "name": "datastore/insert/batch/rects/insert",
-            "value": 573850,
-            "range": "± 2286",
-            "unit": "ns/iter"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -899,6 +869,36 @@ window.BENCHMARK_DATA = {
             "name": "datastore/insert/batch/rects/insert",
             "value": 581894,
             "range": "± 3395",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "jeremy@rerun.io",
+            "name": "Jeremy Leibs",
+            "username": "jleibs"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "dc26406342888bb53616852287b1938489271583",
+          "message": "Partial revert of #904 to fix temporal transforms (#930)",
+          "timestamp": "2023-01-26T00:09:56+01:00",
+          "tree_id": "b229bd95507370c2b643ca34f7723b021f3f0106",
+          "url": "https://github.com/rerun-io/rerun/commit/dc26406342888bb53616852287b1938489271583"
+        },
+        "date": 1674688326318,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/insert/batch/rects/insert",
+            "value": 561644,
+            "range": "± 4156",
             "unit": "ns/iter"
           }
         ]
