@@ -1,38 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1674670678035,
+  "lastUpdate": 1674671707443,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
-      {
-        "commit": {
-          "author": {
-            "email": "jeremy@rerun.io",
-            "name": "Jeremy Leibs",
-            "username": "jleibs"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "c9004877ab970d4bfcaeb725b2c14921b88dd245",
-          "message": "Visible history all the types (#852)\n\n* Visible history all the types\r\n* Fix image layering on arrow",
-          "timestamp": "2023-01-20T15:40:10+01:00",
-          "tree_id": "b40ea11090229ffb94fd4e74a72688ccbab34b1b",
-          "url": "https://github.com/rerun-io/rerun/commit/c9004877ab970d4bfcaeb725b2c14921b88dd245"
-        },
-        "date": 1674225739585,
-        "tool": "cargo",
-        "benches": [
-          {
-            "name": "datastore/insert/batch/rects/insert",
-            "value": 564991,
-            "range": "± 3187",
-            "unit": "ns/iter"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -899,6 +869,36 @@ window.BENCHMARK_DATA = {
             "name": "datastore/insert/batch/rects/insert",
             "value": 580077,
             "range": "± 10497",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "andreas@rerun.io",
+            "name": "Andreas Reich",
+            "username": "Wumpf"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "2efa3d1e336396ba12f1d3e4361515c0f16ace74",
+          "message": "Depth images are now always mapped with turbo color map (#912)",
+          "timestamp": "2023-01-25T19:32:57+01:00",
+          "tree_id": "aed0335c5aaefab10bce2a7e417c64ca1f1f216d",
+          "url": "https://github.com/rerun-io/rerun/commit/2efa3d1e336396ba12f1d3e4361515c0f16ace74"
+        },
+        "date": 1674671706327,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/insert/batch/rects/insert",
+            "value": 569642,
+            "range": "± 5618",
             "unit": "ns/iter"
           }
         ]
