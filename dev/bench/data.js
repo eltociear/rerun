@@ -1,38 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1674665682481,
+  "lastUpdate": 1674669264404,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
-      {
-        "commit": {
-          "author": {
-            "email": "emil@rerun.io",
-            "name": "Emil Ernerfeldt",
-            "username": "emilk"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "4cabe0ada7b3d1f17e4ff8b2b5f55debb9ba9ffa",
-          "message": "Improve selection history UI (#848)\n\n* Document SelectionHistory\r\n* Nice selection history UI: drop-down on right-clicking buttons\r\n* Don't serialize selection history\r\n* Store one selection history per recording\r\n* Fix potential out-of-bound in selection history\r\n* Simplify selection history pruning\r\n* Keep the correct index",
-          "timestamp": "2023-01-20T15:00:28+01:00",
-          "tree_id": "411222a46d2ab99d4d1974959e7f2726724bfde2",
-          "url": "https://github.com/rerun-io/rerun/commit/4cabe0ada7b3d1f17e4ff8b2b5f55debb9ba9ffa"
-        },
-        "date": 1674223422047,
-        "tool": "cargo",
-        "benches": [
-          {
-            "name": "datastore/insert/batch/rects/insert",
-            "value": 565637,
-            "range": "± 6194",
-            "unit": "ns/iter"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -899,6 +869,36 @@ window.BENCHMARK_DATA = {
             "name": "datastore/insert/batch/rects/insert",
             "value": 566843,
             "range": "± 9595",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "andreas@rerun.io",
+            "name": "Andreas Reich",
+            "username": "Wumpf"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "d4763a238e6c8e30ef5f10075af6e3fc7a3c5031",
+          "message": "Add Viridis colormap for tensors and use by default (#915)\n\nFixes #868",
+          "timestamp": "2023-01-25T18:52:16+01:00",
+          "tree_id": "9703f1ec6bf2f57697813b59e953425cdf64a66f",
+          "url": "https://github.com/rerun-io/rerun/commit/d4763a238e6c8e30ef5f10075af6e3fc7a3c5031"
+        },
+        "date": 1674669263288,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/insert/batch/rects/insert",
+            "value": 567154,
+            "range": "± 1645",
             "unit": "ns/iter"
           }
         ]
