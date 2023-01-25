@@ -1,38 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1674634864531,
+  "lastUpdate": 1674639193539,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
-      {
-        "commit": {
-          "author": {
-            "email": "jeremy@rerun.io",
-            "name": "Jeremy Leibs",
-            "username": "jleibs"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "3b5f4f32a59b1c5eeef25da0b82ee139297bea9a",
-          "message": "Fix deadlock when flushing messages (#843)\n\n* Drop msgs on their own thread\r\n\r\n* Relesae the GIL before flush\r\n\r\n* Better expect msg\r\n\r\n* clippy",
-          "timestamp": "2023-01-20T13:56:37+01:00",
-          "tree_id": "64fef631611fb168c97315def96696584183b2f7",
-          "url": "https://github.com/rerun-io/rerun/commit/3b5f4f32a59b1c5eeef25da0b82ee139297bea9a"
-        },
-        "date": 1674220172509,
-        "tool": "cargo",
-        "benches": [
-          {
-            "name": "datastore/insert/batch/rects/insert",
-            "value": 568925,
-            "range": "± 4770",
-            "unit": "ns/iter"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -899,6 +869,36 @@ window.BENCHMARK_DATA = {
             "name": "datastore/insert/batch/rects/insert",
             "value": 580787,
             "range": "± 2948",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "cr.rey.clement@gmail.com",
+            "name": "Clement Rey",
+            "username": "teh-cmc"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "0145234fbea5b662cf79729dbf4161fe20c7b5e6",
+          "message": "examples: add missing stable diffusion reqs (#884)\n\n* add missing stable diffusion reqs\r\n\r\n* pin stable_diffusion's transformers & diffusers",
+          "timestamp": "2023-01-25T10:31:01+01:00",
+          "tree_id": "47e78aec2e7648af1f62c5567ba85315003a8ed4",
+          "url": "https://github.com/rerun-io/rerun/commit/0145234fbea5b662cf79729dbf4161fe20c7b5e6"
+        },
+        "date": 1674639192472,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/insert/batch/rects/insert",
+            "value": 576979,
+            "range": "± 15218",
             "unit": "ns/iter"
           }
         ]
