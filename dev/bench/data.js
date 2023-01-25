@@ -1,38 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1674598410518,
+  "lastUpdate": 1674611650358,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
-      {
-        "commit": {
-          "author": {
-            "email": "andreas@rerun.io",
-            "name": "Andreas Reich",
-            "username": "Wumpf"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "aa09fe470b45864a8b7afee920ebcd2117a9bca1",
-          "message": "Fix objects with transform only missing in arrow and selection history prune crash (#844)\n\n* Fix objects with transform only not being added to scenes in arrow\r\n* Fix selection history prune causing crashes",
-          "timestamp": "2023-01-20T13:12:02+01:00",
-          "tree_id": "d172d63e9b2a4d4303a834c3570f3a199c5a1aa4",
-          "url": "https://github.com/rerun-io/rerun/commit/aa09fe470b45864a8b7afee920ebcd2117a9bca1"
-        },
-        "date": 1674216948783,
-        "tool": "cargo",
-        "benches": [
-          {
-            "name": "datastore/insert/batch/rects/insert",
-            "value": 563321,
-            "range": "± 4496",
-            "unit": "ns/iter"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -899,6 +869,36 @@ window.BENCHMARK_DATA = {
             "name": "datastore/insert/batch/rects/insert",
             "value": 585380,
             "range": "± 2507",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "jeremy@rerun.io",
+            "name": "Jeremy Leibs",
+            "username": "jleibs"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "70a77b25891d2b6cffc7b3c372d681778c4c5c3a",
+          "message": "Release the session lock while we're building the arrow chunks (#908)\n\n* Release the session lock while we're building the arrow chunks\r\n\r\n* Simple example of logging from multiple threads",
+          "timestamp": "2023-01-24T20:50:01-05:00",
+          "tree_id": "47a096b25468818c78252f7a560c7de0b01c9647",
+          "url": "https://github.com/rerun-io/rerun/commit/70a77b25891d2b6cffc7b3c372d681778c4c5c3a"
+        },
+        "date": 1674611649372,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/insert/batch/rects/insert",
+            "value": 562934,
+            "range": "± 5528",
             "unit": "ns/iter"
           }
         ]
