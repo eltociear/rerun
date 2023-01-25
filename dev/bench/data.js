@@ -1,38 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1674669264404,
+  "lastUpdate": 1674670678035,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
-      {
-        "commit": {
-          "author": {
-            "email": "jeremy@rerun.io",
-            "name": "Jeremy Leibs",
-            "username": "jleibs"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "5d3a8759ccb5ff03d1cd4456cf329a8ccc4e43ac",
-          "message": "Slightly cleaner error handling for AddrInUse (#847)\n\n* Slightly cleaner error handling for AddrInUse\r\n* Return error code consistently on failure",
-          "timestamp": "2023-01-20T15:26:21+01:00",
-          "tree_id": "352fbb7e33ad2eaa4a9b9674768a8170e679d32d",
-          "url": "https://github.com/rerun-io/rerun/commit/5d3a8759ccb5ff03d1cd4456cf329a8ccc4e43ac"
-        },
-        "date": 1674224906786,
-        "tool": "cargo",
-        "benches": [
-          {
-            "name": "datastore/insert/batch/rects/insert",
-            "value": 571825,
-            "range": "± 7047",
-            "unit": "ns/iter"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -899,6 +869,36 @@ window.BENCHMARK_DATA = {
             "name": "datastore/insert/batch/rects/insert",
             "value": 567154,
             "range": "± 1645",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "cr.rey.clement@gmail.com",
+            "name": "Clement Rey",
+            "username": "teh-cmc"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "47361384f65d6195b12fab7ddc84184b246b933c",
+          "message": "re_analytics: fix rerun-if-changed clause (#924)",
+          "timestamp": "2023-01-25T19:13:52+01:00",
+          "tree_id": "a802c6885bd4059ddc0245eb3d572ede459d12f0",
+          "url": "https://github.com/rerun-io/rerun/commit/47361384f65d6195b12fab7ddc84184b246b933c"
+        },
+        "date": 1674670676960,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/insert/batch/rects/insert",
+            "value": 580077,
+            "range": "± 10497",
             "unit": "ns/iter"
           }
         ]
