@@ -1,38 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1674651968429,
+  "lastUpdate": 1674662875123,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
-      {
-        "commit": {
-          "author": {
-            "email": "emil@rerun.io",
-            "name": "Emil Ernerfeldt",
-            "username": "emilk"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "e6bb41f569a97d6748a6dbff40ca8834e7075a6b",
-          "message": "Add profiling scopes to point3d scene population (#849)",
-          "timestamp": "2023-01-20T14:31:14+01:00",
-          "tree_id": "f683180d51a21e883d949497c68c7ec5eb2ecc22",
-          "url": "https://github.com/rerun-io/rerun/commit/e6bb41f569a97d6748a6dbff40ca8834e7075a6b"
-        },
-        "date": 1674221608323,
-        "tool": "cargo",
-        "benches": [
-          {
-            "name": "datastore/insert/batch/rects/insert",
-            "value": 581575,
-            "range": "± 4003",
-            "unit": "ns/iter"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -899,6 +869,36 @@ window.BENCHMARK_DATA = {
             "name": "datastore/insert/batch/rects/insert",
             "value": 559897,
             "range": "± 1949",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "jeremy@rerun.io",
+            "name": "Jeremy Leibs",
+            "username": "jleibs"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "105a425dfc1898a146845ef93714b0c25d9fb082",
+          "message": "Update dependencies: Python3.8, arrow==10.0.1, numpy>=1.23 (#898)\n\n* Bump pyarrow\r\n* Use 1.23 as a minimum numpy version\r\n* We already depend on python 3.8 featuees -- make it explicit",
+          "timestamp": "2023-01-25T17:01:27+01:00",
+          "tree_id": "037a3484ffe0894796fdd2267e95a7e9ccf9a884",
+          "url": "https://github.com/rerun-io/rerun/commit/105a425dfc1898a146845ef93714b0c25d9fb082"
+        },
+        "date": 1674662874086,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/insert/batch/rects/insert",
+            "value": 563722,
+            "range": "± 7607",
             "unit": "ns/iter"
           }
         ]
