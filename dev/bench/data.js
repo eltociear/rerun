@@ -1,38 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1674726323847,
+  "lastUpdate": 1674746266408,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
-      {
-        "commit": {
-          "author": {
-            "email": "jeremy@rerun.io",
-            "name": "Jeremy Leibs",
-            "username": "jleibs"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "bf5e622834c9fffc656fa5679333cf828710fb16",
-          "message": "Join threads when client is being dropped (#876)",
-          "timestamp": "2023-01-23T15:44:23+01:00",
-          "tree_id": "078eb6cb478a8104e8a3a42241965d9133e4584c",
-          "url": "https://github.com/rerun-io/rerun/commit/bf5e622834c9fffc656fa5679333cf828710fb16"
-        },
-        "date": 1674485201956,
-        "tool": "cargo",
-        "benches": [
-          {
-            "name": "datastore/insert/batch/rects/insert",
-            "value": 573849,
-            "range": "± 5199",
-            "unit": "ns/iter"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -899,6 +869,36 @@ window.BENCHMARK_DATA = {
             "name": "datastore/insert/batch/rects/insert",
             "value": 579288,
             "range": "± 2879",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "andreas@rerun.io",
+            "name": "Andreas Reich",
+            "username": "Wumpf"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "577b596fa02f378c62a43b5d8eac857d218f2d34",
+          "message": "Refactor space view generation (#923)\n\nRewrite space view generation to a two step process\r\nNo longer need to populate a scene to determine space views.",
+          "timestamp": "2023-01-26T16:08:11+01:00",
+          "tree_id": "4a73dfcd1fbf378e18f595c71aab8e7235ad479d",
+          "url": "https://github.com/rerun-io/rerun/commit/577b596fa02f378c62a43b5d8eac857d218f2d34"
+        },
+        "date": 1674746265219,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/insert/batch/rects/insert",
+            "value": 565445,
+            "range": "± 1781",
             "unit": "ns/iter"
           }
         ]
