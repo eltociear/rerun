@@ -1,38 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1674688327322,
+  "lastUpdate": 1674720375450,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
-      {
-        "commit": {
-          "author": {
-            "email": "emil@rerun.io",
-            "name": "Emil Ernerfeldt",
-            "username": "emilk"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "e951da60d4542076c890bd976c4df1e3f18f5740",
-          "message": "Very minor code cleanup (#863)\n\n* file rename: context -> annotation_context.rs\r\n\r\n* Better variable naming\r\n\r\n* Fix wrong hello_world app id",
-          "timestamp": "2023-01-20T18:55:51+01:00",
-          "tree_id": "236bdefad323ad38b1c59fae303a35f506c60ea3",
-          "url": "https://github.com/rerun-io/rerun/commit/e951da60d4542076c890bd976c4df1e3f18f5740"
-        },
-        "date": 1674237566768,
-        "tool": "cargo",
-        "benches": [
-          {
-            "name": "datastore/insert/batch/rects/insert",
-            "value": 578514,
-            "range": "± 2190",
-            "unit": "ns/iter"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -899,6 +869,36 @@ window.BENCHMARK_DATA = {
             "name": "datastore/insert/batch/rects/insert",
             "value": 561644,
             "range": "± 4156",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "emil@rerun.io",
+            "name": "Emil Ernerfeldt",
+            "username": "emilk"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "28045379c2259d15132f8ac79ae72bebe7b5e0da",
+          "message": "Add button for following the latest data (#921)\n\n* Introduce PlayState\r\n\r\n* Add button to follow latest data\r\n\r\n* Tweak logic of where current time cursor is in the text log ui\r\n\r\n* Space toggles following/paused if following\r\n\r\n* Better handling of looping vs following\r\n\r\n* doclink fix",
+          "timestamp": "2023-01-26T09:03:59+01:00",
+          "tree_id": "50c682eedc971c5d64e98b7037dbebf496f81bb6",
+          "url": "https://github.com/rerun-io/rerun/commit/28045379c2259d15132f8ac79ae72bebe7b5e0da"
+        },
+        "date": 1674720374360,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/insert/batch/rects/insert",
+            "value": 571837,
+            "range": "± 16508",
             "unit": "ns/iter"
           }
         ]
