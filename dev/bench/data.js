@@ -1,38 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1674749128061,
+  "lastUpdate": 1674749342785,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
-      {
-        "commit": {
-          "author": {
-            "email": "cr.rey.clement@gmail.com",
-            "name": "Clement Rey",
-            "username": "teh-cmc"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "3513a502c0e91a3b767ea0fa568ceb38465a5171",
-          "message": "re_viewer: analytics integration (native only) (#839)\n\n* bootstrappin'\r\n\r\n* record 'em\r\n\r\n* dealing with tokio/reqwest shenanigans\r\n\r\n* dead code\r\n\r\n* hashing appid\r\n\r\n* start_method will come later, too painful for my tired mind\r\n\r\n* cleanup\r\n\r\n* some more stuff in 'analytics details'\r\n\r\n* always send update metadata\r\n\r\n* self-review\r\n\r\n* flake\r\n\r\n* add a newline at the end of file\r\n\r\n* hard gate everything web so we can move on before i completely lose it\r\n\r\n* xxx\r\n\r\n* analytics in debug only\r\n\r\n* xxx\r\n\r\n* git hash and cleaned up target triple\r\n\r\n* deterministic hashing\r\n\r\n* safer/less-error-prone way of identifying official examples\r\n\r\n* rebuild when HEAD changes\r\n\r\n* make the app path thing even nicererer for end users\r\n\r\n* happy pylint\r\n\r\n* ??? I did _not_ touch that\r\n\r\n* the linter is just having fun\r\n\r\n* shouldn't need pathlib no more?\r\n\r\n* use a sentinel file for official example detection\r\n\r\n* track git dirtiness\r\n\r\n* .rerun -> .rerun_examples",
-          "timestamp": "2023-01-24T09:03:00+01:00",
-          "tree_id": "8963ab2e45281af8622d36e33dea5289f76780d9",
-          "url": "https://github.com/rerun-io/rerun/commit/3513a502c0e91a3b767ea0fa568ceb38465a5171"
-        },
-        "date": 1674547565902,
-        "tool": "cargo",
-        "benches": [
-          {
-            "name": "datastore/insert/batch/rects/insert",
-            "value": 575676,
-            "range": "± 2243",
-            "unit": "ns/iter"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -899,6 +869,36 @@ window.BENCHMARK_DATA = {
             "name": "datastore/insert/batch/rects/insert",
             "value": 569213,
             "range": "± 2354",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "andreas@rerun.io",
+            "name": "Andreas Reich",
+            "username": "Wumpf"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "e8e866b3a677293556962b094b70472e476dd6b9",
+          "message": "Remove classic scene parts (#936)\n\n* remove classic scene parts\r\n* remove Tensor Arrow/Classic variants",
+          "timestamp": "2023-01-26T17:06:03+01:00",
+          "tree_id": "020427f3fca7eb85ac8f9954a8267fe002ecdff4",
+          "url": "https://github.com/rerun-io/rerun/commit/e8e866b3a677293556962b094b70472e476dd6b9"
+        },
+        "date": 1674749341389,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/insert/batch/rects/insert",
+            "value": 564749,
+            "range": "± 1745",
             "unit": "ns/iter"
           }
         ]
