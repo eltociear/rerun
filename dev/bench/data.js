@@ -1,38 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1674749342785,
+  "lastUpdate": 1674769440991,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
-      {
-        "commit": {
-          "author": {
-            "email": "andreas@rerun.io",
-            "name": "Andreas Reich",
-            "username": "Wumpf"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "08ad9f3876d58bbccd6f824a5dd34a8be399d243",
-          "message": "Fix scale for 3D objects under pinhole camera (#886)",
-          "timestamp": "2023-01-24T09:53:31+01:00",
-          "tree_id": "b73d9ba3c8c17d3c83e75e0a6e5e8d3658d36c85",
-          "url": "https://github.com/rerun-io/rerun/commit/08ad9f3876d58bbccd6f824a5dd34a8be399d243"
-        },
-        "date": 1674550548916,
-        "tool": "cargo",
-        "benches": [
-          {
-            "name": "datastore/insert/batch/rects/insert",
-            "value": 576989,
-            "range": "± 2954",
-            "unit": "ns/iter"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -899,6 +869,36 @@ window.BENCHMARK_DATA = {
             "name": "datastore/insert/batch/rects/insert",
             "value": 564749,
             "range": "± 1745",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "niko@grapic.co",
+            "name": "Nikolaus West",
+            "username": "nikolausWest"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "b0142c14feaa7fad0a2a728f34eafe1be2d8f7fb",
+          "message": "Clarify analytics welcome message (#947)",
+          "timestamp": "2023-01-26T22:39:54+01:00",
+          "tree_id": "61418d9d145de44052caa445a3233f75e8c4a31e",
+          "url": "https://github.com/rerun-io/rerun/commit/b0142c14feaa7fad0a2a728f34eafe1be2d8f7fb"
+        },
+        "date": 1674769439981,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/insert/batch/rects/insert",
+            "value": 567726,
+            "range": "± 2034",
             "unit": "ns/iter"
           }
         ]
