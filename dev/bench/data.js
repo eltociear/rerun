@@ -1,38 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1674723944321,
+  "lastUpdate": 1674726323847,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
-      {
-        "commit": {
-          "author": {
-            "email": "emil@rerun.io",
-            "name": "Emil Ernerfeldt",
-            "username": "emilk"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "b94edb973db58b7e6253ed3a167bbec36994ac4c",
-          "message": "Left-align headers, improve blueprint view (#856)\n\n* Left-align headers\r\n\r\n* Remove background color from small icon buttons\r\n\r\n* Simplify blueprint view\r\n\r\n* Better function name\r\n\r\n* Put blueprint and buttons on same row\r\n\r\n* clippy fix\r\n\r\n* Move selection undo/redo arrows to the right",
-          "timestamp": "2023-01-22T17:32:37+01:00",
-          "tree_id": "c097ee61905b8f355fea1bfafce0a755cafdb232",
-          "url": "https://github.com/rerun-io/rerun/commit/b94edb973db58b7e6253ed3a167bbec36994ac4c"
-        },
-        "date": 1674405394462,
-        "tool": "cargo",
-        "benches": [
-          {
-            "name": "datastore/insert/batch/rects/insert",
-            "value": 567444,
-            "range": "± 6037",
-            "unit": "ns/iter"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -899,6 +869,36 @@ window.BENCHMARK_DATA = {
             "name": "datastore/insert/batch/rects/insert",
             "value": 574815,
             "range": "± 2179",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "niko@grapic.co",
+            "name": "Nikolaus West",
+            "username": "nikolausWest"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "4263a61428da56a65df14752f76f35b390e9b3a5",
+          "message": "COLMAP example (#928)\n\n\r\n* Fix colmap example (mainly quaternion format)\r\n\r\n* Update type hint for log_points\r\n\r\n* colmap example works as it should\r\n\r\n* Add dataset downloading\r\n\r\n* typing and formatting\r\n\r\n* Fix typing in api_tests.py\r\n\r\n* Add example script boilerplate\r\n\r\n* Remove the script helper\r\n\r\n* Remove all the rerun.script exports\r\n\r\n* Increase chunk size for dataset download\r\n\r\n* Add requirements.txt\r\n\r\n* Add identifiers add option not to filter data\r\n\r\nCo-authored-by: John Hughes <john@rerun.io>",
+          "timestamp": "2023-01-26T10:40:42+01:00",
+          "tree_id": "9aa894eec2f63427e7e4cdbdb1f26e590eb1e5cb",
+          "url": "https://github.com/rerun-io/rerun/commit/4263a61428da56a65df14752f76f35b390e9b3a5"
+        },
+        "date": 1674726322756,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/insert/batch/rects/insert",
+            "value": 579288,
+            "range": "± 2879",
             "unit": "ns/iter"
           }
         ]
