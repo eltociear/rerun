@@ -1,38 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1674721788794,
+  "lastUpdate": 1674723944321,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
-      {
-        "commit": {
-          "author": {
-            "email": "emil@rerun.io",
-            "name": "Emil Ernerfeldt",
-            "username": "emilk"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "7343f41232cf65997d4c0d7f5f138c956a665567",
-          "message": "Move Viewport/Event Log buttons to the \"View\" menu (#864)\n\n* Move Viewport/Event Log buttons to the \"View\" menu\r\n* Remove extra separator before the memory use\r\n* Remove unnecessary \"(none)\" label",
-          "timestamp": "2023-01-20T23:53:20+01:00",
-          "tree_id": "871e1ac1c2541458f4273acb797cb07800459f99",
-          "url": "https://github.com/rerun-io/rerun/commit/7343f41232cf65997d4c0d7f5f138c956a665567"
-        },
-        "date": 1674255327843,
-        "tool": "cargo",
-        "benches": [
-          {
-            "name": "datastore/insert/batch/rects/insert",
-            "value": 569462,
-            "range": "± 3088",
-            "unit": "ns/iter"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -899,6 +869,36 @@ window.BENCHMARK_DATA = {
             "name": "datastore/insert/batch/rects/insert",
             "value": 576649,
             "range": "± 2751",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "cr.rey.clement@gmail.com",
+            "name": "Clement Rey",
+            "username": "teh-cmc"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "f7941f90999e8427fae68367e0361c10e8046882",
+          "message": "re_analytics: support for persistent metadata props (#931)\n\n* support for persistent metadata props\r\n\r\n* keeping the old web thing alive... for now\r\n\r\n* preemptively pleasing cranky",
+          "timestamp": "2023-01-26T10:03:28+01:00",
+          "tree_id": "0866923eeef5faf246e63b46780ff51af4b9c61d",
+          "url": "https://github.com/rerun-io/rerun/commit/f7941f90999e8427fae68367e0361c10e8046882"
+        },
+        "date": 1674723943247,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/insert/batch/rects/insert",
+            "value": 574815,
+            "range": "± 2179",
             "unit": "ns/iter"
           }
         ]
