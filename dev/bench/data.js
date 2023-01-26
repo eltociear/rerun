@@ -1,38 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1674746266408,
+  "lastUpdate": 1674748067929,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
-      {
-        "commit": {
-          "author": {
-            "email": "andreas@rerun.io",
-            "name": "Andreas Reich",
-            "username": "Wumpf"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "e7cce91b63abf2df4ba405ffbb1bd259f6663e71",
-          "message": "simplify hover/select highlight distinction & wire up link buttons to hover state (#859)\n\n* wired up egui link buttons to hover state\r\n* simplify hover/select highlight logic by defining highlight types on a higher level",
-          "timestamp": "2023-01-23T16:18:31+01:00",
-          "tree_id": "6c3d34436149dd509f8a0da493930601ebd79f69",
-          "url": "https://github.com/rerun-io/rerun/commit/e7cce91b63abf2df4ba405ffbb1bd259f6663e71"
-        },
-        "date": 1674487285415,
-        "tool": "cargo",
-        "benches": [
-          {
-            "name": "datastore/insert/batch/rects/insert",
-            "value": 564623,
-            "range": "± 7170",
-            "unit": "ns/iter"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -899,6 +869,36 @@ window.BENCHMARK_DATA = {
             "name": "datastore/insert/batch/rects/insert",
             "value": 565445,
             "range": "± 1781",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "jeremy@rerun.io",
+            "name": "Jeremy Leibs",
+            "username": "jleibs"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "8d3d3838197cb18e55db00c3a0a52848eb31eced",
+          "message": "Don't block on flush if the TCP connection to the viewer is disconnected (#926)\n\n* Introduce quit_if_disconnected to allow messages to be dropped\r\n* Avoid confusing flush messages from the spawned rerun viewer",
+          "timestamp": "2023-01-26T16:45:42+01:00",
+          "tree_id": "ab4183b38205d8adc7512b765028dea24ef86c93",
+          "url": "https://github.com/rerun-io/rerun/commit/8d3d3838197cb18e55db00c3a0a52848eb31eced"
+        },
+        "date": 1674748066822,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/insert/batch/rects/insert",
+            "value": 574857,
+            "range": "± 2019",
             "unit": "ns/iter"
           }
         ]
