@@ -1,38 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1674720375450,
+  "lastUpdate": 1674721788794,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
-      {
-        "commit": {
-          "author": {
-            "email": "jeremy@rerun.io",
-            "name": "Jeremy Leibs",
-            "username": "jleibs"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "70600a2684b010954962f11714b8531c07669444",
-          "message": "Make arrow the default storage (#823)\n\n* Make Arrow the default and update changelog\r\n\r\nCo-authored-by: Emil Ernerfeldt <emil@rerun.io>",
-          "timestamp": "2023-01-20T19:52:11+01:00",
-          "tree_id": "88b39a2e1a55c645b6cf4fef341876d7192bf236",
-          "url": "https://github.com/rerun-io/rerun/commit/70600a2684b010954962f11714b8531c07669444"
-        },
-        "date": 1674240916095,
-        "tool": "cargo",
-        "benches": [
-          {
-            "name": "datastore/insert/batch/rects/insert",
-            "value": 560191,
-            "range": "± 4432",
-            "unit": "ns/iter"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -899,6 +869,36 @@ window.BENCHMARK_DATA = {
             "name": "datastore/insert/batch/rects/insert",
             "value": 571837,
             "range": "± 16508",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "niko@grapic.co",
+            "name": "Nikolaus West",
+            "username": "nikolausWest"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "8ddc23ae6073bddb6a15c2b019f795f0137609f2",
+          "message": "Increase chunk size for dataset download (#929)",
+          "timestamp": "2023-01-26T09:27:39+01:00",
+          "tree_id": "7d8cec973012cdedb5e82b68391960c6d4a61847",
+          "url": "https://github.com/rerun-io/rerun/commit/8ddc23ae6073bddb6a15c2b019f795f0137609f2"
+        },
+        "date": 1674721787704,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/insert/batch/rects/insert",
+            "value": 576649,
+            "range": "± 2751",
             "unit": "ns/iter"
           }
         ]
