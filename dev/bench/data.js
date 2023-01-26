@@ -1,38 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1674748067929,
+  "lastUpdate": 1674749128061,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
-      {
-        "commit": {
-          "author": {
-            "email": "andreas@rerun.io",
-            "name": "Andreas Reich",
-            "username": "Wumpf"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "92416c287ea0f0c6e2d5bf227003cfa09352cb83",
-          "message": "tweak point cloud point gradient to be less aggressive (#888)",
-          "timestamp": "2023-01-23T20:46:29+01:00",
-          "tree_id": "ab8fd6f18accb106adebefd9b5a1e54f80ea13ab",
-          "url": "https://github.com/rerun-io/rerun/commit/92416c287ea0f0c6e2d5bf227003cfa09352cb83"
-        },
-        "date": 1674503541186,
-        "tool": "cargo",
-        "benches": [
-          {
-            "name": "datastore/insert/batch/rects/insert",
-            "value": 562695,
-            "range": "± 2070",
-            "unit": "ns/iter"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -899,6 +869,36 @@ window.BENCHMARK_DATA = {
             "name": "datastore/insert/batch/rects/insert",
             "value": 574857,
             "range": "± 2019",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "cr.rey.clement@gmail.com",
+            "name": "Clement Rey",
+            "username": "teh-cmc"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "55ecc3542c47ab988883a4b78c17f4dd3c2da8a5",
+          "message": "time series and bar charts back to a working state (#937)\n\n* add missing arrow category for time series\r\n\r\n* time series and bar charts working once again\r\n\r\n* self review",
+          "timestamp": "2023-01-26T17:03:20+01:00",
+          "tree_id": "778b1407078af73e347b5d7d2411de1c5170ee6c",
+          "url": "https://github.com/rerun-io/rerun/commit/55ecc3542c47ab988883a4b78c17f4dd3c2da8a5"
+        },
+        "date": 1674749127007,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/insert/batch/rects/insert",
+            "value": 569213,
+            "range": "± 2354",
             "unit": "ns/iter"
           }
         ]
