@@ -1,38 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1674812169613,
+  "lastUpdate": 1674812970692,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
-      {
-        "commit": {
-          "author": {
-            "email": "andreas@rerun.io",
-            "name": "Andreas Reich",
-            "username": "Wumpf"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "5aca22b884135b68ecf91af76fb1776e896857e1",
-          "message": "Fix invisible timeline handle and bad objectron example names (#902)\n\n* Fix timeline cursor invisible on hover\r\n* better object names in objectron",
-          "timestamp": "2023-01-24T18:35:25+01:00",
-          "tree_id": "3ac7fd452f143dbd2b9966b9bc3f3a425dacdfe8",
-          "url": "https://github.com/rerun-io/rerun/commit/5aca22b884135b68ecf91af76fb1776e896857e1"
-        },
-        "date": 1674581861706,
-        "tool": "cargo",
-        "benches": [
-          {
-            "name": "datastore/insert/batch/rects/insert",
-            "value": 571248,
-            "range": "± 12819",
-            "unit": "ns/iter"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -899,6 +869,36 @@ window.BENCHMARK_DATA = {
             "name": "datastore/insert/batch/rects/insert",
             "value": 570112,
             "range": "± 15240",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "cr.rey.clement@gmail.com",
+            "name": "Clement Rey",
+            "username": "teh-cmc"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "f9ba39c02b9d14d5714ee40d8d80647f370ca2f9",
+          "message": "re_datastore: puffin probes! (#942)\n\n* instrumenting meta APIs\r\n\r\n* instrumenting read APIs\r\n\r\n* instrument write APIs\r\n\r\n* instrument polars APIs\r\n\r\n* puffin native-only macros\r\n\r\n* native-only puffin",
+          "timestamp": "2023-01-27T10:47:19+01:00",
+          "tree_id": "14d4cf0404afda3e3668c3e9eead56f37e6468e3",
+          "url": "https://github.com/rerun-io/rerun/commit/f9ba39c02b9d14d5714ee40d8d80647f370ca2f9"
+        },
+        "date": 1674812969731,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/insert/batch/rects/insert",
+            "value": 578940,
+            "range": "± 2197",
             "unit": "ns/iter"
           }
         ]
