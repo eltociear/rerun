@@ -1,38 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1674807889761,
+  "lastUpdate": 1674808093965,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
-      {
-        "commit": {
-          "author": {
-            "email": "emil@rerun.io",
-            "name": "Emil Ernerfeldt",
-            "username": "emilk"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "f62abd4e3992b7811f72c06fb43edaa944d41b43",
-          "message": "New rerun menu (#892)\n\n* Turn off background for buttons, dragvalues, comboboxes\r\n\r\n* Use a proper icon for the \"Add new blueprint\" button\r\n\r\n* Rearrange buttons in timeline panel\r\n\r\n* Turn on button-frames (when hovered)\r\n\r\n* Unify all menus under a common Rerun menu\r\n\r\n* Inline the old \"File\" and \"View\" menus under the new rerun menu\r\n\r\n* Tweak wording on menu options\r\n\r\n* Make the menu buttons look better\r\n\r\n* Wider default width of selection view\r\n\r\n* Tidy-up tensor blueprint view\r\n\r\n* Re-arrange the time control buttons\r\n\r\n* Update egui\r\n\r\n* lint fix\r\n\r\n* spelling\r\n\r\nCo-authored-by: Andreas Reich <andreas@rerun.io>\r\n\r\n* Remove rerun.io logo/link from top bar\r\n\r\n* Fix spacing in rerun menu\r\n\r\n* Make Rerun menu logo smaller\r\n\r\n* Fix warning in web build\r\n\r\nCo-authored-by: Andreas Reich <andreas@rerun.io>",
-          "timestamp": "2023-01-24T12:54:49+01:00",
-          "tree_id": "0c18714786abb424892318d12d703be3a1d76071",
-          "url": "https://github.com/rerun-io/rerun/commit/f62abd4e3992b7811f72c06fb43edaa944d41b43"
-        },
-        "date": 1674561424681,
-        "tool": "cargo",
-        "benches": [
-          {
-            "name": "datastore/insert/batch/rects/insert",
-            "value": 570001,
-            "range": "± 2927",
-            "unit": "ns/iter"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -899,6 +869,36 @@ window.BENCHMARK_DATA = {
             "name": "datastore/insert/batch/rects/insert",
             "value": 570600,
             "range": "± 1601",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "marten@martenbjork.com",
+            "name": "Marten Bjork",
+            "username": "martenbjork"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "9a0e8a66c5d317d5366afd4e679828d30881784a",
+          "message": "Add code examples to rerun repo (#950)\n\n* Add code examples to rerun repo\r\n\r\n* Add missing dir name\r\n\r\n* Remove old files",
+          "timestamp": "2023-01-27T09:25:14+01:00",
+          "tree_id": "43c36dcde06fb06c8bbd4288c9dd586ec55228e5",
+          "url": "https://github.com/rerun-io/rerun/commit/9a0e8a66c5d317d5366afd4e679828d30881784a"
+        },
+        "date": 1674808092963,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/insert/batch/rects/insert",
+            "value": 576741,
+            "range": "± 1732",
             "unit": "ns/iter"
           }
         ]
