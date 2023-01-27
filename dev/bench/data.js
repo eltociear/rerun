@@ -1,38 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1674803436310,
+  "lastUpdate": 1674804163435,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
-      {
-        "commit": {
-          "author": {
-            "email": "emil@rerun.io",
-            "name": "Emil Ernerfeldt",
-            "username": "emilk"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "8efbbd16cd50c00f9f4c88c8ab2922e4ec1d5b23",
-          "message": "Add some puffin profiling scopes (#891)",
-          "timestamp": "2023-01-24T11:36:40+01:00",
-          "tree_id": "a684655ec35d4869dfd9798dc6a95f7df684a274",
-          "url": "https://github.com/rerun-io/rerun/commit/8efbbd16cd50c00f9f4c88c8ab2922e4ec1d5b23"
-        },
-        "date": 1674556871162,
-        "tool": "cargo",
-        "benches": [
-          {
-            "name": "datastore/insert/batch/rects/insert",
-            "value": 561141,
-            "range": "± 7703",
-            "unit": "ns/iter"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -899,6 +869,36 @@ window.BENCHMARK_DATA = {
             "name": "datastore/insert/batch/rects/insert",
             "value": 584841,
             "range": "± 6889",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "cr.rey.clement@gmail.com",
+            "name": "Clement Rey",
+            "username": "teh-cmc"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "fad2d296713ffb5bae4792ba37a69c7dafc0a567",
+          "message": "we got spawn_and_connect now! (#943)",
+          "timestamp": "2023-01-27T08:20:30+01:00",
+          "tree_id": "c18f69988693e920a18e2aeffbb58b547dc85fca",
+          "url": "https://github.com/rerun-io/rerun/commit/fad2d296713ffb5bae4792ba37a69c7dafc0a567"
+        },
+        "date": 1674804162080,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/insert/batch/rects/insert",
+            "value": 567472,
+            "range": "± 1750",
             "unit": "ns/iter"
           }
         ]
