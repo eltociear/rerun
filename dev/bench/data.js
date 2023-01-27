@@ -1,38 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1674812970692,
+  "lastUpdate": 1674823967976,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
-      {
-        "commit": {
-          "author": {
-            "email": "emil@rerun.io",
-            "name": "Emil Ernerfeldt",
-            "username": "emilk"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "339575eeca465daec25b5a91ccc5e364e4695103",
-          "message": "Hide the top-bar cpu/memory/latency labels in release builds (#897)\n\n* Hide the top-bar cpu/memory/latency labels in release builds\r\n\r\n* Tweak rerun menu button height so not to expand the top bar\r\n\r\n* Make the minimum app size high enough to fit rerun menu\r\n\r\n* Tweak selection panel width",
-          "timestamp": "2023-01-24T23:09:28+01:00",
-          "tree_id": "ae61cf5a4463dcd4022c2db5e19112e4a5e7c0f4",
-          "url": "https://github.com/rerun-io/rerun/commit/339575eeca465daec25b5a91ccc5e364e4695103"
-        },
-        "date": 1674598409497,
-        "tool": "cargo",
-        "benches": [
-          {
-            "name": "datastore/insert/batch/rects/insert",
-            "value": 585380,
-            "range": "± 2507",
-            "unit": "ns/iter"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -899,6 +869,36 @@ window.BENCHMARK_DATA = {
             "name": "datastore/insert/batch/rects/insert",
             "value": 578940,
             "range": "± 2197",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "emil@rerun.io",
+            "name": "Emil Ernerfeldt",
+            "username": "emilk"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "c7f10b848810d227c7613a74d52e60a773448005",
+          "message": "Improve the blueprint tree looks (#938)\n\n* Improve the blueprint tree looks\r\n\r\n* Disabled and invisible rows are now dimmer\r\n* Only show visibility button on hover\r\n* Switch visibility button to a toggle-switch\r\n\r\n* Add icon infront of data blueprints too for consistency\r\n\r\n* fix TODO formatting\r\n\r\n* lint.py: Ignore the rust analyzer target directory\r\n\r\n* Get Response back\r\n\r\nCo-authored-by: Clement Rey <cr.rey.clement@gmail.com>",
+          "timestamp": "2023-01-27T13:50:40+01:00",
+          "tree_id": "082c2adcab39a242940a23e566d4d6974e9988fd",
+          "url": "https://github.com/rerun-io/rerun/commit/c7f10b848810d227c7613a74d52e60a773448005"
+        },
+        "date": 1674823966937,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/insert/batch/rects/insert",
+            "value": 562232,
+            "range": "± 3746",
             "unit": "ns/iter"
           }
         ]
