@@ -1,38 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1674831034245,
+  "lastUpdate": 1674835361278,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
-      {
-        "commit": {
-          "author": {
-            "email": "cr.rey.clement@gmail.com",
-            "name": "Clement Rey",
-            "username": "teh-cmc"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "0145234fbea5b662cf79729dbf4161fe20c7b5e6",
-          "message": "examples: add missing stable diffusion reqs (#884)\n\n* add missing stable diffusion reqs\r\n\r\n* pin stable_diffusion's transformers & diffusers",
-          "timestamp": "2023-01-25T10:31:01+01:00",
-          "tree_id": "47e78aec2e7648af1f62c5567ba85315003a8ed4",
-          "url": "https://github.com/rerun-io/rerun/commit/0145234fbea5b662cf79729dbf4161fe20c7b5e6"
-        },
-        "date": 1674639192472,
-        "tool": "cargo",
-        "benches": [
-          {
-            "name": "datastore/insert/batch/rects/insert",
-            "value": 576979,
-            "range": "± 15218",
-            "unit": "ns/iter"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -899,6 +869,36 @@ window.BENCHMARK_DATA = {
             "name": "datastore/insert/batch/rects/insert",
             "value": 580587,
             "range": "± 3211",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "andreas@rerun.io",
+            "name": "Andreas Reich",
+            "username": "Wumpf"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "3640e923852df1ca906538a28fe48c3a88dd27e4",
+          "message": "Update wgpu to 0.15 (#954)\n\n* Update wgpu to 0.15\r\n\r\n* allow duplicated `windows` package\r\n\r\n* wgsl typedefs now work everywhere\r\n\r\n* pipeline stabilization now takes 3 ticks\r\n\r\n* comment fix\r\n\r\n* revert unrelated package updates\r\n\r\n---------\r\n\r\nCo-authored-by: Clement Rey <cr.rey.clement@gmail.com>",
+          "timestamp": "2023-01-27T16:58:23+01:00",
+          "tree_id": "80d164d539e0429bd84db0c2797ad876eb058c89",
+          "url": "https://github.com/rerun-io/rerun/commit/3640e923852df1ca906538a28fe48c3a88dd27e4"
+        },
+        "date": 1674835360269,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/insert/batch/rects/insert",
+            "value": 577119,
+            "range": "± 1869",
             "unit": "ns/iter"
           }
         ]
