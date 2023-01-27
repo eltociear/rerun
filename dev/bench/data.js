@@ -1,38 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1674808093965,
+  "lastUpdate": 1674810923125,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
-      {
-        "commit": {
-          "author": {
-            "email": "cr.rey.clement@gmail.com",
-            "name": "Clement Rey",
-            "username": "teh-cmc"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "56f56b7286aed596634d773c3c4b0efdc64ddce6",
-          "message": "added the actual sentinel file............... (#896)",
-          "timestamp": "2023-01-24T09:31:43-05:00",
-          "tree_id": "66d88fb466c207c7fb549bc1627881cbfb65bc63",
-          "url": "https://github.com/rerun-io/rerun/commit/56f56b7286aed596634d773c3c4b0efdc64ddce6"
-        },
-        "date": 1674571018695,
-        "tool": "cargo",
-        "benches": [
-          {
-            "name": "datastore/insert/batch/rects/insert",
-            "value": 573169,
-            "range": "± 2477",
-            "unit": "ns/iter"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -899,6 +869,36 @@ window.BENCHMARK_DATA = {
             "name": "datastore/insert/batch/rects/insert",
             "value": 576741,
             "range": "± 1732",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "andreas@rerun.io",
+            "name": "Andreas Reich",
+            "username": "Wumpf"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "3ec2c3b5b690dcdae2049f2b5e747c2723bce06f",
+          "message": "Fix space views duplicating on startup from script. (#946)\n\nHeuristic didn't realize that the space views shown are \"more powerful\" (seen more objects) than the ones it would propose",
+          "timestamp": "2023-01-27T10:13:13+01:00",
+          "tree_id": "99d5590f0d77c972ad7d72e3452d336a2a2f83ae",
+          "url": "https://github.com/rerun-io/rerun/commit/3ec2c3b5b690dcdae2049f2b5e747c2723bce06f"
+        },
+        "date": 1674810922104,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/insert/batch/rects/insert",
+            "value": 576579,
+            "range": "± 1756",
             "unit": "ns/iter"
           }
         ]
