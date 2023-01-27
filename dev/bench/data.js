@@ -1,38 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1674823967976,
+  "lastUpdate": 1674827314257,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
-      {
-        "commit": {
-          "author": {
-            "email": "jeremy@rerun.io",
-            "name": "Jeremy Leibs",
-            "username": "jleibs"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "70a77b25891d2b6cffc7b3c372d681778c4c5c3a",
-          "message": "Release the session lock while we're building the arrow chunks (#908)\n\n* Release the session lock while we're building the arrow chunks\r\n\r\n* Simple example of logging from multiple threads",
-          "timestamp": "2023-01-24T20:50:01-05:00",
-          "tree_id": "47a096b25468818c78252f7a560c7de0b01c9647",
-          "url": "https://github.com/rerun-io/rerun/commit/70a77b25891d2b6cffc7b3c372d681778c4c5c3a"
-        },
-        "date": 1674611649372,
-        "tool": "cargo",
-        "benches": [
-          {
-            "name": "datastore/insert/batch/rects/insert",
-            "value": 562934,
-            "range": "± 5528",
-            "unit": "ns/iter"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -899,6 +869,36 @@ window.BENCHMARK_DATA = {
             "name": "datastore/insert/batch/rects/insert",
             "value": 562232,
             "range": "± 3746",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "andreas@rerun.io",
+            "name": "Andreas Reich",
+            "username": "Wumpf"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "14d0ec56d231cbc09a9c927f742535faf544ef98",
+          "message": "Detangle spaceinfo from transform cache (#945)\n\n* transform cache no longer know about space info\r\n* rename SpacesInfo to SpaceInfoCollection\r\n* no longer use transform cache for populating space views\r\n* space info can now give reachability information",
+          "timestamp": "2023-01-27T14:46:19+01:00",
+          "tree_id": "618a83240c841061d88d9690da340fd42428cb9a",
+          "url": "https://github.com/rerun-io/rerun/commit/14d0ec56d231cbc09a9c927f742535faf544ef98"
+        },
+        "date": 1674827313245,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/insert/batch/rects/insert",
+            "value": 568465,
+            "range": "± 2453",
             "unit": "ns/iter"
           }
         ]
