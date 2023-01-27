@@ -1,38 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1674805467640,
+  "lastUpdate": 1674807889761,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
-      {
-        "commit": {
-          "author": {
-            "email": "andreas@rerun.io",
-            "name": "Andreas Reich",
-            "username": "Wumpf"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "de9cfe64b77d5bf17f18ad5da44b38e69f056be6",
-          "message": "Link to data blueprint / usages in Blueprint panel (#881)\n\n* fix what-is-selected-ui changes in buttons\r\n* no selected components are no longer an error\r\n* unify instance & object path buttons. show blueprint links when no space view context is known\r\n* object paths now also refer to where they show up",
-          "timestamp": "2023-01-24T11:53:37+01:00",
-          "tree_id": "8263e91e6d064af11690ede4e8b38eb529feb913",
-          "url": "https://github.com/rerun-io/rerun/commit/de9cfe64b77d5bf17f18ad5da44b38e69f056be6"
-        },
-        "date": 1674557797676,
-        "tool": "cargo",
-        "benches": [
-          {
-            "name": "datastore/insert/batch/rects/insert",
-            "value": 557094,
-            "range": "± 5993",
-            "unit": "ns/iter"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -899,6 +869,36 @@ window.BENCHMARK_DATA = {
             "name": "datastore/insert/batch/rects/insert",
             "value": 566539,
             "range": "± 2284",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "niko@grapic.co",
+            "name": "Nikolaus West",
+            "username": "nikolausWest"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "1d07e665fd4c9159d26de37954e5c6c1952464c6",
+          "message": "Add segmentation map to pose tracking example (#948)\n\n* Add segmentation map to pose tracking example\r\n\r\nCo-authored-by: Emil Ernerfeldt <emil@rerun.io>",
+          "timestamp": "2023-01-27T09:22:41+01:00",
+          "tree_id": "4a49ccaae3301d72442b17c056ea1eda348edd0f",
+          "url": "https://github.com/rerun-io/rerun/commit/1d07e665fd4c9159d26de37954e5c6c1952464c6"
+        },
+        "date": 1674807888786,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/insert/batch/rects/insert",
+            "value": 570600,
+            "range": "± 1601",
             "unit": "ns/iter"
           }
         ]
