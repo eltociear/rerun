@@ -1,38 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1674827314257,
+  "lastUpdate": 1674831034245,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
-      {
-        "commit": {
-          "author": {
-            "email": "andreas@rerun.io",
-            "name": "Andreas Reich",
-            "username": "Wumpf"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "7d6aacf4fa64cf0b42fe5cdbc6672026c44352ea",
-          "message": "Space view generation heuristics now always look at latest available data. (#904)\n\nBefore they'd look at the current data, causing different space views when resetting the blueprint e.g. while looking at timeless data",
-          "timestamp": "2023-01-25T09:16:59+01:00",
-          "tree_id": "11f7e8ca3c24158698cf67a5f7ad103d8e9de15b",
-          "url": "https://github.com/rerun-io/rerun/commit/7d6aacf4fa64cf0b42fe5cdbc6672026c44352ea"
-        },
-        "date": 1674634863377,
-        "tool": "cargo",
-        "benches": [
-          {
-            "name": "datastore/insert/batch/rects/insert",
-            "value": 580787,
-            "range": "± 2948",
-            "unit": "ns/iter"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -899,6 +869,36 @@ window.BENCHMARK_DATA = {
             "name": "datastore/insert/batch/rects/insert",
             "value": 568465,
             "range": "± 2453",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "emil@rerun.io",
+            "name": "Emil Ernerfeldt",
+            "username": "emilk"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "ce45f0c75fb11876193bc3feeacc2d269efa0642",
+          "message": "Add options to create a cleaner UI for when doing screen recordings (#955)\n\n* Add options to create a cleaner UI for when doing screen recordings\r\n\r\n* Add separator in menu to make clicking \"panic!\" button less likely\r\n\r\n* Call it show_spaceview_controls\r\n\r\n* Options -> AppOptions",
+          "timestamp": "2023-01-27T15:48:28+01:00",
+          "tree_id": "e823aed9bd16ba6c20f9f7f8ad430bd9cba6921b",
+          "url": "https://github.com/rerun-io/rerun/commit/ce45f0c75fb11876193bc3feeacc2d269efa0642"
+        },
+        "date": 1674831033201,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/insert/batch/rects/insert",
+            "value": 580587,
+            "range": "± 3211",
             "unit": "ns/iter"
           }
         ]
