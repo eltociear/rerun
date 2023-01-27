@@ -1,38 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1674769440991,
+  "lastUpdate": 1674803436310,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
-      {
-        "commit": {
-          "author": {
-            "email": "andreas@rerun.io",
-            "name": "Andreas Reich",
-            "username": "Wumpf"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "1c3ab8c1cdd2c598bbbae2d27176649dc3526572",
-          "message": "Tweak selection effects (#890)\n\n* smaller AUTO_LARGE size\r\n* selection highlight now interpolates toward highlight instead of taking over highlight color",
-          "timestamp": "2023-01-24T10:55:16+01:00",
-          "tree_id": "4410eb825717cc92ff0288f8fce933425682c69d",
-          "url": "https://github.com/rerun-io/rerun/commit/1c3ab8c1cdd2c598bbbae2d27176649dc3526572"
-        },
-        "date": 1674554313818,
-        "tool": "cargo",
-        "benches": [
-          {
-            "name": "datastore/insert/batch/rects/insert",
-            "value": 562868,
-            "range": "± 3675",
-            "unit": "ns/iter"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -899,6 +869,36 @@ window.BENCHMARK_DATA = {
             "name": "datastore/insert/batch/rects/insert",
             "value": 567726,
             "range": "± 2034",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "cr.rey.clement@gmail.com",
+            "name": "Clement Rey",
+            "username": "teh-cmc"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "c90f23faaafb0f820e254fe34783cef544e86904",
+          "message": "sunset classic plots (#939)",
+          "timestamp": "2023-01-27T08:06:10+01:00",
+          "tree_id": "12a86e7d3be257e0ca4d9f7c57d2a62140032978",
+          "url": "https://github.com/rerun-io/rerun/commit/c90f23faaafb0f820e254fe34783cef544e86904"
+        },
+        "date": 1674803435298,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/insert/batch/rects/insert",
+            "value": 584841,
+            "range": "± 6889",
             "unit": "ns/iter"
           }
         ]
