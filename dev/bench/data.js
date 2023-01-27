@@ -1,38 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1674835361278,
+  "lastUpdate": 1674835707833,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
-      {
-        "commit": {
-          "author": {
-            "email": "emil@rerun.io",
-            "name": "Emil Ernerfeldt",
-            "username": "emilk"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "034cb335c026d1cdd19cd5043ca83ad297244edd",
-          "message": "Update egui with deadlock fix (#911)",
-          "timestamp": "2023-01-25T14:03:56+01:00",
-          "tree_id": "d3c34d37931887b50b44dd2280f13d8d1d046e26",
-          "url": "https://github.com/rerun-io/rerun/commit/034cb335c026d1cdd19cd5043ca83ad297244edd"
-        },
-        "date": 1674651967367,
-        "tool": "cargo",
-        "benches": [
-          {
-            "name": "datastore/insert/batch/rects/insert",
-            "value": 559897,
-            "range": "± 1949",
-            "unit": "ns/iter"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -899,6 +869,36 @@ window.BENCHMARK_DATA = {
             "name": "datastore/insert/batch/rects/insert",
             "value": 577119,
             "range": "± 1869",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "jeremy@rerun.io",
+            "name": "Jeremy Leibs",
+            "username": "jleibs"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "6700007c59e6f10188f979de2451c22a19a0daa1",
+          "message": "Force the ouput of the color-conversion code to be unsigned (#961)",
+          "timestamp": "2023-01-27T17:05:22+01:00",
+          "tree_id": "03f560c61701cc320c7f1a7ede23c147d1eb56c8",
+          "url": "https://github.com/rerun-io/rerun/commit/6700007c59e6f10188f979de2451c22a19a0daa1"
+        },
+        "date": 1674835706836,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/insert/batch/rects/insert",
+            "value": 577352,
+            "range": "± 1717",
             "unit": "ns/iter"
           }
         ]
