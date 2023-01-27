@@ -13,7 +13,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.5">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.6">
     
     
       
@@ -1276,16 +1276,16 @@
 <p>Our documentation is versioned with releases and generated via <a href="https://github.com/jimporter/mike">mike</a></p>
 <p>The documentation exists as a <a href="https://pages.github.com/">Github Pages</a> project which is hosted from the
 contents of the <code>gh-pages</code> branch.</p>
-<p><code>mike</code> updates this branch with new content as part of CI and manually n release.</p>
+<p><code>mike</code> updates this branch with new content as part of CI</p>
 <p>Every commit that lands to main will generate bleeding edge documentation as HEAD. Behind the scenes, a
 github action is just running:</p>
 <pre><code>mike deploy -F rerun_py/mkdocs.yml HEAD
 </code></pre>
-<p>On release we instead deploy with a version tag:</p>
+<p>On release, when github sees a new tag: <code>X.Y.Z</code>, the github action will instead deploy with a version tag:</p>
 <pre><code>mike deploy -F rerun_py/mkdocs.yml X.Y.Z latest
 </code></pre>
-<p>You can also locally preview the publicly hosted site wth all versions, using mike:</p>
-<pre><code>mike serve -F rerun_py/mkdocs.yml 
+<p>You can also locally preview the publicly hosted site with all versions, using mike:</p>
+<pre><code>mike serve -F rerun_py/mkdocs.yml
 </code></pre>
 <p>though when locally developing docs you are better off using <code>mkdocs serve</code> as described
 above since it will handle hot-reloading for you as you edit.</p>
