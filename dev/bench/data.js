@@ -1,38 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1674810923125,
+  "lastUpdate": 1674812169613,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
-      {
-        "commit": {
-          "author": {
-            "email": "andreas@rerun.io",
-            "name": "Andreas Reich",
-            "username": "Wumpf"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "001b8df21c880abe79ed716919cb1b63349ab556",
-          "message": "Fix timeless data not correctly showing up in timeline. (#899)\n\nInstead of adding timeless data to all timelines, the time panel is now more aware of timeless data and takes it into account.",
-          "timestamp": "2023-01-24T17:51:21+01:00",
-          "tree_id": "7b4706ec42f03f1d9eefe5970d0d7396972a3481",
-          "url": "https://github.com/rerun-io/rerun/commit/001b8df21c880abe79ed716919cb1b63349ab556"
-        },
-        "date": 1674579224705,
-        "tool": "cargo",
-        "benches": [
-          {
-            "name": "datastore/insert/batch/rects/insert",
-            "value": 584411,
-            "range": "± 20860",
-            "unit": "ns/iter"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -899,6 +869,36 @@ window.BENCHMARK_DATA = {
             "name": "datastore/insert/batch/rects/insert",
             "value": 576579,
             "range": "± 1756",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "marten@martenbjork.com",
+            "name": "Marten Bjork",
+            "username": "martenbjork"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "6aa27af163f8eda46980c7a61a3d56e2249cfa47",
+          "message": "Change markdown structure (#952)",
+          "timestamp": "2023-01-27T10:33:38+01:00",
+          "tree_id": "69ba52e4739aed641f55b85f4347794463ed548d",
+          "url": "https://github.com/rerun-io/rerun/commit/6aa27af163f8eda46980c7a61a3d56e2249cfa47"
+        },
+        "date": 1674812168529,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/insert/batch/rects/insert",
+            "value": 570112,
+            "range": "± 15240",
             "unit": "ns/iter"
           }
         ]
