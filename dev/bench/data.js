@@ -1,38 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1674804163435,
+  "lastUpdate": 1674805467640,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
-      {
-        "commit": {
-          "author": {
-            "email": "andreas@rerun.io",
-            "name": "Andreas Reich",
-            "username": "Wumpf"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "6824669ba11a7e83a77b6cb036f11528033bce50",
-          "message": "selecting/hovering groups causes now select/hover highlight (#893)",
-          "timestamp": "2023-01-24T11:47:21+01:00",
-          "tree_id": "99159fb6b3c6c0b72ebfd02fbbfa0c0252d8202a",
-          "url": "https://github.com/rerun-io/rerun/commit/6824669ba11a7e83a77b6cb036f11528033bce50"
-        },
-        "date": 1674557396404,
-        "tool": "cargo",
-        "benches": [
-          {
-            "name": "datastore/insert/batch/rects/insert",
-            "value": 552629,
-            "range": "± 7221",
-            "unit": "ns/iter"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -899,6 +869,36 @@ window.BENCHMARK_DATA = {
             "name": "datastore/insert/batch/rects/insert",
             "value": 567472,
             "range": "± 1750",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "emil@rerun.io",
+            "name": "Emil Ernerfeldt",
+            "username": "emilk"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "ae81c6a02f4a9a2e4b6e82aa7fb9f864c16c02c8",
+          "message": "Optimize texture padding (#932)\n\n* Add a couple of profiling scopes to the texture creation\r\n\r\n* Optimize texture padding\r\n\r\nCo-authored-by: Clement Rey <cr.rey.clement@gmail.com>",
+          "timestamp": "2023-01-27T08:40:04+01:00",
+          "tree_id": "eef0ee3fb76678b127ec85d4ec5d9423023e3e98",
+          "url": "https://github.com/rerun-io/rerun/commit/ae81c6a02f4a9a2e4b6e82aa7fb9f864c16c02c8"
+        },
+        "date": 1674805466717,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/insert/batch/rects/insert",
+            "value": 566539,
+            "range": "± 2284",
             "unit": "ns/iter"
           }
         ]
