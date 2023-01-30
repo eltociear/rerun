@@ -1,38 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1675100932987,
+  "lastUpdate": 1675107855125,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
-      {
-        "commit": {
-          "author": {
-            "email": "niko@grapic.co",
-            "name": "Nikolaus West",
-            "username": "nikolausWest"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "b0142c14feaa7fad0a2a728f34eafe1be2d8f7fb",
-          "message": "Clarify analytics welcome message (#947)",
-          "timestamp": "2023-01-26T22:39:54+01:00",
-          "tree_id": "61418d9d145de44052caa445a3233f75e8c4a31e",
-          "url": "https://github.com/rerun-io/rerun/commit/b0142c14feaa7fad0a2a728f34eafe1be2d8f7fb"
-        },
-        "date": 1674769439981,
-        "tool": "cargo",
-        "benches": [
-          {
-            "name": "datastore/insert/batch/rects/insert",
-            "value": 567726,
-            "range": "± 2034",
-            "unit": "ns/iter"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -4197,6 +4167,174 @@ window.BENCHMARK_DATA = {
           },
           {
             "name": "obj_batch_points_sequential/Tuid::random",
+            "value": 37,
+            "range": "± 0",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "emil@rerun.io",
+            "name": "Emil Ernerfeldt",
+            "username": "emilk"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "55b75084a6a3fd645e7ed58ce75a188bae553006",
+          "message": "Rust: rename objects and fields (#993)\n\n* ClearFields -> ClearComponents\r\n\r\n* field_name -> component_name\r\n\r\n* Remove unnecessary function indirection\r\n\r\n* File rename: Object -> Instance\r\n\r\n* ObjPath* -> EntityPath*\r\n\r\n* obj_path -> entity_path\r\n\r\n* object_path -> entity_path\r\n\r\n* ObjectTree -> EntityTree\r\n\r\n* ObjectProps -> EntityProperties\r\n\r\n* obj_query_benchmark -> query_benchmark\r\n\r\n* OptionalSpaceViewObjectHighlight -> OptionalSpaceViewEntityHighlight\r\n\r\n* ObjDb -> EntityDb\r\n\r\n* Use \"Entity path\" in UI:s\r\n\r\n* obj_db -> entity_db\r\n\r\n* Fix wrong benchmark_group name\r\n\r\n* reference_from_obj -> reference_from_entity\r\n\r\n* rename some obj-related variables\r\n\r\n* object path -> entity path\r\n\r\n* blueprint-related renamings\r\n\r\n* object_highlight -> entity_highlight\r\n\r\n* load_object -> load\r\n\r\n* queries_objects -> queries_entities\r\n\r\n* rename things in space_view.rs\r\n\r\n* highlighted_object -> highlighted_entity\r\n\r\n* object -> entity in comments and strings\r\n\r\n* A few more object -> entity in comments and strings\r\n\r\n* object path -> entity path\r\n\r\n* obj_path -> entity_path\r\n\r\n* object -> entity\r\n\r\n* REGISTERED_FIELDS -> REGISTERED_COMPONENT_NAMES\r\n\r\n* fix accidental all-caps\r\n\r\n* field_types -> component_types\r\n\r\n* py-format\r\n\r\n* a EntityPath -> an EntityPath\r\n\r\nCo-authored-by: Andreas Reich <andreas@rerun.io>\r\n\r\n* PathOpMsg -> EntityPathOpMsg\r\n\r\n* \"Double-click an object to focus the view on it\"\r\n\r\n* EntityPathComponent -> EntityPathPart\r\n\r\nfor less confusion\r\n\r\n* Fix doscstring link\r\n\r\n* DataPath -> ComponentPath\r\n\r\n* fix doctests: update field_types -> component_types\r\n\r\n---------\r\n\r\nCo-authored-by: Andreas Reich <andreas@rerun.io>",
+          "timestamp": "2023-01-30T20:33:59+01:00",
+          "tree_id": "a5088702fdc16028db7a42ad58581356b1a3a6db",
+          "url": "https://github.com/rerun-io/rerun/commit/55b75084a6a3fd645e7ed58ce75a188bae553006"
+        },
+        "date": 1675107854048,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/insert/batch/rects/insert",
+            "value": 575019,
+            "range": "± 2682",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/latest_at/batch/rects/query",
+            "value": 1801,
+            "range": "± 6",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/latest_at/missing_components/primary",
+            "value": 305,
+            "range": "± 29",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/latest_at/missing_components/secondaries",
+            "value": 376,
+            "range": "± 2",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/range/batch/rects/query",
+            "value": 152824,
+            "range": "± 1283",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/generate_message_bundles",
+            "value": 44442276,
+            "range": "± 1019410",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/generate_messages",
+            "value": 123734679,
+            "range": "± 1120324",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/encode_log_msg",
+            "value": 152498632,
+            "range": "± 718697",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/encode_total",
+            "value": 323255535,
+            "range": "± 1877888",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/decode_log_msg",
+            "value": 177244092,
+            "range": "± 1014700",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/decode_message_bundles",
+            "value": 63062310,
+            "range": "± 874649",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/decode_total",
+            "value": 237613684,
+            "range": "± 2729177",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/generate_message_bundles",
+            "value": 324718,
+            "range": "± 2203",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/generate_messages",
+            "value": 6200,
+            "range": "± 45",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/encode_log_msg",
+            "value": 345156,
+            "range": "± 2131",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/encode_total",
+            "value": 704848,
+            "range": "± 3110",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/decode_log_msg",
+            "value": 327225,
+            "range": "± 3475",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/decode_message_bundles",
+            "value": 2119,
+            "range": "± 19",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/decode_total",
+            "value": 331821,
+            "range": "± 7647",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_mono_points/insert",
+            "value": 6039983244,
+            "range": "± 11472279",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_mono_points/query",
+            "value": 1614384,
+            "range": "± 7477",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_batch_points/insert",
+            "value": 2634147,
+            "range": "± 10212",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_batch_points/query",
+            "value": 16658,
+            "range": "± 129",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "tuid/Tuid::random",
             "value": 37,
             "range": "± 0",
             "unit": "ns/iter"
