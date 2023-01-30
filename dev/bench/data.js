@@ -1,38 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1675074923621,
+  "lastUpdate": 1675090995355,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
-      {
-        "commit": {
-          "author": {
-            "email": "jeremy@rerun.io",
-            "name": "Jeremy Leibs",
-            "username": "jleibs"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "8d3d3838197cb18e55db00c3a0a52848eb31eced",
-          "message": "Don't block on flush if the TCP connection to the viewer is disconnected (#926)\n\n* Introduce quit_if_disconnected to allow messages to be dropped\r\n* Avoid confusing flush messages from the spawned rerun viewer",
-          "timestamp": "2023-01-26T16:45:42+01:00",
-          "tree_id": "ab4183b38205d8adc7512b765028dea24ef86c93",
-          "url": "https://github.com/rerun-io/rerun/commit/8d3d3838197cb18e55db00c3a0a52848eb31eced"
-        },
-        "date": 1674748066822,
-        "tool": "cargo",
-        "benches": [
-          {
-            "name": "datastore/insert/batch/rects/insert",
-            "value": 574857,
-            "range": "± 2019",
-            "unit": "ns/iter"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -3779,6 +3749,174 @@ window.BENCHMARK_DATA = {
             "name": "arrow_batch_points/query",
             "value": 15881,
             "range": "± 170",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "obj_batch_points_sequential/Tuid::random",
+            "value": 37,
+            "range": "± 0",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "emil@rerun.io",
+            "name": "Emil Ernerfeldt",
+            "username": "emilk"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "633ba3e1bf23d691d2ef57bdbdad48f9c03bfb08",
+          "message": "Remove a lot of classical stuff (#988)\n\n* Remove Session::register_type\r\n\r\n* Remove TypeMsg\r\n\r\n* Remove Session::send_data\r\n\r\n* Remove classical text scene\r\n\r\n* Remove DataMsg\r\n\r\n* Remove classic loading of tensors and annotations\r\n\r\n* Remove ObjDb::store\r\n\r\n* Remove add_data_msg\r\n\r\n* Remove classical DataStore\r\n\r\n* Remove unused Error cases\r\n\r\n* Properly throttle arrow messages\r\n\r\n* Remove ObjectType\r\n\r\n* Remove LoggedData\r\n\r\n* Remove DataVec\r\n\r\n* Remove DataTrait\r\n\r\n* Remove Data\r\n\r\n* Remove DataType\r\n\r\n* Tweak how view categorization is done\r\n\r\n* Remove docstrings referring to dead stuff\r\n\r\n* remove batch.rs\r\n\r\n* rename DataPath::field_name to component_name\r\n\r\n* Remove FieldOrComponent\r\n\r\n* Fix doclink\r\n\r\n* Remove FieldName\r\n\r\n* Remove ObjTypePath and IndexPath",
+          "timestamp": "2023-01-30T15:54:15+01:00",
+          "tree_id": "73532eef1c8651962ab24b2420e09fc9e59f30f4",
+          "url": "https://github.com/rerun-io/rerun/commit/633ba3e1bf23d691d2ef57bdbdad48f9c03bfb08"
+        },
+        "date": 1675090994279,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/insert/batch/rects/insert",
+            "value": 573893,
+            "range": "± 2221",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/latest_at/batch/rects/query",
+            "value": 1788,
+            "range": "± 4",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/latest_at/missing_components/primary",
+            "value": 305,
+            "range": "± 0",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/latest_at/missing_components/secondaries",
+            "value": 377,
+            "range": "± 0",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/range/batch/rects/query",
+            "value": 153642,
+            "range": "± 654",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/generate_message_bundles",
+            "value": 45910302,
+            "range": "± 1243574",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/generate_messages",
+            "value": 122845021,
+            "range": "± 1160841",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/encode_log_msg",
+            "value": 150469127,
+            "range": "± 667565",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/encode_total",
+            "value": 322484797,
+            "range": "± 1691694",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/decode_log_msg",
+            "value": 175805098,
+            "range": "± 930708",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/decode_message_bundles",
+            "value": 63120988,
+            "range": "± 855015",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/decode_total",
+            "value": 239283985,
+            "range": "± 3309220",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/generate_message_bundles",
+            "value": 308674,
+            "range": "± 367",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/generate_messages",
+            "value": 6308,
+            "range": "± 16",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/encode_log_msg",
+            "value": 350220,
+            "range": "± 1019",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/encode_total",
+            "value": 691083,
+            "range": "± 1647",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/decode_log_msg",
+            "value": 325811,
+            "range": "± 471",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/decode_message_bundles",
+            "value": 2191,
+            "range": "± 5",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/decode_total",
+            "value": 330225,
+            "range": "± 544",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_mono_points/insert",
+            "value": 5948599794,
+            "range": "± 10643380",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_mono_points/query",
+            "value": 1643153,
+            "range": "± 5791",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_batch_points/insert",
+            "value": 2634346,
+            "range": "± 13821",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_batch_points/query",
+            "value": 16225,
+            "range": "± 24",
             "unit": "ns/iter"
           },
           {
