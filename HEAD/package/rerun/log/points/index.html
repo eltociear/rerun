@@ -1267,7 +1267,7 @@
 
 
 <h4 id="rerun.log.points.log_point" class="doc doc-heading">
-<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_point</span><span class="p">(</span><span class="n">obj_path</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">class_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">keypoint_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_point</span><span class="p">(</span><span class="n">entity_path</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">class_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">keypoint_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
 </h4>
 
@@ -1275,7 +1275,7 @@
   <div class="doc doc-contents ">
   
       <p>Log a 2D or 3D point, with optional color.</p>
-<p>Logging again to the same <code>obj_path</code> will replace the previous point.</p>
+<p>Logging again to the same <code>entity_path</code> will replace the previous point.</p>
 <ul>
 <li><code>position</code>: 2x1 or 3x1 array</li>
 <li><code>radius</code>: Optional radius (make it a sphere)</li>
@@ -1305,7 +1305,7 @@ space.
 
 
 <h4 id="rerun.log.points.log_points" class="doc doc-heading">
-<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_points</span><span class="p">(</span><span class="n">obj_path</span><span class="p">,</span> <span class="n">positions</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">identifiers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">radii</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">class_ids</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">keypoint_ids</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_points</span><span class="p">(</span><span class="n">entity_path</span><span class="p">,</span> <span class="n">positions</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">identifiers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">radii</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">class_ids</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">keypoint_ids</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
 </h4>
 
@@ -1313,7 +1313,7 @@ space.
   <div class="doc doc-contents ">
   
       <p>Log 2D or 3D points, with optional colors.</p>
-<p>Logging again to the same <code>obj_path</code> will replace all the previous points.</p>
+<p>Logging again to the same <code>entity_path</code> will replace all the previous points.</p>
 <ul>
 <li><code>positions</code>: Nx2 or Nx3 array</li>
 <li><code>identifiers</code>: per-point identifiers - unique names or numbers that show up when you hover the points.

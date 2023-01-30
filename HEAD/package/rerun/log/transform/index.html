@@ -1281,17 +1281,17 @@
 
 
 <h4 id="rerun.log.transform.log_view_coordinates" class="doc doc-heading">
-<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_view_coordinates</span><span class="p">(</span><span class="n">obj_path</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">xyz</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">up</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">right_handed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_view_coordinates</span><span class="p">(</span><span class="n">entity_path</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">xyz</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">up</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">right_handed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
 </h4>
 
 
   <div class="doc doc-contents ">
   
-      <p>Log the view coordinates for an object.</p>
-<p>Each object defines its own coordinate system, called a space.
+      <p>Log the view coordinates for an entity.</p>
+<p>Each entity defines its own coordinate system, called a space.
 By logging view coordinates you can give semantic meaning to the XYZ axes of the space.
-This is for instance useful for camera objects ("what axis is forward?").</p>
+This is for instance useful for camera entities ("what axis is forward?").</p>
 <p>For full control, set the <code>xyz</code> parameter to a three-letter acronym (<code>xyz="RDF"</code>). Each letter represents:</p>
 <ul>
 <li>R: Right</li>
@@ -1326,14 +1326,14 @@ rerun.log_view_coordinates(&quot;world&quot;, up=&quot;-Y&quot;, right_handed=Fa
 
 
 <h4 id="rerun.log.transform.log_unknown_transform" class="doc doc-heading">
-<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_unknown_transform</span><span class="p">(</span><span class="n">obj_path</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_unknown_transform</span><span class="p">(</span><span class="n">entity_path</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
 </h4>
 
 
   <div class="doc doc-contents ">
   
-      <p>Log that this object is NOT in the same space as the parent, but you do not (yet) know how they relate.</p>
+      <p>Log that this entity is NOT in the same space as the parent, but you do not (yet) know how they relate.</p>
 
   </div>
 
@@ -1344,20 +1344,20 @@ rerun.log_view_coordinates(&quot;world&quot;, up=&quot;-Y&quot;, right_handed=Fa
 
 
 <h4 id="rerun.log.transform.log_rigid3" class="doc doc-heading">
-<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_rigid3</span><span class="p">(</span><span class="n">obj_path</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">parent_from_child</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">child_from_parent</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">xyz</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_rigid3</span><span class="p">(</span><span class="n">entity_path</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">parent_from_child</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">child_from_parent</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">xyz</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
 </h4>
 
 
   <div class="doc doc-contents ">
   
-      <p>Log a proper rigid 3D transform between this object and the parent.</p>
+      <p>Log a proper rigid 3D transform between this entity and the parent.</p>
 <p>Set either <code>parent_from_child</code> or <code>child_from_parent</code> to
 a tuple of <code>(translation_xyz, quat_xyzw)</code>.</p>
 <h6 id="rerun.log.transform.log_rigid3--parent_from_child"><code>parent_from_child</code></h6>
 <p><code>parent_from_child=(translation_xyz, quat_xyzw)</code></p>
 <p>Also known as pose (e.g. camera extrinsics).</p>
-<p>The translation is the position of the object in the parent space.
+<p>The translation is the position of the entity in the parent space.
 The resulting transform from child to parent corresponds to taking a point in the child space,
 rotating it by the given rotations, and then translating it by the given translation:</p>
 <p>`point_parent = translation + quat * point_child * quat*</p>
@@ -1365,7 +1365,7 @@ rotating it by the given rotations, and then translating it by the given transla
 <p><code>child_from_parent=(translation_xyz, quat_xyzw)</code></p>
 <p>the inverse of <code>parent_from_child</code></p>
 <h6 id="rerun.log.transform.log_rigid3--xyz"><code>xyz</code></h6>
-<p>Optionally set the view coordinates of this object, e.g. to <code>RDF</code> for <code>X=Right, Y=Down, Z=Forward</code>.
+<p>Optionally set the view coordinates of this entity, e.g. to <code>RDF</code> for <code>X=Right, Y=Down, Z=Forward</code>.
 This is a convenience for also calling <code>log_view_coordinates</code>.</p>
 <h6 id="rerun.log.transform.log_rigid3--example">Example</h6>
 <pre><code>rerun.log_rigid3(&quot;world/camera&quot;, parent_from_child=(t,q))

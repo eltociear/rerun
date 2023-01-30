@@ -1447,7 +1447,7 @@
 
 
 <h4 id="rerun.log.rects.log_rect" class="doc doc-heading">
-<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_rect</span><span class="p">(</span><span class="n">obj_path</span><span class="p">,</span> <span class="n">rect</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">rect_format</span><span class="o">=</span><span class="n">RectFormat</span><span class="o">.</span><span class="n">XYWH</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">class_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_rect</span><span class="p">(</span><span class="n">entity_path</span><span class="p">,</span> <span class="n">rect</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">rect_format</span><span class="o">=</span><span class="n">RectFormat</span><span class="o">.</span><span class="n">XYWH</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">class_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
 </h4>
 
@@ -1474,7 +1474,7 @@
 
 
 <h4 id="rerun.log.rects.log_rects" class="doc doc-heading">
-<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_rects</span><span class="p">(</span><span class="n">obj_path</span><span class="p">,</span> <span class="n">rects</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">rect_format</span><span class="o">=</span><span class="n">RectFormat</span><span class="o">.</span><span class="n">XYWH</span><span class="p">,</span> <span class="n">identifiers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">class_ids</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_rects</span><span class="p">(</span><span class="n">entity_path</span><span class="p">,</span> <span class="n">rects</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">rect_format</span><span class="o">=</span><span class="n">RectFormat</span><span class="o">.</span><span class="n">XYWH</span><span class="p">,</span> <span class="n">identifiers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">class_ids</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
 </h4>
 
@@ -1482,7 +1482,7 @@
   <div class="doc doc-contents ">
   
       <p>Log multiple 2D rectangles.</p>
-<p>Logging again to the same <code>obj_path</code> will replace all the previous rectangles.</p>
+<p>Logging again to the same <code>entity_path</code> will replace all the previous rectangles.</p>
 <ul>
 <li><code>rects</code>: Nx4 numpy array, where each row is [x, y, w, h], or some format you pick with the <code>rect_format</code>
 argument.</li>

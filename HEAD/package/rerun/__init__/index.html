@@ -1717,7 +1717,7 @@
 
 
 <h4 id="rerun.log_pinhole" class="doc doc-heading">
-<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_pinhole</span><span class="p">(</span><span class="n">obj_path</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">child_from_parent</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_pinhole</span><span class="p">(</span><span class="n">entity_path</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">child_from_parent</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
 </h4>
 
@@ -1746,17 +1746,17 @@ rerun.log_pinhole(&quot;world/camera/image&quot;, …)
 
 
 <h4 id="rerun.log_view_coordinates" class="doc doc-heading">
-<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_view_coordinates</span><span class="p">(</span><span class="n">obj_path</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">xyz</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">up</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">right_handed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_view_coordinates</span><span class="p">(</span><span class="n">entity_path</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">xyz</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">up</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">right_handed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
 </h4>
 
 
   <div class="doc doc-contents ">
   
-      <p>Log the view coordinates for an object.</p>
-<p>Each object defines its own coordinate system, called a space.
+      <p>Log the view coordinates for an entity.</p>
+<p>Each entity defines its own coordinate system, called a space.
 By logging view coordinates you can give semantic meaning to the XYZ axes of the space.
-This is for instance useful for camera objects ("what axis is forward?").</p>
+This is for instance useful for camera entities ("what axis is forward?").</p>
 <p>For full control, set the <code>xyz</code> parameter to a three-letter acronym (<code>xyz="RDF"</code>). Each letter represents:</p>
 <ul>
 <li>R: Right</li>
@@ -1791,7 +1791,7 @@ rerun.log_view_coordinates(&quot;world&quot;, up=&quot;-Y&quot;, right_handed=Fa
 
 
 <h4 id="rerun.log_image" class="doc doc-heading">
-<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_image</span><span class="p">(</span><span class="n">obj_path</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_image</span><span class="p">(</span><span class="n">entity_path</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
 </h4>
 
@@ -1816,7 +1816,7 @@ linear space.
 
 
 <h4 id="rerun.log_scalar" class="doc doc-heading">
-<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_scalar</span><span class="p">(</span><span class="n">obj_path</span><span class="p">,</span> <span class="n">scalar</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">scattered</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_scalar</span><span class="p">(</span><span class="n">entity_path</span><span class="p">,</span> <span class="n">scalar</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">scattered</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
 
 </h4>
 
@@ -1837,13 +1837,13 @@ From these points, lines with appropriate attributes can then be inferred; and f
 inferred lines, plots with appropriate attributes will be inferred in turn!</p>
 <p>In terms of actual hierarchy:
 - Each space represents a single plot.
-- Each object path within a space that contains scalar data is a line within that plot.
+- Each entity path within a space that contains scalar data is a line within that plot.
 - Each logged scalar is a point.</p>
 <p>E.g. the following:</p>
 <pre><code>rerun.log_scalar(&quot;trig/sin&quot;, sin(t), label=&quot;sin(t)&quot;, color=RED)
 rerun.log_scalar(&quot;trig/cos&quot;, cos(t), label=&quot;cos(t)&quot;, color=BLUE)
 </code></pre>
-<p>will yield a single plot (space = <code>trig</code>), comprised of two lines (object paths <code>trig/sin</code>
+<p>will yield a single plot (space = <code>trig</code>), comprised of two lines (entity paths <code>trig/sin</code>
 and <code>trig/cos</code>).</p>
 <h6 id="rerun.log_scalar--attributes">Attributes</h6>
 <p>The attributes you assigned (or not) to a scalar will affect all layers: points, lines and
@@ -1852,24 +1852,24 @@ plots alike.</p>
 <p>An optional label for the point.</p>
 <p>This won't show up on points at the moment, as our plots don't yet support displaying labels
 for individual points.</p>
-<p>If all points within a single object path (i.e. a line) share the same label, then this label
+<p>If all points within a single entity path (i.e. a line) share the same label, then this label
 will be used as the label for the line itself.
-Otherwise, the line will be named after the object path.</p>
+Otherwise, the line will be named after the entity path.</p>
 <p>The plot itself is named after the space it's in.</p>
 <h6 id="rerun.log_scalar--color"><code>color</code></h6>
 <p>An optional color in the form of a RGB or RGBA triplet in 0-255 sRGB.
 If left unspecified, a pseudo-random color will be used instead. That same color will apply
-to all points residing in the same object path that don't have a color specified.</p>
+to all points residing in the same entity path that don't have a color specified.</p>
 <p>Points within a single line do not have to share the same color, the line will have
 differently colored segments as appropriate.</p>
-<p>If all points within a single object path (i.e. a line) share the same color, then this color
+<p>If all points within a single entity path (i.e. a line) share the same color, then this color
 will be used as the line color in the plot legend.
 Otherwise, the line will appear grey in the legend.</p>
 <h6 id="rerun.log_scalar--radius"><code>radius</code></h6>
 <p>An optional radius for the point.</p>
 <p>Points within a single line do not have to share the same radius, the line will have
 differently sized segments as appropriate.</p>
-<p>If all points within a single object path (i.e. a line) share the same radius, then this radius
+<p>If all points within a single entity path (i.e. a line) share the same radius, then this radius
 will be used as the line width too.
 Otherwise, the line will use the default width of <code>1.0</code>.</p>
 <h6 id="rerun.log_scalar--scattered"><code>scattered</code></h6>
@@ -1887,7 +1887,7 @@ switch between a scattered and a continous representation as required.</p>
 
 
 <h4 id="rerun.log_arrow" class="doc doc-heading">
-<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_arrow</span><span class="p">(</span><span class="n">obj_path</span><span class="p">,</span> <span class="n">origin</span><span class="p">,</span> <span class="n">vector</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">width_scale</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_arrow</span><span class="p">(</span><span class="n">entity_path</span><span class="p">,</span> <span class="n">origin</span><span class="p">,</span> <span class="n">vector</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">width_scale</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
 </h4>
 
@@ -1912,11 +1912,11 @@ The tip is rendered as a cone with <code>height = 2.0 * width_scale</code> and <
     </thead>
     <tbody>
         <tr>
-          <td><code>obj_path</code></td>
+          <td><code>entity_path</code></td>
           <td>
                 <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
           </td>
-          <td><p>The path to store the object at.</p></td>
+          <td><p>The path to store the entity at.</p></td>
           <td>
               <em>required</em>
           </td>
@@ -1976,7 +1976,7 @@ The tip is rendered as a cone with <code>height = 2.0 * width_scale</code> and <
           <td>
                 <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></code>
           </td>
-          <td><p>Object is not time-dependent, and will be visible at any time point.</p></td>
+          <td><p>The entity is not time-dependent, and will be visible at any time point.</p></td>
           <td>
                 <code>False</code>
           </td>
@@ -1993,7 +1993,7 @@ The tip is rendered as a cone with <code>height = 2.0 * width_scale</code> and <
 
 
 <h4 id="rerun.log_path" class="doc doc-heading">
-<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_path</span><span class="p">(</span><span class="n">obj_path</span><span class="p">,</span> <span class="n">positions</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">stroke_width</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_path</span><span class="p">(</span><span class="n">entity_path</span><span class="p">,</span> <span class="n">positions</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">stroke_width</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
 </h4>
 
@@ -2021,7 +2021,7 @@ The tip is rendered as a cone with <code>height = 2.0 * width_scale</code> and <
 
 
 <h4 id="rerun.log_obb" class="doc doc-heading">
-<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_obb</span><span class="p">(</span><span class="n">obj_path</span><span class="p">,</span> <span class="n">half_size</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rotation_q</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">stroke_width</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">class_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_obb</span><span class="p">(</span><span class="n">entity_path</span><span class="p">,</span> <span class="n">half_size</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rotation_q</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">stroke_width</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">class_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
 </h4>
 
@@ -2047,7 +2047,7 @@ The tip is rendered as a cone with <code>height = 2.0 * width_scale</code> and <
 
 
 <h4 id="rerun.log_rect" class="doc doc-heading">
-<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_rect</span><span class="p">(</span><span class="n">obj_path</span><span class="p">,</span> <span class="n">rect</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">rect_format</span><span class="o">=</span><span class="n">RectFormat</span><span class="o">.</span><span class="n">XYWH</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">class_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_rect</span><span class="p">(</span><span class="n">entity_path</span><span class="p">,</span> <span class="n">rect</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">rect_format</span><span class="o">=</span><span class="n">RectFormat</span><span class="o">.</span><span class="n">XYWH</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">class_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
 </h4>
 
@@ -2074,7 +2074,7 @@ The tip is rendered as a cone with <code>height = 2.0 * width_scale</code> and <
 
 
 <h4 id="rerun.log_point" class="doc doc-heading">
-<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_point</span><span class="p">(</span><span class="n">obj_path</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">class_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">keypoint_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_point</span><span class="p">(</span><span class="n">entity_path</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">class_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">keypoint_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
 </h4>
 
@@ -2082,7 +2082,7 @@ The tip is rendered as a cone with <code>height = 2.0 * width_scale</code> and <
   <div class="doc doc-contents ">
   
       <p>Log a 2D or 3D point, with optional color.</p>
-<p>Logging again to the same <code>obj_path</code> will replace the previous point.</p>
+<p>Logging again to the same <code>entity_path</code> will replace the previous point.</p>
 <ul>
 <li><code>position</code>: 2x1 or 3x1 array</li>
 <li><code>radius</code>: Optional radius (make it a sphere)</li>
@@ -2112,7 +2112,7 @@ space.
 
 
 <h4 id="rerun.log_mesh_file" class="doc doc-heading">
-<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_mesh_file</span><span class="p">(</span><span class="n">obj_path</span><span class="p">,</span> <span class="n">mesh_format</span><span class="p">,</span> <span class="n">mesh_file</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_mesh_file</span><span class="p">(</span><span class="n">entity_path</span><span class="p">,</span> <span class="n">mesh_format</span><span class="p">,</span> <span class="n">mesh_file</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
 </h4>
 
@@ -2138,7 +2138,7 @@ transform=np.array([
 
 
 <h4 id="rerun.log_depth_image" class="doc doc-heading">
-<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_depth_image</span><span class="p">(</span><span class="n">obj_path</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">meter</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_depth_image</span><span class="p">(</span><span class="n">entity_path</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">meter</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
 </h4>
 
@@ -2160,7 +2160,7 @@ transform=np.array([
 
 
 <h4 id="rerun.log_line_segments" class="doc doc-heading">
-<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_line_segments</span><span class="p">(</span><span class="n">obj_path</span><span class="p">,</span> <span class="n">positions</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">stroke_width</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_line_segments</span><span class="p">(</span><span class="n">entity_path</span><span class="p">,</span> <span class="n">positions</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">stroke_width</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
 </h4>
 
@@ -2187,7 +2187,7 @@ transform=np.array([
 
 
 <h4 id="rerun.log_annotation_context" class="doc doc-heading">
-<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_annotation_context</span><span class="p">(</span><span class="n">obj_path</span><span class="p">,</span> <span class="n">class_descriptions</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_annotation_context</span><span class="p">(</span><span class="n">entity_path</span><span class="p">,</span> <span class="n">class_descriptions</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code>
 
 </h4>
 
@@ -2195,10 +2195,10 @@ transform=np.array([
   <div class="doc doc-contents ">
   
       <p>Log an annotation context made up of a collection of ClassDescriptions.</p>
-<p>Any object needing to access the annotation context will find it by searching the
-path upward. If all objects share the same you can simply log it to the
-root ("/"), or if you want a per-object ClassDescriptions log it to the same path as
-your object.</p>
+<p>Any entity needing to access the annotation context will find it by searching the
+path upward. If all entities share the same you can simply log it to the
+root ("/"), or if you want a per-entity ClassDescriptions log it to the same path as
+your entity.</p>
 <p>Each ClassDescription must include an annotation info with an id, which will be used for matching
 the class and may optionally include a label and color. Colors should
 either be in 0-255 gamma space or in 0-1 linear space. Colors can be RGB or
@@ -2245,7 +2245,7 @@ Any random UUIDv4 will work, or copy the recording id for the parent process.</p
 
 
 <h4 id="rerun.log_image_file" class="doc doc-heading">
-<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_image_file</span><span class="p">(</span><span class="n">obj_path</span><span class="p">,</span> <span class="n">img_path</span><span class="p">,</span> <span class="n">img_format</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_image_file</span><span class="p">(</span><span class="n">entity_path</span><span class="p">,</span> <span class="n">img_path</span><span class="p">,</span> <span class="n">img_format</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
 </h4>
 
@@ -2264,7 +2264,7 @@ Any random UUIDv4 will work, or copy the recording id for the parent process.</p
 
 
 <h4 id="rerun.log_rects" class="doc doc-heading">
-<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_rects</span><span class="p">(</span><span class="n">obj_path</span><span class="p">,</span> <span class="n">rects</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">rect_format</span><span class="o">=</span><span class="n">RectFormat</span><span class="o">.</span><span class="n">XYWH</span><span class="p">,</span> <span class="n">identifiers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">class_ids</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_rects</span><span class="p">(</span><span class="n">entity_path</span><span class="p">,</span> <span class="n">rects</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">rect_format</span><span class="o">=</span><span class="n">RectFormat</span><span class="o">.</span><span class="n">XYWH</span><span class="p">,</span> <span class="n">identifiers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">class_ids</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
 </h4>
 
@@ -2272,7 +2272,7 @@ Any random UUIDv4 will work, or copy the recording id for the parent process.</p
   <div class="doc doc-contents ">
   
       <p>Log multiple 2D rectangles.</p>
-<p>Logging again to the same <code>obj_path</code> will replace all the previous rectangles.</p>
+<p>Logging again to the same <code>entity_path</code> will replace all the previous rectangles.</p>
 <ul>
 <li><code>rects</code>: Nx4 numpy array, where each row is [x, y, w, h], or some format you pick with the <code>rect_format</code>
 argument.</li>
@@ -2300,14 +2300,14 @@ space.
 
 
 <h4 id="rerun.log_unknown_transform" class="doc doc-heading">
-<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_unknown_transform</span><span class="p">(</span><span class="n">obj_path</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_unknown_transform</span><span class="p">(</span><span class="n">entity_path</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
 </h4>
 
 
   <div class="doc doc-contents ">
   
-      <p>Log that this object is NOT in the same space as the parent, but you do not (yet) know how they relate.</p>
+      <p>Log that this entity is NOT in the same space as the parent, but you do not (yet) know how they relate.</p>
 
   </div>
 
@@ -2318,14 +2318,14 @@ space.
 
 
 <h4 id="rerun.log_cleared" class="doc doc-heading">
-<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_cleared</span><span class="p">(</span><span class="n">obj_path</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">recursive</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_cleared</span><span class="p">(</span><span class="n">entity_path</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">recursive</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
 </h4>
 
 
   <div class="doc doc-contents ">
   
-      <p>Indicate that an object at a given path should no longer be displayed.</p>
+      <p>Indicate that an entity at a given path should no longer be displayed.</p>
 <p>If <code>recursive</code> is True this will also clear all sub-paths</p>
 
   </div>
@@ -2337,20 +2337,20 @@ space.
 
 
 <h4 id="rerun.log_rigid3" class="doc doc-heading">
-<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_rigid3</span><span class="p">(</span><span class="n">obj_path</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">parent_from_child</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">child_from_parent</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">xyz</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_rigid3</span><span class="p">(</span><span class="n">entity_path</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">parent_from_child</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">child_from_parent</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">xyz</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
 </h4>
 
 
   <div class="doc doc-contents ">
   
-      <p>Log a proper rigid 3D transform between this object and the parent.</p>
+      <p>Log a proper rigid 3D transform between this entity and the parent.</p>
 <p>Set either <code>parent_from_child</code> or <code>child_from_parent</code> to
 a tuple of <code>(translation_xyz, quat_xyzw)</code>.</p>
 <h6 id="rerun.log_rigid3--parent_from_child"><code>parent_from_child</code></h6>
 <p><code>parent_from_child=(translation_xyz, quat_xyzw)</code></p>
 <p>Also known as pose (e.g. camera extrinsics).</p>
-<p>The translation is the position of the object in the parent space.
+<p>The translation is the position of the entity in the parent space.
 The resulting transform from child to parent corresponds to taking a point in the child space,
 rotating it by the given rotations, and then translating it by the given translation:</p>
 <p>`point_parent = translation + quat * point_child * quat*</p>
@@ -2358,7 +2358,7 @@ rotating it by the given rotations, and then translating it by the given transla
 <p><code>child_from_parent=(translation_xyz, quat_xyzw)</code></p>
 <p>the inverse of <code>parent_from_child</code></p>
 <h6 id="rerun.log_rigid3--xyz"><code>xyz</code></h6>
-<p>Optionally set the view coordinates of this object, e.g. to <code>RDF</code> for <code>X=Right, Y=Down, Z=Forward</code>.
+<p>Optionally set the view coordinates of this entity, e.g. to <code>RDF</code> for <code>X=Right, Y=Down, Z=Forward</code>.
 This is a convenience for also calling <code>log_view_coordinates</code>.</p>
 <h6 id="rerun.log_rigid3--example">Example</h6>
 <pre><code>rerun.log_rigid3(&quot;world/camera&quot;, parent_from_child=(t,q))
@@ -2399,7 +2399,7 @@ Any random UUIDv4 will work, or copy the recording id for the parent process.</p
 
 
 <h4 id="rerun.log_text_entry" class="doc doc-heading">
-<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_text_entry</span><span class="p">(</span><span class="n">obj_path</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">LogLevel</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_text_entry</span><span class="p">(</span><span class="n">entity_path</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">LogLevel</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
 </h4>
 
@@ -2472,7 +2472,7 @@ and another doing camera calibration, you could have
 
 
 <h4 id="rerun.log_points" class="doc doc-heading">
-<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_points</span><span class="p">(</span><span class="n">obj_path</span><span class="p">,</span> <span class="n">positions</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">identifiers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">radii</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">class_ids</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">keypoint_ids</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_points</span><span class="p">(</span><span class="n">entity_path</span><span class="p">,</span> <span class="n">positions</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">identifiers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">radii</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">class_ids</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">keypoint_ids</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
 </h4>
 
@@ -2480,7 +2480,7 @@ and another doing camera calibration, you could have
   <div class="doc doc-contents ">
   
       <p>Log 2D or 3D points, with optional colors.</p>
-<p>Logging again to the same <code>obj_path</code> will replace all the previous points.</p>
+<p>Logging again to the same <code>entity_path</code> will replace all the previous points.</p>
 <ul>
 <li><code>positions</code>: Nx2 or Nx3 array</li>
 <li><code>identifiers</code>: per-point identifiers - unique names or numbers that show up when you hover the points.
@@ -2511,7 +2511,7 @@ space.
 
 
 <h4 id="rerun.log_segmentation_image" class="doc doc-heading">
-<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_segmentation_image</span><span class="p">(</span><span class="n">obj_path</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_segmentation_image</span><span class="p">(</span><span class="n">entity_path</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
 </h4>
 

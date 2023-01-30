@@ -1253,7 +1253,7 @@
 
 
 <h4 id="rerun.log.arrow.log_arrow" class="doc doc-heading">
-<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_arrow</span><span class="p">(</span><span class="n">obj_path</span><span class="p">,</span> <span class="n">origin</span><span class="p">,</span> <span class="n">vector</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">width_scale</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_arrow</span><span class="p">(</span><span class="n">entity_path</span><span class="p">,</span> <span class="n">origin</span><span class="p">,</span> <span class="n">vector</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">width_scale</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
 </h4>
 
@@ -1278,11 +1278,11 @@ The tip is rendered as a cone with <code>height = 2.0 * width_scale</code> and <
     </thead>
     <tbody>
         <tr>
-          <td><code>obj_path</code></td>
+          <td><code>entity_path</code></td>
           <td>
                 <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
           </td>
-          <td><p>The path to store the object at.</p></td>
+          <td><p>The path to store the entity at.</p></td>
           <td>
               <em>required</em>
           </td>
@@ -1342,7 +1342,7 @@ The tip is rendered as a cone with <code>height = 2.0 * width_scale</code> and <
           <td>
                 <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></code>
           </td>
-          <td><p>Object is not time-dependent, and will be visible at any time point.</p></td>
+          <td><p>The entity is not time-dependent, and will be visible at any time point.</p></td>
           <td>
                 <code>False</code>
           </td>
