@@ -1,38 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1675108800918,
+  "lastUpdate": 1675127370303,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
-      {
-        "commit": {
-          "author": {
-            "email": "cr.rey.clement@gmail.com",
-            "name": "Clement Rey",
-            "username": "teh-cmc"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "fad2d296713ffb5bae4792ba37a69c7dafc0a567",
-          "message": "we got spawn_and_connect now! (#943)",
-          "timestamp": "2023-01-27T08:20:30+01:00",
-          "tree_id": "c18f69988693e920a18e2aeffbb58b547dc85fca",
-          "url": "https://github.com/rerun-io/rerun/commit/fad2d296713ffb5bae4792ba37a69c7dafc0a567"
-        },
-        "date": 1674804162080,
-        "tool": "cargo",
-        "benches": [
-          {
-            "name": "datastore/insert/batch/rects/insert",
-            "value": 567472,
-            "range": "± 1750",
-            "unit": "ns/iter"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -4469,6 +4439,174 @@ window.BENCHMARK_DATA = {
             "name": "arrow_batch_points/query",
             "value": 16692,
             "range": "± 84",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "tuid/Tuid::random",
+            "value": 37,
+            "range": "± 0",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "jeremy@rerun.io",
+            "name": "Jeremy Leibs",
+            "username": "jleibs"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "7cb752f2fdb7bc2a718241d94e0ba2743d9bdbc6",
+          "message": "Update readme and remove the docs in favor of dedicated repo (#995)\n\n* Update README.md\r\n* Remove the docs folder",
+          "timestamp": "2023-01-31T02:01:10+01:00",
+          "tree_id": "af896af43e8cf24d6d6245ae2ebf5c8e4055f0f6",
+          "url": "https://github.com/rerun-io/rerun/commit/7cb752f2fdb7bc2a718241d94e0ba2743d9bdbc6"
+        },
+        "date": 1675127369280,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/insert/batch/rects/insert",
+            "value": 581449,
+            "range": "± 2439",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/latest_at/batch/rects/query",
+            "value": 1801,
+            "range": "± 3",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/latest_at/missing_components/primary",
+            "value": 305,
+            "range": "± 0",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/latest_at/missing_components/secondaries",
+            "value": 376,
+            "range": "± 0",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/range/batch/rects/query",
+            "value": 154048,
+            "range": "± 325",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/generate_message_bundles",
+            "value": 47014339,
+            "range": "± 734333",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/generate_messages",
+            "value": 123542395,
+            "range": "± 993753",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/encode_log_msg",
+            "value": 153409799,
+            "range": "± 869287",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/encode_total",
+            "value": 323901499,
+            "range": "± 1356017",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/decode_log_msg",
+            "value": 177898728,
+            "range": "± 686213",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/decode_message_bundles",
+            "value": 64503501,
+            "range": "± 932906",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/decode_total",
+            "value": 238350481,
+            "range": "± 1305380",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/generate_message_bundles",
+            "value": 325494,
+            "range": "± 546",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/generate_messages",
+            "value": 6145,
+            "range": "± 18",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/encode_log_msg",
+            "value": 347765,
+            "range": "± 1413",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/encode_total",
+            "value": 702407,
+            "range": "± 2910",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/decode_log_msg",
+            "value": 328905,
+            "range": "± 1065",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/decode_message_bundles",
+            "value": 2112,
+            "range": "± 9",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/decode_total",
+            "value": 326589,
+            "range": "± 1088",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_mono_points/insert",
+            "value": 5984786558,
+            "range": "± 11438961",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_mono_points/query",
+            "value": 1593619,
+            "range": "± 9340",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_batch_points/insert",
+            "value": 2664687,
+            "range": "± 23437",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_batch_points/query",
+            "value": 16639,
+            "range": "± 56",
             "unit": "ns/iter"
           },
           {
