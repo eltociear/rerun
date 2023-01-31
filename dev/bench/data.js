@@ -1,38 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1675181170448,
+  "lastUpdate": 1675182585588,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
-      {
-        "commit": {
-          "author": {
-            "email": "emil@rerun.io",
-            "name": "Emil Ernerfeldt",
-            "username": "emilk"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "c7f10b848810d227c7613a74d52e60a773448005",
-          "message": "Improve the blueprint tree looks (#938)\n\n* Improve the blueprint tree looks\r\n\r\n* Disabled and invisible rows are now dimmer\r\n* Only show visibility button on hover\r\n* Switch visibility button to a toggle-switch\r\n\r\n* Add icon infront of data blueprints too for consistency\r\n\r\n* fix TODO formatting\r\n\r\n* lint.py: Ignore the rust analyzer target directory\r\n\r\n* Get Response back\r\n\r\nCo-authored-by: Clement Rey <cr.rey.clement@gmail.com>",
-          "timestamp": "2023-01-27T13:50:40+01:00",
-          "tree_id": "082c2adcab39a242940a23e566d4d6974e9988fd",
-          "url": "https://github.com/rerun-io/rerun/commit/c7f10b848810d227c7613a74d52e60a773448005"
-        },
-        "date": 1674823966937,
-        "tool": "cargo",
-        "benches": [
-          {
-            "name": "datastore/insert/batch/rects/insert",
-            "value": 562232,
-            "range": "± 3746",
-            "unit": "ns/iter"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -5435,6 +5405,174 @@ window.BENCHMARK_DATA = {
             "name": "arrow_batch_points/query",
             "value": 17475,
             "range": "± 83",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "tuid/Tuid::random",
+            "value": 34,
+            "range": "± 0",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "niko@grapic.co",
+            "name": "Nikolaus West",
+            "username": "nikolausWest"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "feb84117608f1e119ec094cd21a94a39c1d6e88c",
+          "message": "Improve colmap example (#1008)\n\n* Fix identifiers handling in log_points\r\n\r\n* Log both keypoints so they match 3D points",
+          "timestamp": "2023-01-31T17:21:35+01:00",
+          "tree_id": "70e92dcd2dc0856b741b29929cbc398dbb95c426",
+          "url": "https://github.com/rerun-io/rerun/commit/feb84117608f1e119ec094cd21a94a39c1d6e88c"
+        },
+        "date": 1675182583436,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/insert/batch/rects/insert",
+            "value": 571674,
+            "range": "± 37323",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/latest_at/batch/rects/query",
+            "value": 1774,
+            "range": "± 2",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/latest_at/missing_components/primary",
+            "value": 307,
+            "range": "± 1",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/latest_at/missing_components/secondaries",
+            "value": 378,
+            "range": "± 0",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/range/batch/rects/query",
+            "value": 154739,
+            "range": "± 202",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/generate_message_bundles",
+            "value": 47423425,
+            "range": "± 918652",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/generate_messages",
+            "value": 126962134,
+            "range": "± 1192567",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/encode_log_msg",
+            "value": 154031797,
+            "range": "± 898426",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/encode_total",
+            "value": 329504338,
+            "range": "± 1753180",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/decode_log_msg",
+            "value": 176078600,
+            "range": "± 907339",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/decode_message_bundles",
+            "value": 63967440,
+            "range": "± 808578",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/decode_total",
+            "value": 239697032,
+            "range": "± 1516538",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/generate_message_bundles",
+            "value": 326200,
+            "range": "± 978",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/generate_messages",
+            "value": 6274,
+            "range": "± 19",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/encode_log_msg",
+            "value": 364527,
+            "range": "± 1312",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/encode_total",
+            "value": 726720,
+            "range": "± 2292",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/decode_log_msg",
+            "value": 346736,
+            "range": "± 1229",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/decode_message_bundles",
+            "value": 2129,
+            "range": "± 10",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/decode_total",
+            "value": 354977,
+            "range": "± 1242",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_mono_points/insert",
+            "value": 5995010828,
+            "range": "± 10361276",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_mono_points/query",
+            "value": 1721015,
+            "range": "± 16378",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_batch_points/insert",
+            "value": 2643982,
+            "range": "± 13846",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_batch_points/query",
+            "value": 17238,
+            "range": "± 53",
             "unit": "ns/iter"
           },
           {
