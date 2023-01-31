@@ -87,7 +87,9 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="../.." title="Rerun Python APIs" class="md-header__button md-logo" aria-label="Rerun Python APIs" data-md-component="logo">
       
@@ -165,14 +167,8 @@
     
   </nav>
   
-</header>
     
-    <div class="md-container" data-md-component="container">
       
-      
-        
-          
-            
 <nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
   <div class="md-tabs__inner md-grid">
     <ul class="md-tabs__list">
@@ -226,7 +222,13 @@
     </ul>
   </div>
 </nav>
-          
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
         
       
       <main class="md-main" data-md-component="main">
@@ -288,6 +290,8 @@
         
           
             
+          
+        
           
         
           
@@ -416,6 +420,20 @@
     <li class="md-nav__item">
       <a href="../images/" class="md-nav__link">
         Logging Images
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../annotation/" class="md-nav__link">
+        Annotations
       </a>
     </li>
   
@@ -1282,13 +1300,21 @@ and another doing camera calibration, you could have
               <em>required</em>
           </td>
         </tr>
+        <tr>
+          <td><code>spawn_and_connect</code></td>
+          <td>
+                <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></code>
+          </td>
+          <td><p>Spawn a Rerun Viewer and stream logging data to it.
+Short for calling <code>spawn_and_connect</code> separately.
+If you don't call this, log events will be buffered indefinitely until
+you call either <code>connect</code>, <code>show</code>, or <code>save</code></p></td>
+          <td>
+                <code>False</code>
+          </td>
+        </tr>
     </tbody>
   </table>
-      <p>spawn_and_connect : bool
-    Spawn a Rerun Viewer and stream logging data to it.
-    Short for calling <code>spawn_and_connect</code> separately.
-    If you don't call this, log events will be buffered indefinitely until
-    you call either <code>connect</code>, <code>show</code>, or <code>save</code></p>
 
   </div>
 
@@ -1315,6 +1341,30 @@ processes to log to the same Rerun instance (and be part of the same recording),
 you will need to manually assign them all the same recording_id.
 Any random UUIDv4 will work, or copy the recording id for the parent process.</p>
 
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>value</code></td>
+          <td>
+                <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
+          </td>
+          <td><p>The recording ID to use for this process.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
   </div>
 
 </div>
@@ -1333,6 +1383,30 @@ Any random UUIDv4 will work, or copy the recording id for the parent process.</p
   
       <p>Connect to a remote Rerun Viewer on the given ip:port.</p>
 <p>Requires that you first start a Rerun Viewer, e.g. with 'python -m rerun'</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>addr</code></td>
+          <td>
+                <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
+          </td>
+          <td><p>The ip:port to connect to</p></td>
+          <td>
+                <code>None</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
 
   </div>
 
@@ -1353,7 +1427,34 @@ Any random UUIDv4 will work, or copy the recording id for the parent process.</p
       <p>Spawn a Rerun Viewer and stream logging data to it.</p>
 <p>This is often the easiest and best way to use Rerun.
 Just call this once at the start of your program.</p>
-<p>See also: rerun.connect</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>port</code></td>
+          <td>
+                <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
+          </td>
+          <td><p>The port to connect to</p></td>
+          <td>
+                <code>9876</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+      <h5 id="rerun.spawn_and_connect--see-also">See Also</h5>
+<ul>
+<li><a class="autorefs autorefs-internal" href="../../package/rerun/__init__/#rerun.connect">rerun.connect</a></li>
+</ul>
 
   </div>
 
@@ -1395,7 +1496,7 @@ Just call this once at the start of your program.</p>
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.instant", "navigation.indexes", "navigation.tracking", "navigation.expand"], "search": "../../assets/javascripts/workers/search.db81ec45.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.expand", "navigation.indexes", "navigation.instant", "navigation.tabs", "navigation.tabs.sticky", "navigation.tracking"], "search": "../../assets/javascripts/workers/search.db81ec45.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.a00a7c5e.min.js"></script>

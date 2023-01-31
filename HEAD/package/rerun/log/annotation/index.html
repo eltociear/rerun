@@ -87,7 +87,9 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="../../../.." title="Rerun Python APIs" class="md-header__button md-logo" aria-label="Rerun Python APIs" data-md-component="logo">
       
@@ -165,14 +167,8 @@
     
   </nav>
   
-</header>
     
-    <div class="md-container" data-md-component="container">
       
-      
-        
-          
-            
 <nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
   <div class="md-tabs__inner md-grid">
     <ul class="md-tabs__list">
@@ -226,7 +222,13 @@
     </ul>
   </div>
 </nav>
-          
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
         
       
       <main class="md-main" data-md-component="main">
@@ -300,6 +302,8 @@
         
           
         
+          
+        
       
       
         
@@ -358,6 +362,20 @@
     <li class="md-nav__item">
       <a href="../../../../common/images/" class="md-nav__link">
         Logging Images
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../common/annotation/" class="md-nav__link">
+        Annotations
       </a>
     </li>
   
@@ -925,6 +943,20 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#rerun.log.annotation.AnnotationInfoLike" class="md-nav__link">
+    AnnotationInfoLike
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rerun.log.annotation.ClassDescriptionLike" class="md-nav__link">
+    ClassDescriptionLike
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#rerun.log.annotation.AnnotationInfo" class="md-nav__link">
     AnnotationInfo
   </a>
@@ -1209,6 +1241,20 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#rerun.log.annotation.AnnotationInfoLike" class="md-nav__link">
+    AnnotationInfoLike
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rerun.log.annotation.ClassDescriptionLike" class="md-nav__link">
+    ClassDescriptionLike
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#rerun.log.annotation.AnnotationInfo" class="md-nav__link">
     AnnotationInfo
   </a>
@@ -1274,14 +1320,56 @@
 
 
 
+<div class="doc doc-object doc-attribute">
+
+
+
+<h4 id="rerun.log.annotation.AnnotationInfoLike" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">AnnotationInfoLike</span> <span class="o">=</span> <span class="n">Union</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">Color</span><span class="p">],</span> <span class="n">AnnotationInfo</span><span class="p">]</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-module-attribute"><code>module-attribute</code></small>
+  </span>
+
+</h4>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Type helper representing the different ways to specify an <a class="autorefs autorefs-internal" href="#rerun.log.annotation.AnnotationInfo">AnnotationInfo</a></p>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h4 id="rerun.log.annotation.ClassDescriptionLike" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">ClassDescriptionLike</span> <span class="o">=</span> <span class="n">Union</span><span class="p">[</span><span class="n">AnnotationInfoLike</span><span class="p">,</span> <span class="n">ClassDescription</span><span class="p">]</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-module-attribute"><code>module-attribute</code></small>
+  </span>
+
+</h4>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Type helper representing the different ways to specify a <a class="autorefs autorefs-internal" href="#rerun.log.annotation.ClassDescription">ClassDescription</a></p>
+  </div>
+
+</div>
+
+
 
 <div class="doc doc-object doc-class">
 
 
 
 <h4 id="rerun.log.annotation.AnnotationInfo" class="doc doc-heading">
-        <code>AnnotationInfo</code>
-
+<code class="highlight language-python"><span class="k">class</span> <span class="nc">AnnotationInfo</span></code>
   
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-dataclass"><code>dataclass</code></small>
@@ -1309,6 +1397,69 @@ The id refers either to a class or key-point id</p>
 
 
 
+<div class="doc doc-object doc-attribute">
+
+
+
+<h5 id="rerun.log.annotation.AnnotationInfo.id" class="doc doc-heading">
+<code class="highlight language-python"><span class="nb">id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
+  </span>
+
+</h5>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>The id of the class or key-point to annotate</p>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h5 id="rerun.log.annotation.AnnotationInfo.label" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">label</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
+  </span>
+
+</h5>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>The label that will be shown in the UI</p>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h5 id="rerun.log.annotation.AnnotationInfo.color" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">color</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Color</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
+  </span>
+
+</h5>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>The color that will be applied to the annotated entity</p>
+  </div>
+
+</div>
+
 
 
 
@@ -1319,13 +1470,13 @@ The id refers either to a class or key-point id</p>
 
 </div>
 
+
 <div class="doc doc-object doc-class">
 
 
 
 <h4 id="rerun.log.annotation.ClassDescription" class="doc doc-heading">
-        <code>ClassDescription</code>
-
+<code class="highlight language-python"><span class="k">class</span> <span class="nc">ClassDescription</span></code>
   
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-dataclass"><code>dataclass</code></small>
@@ -1354,6 +1505,69 @@ Keypoints in turn may be connected to each other by connections (typically used 
 
 
 
+<div class="doc doc-object doc-attribute">
+
+
+
+<h5 id="rerun.log.annotation.ClassDescription.info" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">info</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">AnnotationInfoLike</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
+  </span>
+
+</h5>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>The annotation info for the class</p>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h5 id="rerun.log.annotation.ClassDescription.keypoint_annotations" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">keypoint_annotations</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Iterable</span><span class="p">[</span><span class="n">AnnotationInfoLike</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
+  </span>
+
+</h5>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>The annotation infos for the all key-points</p>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h5 id="rerun.log.annotation.ClassDescription.keypoint_connections" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">keypoint_connections</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Iterable</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]]]</span> <span class="o">=</span> <span class="kc">None</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
+  </span>
+
+</h5>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>The connections between key-points</p>
+  </div>
+
+</div>
+
 
 
 
@@ -1377,15 +1591,15 @@ Keypoints in turn may be connected to each other by connections (typically used 
 
   <div class="doc doc-contents ">
   
-      <p>Log an annotation context made up of a collection of ClassDescriptions.</p>
+      <p>Log an annotation context made up of a collection of <a class="autorefs autorefs-internal" href="#rerun.log.annotation.ClassDescription">ClassDescription</a>s.</p>
 <p>Any entity needing to access the annotation context will find it by searching the
 path upward. If all entities share the same you can simply log it to the
 root ("/"), or if you want a per-entity ClassDescriptions log it to the same path as
 your entity.</p>
-<p>Each ClassDescription must include an annotation info with an id, which will be used for matching
-the class and may optionally include a label and color. Colors should
-either be in 0-255 gamma space or in 0-1 linear space. Colors can be RGB or
-RGBA.</p>
+<p>Each ClassDescription must include an annotation info with an id, which will
+be used for matching the class and may optionally include a label and color.
+Colors should either be in 0-255 gamma space or in 0-1 linear space. Colors
+can be RGB or RGBA.</p>
 <p>These can either be specified verbosely as:</p>
 <pre><code>[AnnotationInfo(id=23, label='foo', color=(255, 0, 0)), ...]
 </code></pre>
@@ -1393,6 +1607,50 @@ RGBA.</p>
 <pre><code>[(23, 'bar'), ...]
 </code></pre>
 <p>Unspecified colors will be filled in by the visualizer randomly.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>entity_path</code></td>
+          <td>
+                <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
+          </td>
+          <td><p>The path to the annotation context in the space hierarchy.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>class_descriptions</code></td>
+          <td>
+                <code><a class="autorefs autorefs-external" title="typing.Union" href="https://docs.python.org/3/library/typing.html#typing.Union">Union</a>[<a class="autorefs autorefs-internal" title="rerun.log.annotation.ClassDescriptionLike" href="#rerun.log.annotation.ClassDescriptionLike">ClassDescriptionLike</a>, <a class="autorefs autorefs-external" title="typing.Iterable" href="https://docs.python.org/3/library/typing.html#typing.Iterable">Iterable</a>[<a class="autorefs autorefs-internal" title="rerun.log.annotation.ClassDescriptionLike" href="#rerun.log.annotation.ClassDescriptionLike">ClassDescriptionLike</a>]]</code>
+          </td>
+          <td><p>A single ClassDescription or a collection of ClassDescriptions.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>timeless</code></td>
+          <td>
+                <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></code>
+          </td>
+          <td><p>If true, the annotation context will be timeless (default: True).</p></td>
+          <td>
+                <code>True</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
 
   </div>
 
@@ -1442,7 +1700,7 @@ RGBA.</p>
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.tabs", "navigation.instant", "navigation.indexes", "navigation.tracking", "navigation.expand"], "search": "../../../../assets/javascripts/workers/search.db81ec45.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.expand", "navigation.indexes", "navigation.instant", "navigation.tabs", "navigation.tabs.sticky", "navigation.tracking"], "search": "../../../../assets/javascripts/workers/search.db81ec45.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
     
     
       <script src="../../../../assets/javascripts/bundle.a00a7c5e.min.js"></script>

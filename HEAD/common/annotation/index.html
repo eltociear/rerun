@@ -9,24 +9,24 @@
       
       
       
-        <link rel="prev" href="../linestrip/">
+        <link rel="prev" href="../images/">
       
       
-        <link rel="next" href="../quaternion/">
+        <link rel="next" href="../plotting/">
       
-      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.9">
     
     
       
-        <title>point.py - Rerun Python APIs</title>
+        <title>Annotations - Rerun Python APIs</title>
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.0d440cfe.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.0d440cfe.min.css">
       
         
-        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.2505c338.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.2505c338.min.css">
       
       
 
@@ -42,11 +42,11 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/_mkdocstrings.css">
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
     
-      <link rel="stylesheet" href="../../../../css/mkdocstrings.css">
+      <link rel="stylesheet" href="../../css/mkdocstrings.css">
     
-    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -71,7 +71,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#rerun.components.point" class="md-skip">
+        <a href="#rerun.log_annotation_context" class="md-skip">
           Skip to content
         </a>
       
@@ -91,7 +91,7 @@
 
 <header class="md-header md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../../.." title="Rerun Python APIs" class="md-header__button md-logo" aria-label="Rerun Python APIs" data-md-component="logo">
+    <a href="../.." title="Rerun Python APIs" class="md-header__button md-logo" aria-label="Rerun Python APIs" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -110,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              point.py
+              Annotations
             
           </span>
         </div>
@@ -176,13 +176,15 @@
         
   
   
+    
+  
 
 
   
   
   
     <li class="md-tabs__item">
-      <a href="../../../../common/" class="md-tabs__link">
+      <a href="../" class="md-tabs__link md-tabs__link--active">
         Common APIs
       </a>
     </li>
@@ -192,15 +194,13 @@
         
   
   
-    
-  
 
 
   
   
   
     <li class="md-tabs__item">
-      <a href="../../../" class="md-tabs__link md-tabs__link--active">
+      <a href="../../package/" class="md-tabs__link">
         Package Listing
       </a>
     </li>
@@ -213,7 +213,7 @@
 
 
   <li class="md-tabs__item">
-    <a href="../../../../docs/" class="md-tabs__link">
+    <a href="../../docs/" class="md-tabs__link">
       Writing Docs
     </a>
   </li>
@@ -246,7 +246,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../../.." title="Rerun Python APIs" class="md-nav__button md-logo" aria-label="Rerun Python APIs" data-md-component="logo">
+    <a href="../.." title="Rerun Python APIs" class="md-nav__button md-logo" aria-label="Rerun Python APIs" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -275,16 +275,16 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-        
-      
-      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
       
       
         
@@ -309,7 +309,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../../../common/">Common APIs</a>
+          <a href="../">Common APIs</a>
           
             <label for="__nav_1">
               <span class="md-nav__icon md-icon"></span>
@@ -317,7 +317,7 @@
           
         </div>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_1">
           <span class="md-nav__icon md-icon"></span>
           Common APIs
@@ -332,7 +332,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../common/initialization/" class="md-nav__link">
+      <a href="../initialization/" class="md-nav__link">
         Initialization
       </a>
     </li>
@@ -346,7 +346,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../common/primitives/" class="md-nav__link">
+      <a href="../primitives/" class="md-nav__link">
         Logging Primitives
       </a>
     </li>
@@ -360,7 +360,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../common/images/" class="md-nav__link">
+      <a href="../images/" class="md-nav__link">
         Logging Images
       </a>
     </li>
@@ -372,11 +372,48 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../../../../common/annotation/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Annotations
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Annotations
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#rerun.log_annotation_context" class="md-nav__link">
+    log_annotation_context()
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -388,7 +425,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../common/plotting/" class="md-nav__link">
+      <a href="../plotting/" class="md-nav__link">
         Plotting
       </a>
     </li>
@@ -402,7 +439,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../common/transforms/" class="md-nav__link">
+      <a href="../transforms/" class="md-nav__link">
         Transforms
       </a>
     </li>
@@ -422,16 +459,16 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
       
       
         
@@ -446,7 +483,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../../">Package Listing</a>
+          <a href="../../package/">Package Listing</a>
           
             <label for="__nav_2">
               <span class="md-nav__icon md-icon"></span>
@@ -454,7 +491,7 @@
           
         </div>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_2">
           <span class="md-nav__icon md-icon"></span>
           Package Listing
@@ -467,16 +504,16 @@
               
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2" >
       
       
         
@@ -495,7 +532,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_2_2">
           <span class="md-nav__icon md-icon"></span>
           rerun/
@@ -508,7 +545,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../__init__/" class="md-nav__link">
+      <a href="../../package/rerun/__init__/" class="md-nav__link">
         __init__.py
       </a>
     </li>
@@ -522,7 +559,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../color_conversion/" class="md-nav__link">
+      <a href="../../package/rerun/color_conversion/" class="md-nav__link">
         color_conversion.py
       </a>
     </li>
@@ -534,16 +571,16 @@
               
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_3" checked>
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2_3" >
       
       
         
@@ -586,7 +623,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_3_label" aria-expanded="true">
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_3_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_2_2_3">
           <span class="md-nav__icon md-icon"></span>
           components/
@@ -599,7 +636,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../__init__/" class="md-nav__link">
+      <a href="../../package/rerun/components/__init__/" class="md-nav__link">
         __init__.py
       </a>
     </li>
@@ -613,7 +650,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../annotation/" class="md-nav__link">
+      <a href="../../package/rerun/components/annotation/" class="md-nav__link">
         annotation.py
       </a>
     </li>
@@ -627,7 +664,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../arrow/" class="md-nav__link">
+      <a href="../../package/rerun/components/arrow/" class="md-nav__link">
         arrow.py
       </a>
     </li>
@@ -641,7 +678,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../box/" class="md-nav__link">
+      <a href="../../package/rerun/components/box/" class="md-nav__link">
         box.py
       </a>
     </li>
@@ -655,7 +692,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../color/" class="md-nav__link">
+      <a href="../../package/rerun/components/color/" class="md-nav__link">
         color.py
       </a>
     </li>
@@ -669,7 +706,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../instance/" class="md-nav__link">
+      <a href="../../package/rerun/components/instance/" class="md-nav__link">
         instance.py
       </a>
     </li>
@@ -683,7 +720,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../label/" class="md-nav__link">
+      <a href="../../package/rerun/components/label/" class="md-nav__link">
         label.py
       </a>
     </li>
@@ -697,7 +734,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../linestrip/" class="md-nav__link">
+      <a href="../../package/rerun/components/linestrip/" class="md-nav__link">
         linestrip.py
       </a>
     </li>
@@ -709,68 +746,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          point.py
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../package/rerun/components/point/" class="md-nav__link">
         point.py
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#rerun.components.point" class="md-nav__link">
-    point
-  </a>
-  
-    <nav class="md-nav" aria-label="point">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#rerun.components.point.Point2DArray" class="md-nav__link">
-    Point2DArray
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#rerun.components.point.Point3DArray" class="md-nav__link">
-    Point3DArray
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -782,7 +762,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../quaternion/" class="md-nav__link">
+      <a href="../../package/rerun/components/quaternion/" class="md-nav__link">
         quaternion.py
       </a>
     </li>
@@ -796,7 +776,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../radius/" class="md-nav__link">
+      <a href="../../package/rerun/components/radius/" class="md-nav__link">
         radius.py
       </a>
     </li>
@@ -810,7 +790,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../rect2d/" class="md-nav__link">
+      <a href="../../package/rerun/components/rect2d/" class="md-nav__link">
         rect2d.py
       </a>
     </li>
@@ -824,7 +804,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../scalar/" class="md-nav__link">
+      <a href="../../package/rerun/components/scalar/" class="md-nav__link">
         scalar.py
       </a>
     </li>
@@ -838,7 +818,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tensor/" class="md-nav__link">
+      <a href="../../package/rerun/components/tensor/" class="md-nav__link">
         tensor.py
       </a>
     </li>
@@ -852,7 +832,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../text_entry/" class="md-nav__link">
+      <a href="../../package/rerun/components/text_entry/" class="md-nav__link">
         text_entry.py
       </a>
     </li>
@@ -866,7 +846,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../vec/" class="md-nav__link">
+      <a href="../../package/rerun/components/vec/" class="md-nav__link">
         vec.py
       </a>
     </li>
@@ -948,7 +928,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../log/__init__/" class="md-nav__link">
+      <a href="../../package/rerun/log/__init__/" class="md-nav__link">
         __init__.py
       </a>
     </li>
@@ -962,7 +942,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../log/annotation/" class="md-nav__link">
+      <a href="../../package/rerun/log/annotation/" class="md-nav__link">
         annotation.py
       </a>
     </li>
@@ -976,7 +956,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../log/arrow/" class="md-nav__link">
+      <a href="../../package/rerun/log/arrow/" class="md-nav__link">
         arrow.py
       </a>
     </li>
@@ -990,7 +970,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../log/bounding_box/" class="md-nav__link">
+      <a href="../../package/rerun/log/bounding_box/" class="md-nav__link">
         bounding_box.py
       </a>
     </li>
@@ -1004,7 +984,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../log/camera/" class="md-nav__link">
+      <a href="../../package/rerun/log/camera/" class="md-nav__link">
         camera.py
       </a>
     </li>
@@ -1018,7 +998,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../log/error_utils/" class="md-nav__link">
+      <a href="../../package/rerun/log/error_utils/" class="md-nav__link">
         error_utils.py
       </a>
     </li>
@@ -1032,7 +1012,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../log/file/" class="md-nav__link">
+      <a href="../../package/rerun/log/file/" class="md-nav__link">
         file.py
       </a>
     </li>
@@ -1046,7 +1026,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../log/image/" class="md-nav__link">
+      <a href="../../package/rerun/log/image/" class="md-nav__link">
         image.py
       </a>
     </li>
@@ -1060,7 +1040,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../log/lines/" class="md-nav__link">
+      <a href="../../package/rerun/log/lines/" class="md-nav__link">
         lines.py
       </a>
     </li>
@@ -1074,7 +1054,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../log/points/" class="md-nav__link">
+      <a href="../../package/rerun/log/points/" class="md-nav__link">
         points.py
       </a>
     </li>
@@ -1088,7 +1068,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../log/rects/" class="md-nav__link">
+      <a href="../../package/rerun/log/rects/" class="md-nav__link">
         rects.py
       </a>
     </li>
@@ -1102,7 +1082,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../log/scalar/" class="md-nav__link">
+      <a href="../../package/rerun/log/scalar/" class="md-nav__link">
         scalar.py
       </a>
     </li>
@@ -1116,7 +1096,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../log/tensor/" class="md-nav__link">
+      <a href="../../package/rerun/log/tensor/" class="md-nav__link">
         tensor.py
       </a>
     </li>
@@ -1130,7 +1110,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../log/text/" class="md-nav__link">
+      <a href="../../package/rerun/log/text/" class="md-nav__link">
         text.py
       </a>
     </li>
@@ -1144,7 +1124,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../log/transform/" class="md-nav__link">
+      <a href="../../package/rerun/log/transform/" class="md-nav__link">
         transform.py
       </a>
     </li>
@@ -1180,7 +1160,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../docs/" class="md-nav__link">
+      <a href="../../docs/" class="md-nav__link">
         Writing Docs
       </a>
     </li>
@@ -1212,29 +1192,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#rerun.components.point" class="md-nav__link">
-    point
+  <a href="#rerun.log_annotation_context" class="md-nav__link">
+    log_annotation_context()
   </a>
-  
-    <nav class="md-nav" aria-label="point">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#rerun.components.point.Point2DArray" class="md-nav__link">
-    Point2DArray
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#rerun.components.point.Point3DArray" class="md-nav__link">
-    Point3DArray
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -1252,149 +1212,85 @@
                 
                   
 
-
-
-  <h1>point.py</h1>
-
-<div class="doc doc-object doc-module">
+  
+  
 
 
 
-<h3 id="rerun.components.point" class="doc doc-heading">
-          <code>rerun.components.point</code>
+  <h1>Annotations</h1>
 
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="rerun.log_annotation_context" class="doc doc-heading">
+<code class="highlight language-python"><span class="k">def</span> <span class="nf">rerun</span><span class="o">.</span><span class="n">log_annotation_context</span><span class="p">(</span><span class="n">entity_path</span><span class="p">,</span> <span class="n">class_descriptions</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code>
 
 </h3>
 
-  <div class="doc doc-contents first">
-
-  
-
-  <div class="doc doc-children">
-
-
-
-
-
-
-
-
-
-<div class="doc doc-object doc-class">
-
-
-
-<h4 id="rerun.components.point.Point2DArray" class="doc doc-heading">
-<code class="highlight language-python"><span class="k">class</span> <span class="nc">Point2DArray</span></code>
-
-</h4>
-
-
-  <div class="doc doc-contents ">
-      <p class="doc doc-class-bases">
-        Bases: <code><span title="pyarrow">pa</span>.<span title="pyarrow.ExtensionArray">ExtensionArray</span></code></p>
-
-
-
-
-  
-
-  <div class="doc doc-children">
-
-
-
-
-
-
-
-
-
-<div class="doc doc-object doc-function">
-
-
-
-<h5 id="rerun.components.point.Point2DArray.from_numpy" class="doc doc-heading">
-<code class="highlight language-python"><span class="k">def</span> <span class="nf">from_numpy</span><span class="p">(</span><span class="n">array</span><span class="p">)</span></code>
-
-</h5>
-
 
   <div class="doc doc-contents ">
   
-      <p>Build a <code>Point2DArray</code> from an Nx2 numpy array.</p>
+      <p>Log an annotation context made up of a collection of <a class="autorefs autorefs-internal" href="../../package/rerun/log/annotation/#rerun.log.annotation.ClassDescription">ClassDescription</a>s.</p>
+<p>Any entity needing to access the annotation context will find it by searching the
+path upward. If all entities share the same you can simply log it to the
+root ("/"), or if you want a per-entity ClassDescriptions log it to the same path as
+your entity.</p>
+<p>Each ClassDescription must include an annotation info with an id, which will
+be used for matching the class and may optionally include a label and color.
+Colors should either be in 0-255 gamma space or in 0-1 linear space. Colors
+can be RGB or RGBA.</p>
+<p>These can either be specified verbosely as:</p>
+<pre><code>[AnnotationInfo(id=23, label='foo', color=(255, 0, 0)), ...]
+</code></pre>
+<p>Or using short-hand tuples.</p>
+<pre><code>[(23, 'bar'), ...]
+</code></pre>
+<p>Unspecified colors will be filled in by the visualizer randomly.</p>
 
-  </div>
-
-</div>
-
-
-
-  </div>
-
-  </div>
-
-</div>
-
-
-<div class="doc doc-object doc-class">
-
-
-
-<h4 id="rerun.components.point.Point3DArray" class="doc doc-heading">
-<code class="highlight language-python"><span class="k">class</span> <span class="nc">Point3DArray</span></code>
-
-</h4>
-
-
-  <div class="doc doc-contents ">
-      <p class="doc doc-class-bases">
-        Bases: <code><span title="pyarrow">pa</span>.<span title="pyarrow.ExtensionArray">ExtensionArray</span></code></p>
-
-
-
-
-  
-
-  <div class="doc doc-children">
-
-
-
-
-
-
-
-
-
-<div class="doc doc-object doc-function">
-
-
-
-<h5 id="rerun.components.point.Point3DArray.from_numpy" class="doc doc-heading">
-<code class="highlight language-python"><span class="k">def</span> <span class="nf">from_numpy</span><span class="p">(</span><span class="n">array</span><span class="p">)</span></code>
-
-</h5>
-
-
-  <div class="doc doc-contents ">
-  
-      <p>Build a <code>Point3DArray</code> from an Nx3 numpy array.</p>
-
-  </div>
-
-</div>
-
-
-
-  </div>
-
-  </div>
-
-</div>
-
-
-
-
-  </div>
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>entity_path</code></td>
+          <td>
+                <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
+          </td>
+          <td><p>The path to the annotation context in the space hierarchy.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>class_descriptions</code></td>
+          <td>
+                <code><a class="autorefs autorefs-external" title="typing.Union" href="https://docs.python.org/3/library/typing.html#typing.Union">Union</a>[<a class="autorefs autorefs-internal" title="rerun.log.annotation.ClassDescriptionLike" href="../../package/rerun/log/annotation/#rerun.log.annotation.ClassDescriptionLike">ClassDescriptionLike</a>, <a class="autorefs autorefs-external" title="typing.Iterable" href="https://docs.python.org/3/library/typing.html#typing.Iterable">Iterable</a>[<a class="autorefs autorefs-internal" title="rerun.log.annotation.ClassDescriptionLike" href="../../package/rerun/log/annotation/#rerun.log.annotation.ClassDescriptionLike">ClassDescriptionLike</a>]]</code>
+          </td>
+          <td><p>A single ClassDescription or a collection of ClassDescriptions.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>timeless</code></td>
+          <td>
+                <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></code>
+          </td>
+          <td><p>If true, the annotation context will be timeless (default: True).</p></td>
+          <td>
+                <code>True</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
 
   </div>
 
@@ -1436,10 +1332,10 @@
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.expand", "navigation.indexes", "navigation.instant", "navigation.tabs", "navigation.tabs.sticky", "navigation.tracking"], "search": "../../../../assets/javascripts/workers/search.db81ec45.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.expand", "navigation.indexes", "navigation.instant", "navigation.tabs", "navigation.tabs.sticky", "navigation.tracking"], "search": "../../assets/javascripts/workers/search.db81ec45.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.a00a7c5e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.a00a7c5e.min.js"></script>
       
     
   </body>

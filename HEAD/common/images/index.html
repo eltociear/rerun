@@ -12,7 +12,7 @@
         <link rel="prev" href="../primitives/">
       
       
-        <link rel="next" href="../plotting/">
+        <link rel="next" href="../annotation/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.9">
@@ -87,7 +87,9 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="../.." title="Rerun Python APIs" class="md-header__button md-logo" aria-label="Rerun Python APIs" data-md-component="logo">
       
@@ -165,14 +167,8 @@
     
   </nav>
   
-</header>
     
-    <div class="md-container" data-md-component="container">
       
-      
-        
-          
-            
 <nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
   <div class="md-tabs__inner md-grid">
     <ul class="md-tabs__list">
@@ -226,7 +222,13 @@
     </ul>
   </div>
 </nav>
-          
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
         
       
       <main class="md-main" data-md-component="main">
@@ -288,6 +290,8 @@
         
           
             
+          
+        
           
         
           
@@ -413,17 +417,24 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#rerun.log_annotation_context" class="md-nav__link">
-    log_annotation_context()
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
       
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../annotation/" class="md-nav__link">
+        Annotations
+      </a>
     </li>
   
 
@@ -1229,13 +1240,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#rerun.log_annotation_context" class="md-nav__link">
-    log_annotation_context()
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -1271,12 +1275,58 @@
   
       <p>Log a gray or color image.</p>
 <p>The image should either have 1, 3 or 4 channels (gray, RGB or RGBA).</p>
-<p>Supported <code>dtype</code>s:
-* uint8: color components should be in 0-255 sRGB gamma space, except for alpha which should be in 0-255 linear
-space.
-* uint16: color components should be in 0-65535 sRGB gamma space, except for alpha which should be in 0-65535
-linear space.
-* float32/float64: all color components should be in 0-1 linear space.</p>
+<h5 id="rerun.log_image--supported-dtypes">Supported dtypes</h5>
+<ul>
+<li>uint8: color components should be in 0-255 sRGB gamma space, except for alpha which should be in 0-255 linear
+space.</li>
+<li>uint16: color components should be in 0-65535 sRGB gamma space, except for alpha which should be in 0-65535
+linear space.</li>
+<li>float32, float64: all color components should be in 0-1 linear space.</li>
+</ul>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>entity_path</code></td>
+          <td>
+                <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
+          </td>
+          <td><p>Path to the image in the space hierarchy.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>image</code></td>
+          <td>
+                <code><a class="autorefs autorefs-internal" title="rerun.log.tensor.Tensor" href="../../package/rerun/log/tensor/#rerun.log.tensor.Tensor">Tensor</a></code>
+          </td>
+          <td><p>A <a class="autorefs autorefs-internal" href="../../package/rerun/log/tensor/#rerun.log.tensor.Tensor">Tensor</a> representing the image to log.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>timeless</code></td>
+          <td>
+                <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></code>
+          </td>
+          <td><p>If true, the image will be timeless (default: False).</p></td>
+          <td>
+                <code>False</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
 
   </div>
 
@@ -1297,6 +1347,60 @@ linear space.
       <p>Log the contents of an image file (only JPEGs supported for now).</p>
 <p>If no <code>img_format</code> is specified, we will try and guess it.</p>
 
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>entity_path</code></td>
+          <td>
+                <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
+          </td>
+          <td><p>Path to the image in the space hierarchy.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>img_path</code></td>
+          <td>
+                <code><a class="autorefs autorefs-external" title="pathlib.Path" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path">Path</a></code>
+          </td>
+          <td><p>Path to the image file.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>img_format</code></td>
+          <td>
+                <code><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a>[<a class="autorefs autorefs-internal" title="rerun.log.file.ImageFormat" href="../../package/rerun/log/file/#rerun.log.file.ImageFormat">ImageFormat</a>]</code>
+          </td>
+          <td><p>Format of the image file.</p></td>
+          <td>
+                <code>None</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>timeless</code></td>
+          <td>
+                <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></code>
+          </td>
+          <td><p>If true, the image will be timeless (default: False).</p></td>
+          <td>
+                <code>False</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
   </div>
 
 </div>
@@ -1314,10 +1418,65 @@ linear space.
   <div class="doc doc-contents ">
   
       <p>Log a depth image.</p>
-<p>The image must be a 2D array. Supported <code>dtype</code>:s are: uint8, uint16, float32, float64</p>
-<p>meter: How long is a meter in the given dtype?
-       For instance: with uint16, perhaps meter=1000 which would mean
-       you have millimeter precision and a range of up to ~65 meters (2^16 / 1000).</p>
+<p>The image must be a 2D array.</p>
+<h5 id="rerun.log_depth_image--supported-dtypes">Supported dtypes</h5>
+<p>uint8, uint16, float32, float64</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>entity_path</code></td>
+          <td>
+                <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
+          </td>
+          <td><p>Path to the image in the space hierarchy.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>image</code></td>
+          <td>
+                <code><a class="autorefs autorefs-internal" title="rerun.log.tensor.Tensor" href="../../package/rerun/log/tensor/#rerun.log.tensor.Tensor">Tensor</a></code>
+          </td>
+          <td><p>A <a class="autorefs autorefs-internal" href="../../package/rerun/log/tensor/#rerun.log.tensor.Tensor">Tensor</a> representing the depth image to log.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>meter</code></td>
+          <td>
+                <code><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a>[<a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a>]</code>
+          </td>
+          <td><p>How long is a meter in the given dtype?
+For instance: with uint16, perhaps meter=1000 which would mean
+you have millimeter precision and a range of up to ~65 meters (2^16 / 1000).</p></td>
+          <td>
+                <code>None</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>timeless</code></td>
+          <td>
+                <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></code>
+          </td>
+          <td><p>If true, the image will be timeless (default: False).</p></td>
+          <td>
+                <code>False</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
 
   </div>
 
@@ -1337,39 +1496,54 @@ linear space.
   
       <p>Log an image made up of integer class-ids.</p>
 <p>The image should have 1 channel, i.e. be either <code>H x W</code> or <code>H x W x 1</code>.</p>
+<p>See: <a class="autorefs autorefs-internal" href="../../package/rerun/__init__/#rerun.log_annotation_context">rerun.log_annotation_context</a> for information on how to map the class-ids to
+colors and labels.</p>
+<h5 id="rerun.log_segmentation_image--supported-dtypes">Supported dtypes</h5>
+<p>uint8, uint16</p>
 
-  </div>
-
-</div>
-
-<div class="doc doc-object doc-function">
-
-
-
-<h3 id="rerun.log_annotation_context" class="doc doc-heading">
-<code class="highlight language-python"><span class="k">def</span> <span class="nf">rerun</span><span class="o">.</span><span class="n">log_annotation_context</span><span class="p">(</span><span class="n">entity_path</span><span class="p">,</span> <span class="n">class_descriptions</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code>
-
-</h3>
-
-
-  <div class="doc doc-contents ">
-  
-      <p>Log an annotation context made up of a collection of ClassDescriptions.</p>
-<p>Any entity needing to access the annotation context will find it by searching the
-path upward. If all entities share the same you can simply log it to the
-root ("/"), or if you want a per-entity ClassDescriptions log it to the same path as
-your entity.</p>
-<p>Each ClassDescription must include an annotation info with an id, which will be used for matching
-the class and may optionally include a label and color. Colors should
-either be in 0-255 gamma space or in 0-1 linear space. Colors can be RGB or
-RGBA.</p>
-<p>These can either be specified verbosely as:</p>
-<pre><code>[AnnotationInfo(id=23, label='foo', color=(255, 0, 0)), ...]
-</code></pre>
-<p>Or using short-hand tuples.</p>
-<pre><code>[(23, 'bar'), ...]
-</code></pre>
-<p>Unspecified colors will be filled in by the visualizer randomly.</p>
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>entity_path</code></td>
+          <td>
+                <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
+          </td>
+          <td><p>Path to the image in the space hierarchy.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>image</code></td>
+          <td>
+                <code><a class="autorefs autorefs-external" title="numpy.typing" href="https://numpy.org/doc/stable/reference/typing.html#module-numpy.typing">npt</a>.<a class="autorefs autorefs-external" title="numpy.typing.ArrayLike" href="https://numpy.org/doc/stable/reference/typing.html#numpy.typing.ArrayLike">ArrayLike</a></code>
+          </td>
+          <td><p>A <a class="autorefs autorefs-internal" href="../../package/rerun/log/tensor/#rerun.log.tensor.Tensor">Tensor</a> representing the segmentation image to log.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>timeless</code></td>
+          <td>
+                <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></code>
+          </td>
+          <td><p>If true, the image will be timeless (default: False).</p></td>
+          <td>
+                <code>False</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
 
   </div>
 
@@ -1411,7 +1585,7 @@ RGBA.</p>
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.instant", "navigation.indexes", "navigation.tracking", "navigation.expand"], "search": "../../assets/javascripts/workers/search.db81ec45.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.expand", "navigation.indexes", "navigation.instant", "navigation.tabs", "navigation.tabs.sticky", "navigation.tracking"], "search": "../../assets/javascripts/workers/search.db81ec45.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.a00a7c5e.min.js"></script>
