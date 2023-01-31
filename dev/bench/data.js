@@ -1,38 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1675127370303,
+  "lastUpdate": 1675141135305,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
-      {
-        "commit": {
-          "author": {
-            "email": "emil@rerun.io",
-            "name": "Emil Ernerfeldt",
-            "username": "emilk"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "ae81c6a02f4a9a2e4b6e82aa7fb9f864c16c02c8",
-          "message": "Optimize texture padding (#932)\n\n* Add a couple of profiling scopes to the texture creation\r\n\r\n* Optimize texture padding\r\n\r\nCo-authored-by: Clement Rey <cr.rey.clement@gmail.com>",
-          "timestamp": "2023-01-27T08:40:04+01:00",
-          "tree_id": "eef0ee3fb76678b127ec85d4ec5d9423023e3e98",
-          "url": "https://github.com/rerun-io/rerun/commit/ae81c6a02f4a9a2e4b6e82aa7fb9f864c16c02c8"
-        },
-        "date": 1674805466717,
-        "tool": "cargo",
-        "benches": [
-          {
-            "name": "datastore/insert/batch/rects/insert",
-            "value": 566539,
-            "range": "± 2284",
-            "unit": "ns/iter"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -4612,6 +4582,174 @@ window.BENCHMARK_DATA = {
           {
             "name": "tuid/Tuid::random",
             "value": 37,
+            "range": "± 0",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "emil@rerun.io",
+            "name": "Emil Ernerfeldt",
+            "username": "emilk"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "52c752aa7a4318f9c8f3c2989293ffb187c40a53",
+          "message": "Update to Rust 1.67 (#1000)\n\n* Update to Rust 1.67\r\n\r\n* cargo clippy --fix\r\n\r\n* Add a few new clippy lints to Cranky.toml, and fix one case\r\n\r\n* Update to a docker image that hopefully will work\r\n\r\n* update the formatting of some dead code too, because why not\r\n\r\n* cargo fmt",
+          "timestamp": "2023-01-31T05:49:14+01:00",
+          "tree_id": "f23e506590dba9b1973fb42e22d639110297c0eb",
+          "url": "https://github.com/rerun-io/rerun/commit/52c752aa7a4318f9c8f3c2989293ffb187c40a53"
+        },
+        "date": 1675141134239,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/insert/batch/rects/insert",
+            "value": 559409,
+            "range": "± 7203",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/latest_at/batch/rects/query",
+            "value": 1744,
+            "range": "± 18",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/latest_at/missing_components/primary",
+            "value": 303,
+            "range": "± 11",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/latest_at/missing_components/secondaries",
+            "value": 362,
+            "range": "± 4",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/range/batch/rects/query",
+            "value": 152112,
+            "range": "± 2680",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/generate_message_bundles",
+            "value": 43478086,
+            "range": "± 1530536",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/generate_messages",
+            "value": 121762850,
+            "range": "± 1478126",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/encode_log_msg",
+            "value": 149258659,
+            "range": "± 2059181",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/encode_total",
+            "value": 317524430,
+            "range": "± 4600271",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/decode_log_msg",
+            "value": 168648389,
+            "range": "± 2272806",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/decode_message_bundles",
+            "value": 61807097,
+            "range": "± 1004534",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/decode_total",
+            "value": 230549080,
+            "range": "± 2653979",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/generate_message_bundles",
+            "value": 319180,
+            "range": "± 5103",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/generate_messages",
+            "value": 6042,
+            "range": "± 102",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/encode_log_msg",
+            "value": 354499,
+            "range": "± 3378",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/encode_total",
+            "value": 704017,
+            "range": "± 7150",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/decode_log_msg",
+            "value": 341247,
+            "range": "± 2541",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/decode_message_bundles",
+            "value": 2064,
+            "range": "± 34",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/decode_total",
+            "value": 346697,
+            "range": "± 3436",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_mono_points/insert",
+            "value": 6000823830,
+            "range": "± 28763766",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_mono_points/query",
+            "value": 1674978,
+            "range": "± 21422",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_batch_points/insert",
+            "value": 2570384,
+            "range": "± 21795",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_batch_points/query",
+            "value": 16896,
+            "range": "± 266",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "tuid/Tuid::random",
+            "value": 34,
             "range": "± 0",
             "unit": "ns/iter"
           }
