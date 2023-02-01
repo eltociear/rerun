@@ -304,6 +304,8 @@
         
           
         
+          
+        
       
       
         
@@ -434,6 +436,20 @@
     <li class="md-nav__item">
       <a href="../annotation/" class="md-nav__link">
         Annotations
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../extension_components/" class="md-nav__link">
+        Extension Components
       </a>
     </li>
   
@@ -929,6 +945,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_2_2_4" id="__nav_2_2_4_label" tabindex="0">
@@ -1021,6 +1039,20 @@
     <li class="md-nav__item">
       <a href="../../package/rerun/log/error_utils/" class="md-nav__link">
         error_utils.py
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../package/rerun/log/extension_components/" class="md-nav__link">
+        extension_components.py
       </a>
     </li>
   
@@ -1266,7 +1298,7 @@
 
 
 <h3 id="rerun.log_image" class="doc doc-heading">
-<code class="highlight language-python"><span class="k">def</span> <span class="nf">rerun</span><span class="o">.</span><span class="n">log_image</span><span class="p">(</span><span class="n">entity_path</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="k">def</span> <span class="nf">rerun</span><span class="o">.</span><span class="n">log_image</span><span class="p">(</span><span class="n">entity_path</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
 </h3>
 
@@ -1313,6 +1345,16 @@ linear space.</li>
           <td><p>A <a class="autorefs autorefs-internal" href="../../package/rerun/log/tensor/#rerun.log.tensor.Tensor">Tensor</a> representing the image to log.</p></td>
           <td>
               <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>ext</code></td>
+          <td>
+                <code><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a>[<a class="autorefs autorefs-external" title="typing.Dict" href="https://docs.python.org/3/library/typing.html#typing.Dict">Dict</a>[<a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a>, <a class="autorefs autorefs-external" title="typing.Any" href="https://docs.python.org/3/library/typing.html#typing.Any">Any</a>]]</code>
+          </td>
+          <td><p>Optional dictionary of extension components. See <a class="autorefs autorefs-internal" href="../../package/rerun/__init__/#rerun.log_extension_components">rerun.log_extension_components</a></p></td>
+          <td>
+                <code>None</code>
           </td>
         </tr>
         <tr>
@@ -1410,7 +1452,7 @@ linear space.</li>
 
 
 <h3 id="rerun.log_depth_image" class="doc doc-heading">
-<code class="highlight language-python"><span class="k">def</span> <span class="nf">rerun</span><span class="o">.</span><span class="n">log_depth_image</span><span class="p">(</span><span class="n">entity_path</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">meter</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="k">def</span> <span class="nf">rerun</span><span class="o">.</span><span class="n">log_depth_image</span><span class="p">(</span><span class="n">entity_path</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">meter</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
 </h3>
 
@@ -1466,6 +1508,16 @@ you have millimeter precision and a range of up to ~65 meters (2^16 / 1000).</p>
           </td>
         </tr>
         <tr>
+          <td><code>ext</code></td>
+          <td>
+                <code><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a>[<a class="autorefs autorefs-external" title="typing.Dict" href="https://docs.python.org/3/library/typing.html#typing.Dict">Dict</a>[<a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a>, <a class="autorefs autorefs-external" title="typing.Any" href="https://docs.python.org/3/library/typing.html#typing.Any">Any</a>]]</code>
+          </td>
+          <td><p>Optional dictionary of extension components. See <a class="autorefs autorefs-internal" href="../../package/rerun/__init__/#rerun.log_extension_components">rerun.log_extension_components</a></p></td>
+          <td>
+                <code>None</code>
+          </td>
+        </tr>
+        <tr>
           <td><code>timeless</code></td>
           <td>
                 <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></code>
@@ -1487,7 +1539,7 @@ you have millimeter precision and a range of up to ~65 meters (2^16 / 1000).</p>
 
 
 <h3 id="rerun.log_segmentation_image" class="doc doc-heading">
-<code class="highlight language-python"><span class="k">def</span> <span class="nf">rerun</span><span class="o">.</span><span class="n">log_segmentation_image</span><span class="p">(</span><span class="n">entity_path</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="k">def</span> <span class="nf">rerun</span><span class="o">.</span><span class="n">log_segmentation_image</span><span class="p">(</span><span class="n">entity_path</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
 </h3>
 
@@ -1530,6 +1582,16 @@ colors and labels.</p>
           <td><p>A <a class="autorefs autorefs-internal" href="../../package/rerun/log/tensor/#rerun.log.tensor.Tensor">Tensor</a> representing the segmentation image to log.</p></td>
           <td>
               <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>ext</code></td>
+          <td>
+                <code><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a>[<a class="autorefs autorefs-external" title="typing.Dict" href="https://docs.python.org/3/library/typing.html#typing.Dict">Dict</a>[<a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a>, <a class="autorefs autorefs-external" title="typing.Any" href="https://docs.python.org/3/library/typing.html#typing.Any">Any</a>]]</code>
+          </td>
+          <td><p>Optional dictionary of extension components. See <a class="autorefs autorefs-internal" href="../../package/rerun/__init__/#rerun.log_extension_components">rerun.log_extension_components</a></p></td>
+          <td>
+                <code>None</code>
           </td>
         </tr>
         <tr>

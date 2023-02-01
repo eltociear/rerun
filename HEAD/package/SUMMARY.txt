@@ -26,6 +26,7 @@
         * [bounding_box.py](rerun/log/bounding_box.md)
         * [camera.py](rerun/log/camera.md)
         * [error_utils.py](rerun/log/error_utils.md)
+        * [extension_components.py](rerun/log/extension_components.md)
         * [file.py](rerun/log/file.md)
         * [image.py](rerun/log/image.md)
         * [lines.py](rerun/log/lines.md)
