@@ -1,38 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1675241377052,
+  "lastUpdate": 1675241955247,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
-      {
-        "commit": {
-          "author": {
-            "email": "emil@rerun.io",
-            "name": "Emil Ernerfeldt",
-            "username": "emilk"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "ce45f0c75fb11876193bc3feeacc2d269efa0642",
-          "message": "Add options to create a cleaner UI for when doing screen recordings (#955)\n\n* Add options to create a cleaner UI for when doing screen recordings\r\n\r\n* Add separator in menu to make clicking \"panic!\" button less likely\r\n\r\n* Call it show_spaceview_controls\r\n\r\n* Options -> AppOptions",
-          "timestamp": "2023-01-27T15:48:28+01:00",
-          "tree_id": "e823aed9bd16ba6c20f9f7f8ad430bd9cba6921b",
-          "url": "https://github.com/rerun-io/rerun/commit/ce45f0c75fb11876193bc3feeacc2d269efa0642"
-        },
-        "date": 1674831033201,
-        "tool": "cargo",
-        "benches": [
-          {
-            "name": "datastore/insert/batch/rects/insert",
-            "value": 580587,
-            "range": "± 3211",
-            "unit": "ns/iter"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -5716,6 +5686,174 @@ window.BENCHMARK_DATA = {
           {
             "name": "tuid/Tuid::random",
             "value": 34,
+            "range": "± 0",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "niko@grapic.co",
+            "name": "Nikolaus West",
+            "username": "nikolausWest"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "9d4f81f5f50e8c5793bc46282a3e8f024f9ee8e5",
+          "message": "Issue templates with \"👀 needs triage\" (#1016)\n\n* Add \"needs triage\" to label to issue templates\r\n\r\n* Add issue template for \"annoyance report\"",
+          "timestamp": "2023-02-01T09:51:11+01:00",
+          "tree_id": "56500231fac6f11b51b790d95033be5c0a555044",
+          "url": "https://github.com/rerun-io/rerun/commit/9d4f81f5f50e8c5793bc46282a3e8f024f9ee8e5"
+        },
+        "date": 1675241954012,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/insert/batch/rects/insert",
+            "value": 571836,
+            "range": "± 6015",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/latest_at/batch/rects/query",
+            "value": 1745,
+            "range": "± 54",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/latest_at/missing_components/primary",
+            "value": 305,
+            "range": "± 3",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/latest_at/missing_components/secondaries",
+            "value": 368,
+            "range": "± 6",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/range/batch/rects/query",
+            "value": 150045,
+            "range": "± 2005",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/generate_message_bundles",
+            "value": 44401804,
+            "range": "± 1591700",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/generate_messages",
+            "value": 124355285,
+            "range": "± 1785187",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/encode_log_msg",
+            "value": 148379846,
+            "range": "± 1524446",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/encode_total",
+            "value": 321933029,
+            "range": "± 3573980",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/decode_log_msg",
+            "value": 171856778,
+            "range": "± 1908951",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/decode_message_bundles",
+            "value": 62666717,
+            "range": "± 1094201",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/decode_total",
+            "value": 234293424,
+            "range": "± 2858554",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/generate_message_bundles",
+            "value": 316469,
+            "range": "± 4768",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/generate_messages",
+            "value": 5936,
+            "range": "± 78",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/encode_log_msg",
+            "value": 362862,
+            "range": "± 3812",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/encode_total",
+            "value": 704546,
+            "range": "± 10447",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/decode_log_msg",
+            "value": 342180,
+            "range": "± 3322",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/decode_message_bundles",
+            "value": 2045,
+            "range": "± 28",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/decode_total",
+            "value": 348249,
+            "range": "± 3990",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_mono_points/insert",
+            "value": 6041710858,
+            "range": "± 14581215",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_mono_points/query",
+            "value": 1661809,
+            "range": "± 30562",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_batch_points/insert",
+            "value": 2641340,
+            "range": "± 26284",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_batch_points/query",
+            "value": 16801,
+            "range": "± 259",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "tuid/Tuid::random",
+            "value": 33,
             "range": "± 0",
             "unit": "ns/iter"
           }
