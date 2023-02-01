@@ -234,6 +234,8 @@
           
             
               
+                
+              
               <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
@@ -346,7 +348,7 @@
   
   
     <li class="md-nav__item">
-      <a href="primitives/" class="md-nav__link">
+      <a href="logging_primitives/" class="md-nav__link">
         Logging Primitives
       </a>
     </li>
@@ -360,7 +362,7 @@
   
   
     <li class="md-nav__item">
-      <a href="images/" class="md-nav__link">
+      <a href="logging_images/" class="md-nav__link">
         Logging Images
       </a>
     </li>
@@ -374,7 +376,7 @@
   
   
     <li class="md-nav__item">
-      <a href="annotation/" class="md-nav__link">
+      <a href="annotations/" class="md-nav__link">
         Annotations
       </a>
     </li>
@@ -1168,7 +1170,9 @@
             
             
               
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" hidden>
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
@@ -1179,6 +1183,63 @@
   
     
   
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#initialization" class="md-nav__link">
+    Initialization
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#logging-primitives" class="md-nav__link">
+    Logging Primitives
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#logging-images" class="md-nav__link">
+    Logging Images
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#annotations" class="md-nav__link">
+    Annotations
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#extension-components" class="md-nav__link">
+    Extension Components
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#plotting" class="md-nav__link">
+    Plotting
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#transforms" class="md-nav__link">
+    Transforms
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -1192,18 +1253,182 @@
                 
                   
 
-  
-  
-
 
 
 <h1 id="common-apis">Common APIs</h1>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>TODO(jleibs): Very high level pointers to common API groups</p>
-</div>
+<h2 id="initialization">Initialization</h2>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="initialization#rerun.init"><code>rerun.init()</code></a></td>
+<td>Initialize the Rerun SDK with a user-chosen application id (name).</td>
+</tr>
+<tr>
+<td><a href="initialization#rerun.set_recording_id"><code>rerun.set_recording_id()</code></a></td>
+<td>Set the recording ID that this process is logging to, as a UUIDv4.</td>
+</tr>
+<tr>
+<td><a href="initialization#rerun.connect"><code>rerun.connect()</code></a></td>
+<td>Connect to a remote Rerun Viewer on the given ip:port.</td>
+</tr>
+<tr>
+<td><a href="initialization#rerun.spawn_and_connect"><code>rerun.spawn_and_connect()</code></a></td>
+<td>Spawn a Rerun Viewer and stream logging data to it.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="logging-primitives">Logging Primitives</h2>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="logging_primitives#rerun.log_point"><code>rerun.log_point()</code></a></td>
+<td>Log a 2D or 3D point, with optional color.</td>
+</tr>
+<tr>
+<td><a href="logging_primitives#rerun.log_points"><code>rerun.log_points()</code></a></td>
+<td>Log 2D or 3D points, with optional colors.</td>
+</tr>
+<tr>
+<td><a href="logging_primitives#rerun.log_rect"><code>rerun.log_rect()</code></a></td>
+<td>Log a 2D rectangle.</td>
+</tr>
+<tr>
+<td><a href="logging_primitives#rerun.log_rects"><code>rerun.log_rects()</code></a></td>
+<td>Log multiple 2D rectangles.</td>
+</tr>
+<tr>
+<td><a href="logging_primitives#rerun.log_obb"><code>rerun.log_obb()</code></a></td>
+<td>Log a 3D oriented bounding box, defined by its half size.</td>
+</tr>
+<tr>
+<td><a href="logging_primitives#rerun.log_path"><code>rerun.log_path()</code></a></td>
+<td>Log a 3D path.</td>
+</tr>
+<tr>
+<td><a href="logging_primitives#rerun.log_line_segments"><code>rerun.log_line_segments()</code></a></td>
+<td>Log many 2D or 3D line segments.</td>
+</tr>
+<tr>
+<td><a href="logging_primitives#rerun.log_arrow"><code>rerun.log_arrow()</code></a></td>
+<td>Log a 3D arrow.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="logging-images">Logging Images</h2>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="logging_images#rerun.log_image"><code>rerun.log_image()</code></a></td>
+<td>Log a gray or color image.</td>
+</tr>
+<tr>
+<td><a href="logging_images#rerun.log_image_file"><code>rerun.log_image_file()</code></a></td>
+<td>Log the contents of an image file (only JPEGs supported for now).</td>
+</tr>
+<tr>
+<td><a href="logging_images#rerun.log_depth_image"><code>rerun.log_depth_image()</code></a></td>
+<td>Log a depth image.</td>
+</tr>
+<tr>
+<td><a href="logging_images#rerun.log_segmentation_image"><code>rerun.log_segmentation_image()</code></a></td>
+<td>Log an image made up of integer class-ids.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="annotations">Annotations</h2>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="annotations#rerun.log_annotation_context"><code>rerun.log_annotation_context()</code></a></td>
+<td>Log an annotation context made up of a collection of <a class="autorefs autorefs-internal" href="../package/rerun/log/annotation/#rerun.log.annotation.ClassDescription">ClassDescription</a>s.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="extension-components">Extension Components</h2>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="extension_components#rerun.log_extension_components"><code>rerun.log_extension_components()</code></a></td>
+<td>Log an arbitrary collection of extension components.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="plotting">Plotting</h2>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="plotting#rerun.log_scalar"><code>rerun.log_scalar()</code></a></td>
+<td>Log a double-precision scalar that will be visualized as a timeseries plot.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="transforms">Transforms</h2>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="transforms#rerun.log_rigid3"><code>rerun.log_rigid3()</code></a></td>
+<td>Log a proper rigid 3D transform between this entity and the parent.</td>
+</tr>
+<tr>
+<td><a href="transforms#rerun.log_pinhole"><code>rerun.log_pinhole()</code></a></td>
+<td>Log a perspective camera model.</td>
+</tr>
+<tr>
+<td><a href="transforms#rerun.log_unknown_transform"><code>rerun.log_unknown_transform()</code></a></td>
+<td>Log that this entity is NOT in the same space as the parent, but you do not (yet) know how they relate.</td>
+</tr>
+<tr>
+<td><a href="transforms#rerun.log_view_coordinates"><code>rerun.log_view_coordinates()</code></a></td>
+<td>Log the view coordinates for an entity.</td>
+</tr>
+</tbody>
+</table>
 
 
+
+  
 
 
 
