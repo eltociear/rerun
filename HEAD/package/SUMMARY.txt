@@ -30,6 +30,7 @@
         * [file.py](rerun/log/file.md)
         * [image.py](rerun/log/image.md)
         * [lines.py](rerun/log/lines.md)
+        * [mesh.py](rerun/log/mesh.md)
         * [points.py](rerun/log/points.md)
         * [rects.py](rerun/log/rects.md)
         * [scalar.py](rerun/log/scalar.md)
