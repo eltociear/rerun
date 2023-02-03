@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":[["Selection",""]],"struct":[["MultiSelection","Describing a single selection of things."]]};

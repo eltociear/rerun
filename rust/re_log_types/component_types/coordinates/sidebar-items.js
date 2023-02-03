@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":[["Axis3",""],["Handedness",""],["Sign",""],["ViewDir","The six cardinal directions for 3D view-space and image-space."]],"struct":[["SignedAxis3",""],["ViewCoordinates","How we interpret the coordinate system of an entity/space."]]};
