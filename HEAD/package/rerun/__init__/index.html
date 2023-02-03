@@ -653,15 +653,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#rerun.log_meshes" class="md-nav__link">
-    log_meshes()
+  <a href="#rerun.get_recording_id" class="md-nav__link">
+    get_recording_id()
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#rerun.get_recording_id" class="md-nav__link">
-    get_recording_id()
+  <a href="#rerun.log_meshes" class="md-nav__link">
+    log_meshes()
   </a>
   
 </li>
@@ -1611,15 +1611,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#rerun.log_meshes" class="md-nav__link">
-    log_meshes()
+  <a href="#rerun.get_recording_id" class="md-nav__link">
+    get_recording_id()
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#rerun.get_recording_id" class="md-nav__link">
-    get_recording_id()
+  <a href="#rerun.log_meshes" class="md-nav__link">
+    log_meshes()
   </a>
   
 </li>
@@ -1930,14 +1930,14 @@ rerun.log_pinhole(&quot;world/camera/image&quot;, …)
 
 
 <h4 id="rerun.log_mesh" class="doc doc-heading">
-<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_mesh</span><span class="p">(</span><span class="n">entity_path</span><span class="p">,</span> <span class="n">positions</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">indices</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">normals</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_mesh</span><span class="p">(</span><span class="n">entity_path</span><span class="p">,</span> <span class="n">positions</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">indices</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">normals</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">albedo_factor</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
 </h4>
 
 
   <div class="doc doc-contents ">
   
-      <p>Log a raw 3D mesh by specifying its vertex positions, and optionally indices and normals.</p>
+      <p>Log a raw 3D mesh by specifying its vertex positions, and optionally indices, normals and albedo factor.</p>
 <p>The data is <em>always</em> interpreted as a triangle list:</p>
 <ul>
 <li><code>positions</code> is a flattened array of 3D points, i.e. its length must be divisible by 3.</li>
@@ -1946,12 +1946,15 @@ rerun.log_pinhole(&quot;world/camera/image&quot;, …)
 <li><code>normals</code>, if specified, is a flattened array of 3D vectors that describe the normal
   for each vertex, i.e. its length must be divisible by 3 and more importantly it has to be
   equal to the length of <code>positions</code>.</li>
+<li><code>albedo_factor</code>, if specified, is either a linear, unmultiplied, normalized RGB (vec3) or
+  RGBA (vec4) value.</li>
 </ul>
 <h6 id="rerun.log_mesh--example">Example:</h6>
-<pre><code># A simple triangle:
+<pre><code># A simple red triangle:
 positions = np.array([0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0])
 indices = np.array([0, 1, 2])
 normals = np.array([0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0])
+albedo_factor = np.array([1.0, 0.0, 0.0])
 </code></pre>
 
   <p><strong>Parameters:</strong></p>
@@ -2001,6 +2004,16 @@ normals = np.array([0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0])
                 <code><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a>[<a class="autorefs autorefs-external" title="numpy.typing" href="https://numpy.org/doc/stable/reference/typing.html#module-numpy.typing">npt</a>.<a class="autorefs autorefs-external" title="numpy.typing.NDArray" href="https://numpy.org/doc/stable/reference/typing.html#numpy.typing.NDArray">NDArray</a>[<a class="autorefs autorefs-external" title="numpy" href="https://numpy.org/doc/stable/reference/index.html#module-numpy">np</a>.<a class="autorefs autorefs-external" title="numpy.float32" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float32">float32</a>]]</code>
           </td>
           <td><p>Optional flattened array of 3D vectors that describe the normal of each vertices</p></td>
+          <td>
+                <code>None</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>albedo_factor</code></td>
+          <td>
+                <code><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a>[<a class="autorefs autorefs-external" title="numpy.typing" href="https://numpy.org/doc/stable/reference/typing.html#module-numpy.typing">npt</a>.<a class="autorefs autorefs-external" title="numpy.typing.NDArray" href="https://numpy.org/doc/stable/reference/typing.html#numpy.typing.NDArray">NDArray</a>[<a class="autorefs autorefs-external" title="numpy" href="https://numpy.org/doc/stable/reference/index.html#module-numpy">np</a>.<a class="autorefs autorefs-external" title="numpy.float32" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float32">float32</a>]]</code>
+          </td>
+          <td><p>Optional RGB(A) color for the albedo factor of the mesh, aka base color factor.</p></td>
           <td>
                 <code>None</code>
           </td>
@@ -3238,20 +3251,64 @@ pa_value = pa.array(value)
 
 
 
-<h4 id="rerun.log_meshes" class="doc doc-heading">
-<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_meshes</span><span class="p">(</span><span class="n">entity_path</span><span class="p">,</span> <span class="n">position_buffers</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">index_buffers</span><span class="p">,</span> <span class="n">normal_buffers</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+<h4 id="rerun.get_recording_id" class="doc doc-heading">
+<code class="highlight language-python"><span class="k">def</span> <span class="nf">get_recording_id</span><span class="p">()</span></code>
 
 </h4>
 
 
   <div class="doc doc-contents ">
   
-      <p>Log multiple raw 3D meshes by specifying their vertex buffers, and optionally their index and normal buffers.</p>
+      <p>Get the recording ID that this process is logging to, as a UUIDv4.</p>
+<p>The default recording_id is based on <code>multiprocessing.current_process().authkey</code>
+which means that all processes spawned with <code>multiprocessing</code>
+will have the same default recording_id.</p>
+<p>If you are not using <code>multiprocessing</code> and still want several different Python
+processes to log to the same Rerun instance (and be part of the same recording),
+you will need to manually assign them all the same recording_id.
+Any random UUIDv4 will work, or copy the recording id for the parent process.</p>
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
+          </td>
+          <td><p>The recording ID that this process is logging to.</p></td>
+        </tr>
+    </tbody>
+  </table>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h4 id="rerun.log_meshes" class="doc doc-heading">
+<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_meshes</span><span class="p">(</span><span class="n">entity_path</span><span class="p">,</span> <span class="n">position_buffers</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">index_buffers</span><span class="p">,</span> <span class="n">normal_buffers</span><span class="p">,</span> <span class="n">albedo_factors</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+
+</h4>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Log multiple raw 3D meshes by specifying their different buffers and albedo factors.</p>
 <p>To learn more about how the data within these buffers is interpreted and laid out, refer
 to <code>log_mesh</code>'s documentation.</p>
 <ul>
 <li>If specified, <code>index_buffers</code> must have the same length as <code>position_buffers</code>.</li>
-<li>If specified, <code>normal_buffers</code> must have the same length as <code>normal_buffers</code>.</li>
+<li>If specified, <code>normal_buffers</code> must have the same length as <code>position_buffers</code>.</li>
+<li>If specified, <code>albedo_factors</code> must have the same length as <code>position_buffers</code>.</li>
 </ul>
 
   <p><strong>Parameters:</strong></p>
@@ -3306,6 +3363,16 @@ to <code>log_mesh</code>'s documentation.</p>
           </td>
         </tr>
         <tr>
+          <td><code>albedo_factors</code></td>
+          <td>
+                <code><a class="autorefs autorefs-external" title="typing.Sequence" href="https://docs.python.org/3/library/typing.html#typing.Sequence">Sequence</a>[<a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a>[<a class="autorefs autorefs-external" title="numpy.typing" href="https://numpy.org/doc/stable/reference/typing.html#module-numpy.typing">npt</a>.<a class="autorefs autorefs-external" title="numpy.typing.NDArray" href="https://numpy.org/doc/stable/reference/typing.html#numpy.typing.NDArray">NDArray</a>[<a class="autorefs autorefs-external" title="numpy" href="https://numpy.org/doc/stable/reference/index.html#module-numpy">np</a>.<a class="autorefs autorefs-external" title="numpy.float32" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float32">float32</a>]]]</code>
+          </td>
+          <td><p>An optional sequence of albedo factors, one for each mesh.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
           <td><code>timeless</code></td>
           <td>
                 <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></code>
@@ -3314,49 +3381,6 @@ to <code>log_mesh</code>'s documentation.</p>
           <td>
                 <code>False</code>
           </td>
-        </tr>
-    </tbody>
-  </table>
-
-  </div>
-
-</div>
-
-<div class="doc doc-object doc-function">
-
-
-
-<h4 id="rerun.get_recording_id" class="doc doc-heading">
-<code class="highlight language-python"><span class="k">def</span> <span class="nf">get_recording_id</span><span class="p">()</span></code>
-
-</h4>
-
-
-  <div class="doc doc-contents ">
-  
-      <p>Get the recording ID that this process is logging to, as a UUIDv4.</p>
-<p>The default recording_id is based on <code>multiprocessing.current_process().authkey</code>
-which means that all processes spawned with <code>multiprocessing</code>
-will have the same default recording_id.</p>
-<p>If you are not using <code>multiprocessing</code> and still want several different Python
-processes to log to the same Rerun instance (and be part of the same recording),
-you will need to manually assign them all the same recording_id.
-Any random UUIDv4 will work, or copy the recording id for the parent process.</p>
-
-  <p><strong>Returns:</strong></p>
-  <table>
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-        <tr>
-          <td>
-                <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
-          </td>
-          <td><p>The recording ID that this process is logging to.</p></td>
         </tr>
     </tbody>
   </table>
