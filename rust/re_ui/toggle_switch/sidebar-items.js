@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"fn":[["toggle_switch","iOS-style toggle switch."],["toggle_switch_ui",""]]};

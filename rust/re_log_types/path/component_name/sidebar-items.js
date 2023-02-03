@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"struct":[["ComponentName","The name of an entity component, e.g. `pos` or `color`."]]};

@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"fn":[["format_table","Format `columns` into a [`Table`] using `names` as headers."]],"struct":[["DisplayDataType",""],["DisplayIntervalUnit",""],["DisplayTimeUnit",""]]};

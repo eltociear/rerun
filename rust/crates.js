@@ -1,1 +1,0 @@
-window.ALL_CRATES = ["raw_mesh","re_analytics","re_arrow_store","re_data_store","re_error","re_format","re_int_histogram","re_log","re_log_types","re_memory","re_query","re_renderer","re_sdk_comms","re_smart_channel","re_string_interner","re_tensor_ops","re_tuid","re_ui","re_viewer","re_web_server","re_ws_comms","rerun","rerun_bindings","rerun_sdk","run_wasm"];

@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"enum":[["Rect2D","A rectangle in 2D space."]],"struct":[["MutableRect2DArray",""],["Rect2DArray",""],["Rect2DArrayIterator",""]]};

@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"constant":[["HELP_TEXT",""]],"fn":[["view_bar_chart",""]],"struct":[["BarChartState",""]]};

@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"mod":[["arrow","Methods for handling Arrow datamodel log ingest"],["python_bridge",""]],"static":[["GLOBAL",""]]};

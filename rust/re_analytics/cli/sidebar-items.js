@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"constant":[["DETAILS",""]],"enum":[["CliError",""]],"fn":[["clear",""],["opt",""],["print_config",""],["print_details",""],["set",""]]};

@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"struct":[["Size","A size of something in either world-units, screen-units, or unsized."],["SizeHalf","Same as [`Size`] but stored with a f16 float."]]};

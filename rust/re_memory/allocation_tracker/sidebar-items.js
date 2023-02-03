@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"fn":[["format_backtrace",""],["hash_backtrace",""]],"struct":[["AllocationTracker","Track the callstacks of allocations."],["BacktraceHash",""],["CallstackStatistics","Per-callstack statistics."],["PtrHash","A hash of a pointer address."],["ReadableBacktrace","Formatted [`Backtrace`]."]]};

@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"mod":[["mesh_cache",""],["tensor_image_cache",""]],"struct":[["Caches","Does memoization of different things for the immediate mode UI."],["TensorStats",""]]};

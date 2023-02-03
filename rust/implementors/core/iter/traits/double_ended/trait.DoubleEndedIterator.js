@@ -1,3 +1,0 @@
-(function() {var implementors = {
-"re_ui":[["impl <a class=\"trait\" href=\"https://doc.rust-lang.org/1.67.0/core/iter/traits/double_ended/trait.DoubleEndedIterator.html\" title=\"trait core::iter::traits::double_ended::DoubleEndedIterator\">DoubleEndedIterator</a> for <a class=\"struct\" href=\"re_ui/command/struct.CommandIter.html\" title=\"struct re_ui::command::CommandIter\">CommandIter</a>"]]
-};if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

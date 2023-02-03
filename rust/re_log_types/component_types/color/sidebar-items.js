@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"struct":[["ColorRGBA","An RGBA color tuple."]]};

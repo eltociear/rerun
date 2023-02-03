@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"constant":[["ADD",""],["ARROW_LEFT",""],["ARROW_RIGHT",""],["BOTTOM_PANEL_TOGGLE",""],["CLOSE",""],["FOLLOW",""],["INVISIBLE",""],["LEFT_PANEL_TOGGLE",""],["LOOP",""],["MAXIMIZE",""],["MINIMIZE",""],["PAUSE",""],["PLAY",""],["REMOVE",""],["RERUN_MENU",""],["RESET",""],["RIGHT_PANEL_TOGGLE",""],["VISIBLE",""]],"struct":[["Icon",""]]};

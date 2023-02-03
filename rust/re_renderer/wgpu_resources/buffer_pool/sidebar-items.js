@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"struct":[["BufferDesc",""],["GpuBufferHandle",""],["GpuBufferPool",""]],"type":[["GpuBufferHandleStrong","A reference counter baked bind group handle. Once all strong handles are dropped, the bind group will be marked for reclamation in the following frame."]]};

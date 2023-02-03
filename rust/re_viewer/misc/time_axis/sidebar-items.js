@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"struct":[["TimelineAxis","A piece-wise linear view of a single timeline."]]};

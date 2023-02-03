@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"constant":[["VIRIDIS_SRGB_BYTES","LUT as defined here"]],"fn":[["turbo_color_map","Converts float from 0.0..=1.0 into a color using Turbo."],["viridis_color_map","Given a value in [0, 1], output `sRGB` in Viridis color map."]]};

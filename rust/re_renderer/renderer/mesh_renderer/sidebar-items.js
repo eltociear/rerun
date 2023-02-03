@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"mod":[["gpu_data",""]],"struct":[["MeshBatch",""],["MeshDrawData",""],["MeshInstance",""],["MeshRenderer",""]]};
