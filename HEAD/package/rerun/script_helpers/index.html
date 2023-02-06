@@ -9,24 +9,24 @@
       
       
       
-        <link rel="prev" href="../radius/">
+        <link rel="prev" href="../log/transform/">
       
       
-        <link rel="next" href="../scalar/">
+        <link rel="next" href="../../../docs/">
       
-      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.11">
     
     
       
-        <title>rect2d.py - Rerun Python APIs</title>
+        <title>script_helpers.py - Rerun Python APIs</title>
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.0d440cfe.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.0d440cfe.min.css">
       
         
-        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.2505c338.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.2505c338.min.css">
       
       
 
@@ -42,11 +42,11 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/_mkdocstrings.css">
+      <link rel="stylesheet" href="../../../assets/_mkdocstrings.css">
     
-      <link rel="stylesheet" href="../../../../css/mkdocstrings.css">
+      <link rel="stylesheet" href="../../../css/mkdocstrings.css">
     
-    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -71,7 +71,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#rerun.components.rect2d" class="md-skip">
+        <a href="#rerun.script_helpers" class="md-skip">
           Skip to content
         </a>
       
@@ -91,7 +91,7 @@
 
 <header class="md-header md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../../.." title="Rerun Python APIs" class="md-header__button md-logo" aria-label="Rerun Python APIs" data-md-component="logo">
+    <a href="../../.." title="Rerun Python APIs" class="md-header__button md-logo" aria-label="Rerun Python APIs" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -110,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              rect2d.py
+              script_helpers.py
             
           </span>
         </div>
@@ -182,7 +182,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../../common/" class="md-tabs__link">
+      <a href="../../../common/" class="md-tabs__link">
         Common APIs
       </a>
     </li>
@@ -200,7 +200,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../" class="md-tabs__link md-tabs__link--active">
+      <a href="../../" class="md-tabs__link md-tabs__link--active">
         Package Listing
       </a>
     </li>
@@ -213,7 +213,7 @@
 
 
   <li class="md-tabs__item">
-    <a href="../../../../docs/" class="md-tabs__link">
+    <a href="../../../docs/" class="md-tabs__link">
       Writing Docs
     </a>
   </li>
@@ -246,7 +246,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../../.." title="Rerun Python APIs" class="md-nav__button md-logo" aria-label="Rerun Python APIs" data-md-component="logo">
+    <a href="../../.." title="Rerun Python APIs" class="md-nav__button md-logo" aria-label="Rerun Python APIs" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -313,7 +313,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../../../common/">Common APIs</a>
+          <a href="../../../common/">Common APIs</a>
           
             <label for="__nav_1">
               <span class="md-nav__icon md-icon"></span>
@@ -336,7 +336,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../common/initialization/" class="md-nav__link">
+      <a href="../../../common/initialization/" class="md-nav__link">
         Initialization
       </a>
     </li>
@@ -350,7 +350,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../common/logging_primitives/" class="md-nav__link">
+      <a href="../../../common/logging_primitives/" class="md-nav__link">
         Logging Primitives
       </a>
     </li>
@@ -364,7 +364,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../common/logging_images/" class="md-nav__link">
+      <a href="../../../common/logging_images/" class="md-nav__link">
         Logging Images
       </a>
     </li>
@@ -378,7 +378,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../common/annotations/" class="md-nav__link">
+      <a href="../../../common/annotations/" class="md-nav__link">
         Annotations
       </a>
     </li>
@@ -392,7 +392,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../common/extension_components/" class="md-nav__link">
+      <a href="../../../common/extension_components/" class="md-nav__link">
         Extension Components
       </a>
     </li>
@@ -406,7 +406,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../common/plotting/" class="md-nav__link">
+      <a href="../../../common/plotting/" class="md-nav__link">
         Plotting
       </a>
     </li>
@@ -420,7 +420,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../common/transforms/" class="md-nav__link">
+      <a href="../../../common/transforms/" class="md-nav__link">
         Transforms
       </a>
     </li>
@@ -434,7 +434,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../common/helpers/" class="md-nav__link">
+      <a href="../../../common/helpers/" class="md-nav__link">
         Helpers
       </a>
     </li>
@@ -478,7 +478,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../../">Package Listing</a>
+          <a href="../../">Package Listing</a>
           
             <label for="__nav_2">
               <span class="md-nav__icon md-icon"></span>
@@ -542,7 +542,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../__init__/" class="md-nav__link">
+      <a href="../__init__/" class="md-nav__link">
         __init__.py
       </a>
     </li>
@@ -556,7 +556,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../color_conversion/" class="md-nav__link">
+      <a href="../color_conversion/" class="md-nav__link">
         color_conversion.py
       </a>
     </li>
@@ -568,16 +568,16 @@
               
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_3" checked>
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2_3" >
       
       
         
@@ -620,7 +620,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_3_label" aria-expanded="true">
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_3_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_2_2_3">
           <span class="md-nav__icon md-icon"></span>
           components/
@@ -633,7 +633,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../__init__/" class="md-nav__link">
+      <a href="../components/__init__/" class="md-nav__link">
         __init__.py
       </a>
     </li>
@@ -647,7 +647,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../annotation/" class="md-nav__link">
+      <a href="../components/annotation/" class="md-nav__link">
         annotation.py
       </a>
     </li>
@@ -661,7 +661,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../arrow/" class="md-nav__link">
+      <a href="../components/arrow/" class="md-nav__link">
         arrow.py
       </a>
     </li>
@@ -675,7 +675,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../box/" class="md-nav__link">
+      <a href="../components/box/" class="md-nav__link">
         box.py
       </a>
     </li>
@@ -689,7 +689,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../color/" class="md-nav__link">
+      <a href="../components/color/" class="md-nav__link">
         color.py
       </a>
     </li>
@@ -703,7 +703,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../instance/" class="md-nav__link">
+      <a href="../components/instance/" class="md-nav__link">
         instance.py
       </a>
     </li>
@@ -717,7 +717,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../label/" class="md-nav__link">
+      <a href="../components/label/" class="md-nav__link">
         label.py
       </a>
     </li>
@@ -731,7 +731,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../linestrip/" class="md-nav__link">
+      <a href="../components/linestrip/" class="md-nav__link">
         linestrip.py
       </a>
     </li>
@@ -745,7 +745,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../point/" class="md-nav__link">
+      <a href="../components/point/" class="md-nav__link">
         point.py
       </a>
     </li>
@@ -759,7 +759,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../quaternion/" class="md-nav__link">
+      <a href="../components/quaternion/" class="md-nav__link">
         quaternion.py
       </a>
     </li>
@@ -773,7 +773,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../radius/" class="md-nav__link">
+      <a href="../components/radius/" class="md-nav__link">
         radius.py
       </a>
     </li>
@@ -785,68 +785,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          rect2d.py
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../components/rect2d/" class="md-nav__link">
         rect2d.py
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#rerun.components.rect2d" class="md-nav__link">
-    rect2d
-  </a>
-  
-    <nav class="md-nav" aria-label="rect2d">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#rerun.components.rect2d.RectFormat" class="md-nav__link">
-    RectFormat
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#rerun.components.rect2d.Rect2DArray" class="md-nav__link">
-    Rect2DArray
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -858,7 +801,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../scalar/" class="md-nav__link">
+      <a href="../components/scalar/" class="md-nav__link">
         scalar.py
       </a>
     </li>
@@ -872,7 +815,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tensor/" class="md-nav__link">
+      <a href="../components/tensor/" class="md-nav__link">
         tensor.py
       </a>
     </li>
@@ -886,7 +829,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../text_entry/" class="md-nav__link">
+      <a href="../components/text_entry/" class="md-nav__link">
         text_entry.py
       </a>
     </li>
@@ -900,7 +843,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../vec/" class="md-nav__link">
+      <a href="../components/vec/" class="md-nav__link">
         vec.py
       </a>
     </li>
@@ -986,7 +929,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../log/__init__/" class="md-nav__link">
+      <a href="../log/__init__/" class="md-nav__link">
         __init__.py
       </a>
     </li>
@@ -1000,7 +943,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../log/annotation/" class="md-nav__link">
+      <a href="../log/annotation/" class="md-nav__link">
         annotation.py
       </a>
     </li>
@@ -1014,7 +957,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../log/arrow/" class="md-nav__link">
+      <a href="../log/arrow/" class="md-nav__link">
         arrow.py
       </a>
     </li>
@@ -1028,7 +971,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../log/bounding_box/" class="md-nav__link">
+      <a href="../log/bounding_box/" class="md-nav__link">
         bounding_box.py
       </a>
     </li>
@@ -1042,7 +985,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../log/camera/" class="md-nav__link">
+      <a href="../log/camera/" class="md-nav__link">
         camera.py
       </a>
     </li>
@@ -1056,7 +999,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../log/error_utils/" class="md-nav__link">
+      <a href="../log/error_utils/" class="md-nav__link">
         error_utils.py
       </a>
     </li>
@@ -1070,7 +1013,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../log/extension_components/" class="md-nav__link">
+      <a href="../log/extension_components/" class="md-nav__link">
         extension_components.py
       </a>
     </li>
@@ -1084,7 +1027,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../log/file/" class="md-nav__link">
+      <a href="../log/file/" class="md-nav__link">
         file.py
       </a>
     </li>
@@ -1098,7 +1041,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../log/image/" class="md-nav__link">
+      <a href="../log/image/" class="md-nav__link">
         image.py
       </a>
     </li>
@@ -1112,7 +1055,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../log/lines/" class="md-nav__link">
+      <a href="../log/lines/" class="md-nav__link">
         lines.py
       </a>
     </li>
@@ -1126,7 +1069,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../log/mesh/" class="md-nav__link">
+      <a href="../log/mesh/" class="md-nav__link">
         mesh.py
       </a>
     </li>
@@ -1140,7 +1083,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../log/points/" class="md-nav__link">
+      <a href="../log/points/" class="md-nav__link">
         points.py
       </a>
     </li>
@@ -1154,7 +1097,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../log/rects/" class="md-nav__link">
+      <a href="../log/rects/" class="md-nav__link">
         rects.py
       </a>
     </li>
@@ -1168,7 +1111,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../log/scalar/" class="md-nav__link">
+      <a href="../log/scalar/" class="md-nav__link">
         scalar.py
       </a>
     </li>
@@ -1182,7 +1125,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../log/tensor/" class="md-nav__link">
+      <a href="../log/tensor/" class="md-nav__link">
         tensor.py
       </a>
     </li>
@@ -1196,7 +1139,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../log/text/" class="md-nav__link">
+      <a href="../log/text/" class="md-nav__link">
         text.py
       </a>
     </li>
@@ -1210,7 +1153,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../log/transform/" class="md-nav__link">
+      <a href="../log/transform/" class="md-nav__link">
         transform.py
       </a>
     </li>
@@ -1229,11 +1172,75 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../../script_helpers/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          script_helpers.py
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         script_helpers.py
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#rerun.script_helpers" class="md-nav__link">
+    script_helpers
+  </a>
+  
+    <nav class="md-nav" aria-label="script_helpers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rerun.script_helpers.script_add_args" class="md-nav__link">
+    script_add_args()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rerun.script_helpers.script_setup" class="md-nav__link">
+    script_setup()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rerun.script_helpers.script_teardown" class="md-nav__link">
+    script_teardown()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1260,7 +1267,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../docs/" class="md-nav__link">
+      <a href="../../../docs/" class="md-nav__link">
         Writing Docs
       </a>
     </li>
@@ -1292,23 +1299,30 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#rerun.components.rect2d" class="md-nav__link">
-    rect2d
+  <a href="#rerun.script_helpers" class="md-nav__link">
+    script_helpers
   </a>
   
-    <nav class="md-nav" aria-label="rect2d">
+    <nav class="md-nav" aria-label="script_helpers">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#rerun.components.rect2d.RectFormat" class="md-nav__link">
-    RectFormat
+  <a href="#rerun.script_helpers.script_add_args" class="md-nav__link">
+    script_add_args()
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#rerun.components.rect2d.Rect2DArray" class="md-nav__link">
-    Rect2DArray
+  <a href="#rerun.script_helpers.script_setup" class="md-nav__link">
+    script_setup()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rerun.script_helpers.script_teardown" class="md-nav__link">
+    script_teardown()
   </a>
   
 </li>
@@ -1334,214 +1348,33 @@
 
 
 
-  <h1>rect2d.py</h1>
+  <h1>script_helpers.py</h1>
 
 <div class="doc doc-object doc-module">
 
 
 
-<h3 id="rerun.components.rect2d" class="doc doc-heading">
-          <code>rerun.components.rect2d</code>
+<h3 id="rerun.script_helpers" class="doc doc-heading">
+          <code>rerun.script_helpers</code>
 
 
 </h3>
 
   <div class="doc doc-contents first">
-
   
-
-  <div class="doc doc-children">
-
-
-
-
-
-
-
-
-
-<div class="doc doc-object doc-class">
-
-
-
-<h4 id="rerun.components.rect2d.RectFormat" class="doc doc-heading">
-<code class="highlight language-python"><span class="k">class</span> <span class="nc">RectFormat</span></code>
-
-</h4>
-
-
-  <div class="doc doc-contents ">
-      <p class="doc doc-class-bases">
-        Bases: <code><a class="autorefs autorefs-external" title="enum.Enum" href="https://docs.python.org/3/library/enum.html#enum.Enum">Enum</a></code></p>
-
-  
-      <p>How to specify rectangles (axis-aligned bounding boxes).</p>
-
-
-
-  
-
-  <div class="doc doc-children">
-
-
-
-
-
-
-
-<div class="doc doc-object doc-attribute">
-
-
-
-<h5 id="rerun.components.rect2d.RectFormat.XYWH" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">XYWH</span> <span class="o">=</span> <span class="s1">&#39;XYWH&#39;</span></code>
-  
-  <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
-  </span>
-
-</h5>
-
-
-  <div class="doc doc-contents ">
-  
-      <p>[x,y,w,h], with x,y = left,top.</p>
-  </div>
-
-</div>
-
-<div class="doc doc-object doc-attribute">
-
-
-
-<h5 id="rerun.components.rect2d.RectFormat.YXHW" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">YXHW</span> <span class="o">=</span> <span class="s1">&#39;YXHW&#39;</span></code>
-  
-  <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
-  </span>
-
-</h5>
-
-
-  <div class="doc doc-contents ">
-  
-      <p>[y,x,h,w], with x,y = left,top.</p>
-  </div>
-
-</div>
-
-<div class="doc doc-object doc-attribute">
-
-
-
-<h5 id="rerun.components.rect2d.RectFormat.XYXY" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">XYXY</span> <span class="o">=</span> <span class="s1">&#39;XYXY&#39;</span></code>
-  
-  <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
-  </span>
-
-</h5>
-
-
-  <div class="doc doc-contents ">
-  
-      <p>[x0, y0, x1, y1], with x0,y0 = left,top and x1,y1 = right,bottom.</p>
-  </div>
-
-</div>
-
-<div class="doc doc-object doc-attribute">
-
-
-
-<h5 id="rerun.components.rect2d.RectFormat.YXYX" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">YXYX</span> <span class="o">=</span> <span class="s1">&#39;YXYX&#39;</span></code>
-  
-  <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
-  </span>
-
-</h5>
-
-
-  <div class="doc doc-contents ">
-  
-      <p>[y0, x0, y1, x1], with x0,y0 = left,top and x1,y1 = right,bottom.</p>
-  </div>
-
-</div>
-
-<div class="doc doc-object doc-attribute">
-
-
-
-<h5 id="rerun.components.rect2d.RectFormat.XCYCWH" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">XCYCWH</span> <span class="o">=</span> <span class="s1">&#39;XCYCWH&#39;</span></code>
-  
-  <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
-  </span>
-
-</h5>
-
-
-  <div class="doc doc-contents ">
-  
-      <p>[x_center, y_center, width, height].</p>
-  </div>
-
-</div>
-
-<div class="doc doc-object doc-attribute">
-
-
-
-<h5 id="rerun.components.rect2d.RectFormat.XCYCW2H2" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">XCYCW2H2</span> <span class="o">=</span> <span class="s1">&#39;XCYCW2H2&#39;</span></code>
-  
-  <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
-  </span>
-
-</h5>
-
-
-  <div class="doc doc-contents ">
-  
-      <p>[x_center, y_center, width/2, height/2].</p>
-  </div>
-
-</div>
-
-
-
-
-
-  </div>
-
-  </div>
-
-</div>
-
-
-<div class="doc doc-object doc-class">
-
-
-
-<h4 id="rerun.components.rect2d.Rect2DArray" class="doc doc-heading">
-<code class="highlight language-python"><span class="k">class</span> <span class="nc">Rect2DArray</span></code>
-
-</h4>
-
-
-  <div class="doc doc-contents ">
-      <p class="doc doc-class-bases">
-        Bases: <code><span title="pyarrow">pa</span>.<span title="pyarrow.ExtensionArray">ExtensionArray</span></code></p>
-
-
-
+      <p>Helper functions for Rerun scripts.</p>
+<p>These helper functions can be used to wire up common Rerun features to your script CLi arguments.</p>
+<h5 id="rerun.script_helpers--example">Example</h5>
+<pre><code class="language-python">import argparse
+import rerun as rr
+
+parser = argparse.ArgumentParser()
+rr.script_add_args(parser)
+args = parser.parse_args()
+rr.script_setup(args, &quot;my_application&quot;)
+# ... Run your logging code here ...
+rr.script_teardown(args)
+</code></pre>
 
   
 
@@ -1559,28 +1392,137 @@
 
 
 
-<h5 id="rerun.components.rect2d.Rect2DArray.from_numpy_and_format" class="doc doc-heading">
-<code class="highlight language-python"><span class="k">def</span> <span class="nf">from_numpy_and_format</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">rect_format</span><span class="p">)</span></code>
+<h4 id="rerun.script_helpers.script_add_args" class="doc doc-heading">
+<code class="highlight language-python"><span class="k">def</span> <span class="nf">script_add_args</span><span class="p">(</span><span class="n">parser</span><span class="p">)</span></code>
 
-</h5>
+</h4>
 
 
   <div class="doc doc-contents ">
   
-      <p>Build a <code>Rect2DArray</code> from an Nx4 numpy array.</p>
+      <p>Add common Rerun script arguments to <code>parser</code>.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>parser</code></td>
+          <td>
+                <code><a class="autorefs autorefs-external" title="argparse.ArgumentParser" href="https://docs.python.org/3/library/argparse.html#argparse.ArgumentParser">ArgumentParser</a></code>
+          </td>
+          <td><p>The parser to add arguments to.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
 
   </div>
 
 </div>
 
+<div class="doc doc-object doc-function">
 
 
-  </div>
+
+<h4 id="rerun.script_helpers.script_setup" class="doc doc-heading">
+<code class="highlight language-python"><span class="k">def</span> <span class="nf">script_setup</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">application_id</span><span class="p">)</span></code>
+
+</h4>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Run common Rerun script setup actions. Connect to the viewer if necessary.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>args</code></td>
+          <td>
+                <code><a class="autorefs autorefs-external" title="argparse.Namespace" href="https://docs.python.org/3/library/argparse.html#argparse.Namespace">Namespace</a></code>
+          </td>
+          <td><p>The parsed arguments from <code>parser.parse_args()</code>.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>application_id</code></td>
+          <td>
+                <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
+          </td>
+          <td><p>The application ID to use for the viewer.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
 
   </div>
 
 </div>
 
+<div class="doc doc-object doc-function">
+
+
+
+<h4 id="rerun.script_helpers.script_teardown" class="doc doc-heading">
+<code class="highlight language-python"><span class="k">def</span> <span class="nf">script_teardown</span><span class="p">(</span><span class="n">args</span><span class="p">)</span></code>
+
+</h4>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Run common post-actions. Sleep if serving the web viewer.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>args</code></td>
+          <td>
+                <code><a class="autorefs autorefs-external" title="argparse.Namespace" href="https://docs.python.org/3/library/argparse.html#argparse.Namespace">Namespace</a></code>
+          </td>
+          <td><p>The parsed arguments from <code>parser.parse_args()</code>.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+  </div>
+
+</div>
 
 
 
@@ -1626,10 +1568,10 @@
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.expand", "navigation.indexes", "navigation.instant", "navigation.tabs", "navigation.tabs.sticky", "navigation.tracking"], "search": "../../../../assets/javascripts/workers/search.db81ec45.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.expand", "navigation.indexes", "navigation.instant", "navigation.tabs", "navigation.tabs.sticky", "navigation.tracking"], "search": "../../../assets/javascripts/workers/search.db81ec45.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.6df46069.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.6df46069.min.js"></script>
       
     
   </body>

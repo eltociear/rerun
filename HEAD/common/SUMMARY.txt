@@ -6,3 +6,4 @@
 * [Extension Components](extension_components.md)
 * [Plotting](plotting.md)
 * [Transforms](transforms.md)
+* [Helpers](helpers.md)

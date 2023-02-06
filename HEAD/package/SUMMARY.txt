@@ -37,3 +37,4 @@
         * [tensor.py](rerun/log/tensor.md)
         * [text.py](rerun/log/text.md)
         * [transform.py](rerun/log/transform.md)
+    * [script_helpers.py](rerun/script_helpers.md)
