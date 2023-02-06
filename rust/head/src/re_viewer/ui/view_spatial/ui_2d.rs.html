@@ -638,8 +638,6 @@
 <a href="#638" id="638">638</a>
 <a href="#639" id="639">639</a>
 <a href="#640" id="640">640</a>
-<a href="#641" id="641">641</a>
-<a href="#642" id="642">642</a>
 </pre><pre class="rust"><code><span class="kw">use </span>eframe::{emath::RectTransform, epaint::text::TextWrapping};
 <span class="kw">use </span>egui::{
     pos2, vec2, Align, Align2, Color32, NumExt <span class="kw">as _</span>, Pos2, Rect, Response, ScrollArea, Shape,
@@ -652,7 +650,7 @@
 
 <span class="kw">use super</span>::{eye::Eye, scene::AdditionalPickingInfo, ViewSpatialState};
 <span class="kw">use crate</span>::{
-    misc::{HoveredSpace, Selection, SelectionHighlight, SpaceViewHighlights},
+    misc::{HoveredSpace, Item, SelectionHighlight, SpaceViewHighlights},
     ui::{
         data_ui::{<span class="self">self</span>, DataUi},
         view_spatial::{
@@ -1084,9 +1082,7 @@
             ctx.set_hovered(picking_result.iter_hits().filter_map(|pick| {
                 pick.instance_path_hash
                     .resolve(<span class="kw-2">&amp;</span>ctx.log_db.entity_db)
-                    .map(|instance_path| {
-                        Selection::InstancePath(<span class="prelude-val">Some</span>(space_view_id), instance_path)
-                    })
+                    .map(|instance_path| Item::InstancePath(<span class="prelude-val">Some</span>(space_view_id), instance_path))
             }));
         }
     }

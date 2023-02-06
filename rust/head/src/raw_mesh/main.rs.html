@@ -299,12 +299,6 @@
 <a href="#299" id="299">299</a>
 <a href="#300" id="300">300</a>
 <a href="#301" id="301">301</a>
-<a href="#302" id="302">302</a>
-<a href="#303" id="303">303</a>
-<a href="#304" id="304">304</a>
-<a href="#305" id="305">305</a>
-<a href="#306" id="306">306</a>
-<a href="#307" id="307">307</a>
 </pre><pre class="rust"><code><span class="doccomment">//! This example demonstrates how to use the Rerun Rust SDK to log raw 3D meshes (so-called
 //! &quot;triangle soups&quot;) and their transform hierarchy.
 //!
@@ -315,11 +309,14 @@
 
 </span><span class="attr">#![allow(clippy::doc_markdown)]
 
-</span><span class="kw">use </span>anyhow::{bail, Context};
+</span><span class="kw">use </span>std::path::PathBuf;
+
+<span class="kw">use </span>anyhow::anyhow;
 <span class="kw">use </span>bytes::Bytes;
+<span class="kw">use </span>clap::Parser;
 <span class="kw">use </span>rerun::{
-    reexports::{re_log, re_memory::AccountingAllocator},
-    EntityPath, LogMsg, Mesh3D, MeshId, MsgBundle, MsgId, RawMesh3D, Session, Time, TimePoint,
+    external::{re_log, re_memory::AccountingAllocator},
+    ApplicationId, EntityPath, Mesh3D, MeshId, MsgSender, RawMesh3D, RecordingId, Session,
     TimeType, Timeline, Transform, Vec4D, ViewCoordinates,
 };
 
@@ -373,17 +370,8 @@
 }
 
 <span class="doccomment">/// Log a glTF node with Rerun.
-</span><span class="kw">fn </span>log_node(session: <span class="kw-2">&amp;mut </span>Session, node: GltfNode) {
+</span><span class="kw">fn </span>log_node(session: <span class="kw-2">&amp;mut </span>Session, node: GltfNode) -&gt; anyhow::Result&lt;()&gt; {
     <span class="kw">let </span>ent_path = EntityPath::from(node.name.as_str());
-
-    <span class="comment">// What time is it?
-    </span><span class="kw">let </span>timeline_keyframe = Timeline::new(<span class="string">&quot;keyframe&quot;</span>, TimeType::Sequence);
-    <span class="kw">let </span>time_point = TimePoint::from([
-        <span class="comment">// TODO(cmc): this _has_ to be inserted by the SDK
-        </span>(Timeline::log_time(), Time::now().into()),
-        <span class="comment">// TODO(cmc): animations!
-        </span>(timeline_keyframe, <span class="number">0</span>.into()),
-    ]);
 
     <span class="comment">// Convert glTF objects into Rerun components.
     </span><span class="kw">let </span>transform = node.transform.map(Transform::from);
@@ -393,61 +381,36 @@
         .map(Mesh3D::from)
         .collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;();
 
-    <span class="comment">// TODO(cmc): Transforms have to be logged separately because they are neither batches nor
-    // splats... the user shouldn&#39;t have to know that though!
-    // The SDK needs to split things up as needed when it sees a Transform component.
-    //
-    // We&#39;re going to have the same issue with splats: the SDK needs to automagically detect the
-    // user intention to use splats and do the necessary (like the python SDK does iirc).
-    </span><span class="kw">if let </span><span class="prelude-val">Some</span>(transform) = transform {
-        <span class="kw">let </span>bundle = MsgBundle::new(
-            MsgId::random(),
-            ent_path.clone(),
-            time_point.clone(),
-            <span class="comment">// TODO(cmc): need to reproduce the viewer crash I had earlier and fix/log-an-issue for
-            // it.
-            </span><span class="macro">vec!</span>[<span class="macro">vec!</span>[transform].try_into().unwrap()],
-        );
-        <span class="comment">// TODO(cmc): These last conversion details need to be hidden in the SDK.
-        </span><span class="kw">let </span>msg = bundle.try_into().unwrap();
-        session.send(LogMsg::ArrowMsg(msg));
-    }
-
-    <span class="comment">// TODO(cmc): Working at the `ComponentBundle`/`TryIntoArrow` layer feels too low-level,
-    // something like a MsgBuilder kinda thing would probably be quite nice.
-    </span><span class="kw">let </span>bundle = MsgBundle::new(
-        MsgId::random(),
-        ent_path,
-        time_point,
-        <span class="macro">vec!</span>[primitives.try_into().unwrap()],
-    );
-
-    <span class="comment">// Create and send one message to the sdk
-    // TODO(cmc): These last conversion details need to be hidden in the SDK.
-    </span><span class="kw">let </span>msg = bundle.try_into().unwrap();
-    session.send(LogMsg::ArrowMsg(msg));
+    <span class="kw">let </span>timeline_keyframe = Timeline::new(<span class="string">&quot;keyframe&quot;</span>, TimeType::Sequence);
+    MsgSender::new(ent_path)
+        .with_time(timeline_keyframe, <span class="number">0</span>)
+        .with_component(<span class="kw-2">&amp;</span>primitives)<span class="question-mark">?
+        </span>.with_component(transform.as_ref())<span class="question-mark">?
+        </span>.send(session)<span class="question-mark">?</span>;
 
     <span class="comment">// Recurse through all of the node&#39;s children!
     </span><span class="kw">for </span><span class="kw-2">mut </span>child <span class="kw">in </span>node.children {
         child.name = [node.name.as_str(), child.name.as_str()].join(<span class="string">&quot;/&quot;</span>);
-        log_node(session, child);
+        log_node(session, child)<span class="question-mark">?</span>;
     }
+
+    <span class="prelude-val">Ok</span>(())
 }
 
-<span class="comment">// TODO(cmc): The SDK should make this call so trivial that it doesn&#39;t require this helper at all.
-</span><span class="kw">fn </span>log_axis(session: <span class="kw-2">&amp;mut </span>Session, ent_path: <span class="kw-2">&amp;</span>EntityPath) {
-    <span class="comment">// glTF always uses a right-handed coordinate system when +Y is up and meshes face +Z.
-    </span><span class="kw">let </span>view_coords: ViewCoordinates = <span class="string">&quot;RUB&quot;</span>.parse().unwrap();
+<span class="kw">fn </span>log_coordinate_space(
+    session: <span class="kw-2">&amp;mut </span>Session,
+    ent_path: <span class="kw">impl </span>Into&lt;EntityPath&gt;,
+    axes: <span class="kw-2">&amp;</span>str,
+) -&gt; anyhow::Result&lt;()&gt; {
+    <span class="kw">let </span>view_coords: ViewCoordinates = axes
+        .parse()
+        .map_err(|err| <span class="macro">anyhow!</span>(<span class="string">&quot;couldn&#39;t parse {axes:?} as ViewCoordinates: {err}&quot;</span>))<span class="question-mark">?</span>;
 
-    <span class="kw">let </span>bundle = MsgBundle::new(
-        MsgId::random(),
-        ent_path.clone(),
-        [].into(), <span class="comment">// TODO(cmc): doing timeless stuff shouldn&#39;t be so weird
-        </span><span class="macro">vec!</span>[<span class="macro">vec!</span>[view_coords].try_into().unwrap()],
-    );
-
-    <span class="kw">let </span>msg = bundle.try_into().unwrap();
-    session.send(LogMsg::ArrowMsg(msg));
+    MsgSender::new(ent_path)
+        .with_timeless(<span class="bool-val">true</span>)
+        .with_component(<span class="kw-2">&amp;</span>[view_coords])<span class="question-mark">?
+        </span>.send(session)
+        .map_err(Into::into)
 }
 
 <span class="comment">// --- Init ---
@@ -458,37 +421,62 @@
 </span><span class="kw">static </span>GLOBAL: AccountingAllocator&lt;mimalloc::MiMalloc&gt; =
     AccountingAllocator::new(mimalloc::MiMalloc);
 
+<span class="attr">#[derive(Debug, clap::Parser)]
+#[clap(author, version, about)]
+</span><span class="kw">struct </span>Args {
+    <span class="doccomment">/// If specified, connects and sends the logged data to a remote Rerun viewer.
+    ///
+    /// Optionally takes an ip:port, otherwise uses Rerun&#39;s defaults.
+    </span><span class="attr">#[clap(long)]
+    #[allow(clippy::option_option)]
+    </span>connect: <span class="prelude-ty">Option</span>&lt;<span class="prelude-ty">Option</span>&lt;String&gt;&gt;,
+
+    <span class="doccomment">/// Specifies the path of the glTF scene to load.
+    </span><span class="attr">#[clap(long)]
+    </span>scene_path: PathBuf,
+}
+
 <span class="kw">fn </span>main() -&gt; anyhow::Result&lt;()&gt; {
     re_log::setup_native_logging();
 
-    <span class="comment">// TODO(cmc): Here we shall pass argv to the SDK which will strip it out of all SDK flags, and
-    // give us back our actual CLI flags.
-    // The name of the gltf sample to load should then come from there.
-
-    // Read glTF asset
-    </span><span class="kw">let </span>args = std::env::args().collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;();
-    <span class="kw">let </span>bytes = <span class="kw">if let </span><span class="prelude-val">Some</span>(path) = args.get(<span class="number">1</span>) {
-        Bytes::from(std::fs::read(path)<span class="question-mark">?</span>)
-    } <span class="kw">else </span>{
-        <span class="macro">bail!</span>(<span class="string">&quot;Usage: {} &lt;path_to_gltf_scene&gt;&quot;</span>, args[<span class="number">0</span>]);
+    <span class="kw">let </span>args = Args::parse();
+    <span class="kw">let </span>addr = <span class="kw">match </span>args.connect.as_ref() {
+        <span class="prelude-val">Some</span>(<span class="prelude-val">Some</span>(addr)) =&gt; <span class="prelude-val">Some</span>(addr.parse()<span class="question-mark">?</span>),
+        <span class="prelude-val">Some</span>(<span class="prelude-val">None</span>) =&gt; <span class="prelude-val">Some</span>(rerun::default_server_addr()),
+        <span class="prelude-val">None </span>=&gt; <span class="prelude-val">None</span>,
     };
 
-    <span class="comment">// Parse glTF asset
-    </span><span class="kw">let </span>(doc, buffers, <span class="kw">_</span>) = gltf::import_slice(bytes).unwrap();
+    <span class="kw">let </span><span class="kw-2">mut </span>session = Session::new();
+    <span class="comment">// TODO(cmc): The Rust SDK needs a higher-level `init()` method, akin to what the python SDK
+    // does... which they can probably share.
+    // This needs to take care of the whole `official_example` thing, and also keeps track of
+    // whether we&#39;re using the rust or python sdk.
+    </span>session.set_application_id(ApplicationId(<span class="string">&quot;objectron-rs&quot;</span>.into()), <span class="bool-val">true</span>);
+    session.set_recording_id(RecordingId::random());
+    <span class="kw">if let </span><span class="prelude-val">Some</span>(addr) = addr {
+        session.connect(addr);
+    }
+
+    <span class="comment">// Read glTF scene
+    </span><span class="kw">let </span>(doc, buffers, <span class="kw">_</span>) = gltf::import_slice(Bytes::from(std::fs::read(args.scene_path)<span class="question-mark">?</span>))<span class="question-mark">?</span>;
     <span class="kw">let </span>nodes = load_gltf(<span class="kw-2">&amp;</span>doc, <span class="kw-2">&amp;</span>buffers);
 
     <span class="comment">// Log raw glTF nodes and their transforms with Rerun
-    </span><span class="kw">let </span><span class="kw-2">mut </span>session = Session::new();
-    <span class="kw">for </span>root <span class="kw">in </span>nodes {
+    </span><span class="kw">for </span>root <span class="kw">in </span>nodes {
         <span class="macro">re_log::info!</span>(scene = root.name, <span class="string">&quot;logging glTF scene&quot;</span>);
-        log_axis(<span class="kw-2">&amp;mut </span>session, <span class="kw-2">&amp;</span>root.name.as_str().into());
-        log_node(<span class="kw-2">&amp;mut </span>session, root);
+        log_coordinate_space(<span class="kw-2">&amp;mut </span>session, root.name.as_str(), <span class="string">&quot;RUB&quot;</span>)<span class="question-mark">?</span>;
+        log_node(<span class="kw-2">&amp;mut </span>session, root)<span class="question-mark">?</span>;
     }
 
-    <span class="comment">// TODO(cmc): provide high-level tools to pick and handle the different modes.
-    // TODO(cmc): connect, spawn_and_connect; show() probably doesn&#39;t make sense with pure rust
-    </span><span class="kw">let </span>log_messages = session.drain_log_messages_buffer();
-    rerun::viewer::show(log_messages).context(<span class="string">&quot;failed to start viewer&quot;</span>)
+    <span class="comment">// TODO(cmc): arg parsing and arg interpretation helpers
+    // TODO(cmc): missing flags: save, serve
+    // TODO(cmc): expose an easy to use async local mode.
+    </span><span class="kw">if </span>args.connect.is_none() {
+        <span class="kw">let </span>log_messages = session.drain_log_messages_buffer();
+        rerun::viewer::show(log_messages)<span class="question-mark">?</span>;
+    }
+
+    <span class="prelude-val">Ok</span>(())
 }
 
 <span class="comment">// --- glTF parsing ---

@@ -420,9 +420,6 @@
 <a href="#420" id="420">420</a>
 <a href="#421" id="421">421</a>
 <a href="#422" id="422">422</a>
-<a href="#423" id="423">423</a>
-<a href="#424" id="424">424</a>
-<a href="#425" id="425">425</a>
 </pre><pre class="rust"><code><span class="kw">use </span>ahash::{HashMap, HashSet};
 <span class="kw">use </span>nohash_hasher::IntMap;
 <span class="kw">use </span>re_data_store::{EntityPath, LogDb};
@@ -430,7 +427,7 @@
 
 <span class="kw">use </span><span class="kw">crate</span>::ui::{Blueprint, HistoricalSelection, SelectionHistory, SpaceView, SpaceViewId};
 
-<span class="kw">use super</span>::{MultiSelection, Selection};
+<span class="kw">use super</span>::{Item, ItemCollection};
 
 <span class="attr">#[derive(Clone, Default, Debug, PartialEq)]
 </span><span class="kw">pub enum </span>HoveredSpace {
@@ -580,7 +577,7 @@
     ///
     /// Do not access this field directly! Use the helper methods instead, which will make sure
     /// to properly maintain the undo/redo history.
-    </span>selection: MultiSelection,
+    </span>selection: ItemCollection,
 
     <span class="doccomment">/// History of selections (what was selected previously).
     </span><span class="attr">#[serde(skip)]
@@ -588,11 +585,11 @@
 
     <span class="doccomment">/// What objects are hovered? Read from this.
     </span><span class="attr">#[serde(skip)]
-    </span>hovered_previous_frame: MultiSelection,
+    </span>hovered_previous_frame: ItemCollection,
 
     <span class="doccomment">/// What objects are hovered? Write to this.
     </span><span class="attr">#[serde(skip)]
-    </span>hovered_this_frame: MultiSelection,
+    </span>hovered_this_frame: ItemCollection,
 
     <span class="doccomment">/// What space is the pointer hovering over? Read from this.
     </span><span class="attr">#[serde(skip)]
@@ -627,51 +624,48 @@
 
     <span class="doccomment">/// Clears the current selection out.
     </span><span class="kw">pub fn </span>clear_current(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
-        <span class="self">self</span>.selection = MultiSelection::default();
+        <span class="self">self</span>.selection = ItemCollection::default();
     }
 
     <span class="doccomment">/// Sets a single selection, updating history as needed.
     ///
     /// Returns the previous selection.
-    </span><span class="kw">pub fn </span>set_single_selection(<span class="kw-2">&amp;mut </span><span class="self">self</span>, item: Selection) -&gt; MultiSelection {
+    </span><span class="kw">pub fn </span>set_single_selection(<span class="kw-2">&amp;mut </span><span class="self">self</span>, item: Item) -&gt; ItemCollection {
         <span class="self">self</span>.set_multi_selection(std::iter::once(item))
     }
 
     <span class="doccomment">/// Sets several objects to be selected, updating history as needed.
     ///
     /// Returns the previous selection.
-    </span><span class="kw">pub fn </span>set_multi_selection(
-        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
-        items: <span class="kw">impl </span>Iterator&lt;Item = Selection&gt;,
-    ) -&gt; MultiSelection {
-        <span class="kw">let </span>new_selection = MultiSelection::new(items);
+    </span><span class="kw">pub fn </span>set_multi_selection(<span class="kw-2">&amp;mut </span><span class="self">self</span>, items: <span class="kw">impl </span>Iterator&lt;Item = Item&gt;) -&gt; ItemCollection {
+        <span class="kw">let </span>new_selection = ItemCollection::new(items);
         <span class="self">self</span>.history.update_selection(<span class="kw-2">&amp;</span>new_selection);
         std::mem::replace(<span class="kw-2">&amp;mut </span><span class="self">self</span>.selection, new_selection)
     }
 
     <span class="doccomment">/// Returns the current selection.
-    </span><span class="kw">pub fn </span>current(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>MultiSelection {
+    </span><span class="kw">pub fn </span>current(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>ItemCollection {
         <span class="kw-2">&amp;</span><span class="self">self</span>.selection
     }
 
     <span class="doccomment">/// Returns the currently hovered objects.
-    </span><span class="kw">pub fn </span>hovered(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>MultiSelection {
+    </span><span class="kw">pub fn </span>hovered(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>ItemCollection {
         <span class="kw-2">&amp;</span><span class="self">self</span>.hovered_previous_frame
     }
 
     <span class="doccomment">/// Set the hovered objects. Will be in [`Self::hovered`] on the next frame.
-    </span><span class="kw">pub fn </span>set_hovered(<span class="kw-2">&amp;mut </span><span class="self">self</span>, items: <span class="kw">impl </span>Iterator&lt;Item = Selection&gt;) {
-        <span class="self">self</span>.hovered_this_frame = MultiSelection::new(items);
+    </span><span class="kw">pub fn </span>set_hovered(<span class="kw-2">&amp;mut </span><span class="self">self</span>, items: <span class="kw">impl </span>Iterator&lt;Item = Item&gt;) {
+        <span class="self">self</span>.hovered_this_frame = ItemCollection::new(items);
     }
 
     <span class="doccomment">/// Select currently hovered objects unless already selected in which case they get unselected.
-    </span><span class="kw">pub fn </span>toggle_selection(<span class="kw-2">&amp;mut </span><span class="self">self</span>, toggle_items: Vec&lt;Selection&gt;) {
+    </span><span class="kw">pub fn </span>toggle_selection(<span class="kw-2">&amp;mut </span><span class="self">self</span>, toggle_items: Vec&lt;Item&gt;) {
         <span class="macro">crate::profile_function!</span>();
 
         <span class="comment">// Make sure we preserve the order - old items kept in same order, new items added to the end.
 
         // All the items to toggle. If an was already selected, it will be removed from this.
-        </span><span class="kw">let </span><span class="kw-2">mut </span>toggle_items_set: HashSet&lt;Selection&gt; = toggle_items.iter().cloned().collect();
+        </span><span class="kw">let </span><span class="kw-2">mut </span>toggle_items_set: HashSet&lt;Item&gt; = toggle_items.iter().cloned().collect();
 
         <span class="kw">let </span><span class="kw-2">mut </span>new_selection = <span class="self">self</span>.selection.to_vec();
         new_selection.retain(|item| !toggle_items_set.remove(item));
@@ -698,22 +692,22 @@
         <span class="kw-2">&amp;mut </span><span class="self">self</span>,
         ui: <span class="kw-2">&amp;mut </span>egui::Ui,
         blueprint: <span class="kw-2">&amp;mut </span>Blueprint,
-    ) -&gt; <span class="prelude-ty">Option</span>&lt;MultiSelection&gt; {
+    ) -&gt; <span class="prelude-ty">Option</span>&lt;ItemCollection&gt; {
         <span class="self">self</span>.history.selection_ui(ui, blueprint)
     }
 
-    <span class="kw">pub fn </span>highlight_for_ui_element(<span class="kw-2">&amp;</span><span class="self">self</span>, test: <span class="kw-2">&amp;</span>Selection) -&gt; HoverHighlight {
+    <span class="kw">pub fn </span>highlight_for_ui_element(<span class="kw-2">&amp;</span><span class="self">self</span>, test: <span class="kw-2">&amp;</span>Item) -&gt; HoverHighlight {
         <span class="kw">let </span>hovered = <span class="self">self
             </span>.hovered_previous_frame
             .iter()
             .any(|current| <span class="kw">match </span>current {
-                Selection::MsgId(<span class="kw">_</span>)
-                | Selection::ComponentPath(<span class="kw">_</span>)
-                | Selection::SpaceView(<span class="kw">_</span>)
-                | Selection::DataBlueprintGroup(<span class="kw">_</span>, <span class="kw">_</span>) =&gt; current == test,
+                Item::MsgId(<span class="kw">_</span>)
+                | Item::ComponentPath(<span class="kw">_</span>)
+                | Item::SpaceView(<span class="kw">_</span>)
+                | Item::DataBlueprintGroup(<span class="kw">_</span>, <span class="kw">_</span>) =&gt; current == test,
 
-                Selection::InstancePath(current_space_view_id, current_instance_path) =&gt; {
-                    <span class="kw">if let </span>Selection::InstancePath(test_space_view_id, test_instance_path) = test {
+                Item::InstancePath(current_space_view_id, current_instance_path) =&gt; {
+                    <span class="kw">if let </span>Item::InstancePath(test_space_view_id, test_instance_path) = test {
                         <span class="comment">// For both space view id and instance index we want to be inclusive,
                         // but if both are set to Some, and set to different, then we count that
                         // as a miss.
@@ -751,9 +745,9 @@
 
         <span class="kw">for </span>current_selection <span class="kw">in </span><span class="self">self</span>.selection.iter() {
             <span class="kw">match </span>current_selection {
-                Selection::MsgId(<span class="kw">_</span>) | Selection::ComponentPath(<span class="kw">_</span>) | Selection::SpaceView(<span class="kw">_</span>) =&gt; {}
+                Item::MsgId(<span class="kw">_</span>) | Item::ComponentPath(<span class="kw">_</span>) | Item::SpaceView(<span class="kw">_</span>) =&gt; {}
 
-                Selection::DataBlueprintGroup(group_space_view_id, group_handle) =&gt; {
+                Item::DataBlueprintGroup(group_space_view_id, group_handle) =&gt; {
                     <span class="kw">if </span><span class="kw-2">*</span>group_space_view_id == space_view_id {
                         <span class="kw">if let </span><span class="prelude-val">Some</span>(space_view) = space_views.get(group_space_view_id) {
                             space_view.data_blueprint.visit_group_entities_recursively(
@@ -770,7 +764,7 @@
                     }
                 }
 
-                Selection::InstancePath(selected_space_view_context, selected_instance) =&gt; {
+                Item::InstancePath(selected_space_view_context, selected_instance) =&gt; {
                     <span class="kw">let </span>highlight = <span class="kw">if </span><span class="kw-2">*</span>selected_space_view_context == <span class="prelude-val">Some</span>(space_view_id) {
                         SelectionHighlight::Selection
                     } <span class="kw">else </span>{
@@ -800,9 +794,9 @@
 
         <span class="kw">for </span>current_hover <span class="kw">in </span><span class="self">self</span>.hovered_previous_frame.iter() {
             <span class="kw">match </span>current_hover {
-                Selection::MsgId(<span class="kw">_</span>) | Selection::ComponentPath(<span class="kw">_</span>) | Selection::SpaceView(<span class="kw">_</span>) =&gt; {}
+                Item::MsgId(<span class="kw">_</span>) | Item::ComponentPath(<span class="kw">_</span>) | Item::SpaceView(<span class="kw">_</span>) =&gt; {}
 
-                Selection::DataBlueprintGroup(group_space_view_id, group_handle) =&gt; {
+                Item::DataBlueprintGroup(group_space_view_id, group_handle) =&gt; {
                     <span class="comment">// Unlike for selected objects/data we are more picky for data blueprints with our hover highlights
                     // since they are truly local to a space view.
                     </span><span class="kw">if </span><span class="kw-2">*</span>group_space_view_id == space_view_id {
@@ -821,7 +815,7 @@
                     }
                 }
 
-                Selection::InstancePath(<span class="kw">_</span>, selected_instance) =&gt; {
+                Item::InstancePath(<span class="kw">_</span>, selected_instance) =&gt; {
                     <span class="kw">let </span>highlighted_entity = highlighted_entity_paths
                         .entry(selected_instance.entity_path.hash())
                         .or_default();

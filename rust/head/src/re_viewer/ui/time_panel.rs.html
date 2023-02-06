@@ -2175,6 +2175,53 @@
 <a href="#2175" id="2175">2175</a>
 <a href="#2176" id="2176">2176</a>
 <a href="#2177" id="2177">2177</a>
+<a href="#2178" id="2178">2178</a>
+<a href="#2179" id="2179">2179</a>
+<a href="#2180" id="2180">2180</a>
+<a href="#2181" id="2181">2181</a>
+<a href="#2182" id="2182">2182</a>
+<a href="#2183" id="2183">2183</a>
+<a href="#2184" id="2184">2184</a>
+<a href="#2185" id="2185">2185</a>
+<a href="#2186" id="2186">2186</a>
+<a href="#2187" id="2187">2187</a>
+<a href="#2188" id="2188">2188</a>
+<a href="#2189" id="2189">2189</a>
+<a href="#2190" id="2190">2190</a>
+<a href="#2191" id="2191">2191</a>
+<a href="#2192" id="2192">2192</a>
+<a href="#2193" id="2193">2193</a>
+<a href="#2194" id="2194">2194</a>
+<a href="#2195" id="2195">2195</a>
+<a href="#2196" id="2196">2196</a>
+<a href="#2197" id="2197">2197</a>
+<a href="#2198" id="2198">2198</a>
+<a href="#2199" id="2199">2199</a>
+<a href="#2200" id="2200">2200</a>
+<a href="#2201" id="2201">2201</a>
+<a href="#2202" id="2202">2202</a>
+<a href="#2203" id="2203">2203</a>
+<a href="#2204" id="2204">2204</a>
+<a href="#2205" id="2205">2205</a>
+<a href="#2206" id="2206">2206</a>
+<a href="#2207" id="2207">2207</a>
+<a href="#2208" id="2208">2208</a>
+<a href="#2209" id="2209">2209</a>
+<a href="#2210" id="2210">2210</a>
+<a href="#2211" id="2211">2211</a>
+<a href="#2212" id="2212">2212</a>
+<a href="#2213" id="2213">2213</a>
+<a href="#2214" id="2214">2214</a>
+<a href="#2215" id="2215">2215</a>
+<a href="#2216" id="2216">2216</a>
+<a href="#2217" id="2217">2217</a>
+<a href="#2218" id="2218">2218</a>
+<a href="#2219" id="2219">2219</a>
+<a href="#2220" id="2220">2220</a>
+<a href="#2221" id="2221">2221</a>
+<a href="#2222" id="2222">2222</a>
+<a href="#2223" id="2223">2223</a>
+<a href="#2224" id="2224">2224</a>
 </pre><pre class="rust"><code><span class="kw">use </span>std::{collections::BTreeMap, ops::RangeInclusive};
 
 <span class="kw">use </span>egui::{
@@ -2192,7 +2239,7 @@
 <span class="kw">use crate</span>::{
     misc::time_control::{Looping, PlayState},
     time_axis::TimelineAxis,
-    Selection, TimeControl, TimeView, ViewerContext,
+    Item, TimeControl, TimeView, ViewerContext,
 };
 
 <span class="kw">use super</span>::{data_ui::DataUi, selection_panel::what_is_selected_ui, Blueprint};
@@ -2232,13 +2279,29 @@
         blueprint: <span class="kw-2">&amp;mut </span>Blueprint,
         egui_ctx: <span class="kw-2">&amp;</span>egui::Context,
     ) {
-        <span class="kw">let </span>x_margin = <span class="number">16.0</span>;
+        <span class="kw">let </span>x_margin = <span class="number">8.0</span>;
         <span class="kw">let </span>y_margin = <span class="number">8.0</span>;
         <span class="kw">let </span>top_bar_height = <span class="number">28.0</span>;
 
+        <span class="comment">// Show a stroke only on the top. To achieve this, we add a negative outer margin.
+        // (on the inner margin we counteract this again)
+        </span><span class="kw">let </span>margin_offset = ctx.re_ui.design_tokens.bottom_bar_stroke.width * <span class="number">0.5</span>;
+
         <span class="kw">let </span><span class="kw-2">mut </span>panel_frame = egui::Frame {
             fill: ctx.re_ui.design_tokens.bottom_bar_color,
-            inner_margin: egui::style::Margin::symmetric(x_margin, y_margin),
+            inner_margin: egui::Margin::symmetric(
+                x_margin + margin_offset,
+                y_margin + margin_offset,
+            ),
+            outer_margin: egui::Margin {
+                left: -margin_offset,
+                right: -margin_offset,
+                <span class="comment">// Add a proper stoke width thick margin on the top.
+                </span>top: ctx.re_ui.design_tokens.bottom_bar_stroke.width,
+                bottom: -margin_offset,
+            },
+            stroke: ctx.re_ui.design_tokens.bottom_bar_stroke,
+            rounding: ctx.re_ui.design_tokens.bottom_bar_rounding,
             ..Default::default()
         };
 
@@ -2252,10 +2315,12 @@
 
         <span class="kw">let </span>collapsed = egui::TopBottomPanel::bottom(<span class="string">&quot;time_panel_collapsed&quot;</span>)
             .resizable(<span class="bool-val">false</span>)
+            .show_separator_line(<span class="bool-val">false</span>)
             .frame(panel_frame)
             .default_height(<span class="number">16.0</span>);
         <span class="kw">let </span>expanded = egui::TopBottomPanel::bottom(<span class="string">&quot;time_panel_expanded&quot;</span>)
             .resizable(<span class="bool-val">true</span>)
+            .show_separator_line(<span class="bool-val">false</span>)
             .frame(panel_frame)
             .min_height(<span class="number">150.0</span>)
             .default_height(<span class="number">250.0</span>);
@@ -2299,7 +2364,13 @@
                         );
 
                         ui.spacing_mut().scroll_bar_outer_margin = <span class="number">4.0</span>; <span class="comment">// needed, because we have no panel margin on the right side.
-                        </span><span class="self">self</span>.expanded_ui(ctx, blueprint, ui);
+
+                        // Add extra margin on the left which was intentionally missing on the controls.
+                        </span><span class="kw">let </span><span class="kw-2">mut </span>top_rop_frame = egui::Frame::default();
+                        top_rop_frame.inner_margin.left = <span class="number">8.0</span>;
+                        top_rop_frame.show(ui, |ui| {
+                            <span class="self">self</span>.expanded_ui(ctx, blueprint, ui);
+                        });
                     });
                 }
             },
@@ -2425,6 +2496,7 @@
         );
         paint_time_ranges_gaps(
             <span class="kw-2">&amp;</span><span class="self">self</span>.time_ranges_ui,
+            ctx.re_ui,
             ui,
             <span class="kw-2">&amp;</span>time_bg_area_painter,
             full_y_range.clone(),
@@ -2472,13 +2544,25 @@
             });
 
         {
-            <span class="comment">// Paint a line between the stream names on the left
+            <span class="comment">// Paint a shadow between the stream names on the left
             // and the data on the right:
-            </span>ui.painter().vline(
-                time_x_left,
-                full_y_range,
-                ui.visuals().widgets.noninteractive.bg_stroke,
+            </span><span class="kw">let </span>shadow_width = <span class="number">30.0</span>;
+
+            <span class="comment">// In the design the shadow starts under the time markers.
+            //let shadow_y_start =
+            //    timeline_rect.bottom() + ui.visuals().widgets.noninteractive.bg_stroke.width;
+            // This looks great but only if there are still time markes.
+            // When they move to the right (or have a cut) one expects the shadow to go all the way up.
+            // But that&#39;s quite complicated so let&#39;s have the shadow all the way
+            </span><span class="kw">let </span>shadow_y_start = <span class="kw-2">*</span>full_y_range.start();
+
+            <span class="kw">let </span>shadow_y_end = <span class="kw-2">*</span>full_y_range.end();
+            <span class="kw">let </span>rect = egui::Rect::from_x_y_ranges(
+                time_x_left..=(time_x_left + shadow_width),
+                shadow_y_start..=shadow_y_end,
             );
+            ctx.re_ui
+                .draw_shadow_line(ui, rect, egui::Direction::LeftToRight);
         }
 
         <span class="comment">// Put time-marker on top and last, so that you can always drag it
@@ -2604,7 +2688,7 @@
                 num_messages_at_time,
                 full_width_rect,
                 <span class="kw-2">&amp;</span><span class="self">self</span>.time_ranges_ui,
-                Selection::InstancePath(<span class="prelude-val">None</span>, InstancePath::entity_splat(tree.path.clone())),
+                Item::InstancePath(<span class="prelude-val">None</span>, InstancePath::entity_splat(tree.path.clone())),
             );
         }
     }
@@ -2681,7 +2765,7 @@
 
                 <span class="kw">if </span>is_visible {
                     response.on_hover_ui(|ui| {
-                        <span class="kw">let </span>selection = Selection::ComponentPath(component_path.clone());
+                        <span class="kw">let </span>selection = Item::ComponentPath(component_path.clone());
                         what_is_selected_ui(ui, ctx, blueprint, <span class="kw-2">&amp;</span>selection);
                         ui.add_space(<span class="number">8.0</span>);
                         <span class="kw">let </span>query = ctx.current_query();
@@ -2707,7 +2791,7 @@
                         messages_over_time,
                         full_width_rect,
                         <span class="kw-2">&amp;</span><span class="self">self</span>.time_ranges_ui,
-                        Selection::ComponentPath(component_path),
+                        Item::ComponentPath(component_path),
                     );
                 }
             }
@@ -2760,7 +2844,7 @@
     num_messages_at_time: <span class="kw-2">&amp;</span>BTreeMap&lt;TimeInt, usize&gt;,
     full_width_rect: Rect,
     time_ranges_ui: <span class="kw-2">&amp;</span>TimeRangesUi,
-    select_on_click: Selection,
+    select_on_click: Item,
 ) {
     <span class="macro">crate::profile_function!</span>();
 
@@ -2942,7 +3026,7 @@
     ctx: <span class="kw-2">&amp;mut </span>ViewerContext&lt;<span class="lifetime">&#39;_</span>&gt;,
     blueprint: <span class="kw-2">&amp;mut </span>Blueprint,
     egui_ctx: <span class="kw-2">&amp;</span>egui::Context,
-    selection: <span class="kw-2">&amp;</span>Selection,
+    item: <span class="kw-2">&amp;</span>Item,
     time_points: <span class="kw-2">&amp;</span>[(TimeInt, usize)],
 ) {
     show_tooltip_at_pointer(egui_ctx, Id::new(<span class="string">&quot;data_tooltip&quot;</span>), |ui| {
@@ -2956,13 +3040,13 @@
                 <span class="comment">// Could be an entity made up of many components logged at the same time.
                 // Still show a preview!
             </span>}
-            <span class="kw">super</span>::selection_panel::what_is_selected_ui(ui, ctx, blueprint, selection);
+            <span class="kw">super</span>::selection_panel::what_is_selected_ui(ui, ctx, blueprint, item);
             ui.add_space(<span class="number">8.0</span>);
 
             <span class="kw">let </span>timeline = <span class="kw-2">*</span>ctx.rec_cfg.time_ctrl.timeline();
-            <span class="kw">let </span>time_int = time_points[<span class="number">0</span>].<span class="number">0</span>; <span class="comment">// We want to show the selection at the time of whatever point we are hovering
+            <span class="kw">let </span>time_int = time_points[<span class="number">0</span>].<span class="number">0</span>; <span class="comment">// We want to show the item at the time of whatever point we are hovering
             </span><span class="kw">let </span>query = re_arrow_store::LatestAtQuery::new(timeline, time_int);
-            selection.data_ui(ctx, ui, <span class="kw">super</span>::UiVerbosity::Reduced, <span class="kw-2">&amp;</span>query);
+            item.data_ui(ctx, ui, <span class="kw">super</span>::UiVerbosity::Reduced, <span class="kw-2">&amp;</span>query);
         } <span class="kw">else </span>{
             ui.label(<span class="macro">format!</span>(
                 <span class="string">&quot;{num_messages} messages at {num_times} points in time&quot;
@@ -3055,6 +3139,7 @@
 <span class="doccomment">/// Visually separate the different time segments
 </span><span class="kw">fn </span>paint_time_ranges_gaps(
     time_ranges_ui: <span class="kw-2">&amp;</span>TimeRangesUi,
+    re_ui: <span class="kw-2">&amp;</span>re_ui::ReUi,
     ui: <span class="kw-2">&amp;mut </span>egui::Ui,
     painter: <span class="kw-2">&amp;</span>egui::Painter,
     y_range: RangeInclusive&lt;f32&gt;,
@@ -3082,25 +3167,27 @@
     //    &lt;---------&gt;
     //     gap width
     //
-    // Filled with black, plus a stroke.
+    // Filled with a dark color, plus a stroke and a small drop shadow to the left.
 
     </span><span class="kw">use </span>itertools::Itertools <span class="kw">as _</span>;
 
     <span class="kw">let </span>top = <span class="kw-2">*</span>y_range.start();
     <span class="kw">let </span>bottom = <span class="kw-2">*</span>y_range.end();
 
-    <span class="kw">let </span>fill_color = Color32::BLACK;
+    <span class="kw">let </span>fill_color = ui.visuals().widgets.noninteractive.bg_fill;
     <span class="kw">let </span>stroke = ui.visuals().widgets.noninteractive.bg_stroke;
 
     <span class="kw">let </span>paint_time_gap = |gap_left: f32, gap_right: f32| {
         <span class="kw">let </span>gap_width = gap_right - gap_left;
         <span class="kw">let </span>zig_width = <span class="number">4.0_f32</span>.at_most(gap_width / <span class="number">3.0</span>).at_least(<span class="number">1.0</span>);
         <span class="kw">let </span>zig_height = zig_width;
+        <span class="kw">let </span>shadow_width = <span class="number">12.0</span>;
 
         <span class="kw">let </span><span class="kw-2">mut </span>y = top;
         <span class="kw">let </span><span class="kw-2">mut </span>row = <span class="number">0</span>; <span class="comment">// 0 = start wide, 1 = start narrow
 
         </span><span class="kw">let </span><span class="kw-2">mut </span>mesh = egui::Mesh::default();
+        <span class="kw">let </span><span class="kw-2">mut </span>shadow_mesh = egui::Mesh::default();
         <span class="kw">let </span><span class="kw-2">mut </span>left_line_strip = <span class="macro">vec!</span>[];
         <span class="kw">let </span><span class="kw-2">mut </span>right_line_strip = <span class="macro">vec!</span>[];
 
@@ -3129,6 +3216,9 @@
             mesh.colored_vertex(left_pos, fill_color);
             mesh.colored_vertex(right_pos, fill_color);
 
+            shadow_mesh.colored_vertex(pos2(right - shadow_width, y), Color32::TRANSPARENT);
+            shadow_mesh.colored_vertex(right_pos, re_ui.design_tokens.shadow_gradient_dark_start);
+
             left_line_strip.push(left_pos);
             right_line_strip.push(right_pos);
 
@@ -3136,7 +3226,11 @@
             row += <span class="number">1</span>;
         }
 
+        <span class="comment">// Regular &amp; shadow mesh have the same topology!
+        </span>shadow_mesh.indices = mesh.indices.clone();
+
         painter.add(Shape::Mesh(mesh));
+        painter.add(Shape::Mesh(shadow_mesh));
         painter.add(Shape::line(left_line_strip, stroke));
         painter.add(Shape::line(right_line_strip, stroke));
     };

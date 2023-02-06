@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":[["MsgSenderError",""]],"fn":[["bundle_from_iter",""]],"struct":[["MsgSender","Facilitates building and sending component payloads with the Rerun SDK."]]};

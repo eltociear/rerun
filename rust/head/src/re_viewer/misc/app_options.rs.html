@@ -23,6 +23,7 @@
 <a href="#23" id="23">23</a>
 <a href="#24" id="24">24</a>
 <a href="#25" id="25">25</a>
+<a href="#26" id="26">26</a>
 </pre><pre class="rust"><code><span class="doccomment">/// Global options for the viewer.
 </span><span class="attr">#[derive(Debug, PartialEq, serde::Deserialize, serde::Serialize)]
 #[serde(default)]
@@ -33,6 +34,7 @@
     <span class="kw">pub </span>warn_latency: f32,
 
     <span class="doccomment">/// Show milliseconds, RAM usage, etc.
+    </span><span class="attr">#[serde(skip)] </span><span class="comment">// restore to the default for the current mode (dev vs debug)
     </span><span class="kw">pub </span>show_metrics: bool,
 }
 

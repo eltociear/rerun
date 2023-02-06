@@ -473,7 +473,7 @@
 
     ui.vertical(|ui| {
         ui.vertical(|ui| {
-            ui.strong(<span class="string">&quot;Image:&quot;</span>);
+            ui.strong(<span class="string">&quot;Image&quot;</span>);
             egui::Grid::new(<span class="string">&quot;imagegrid&quot;</span>).num_columns(<span class="number">2</span>).show(ui, |ui| {
                 tensor_dimension_ui(
                     ui,
@@ -512,7 +512,7 @@
         ui.add_space(<span class="number">4.0</span>);
 
         ui.vertical(|ui| {
-            ui.strong(<span class="string">&quot;Selectors:&quot;</span>);
+            ui.strong(<span class="string">&quot;Selectors&quot;</span>);
             <span class="comment">// Use Grid instead of Vertical layout to match styling of the parallel Grid for
             </span>egui::Grid::new(<span class="string">&quot;selectiongrid&quot;</span>)
                 .num_columns(<span class="number">2</span>)

@@ -203,7 +203,7 @@
 <span class="kw">use </span>re_ui::Command;
 
 <span class="kw">use super</span>::{HistoricalSelection, SelectionHistory};
-<span class="kw">use crate</span>::{misc::MultiSelection, ui::Blueprint, Selection};
+<span class="kw">use crate</span>::{misc::ItemCollection, ui::Blueprint, Item};
 
 <span class="comment">// ---
 
@@ -212,7 +212,7 @@
         <span class="kw-2">&amp;mut </span><span class="self">self</span>,
         ui: <span class="kw-2">&amp;mut </span>egui::Ui,
         blueprint: <span class="kw-2">&amp;</span>Blueprint,
-    ) -&gt; <span class="prelude-ty">Option</span>&lt;MultiSelection&gt; {
+    ) -&gt; <span class="prelude-ty">Option</span>&lt;ItemCollection&gt; {
         <span class="self">self</span>.control_bar_ui(ui, blueprint).map(|sel| sel.selection)
     }
 
@@ -276,7 +276,7 @@
                 \n\
                 Right-click for more.&quot;</span>,
                 Command::SelectionPrevious.format_shortcut_tooltip_suffix(ui.ctx()),
-                multi_selection_to_string(blueprint, <span class="kw-2">&amp;</span>previous.selection),
+                item_collection_to_string(blueprint, <span class="kw-2">&amp;</span>previous.selection),
             ));
 
             <span class="kw">let </span>response = response.context_menu(|ui| {
@@ -314,7 +314,7 @@
                 \n\
                 Right-click for more.&quot;</span>,
                 Command::SelectionNext.format_shortcut_tooltip_suffix(ui.ctx()),
-                multi_selection_to_string(blueprint, <span class="kw-2">&amp;</span>next.selection),
+                item_collection_to_string(blueprint, <span class="kw-2">&amp;</span>next.selection),
             ));
 
             <span class="kw">let </span>response = response.context_menu(|ui| {
@@ -343,13 +343,13 @@
             ui.horizontal(|ui| {
                 {
                     <span class="comment">// borrow checker workaround
-                    </span><span class="kw">let </span>sel = multi_selection_to_string(blueprint, sel);
+                    </span><span class="kw">let </span>sel = item_collection_to_string(blueprint, sel);
                     <span class="kw">if </span>ui.selectable_value(<span class="kw-2">&amp;mut </span><span class="self">self</span>.current, index, sel).clicked() {
                         ui.close_menu();
                     }
                 }
                 <span class="kw">if </span>sel.len() == <span class="number">1 </span>{
-                    selection_kind_ui(ui, sel.iter().next().unwrap());
+                    item_kind_ui(ui, sel.iter().next().unwrap());
                 }
             });
         }
@@ -358,44 +358,44 @@
 
 <span class="comment">// Different kinds of selections can share the same path in practice! We need to
 // differentiate those in the UI to avoid confusion.
-</span><span class="kw">fn </span>selection_kind_ui(ui: <span class="kw-2">&amp;mut </span>egui::Ui, sel: <span class="kw-2">&amp;</span>Selection) {
+</span><span class="kw">fn </span>item_kind_ui(ui: <span class="kw-2">&amp;mut </span>egui::Ui, sel: <span class="kw-2">&amp;</span>Item) {
     ui.weak(RichText::new(<span class="macro">format!</span>(<span class="string">&quot;({})&quot;</span>, sel.kind())));
 }
 
-<span class="kw">fn </span>multi_selection_to_string(blueprint: <span class="kw-2">&amp;</span>Blueprint, sel: <span class="kw-2">&amp;</span>MultiSelection) -&gt; String {
-    <span class="macro">assert!</span>(!sel.is_empty()); <span class="comment">// history never contains empty selections.
-    </span><span class="kw">if </span>sel.len() == <span class="number">1 </span>{
-        single_selection_to_string(blueprint, sel.iter().next().unwrap())
-    } <span class="kw">else if let </span><span class="prelude-val">Some</span>(kind) = sel.are_all_same_kind() {
-        <span class="macro">format!</span>(<span class="string">&quot;{}x {}s&quot;</span>, sel.len(), kind)
+<span class="kw">fn </span>item_collection_to_string(blueprint: <span class="kw-2">&amp;</span>Blueprint, items: <span class="kw-2">&amp;</span>ItemCollection) -&gt; String {
+    <span class="macro">assert!</span>(!items.is_empty()); <span class="comment">// history never contains empty selections.
+    </span><span class="kw">if </span>items.len() == <span class="number">1 </span>{
+        item_to_string(blueprint, items.iter().next().unwrap())
+    } <span class="kw">else if let </span><span class="prelude-val">Some</span>(kind) = items.are_all_same_kind() {
+        <span class="macro">format!</span>(<span class="string">&quot;{}x {}s&quot;</span>, items.len(), kind)
     } <span class="kw">else </span>{
         <span class="string">&quot;&lt;multiple selections&gt;&quot;</span>.to_owned()
     }
 }
 
-<span class="kw">fn </span>single_selection_to_string(blueprint: <span class="kw-2">&amp;</span>Blueprint, sel: <span class="kw-2">&amp;</span>Selection) -&gt; String {
-    <span class="kw">match </span>sel {
-        Selection::SpaceView(sid) =&gt; {
+<span class="kw">fn </span>item_to_string(blueprint: <span class="kw-2">&amp;</span>Blueprint, item: <span class="kw-2">&amp;</span>Item) -&gt; String {
+    <span class="kw">match </span>item {
+        Item::SpaceView(sid) =&gt; {
             <span class="kw">if let </span><span class="prelude-val">Some</span>(space_view) = blueprint.viewport.space_view(sid) {
-                space_view.name.clone()
+                space_view.display_name.clone()
             } <span class="kw">else </span>{
                 <span class="string">&quot;&lt;removed space view&gt;&quot;</span>.to_owned()
             }
         }
-        Selection::InstancePath(<span class="kw">_</span>, entity_path) =&gt; entity_path.to_string(),
-        Selection::DataBlueprintGroup(sid, handle) =&gt; {
+        Item::InstancePath(<span class="kw">_</span>, entity_path) =&gt; entity_path.to_string(),
+        Item::DataBlueprintGroup(sid, handle) =&gt; {
             <span class="kw">if let </span><span class="prelude-val">Some</span>(space_view) = blueprint.viewport.space_view(sid) {
                 <span class="kw">if let </span><span class="prelude-val">Some</span>(group) = space_view.data_blueprint.group(<span class="kw-2">*</span>handle) {
                     group.display_name.clone()
                 } <span class="kw">else </span>{
-                    <span class="macro">format!</span>(<span class="string">&quot;&lt;removed group in {}&gt;&quot;</span>, space_view.name)
+                    <span class="macro">format!</span>(<span class="string">&quot;&lt;removed group in {}&gt;&quot;</span>, space_view.display_name)
                 }
             } <span class="kw">else </span>{
                 <span class="string">&quot;&lt;group in removed space view&gt;&quot;</span>.to_owned()
             }
         }
-        Selection::MsgId(msg_id) =&gt; msg_id.short_string(),
-        Selection::ComponentPath(path) =&gt; {
+        Item::MsgId(msg_id) =&gt; msg_id.short_string(),
+        Item::ComponentPath(path) =&gt; {
             <span class="macro">format!</span>(<span class="string">&quot;{} {}&quot;</span>, path.entity_path, path.component_name.short_name(),)
         }
     }

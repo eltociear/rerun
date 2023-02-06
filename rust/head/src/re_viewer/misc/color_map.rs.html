@@ -301,7 +301,11 @@
 <a href="#301" id="301">301</a>
 <a href="#302" id="302">302</a>
 <a href="#303" id="303">303</a>
-</pre><pre class="rust"><code><span class="doccomment">/// Converts float from 0.0..=1.0 into a color using Turbo.
+<a href="#304" id="304">304</a>
+<a href="#305" id="305">305</a>
+</pre><pre class="rust"><code><span class="kw">use </span>glam::{Vec2, Vec4};
+
+<span class="doccomment">/// Converts float from 0.0..=1.0 into a color using Turbo.
 ///
 /// The Turbo color map described [here](https://ai.googleblog.com/2019/08/turbo-improved-rainbow-colormap-for.html)
 ///
@@ -312,21 +316,21 @@
 /// [see here](https://gist.github.com/mikhailov-work/0d177465a8151eb6ede1768d51d476c7)
 </span><span class="attr">#[allow(clippy::excessive_precision)]
 </span><span class="kw">pub fn </span>turbo_color_map(x: f32) -&gt; egui::Color32 {
-    <span class="kw">let </span>red_vec4 = glam::vec4(<span class="number">0.13572138</span>, <span class="number">4.61539260</span>, -<span class="number">42.66032258</span>, <span class="number">132.13108234</span>);
-    <span class="kw">let </span>green_vec4 = glam::vec4(<span class="number">0.09140261</span>, <span class="number">2.19418839</span>, <span class="number">4.84296658</span>, -<span class="number">14.18503333</span>);
-    <span class="kw">let </span>blue_vec4 = glam::vec4(<span class="number">0.10667330</span>, <span class="number">12.64194608</span>, -<span class="number">60.58204836</span>, <span class="number">110.36276771</span>);
-    <span class="kw">let </span>red_vec2 = glam::vec2(-<span class="number">152.94239396</span>, <span class="number">59.28637943</span>);
-    <span class="kw">let </span>green_vec2 = glam::vec2(<span class="number">4.27729857</span>, <span class="number">2.82956604</span>);
-    <span class="kw">let </span>blue_vec2 = glam::vec2(-<span class="number">89.90310912</span>, <span class="number">27.34824973</span>);
+    <span class="kw">const </span>RED_VEC4: Vec4 = Vec4::new(<span class="number">0.13572138</span>, <span class="number">4.61539260</span>, -<span class="number">42.66032258</span>, <span class="number">132.13108234</span>);
+    <span class="kw">const </span>GREEN_VEC4: Vec4 = Vec4::new(<span class="number">0.09140261</span>, <span class="number">2.19418839</span>, <span class="number">4.84296658</span>, -<span class="number">14.18503333</span>);
+    <span class="kw">const </span>BLUE_VEC4: Vec4 = Vec4::new(<span class="number">0.10667330</span>, <span class="number">12.64194608</span>, -<span class="number">60.58204836</span>, <span class="number">110.36276771</span>);
+    <span class="kw">const </span>RED_VEC2: Vec2 = Vec2::new(-<span class="number">152.94239396</span>, <span class="number">59.28637943</span>);
+    <span class="kw">const </span>GREEN_VEC2: Vec2 = Vec2::new(<span class="number">4.27729857</span>, <span class="number">2.82956604</span>);
+    <span class="kw">const </span>BLURE_VEC2: Vec2 = Vec2::new(-<span class="number">89.90310912</span>, <span class="number">27.34824973</span>);
 
     <span class="kw">let </span>v4 = glam::vec4(<span class="number">1.0</span>, x, x * x, x * x * x);
     <span class="kw">let </span>v2 = glam::vec2(v4.z, v4.w) * v4.z;
 
-    <span class="comment">// Above sources are not explicit about it but this color is seemingly already in srgb gamma space.
+    <span class="comment">// Above sources are not explicit about it but this color is seemingly already in sRGB gamma space.
     </span>egui::Color32::from_rgb(
-        ((v4.dot(red_vec4) + v2.dot(red_vec2)) * <span class="number">255.0</span>) <span class="kw">as </span>u8,
-        ((v4.dot(green_vec4) + v2.dot(green_vec2)) * <span class="number">255.0</span>) <span class="kw">as </span>u8,
-        ((v4.dot(blue_vec4) + v2.dot(blue_vec2)) * <span class="number">255.0</span>) <span class="kw">as </span>u8,
+        ((v4.dot(RED_VEC4) + v2.dot(RED_VEC2)) * <span class="number">255.0</span>) <span class="kw">as </span>u8,
+        ((v4.dot(GREEN_VEC4) + v2.dot(GREEN_VEC2)) * <span class="number">255.0</span>) <span class="kw">as </span>u8,
+        ((v4.dot(BLUE_VEC4) + v2.dot(BLURE_VEC2)) * <span class="number">255.0</span>) <span class="kw">as </span>u8,
     )
 }
 

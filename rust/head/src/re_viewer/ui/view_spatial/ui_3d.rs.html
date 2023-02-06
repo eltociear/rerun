@@ -648,6 +648,28 @@
 <a href="#648" id="648">648</a>
 <a href="#649" id="649">649</a>
 <a href="#650" id="650">650</a>
+<a href="#651" id="651">651</a>
+<a href="#652" id="652">652</a>
+<a href="#653" id="653">653</a>
+<a href="#654" id="654">654</a>
+<a href="#655" id="655">655</a>
+<a href="#656" id="656">656</a>
+<a href="#657" id="657">657</a>
+<a href="#658" id="658">658</a>
+<a href="#659" id="659">659</a>
+<a href="#660" id="660">660</a>
+<a href="#661" id="661">661</a>
+<a href="#662" id="662">662</a>
+<a href="#663" id="663">663</a>
+<a href="#664" id="664">664</a>
+<a href="#665" id="665">665</a>
+<a href="#666" id="666">666</a>
+<a href="#667" id="667">667</a>
+<a href="#668" id="668">668</a>
+<a href="#669" id="669">669</a>
+<a href="#670" id="670">670</a>
+<a href="#671" id="671">671</a>
+<a href="#672" id="672">672</a>
 </pre><pre class="rust"><code><span class="kw">use </span>egui::NumExt <span class="kw">as _</span>;
 <span class="kw">use </span>glam::Affine3A;
 <span class="kw">use </span>macaw::{vec3, BoundingBox, Quat, Vec3};
@@ -660,7 +682,7 @@
 };
 
 <span class="kw">use crate</span>::{
-    misc::{HoveredSpace, Selection},
+    misc::{HoveredSpace, Item},
     ui::{
         data_ui::{<span class="self">self</span>, DataUi},
         view_spatial::{
@@ -687,6 +709,8 @@
 
     <span class="doccomment">/// Currently tracked camera.
     </span>tracked_camera: <span class="prelude-ty">Option</span>&lt;InstancePath&gt;,
+    <span class="doccomment">/// Camera pose just before we took over another camera via [Self::tracked_camera].
+    </span>camera_before_tracked_camera: <span class="prelude-ty">Option</span>&lt;Eye&gt;,
 
     <span class="attr">#[serde(skip)]
     </span>eye_interpolation: <span class="prelude-ty">Option</span>&lt;EyeInterpolation&gt;,
@@ -714,6 +738,7 @@
         <span class="self">Self </span>{
             orbit_eye: Default::default(),
             tracked_camera: <span class="prelude-val">None</span>,
+            camera_before_tracked_camera: <span class="prelude-val">None</span>,
             eye_interpolation: Default::default(),
             hovered_point: Default::default(),
             spin: <span class="bool-val">false</span>,
@@ -729,6 +754,7 @@
     <span class="kw">pub fn </span>reset_camera(<span class="kw-2">&amp;mut </span><span class="self">self</span>, scene_bbox_accum: <span class="kw-2">&amp;</span>BoundingBox) {
         <span class="self">self</span>.interpolate_to_eye(default_eye(scene_bbox_accum, <span class="kw-2">&amp;</span><span class="self">self</span>.space_specs).to_eye());
         <span class="self">self</span>.tracked_camera = <span class="prelude-val">None</span>;
+        <span class="self">self</span>.camera_before_tracked_camera = <span class="prelude-val">None</span>;
     }
 
     <span class="kw">fn </span>update_eye(
@@ -885,6 +911,7 @@
     CTRL slows down, SHIFT speeds up.\n\
     \n\
     Double-click an object to focus the view on it.\n\
+    For cameras, you can restore the view again with Escape.\n\
     \n\
     Double-click on empty space to reset the view.&quot;</span>;
 
@@ -924,6 +951,7 @@
         state.state_3d.last_eye_interact_time = ui.input(|i| i.time);
         state.state_3d.eye_interpolation = <span class="prelude-val">None</span>;
         state.state_3d.tracked_camera = <span class="prelude-val">None</span>;
+        state.state_3d.camera_before_tracked_camera = <span class="prelude-val">None</span>;
     }
 
     <span class="comment">// TODO(andreas): This isn&#39;t part of the camera, but of the transform https://github.com/rerun-io/rerun/issues/753
@@ -1011,7 +1039,7 @@
         ctx.set_hovered(picking_result.iter_hits().filter_map(|pick| {
             pick.instance_path_hash
                 .resolve(<span class="kw-2">&amp;</span>ctx.log_db.entity_db)
-                .map(|instance_path| Selection::InstancePath(<span class="prelude-val">Some</span>(space_view_id), instance_path))
+                .map(|instance_path| Item::InstancePath(<span class="prelude-val">Some</span>(space_view_id), instance_path))
         }));
         state.state_3d.hovered_point = picking_result
             .opaque_hit
@@ -1027,10 +1055,13 @@
     <span class="comment">// Double click changes camera
     </span><span class="kw">if </span>response.double_clicked() {
         state.state_3d.tracked_camera = <span class="prelude-val">None</span>;
+        state.state_3d.camera_before_tracked_camera = <span class="prelude-val">None</span>;
 
         <span class="comment">// While hovering an entity, focuses the camera on it.
-        </span><span class="kw">if let </span><span class="prelude-val">Some</span>(Selection::InstancePath(<span class="kw">_</span>, instance_path)) = ctx.hovered().first() {
+        </span><span class="kw">if let </span><span class="prelude-val">Some</span>(Item::InstancePath(<span class="kw">_</span>, instance_path)) = ctx.hovered().first() {
             <span class="kw">if let </span><span class="prelude-val">Some</span>(camera) = find_camera(<span class="kw-2">&amp;</span>scene.space_cameras, <span class="kw-2">&amp;</span>instance_path.hash()) {
+                state.state_3d.camera_before_tracked_camera =
+                    state.state_3d.orbit_eye.map(|eye| eye.to_eye());
                 state.state_3d.interpolate_to_eye(camera);
                 state.state_3d.tracked_camera = <span class="prelude-val">Some</span>(instance_path.clone());
             } <span class="kw">else if let </span><span class="prelude-val">Some</span>(clicked_point) = state.state_3d.hovered_point {
@@ -1047,6 +1078,19 @@
         <span class="comment">// Without hovering, resets the camera.
         </span><span class="kw">else </span>{
             state.state_3d.reset_camera(<span class="kw-2">&amp;</span>state.scene_bbox_accum);
+        }
+    }
+
+    <span class="comment">// Allow to restore the camera state with escape if a camera was tracked before.
+    </span><span class="kw">if </span>response.hovered() &amp;&amp; ui.input(|i| i.key_pressed(egui::Key::Escape)) {
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(camera_before_changing_tracked_state) =
+            state.state_3d.camera_before_tracked_camera
+        {
+            state
+                .state_3d
+                .interpolate_to_eye(camera_before_changing_tracked_state);
+            state.state_3d.camera_before_tracked_camera = <span class="prelude-val">None</span>;
+            state.state_3d.tracked_camera = <span class="prelude-val">None</span>;
         }
     }
 

@@ -123,8 +123,6 @@
 <a href="#123" id="123">123</a>
 <a href="#124" id="124">124</a>
 <a href="#125" id="125">125</a>
-<a href="#126" id="126">126</a>
-<a href="#127" id="127">127</a>
 </pre><pre class="rust"><code><span class="doccomment">//! The `DataUi` trait and implementations provide methods for representing data using [`egui`].
 
 </span><span class="kw">use </span>itertools::Itertools;
@@ -223,15 +221,13 @@
     }
 }
 
-<span class="kw">fn </span>format_component_bundle(component_bundle: <span class="kw-2">&amp;</span>ComponentBundle) -&gt; String {
-    <span class="kw">let </span>ComponentBundle { name, value } = component_bundle;
-
-    <span class="kw">use </span>re_arrow_store::ArrayExt <span class="kw">as _</span>;
-    <span class="kw">let </span>num_instances = value.get_child_length(<span class="number">0</span>);
-
+<span class="kw">fn </span>format_component_bundle(bundle: <span class="kw-2">&amp;</span>ComponentBundle) -&gt; String {
     <span class="comment">// TODO(emilk): if there&#39;s only once instance, and the byte size is small, then deserialize and show the value.
-
-    </span><span class="macro">format!</span>(<span class="string">&quot;{}x {}&quot;</span>, num_instances, name.short_name())
+    </span><span class="macro">format!</span>(
+        <span class="string">&quot;{}x {}&quot;</span>,
+        bundle.nb_instances(<span class="number">0</span>).unwrap(), <span class="comment">// all of our bundles have exactly 1 row as of today
+        </span>bundle.name.short_name()
+    )
 }
 
 <span class="kw">impl </span>DataUi <span class="kw">for </span>PathOp {

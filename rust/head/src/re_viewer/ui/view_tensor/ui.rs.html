@@ -870,6 +870,16 @@
 <a href="#870" id="870">870</a>
 <a href="#871" id="871">871</a>
 <a href="#872" id="872">872</a>
+<a href="#873" id="873">873</a>
+<a href="#874" id="874">874</a>
+<a href="#875" id="875">875</a>
+<a href="#876" id="876">876</a>
+<a href="#877" id="877">877</a>
+<a href="#878" id="878">878</a>
+<a href="#879" id="879">879</a>
+<a href="#880" id="880">880</a>
+<a href="#881" id="881">881</a>
+<a href="#882" id="882">882</a>
 </pre><pre class="rust"><code><span class="kw">use </span>std::{collections::BTreeMap, fmt::Display};
 
 <span class="kw">use </span>eframe::emath::Align2;
@@ -879,6 +889,8 @@
 
 <span class="kw">use </span>re_log_types::{component_types, ClassicTensor, TensorDataType};
 <span class="kw">use </span>re_tensor_ops::dimension_mapping::{DimensionMapping, DimensionSelector};
+
+<span class="kw">use </span><span class="kw">crate</span>::ui::data_ui::image::tensor_dtype_and_shape_ui_grid_contents;
 
 <span class="kw">use </span><span class="kw">super</span>::dimension_mapping_ui;
 
@@ -916,38 +928,39 @@
     }
 
     <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>ui(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span><span class="kw">crate</span>::misc::ViewerContext&lt;<span class="lifetime">&#39;_</span>&gt;, ui: <span class="kw-2">&amp;mut </span>egui::Ui) {
-        <span class="kw">if let </span><span class="prelude-val">Some</span>(tensor) = <span class="kw-2">&amp;</span><span class="self">self</span>.tensor {
-            egui::CollapsingHeader::new(<span class="string">&quot;Dimension Mapping&quot;</span>)
-                .default_open(<span class="bool-val">true</span>)
-                .show(ui, |ui| {
-                    <span class="kw">crate</span>::ui::data_ui::image::tensor_dtype_and_shape_ui(ui, tensor);
-                    ui.add_space(<span class="number">12.0</span>);
+        <span class="kw">let </span><span class="prelude-val">Some</span>(tensor) = <span class="kw-2">&amp;</span><span class="self">self</span>.tensor <span class="kw">else </span>{
+            ui.label(<span class="string">&quot;No Tensor shown in this Space View.&quot;</span>);
+            <span class="kw">return</span>;
+        };
 
-                    <span class="kw">let </span>default_mapping = DimensionMapping::create(tensor.shape());
-                    <span class="kw">if </span>ui
-                        .add_enabled(
-                            <span class="self">self</span>.dimension_mapping != default_mapping,
-                            egui::Button::new(<span class="string">&quot;Reset mapping&quot;</span>),
-                        )
-                        .on_disabled_hover_text(<span class="string">&quot;The default is already set up.&quot;</span>)
-                        .on_hover_text(<span class="string">&quot;Reset dimension mapping to the default.&quot;</span>)
-                        .clicked()
-                    {
-                        <span class="self">self</span>.dimension_mapping = DimensionMapping::create(tensor.shape());
-                    }
+        ctx.re_ui
+            .selection_grid(ui, <span class="string">&quot;tensor_selection_ui&quot;</span>)
+            .show(ui, |ui| {
+                tensor_dtype_and_shape_ui_grid_contents(
+                    ctx.re_ui,
+                    ui,
+                    tensor,
+                    <span class="prelude-val">Some</span>(ctx.cache.tensor_stats(tensor)),
+                );
+                <span class="self">self</span>.texture_settings.ui(ctx.re_ui, ui);
+                <span class="self">self</span>.color_mapping.ui(ctx.re_ui, ui);
+            });
 
-                    dimension_mapping_ui(
-                        ctx.re_ui,
-                        ui,
-                        <span class="kw-2">&amp;mut </span><span class="self">self</span>.dimension_mapping,
-                        tensor.shape(),
-                    );
-                });
+        ui.separator();
+        ui.strong(<span class="string">&quot;Dimension Mapping&quot;</span>);
+        dimension_mapping_ui(ctx.re_ui, ui, <span class="kw-2">&amp;mut </span><span class="self">self</span>.dimension_mapping, tensor.shape());
+        <span class="kw">let </span>default_mapping = DimensionMapping::create(tensor.shape());
+        <span class="kw">if </span>ui
+            .add_enabled(
+                <span class="self">self</span>.dimension_mapping != default_mapping,
+                egui::Button::new(<span class="string">&quot;Reset mapping&quot;</span>),
+            )
+            .on_disabled_hover_text(<span class="string">&quot;The default is already set up.&quot;</span>)
+            .on_hover_text(<span class="string">&quot;Reset dimension mapping to the default.&quot;</span>)
+            .clicked()
+        {
+            <span class="self">self</span>.dimension_mapping = DimensionMapping::create(tensor.shape());
         }
-
-        <span class="self">self</span>.texture_settings.show(ui);
-
-        color_mapping_ui(ctx, ui, <span class="kw-2">&amp;mut </span><span class="self">self</span>.color_mapping, <span class="self">self</span>.tensor.as_ref());
     }
 }
 
@@ -965,7 +978,24 @@
         state.dimension_mapping = DimensionMapping::create(tensor.shape());
     }
 
-    selectors_ui(ui, state, tensor);
+    <span class="kw">let </span>default_item_spacing = ui.spacing_mut().item_spacing;
+    ui.spacing_mut().item_spacing.y = <span class="number">0.0</span>; <span class="comment">// No extra spacing between sliders and tensor
+
+    </span><span class="kw">if </span>state
+        .dimension_mapping
+        .selectors
+        .iter()
+        .any(|selector| selector.visible)
+    {
+        egui::Frame {
+            inner_margin: egui::Margin::symmetric(<span class="number">16.0</span>, <span class="number">8.0</span>),
+            ..Default::default()
+        }
+        .show(ui, |ui| {
+            ui.spacing_mut().item_spacing = default_item_spacing; <span class="comment">// keep the default spacing between sliders
+            </span>selectors_ui(ui, state, tensor);
+        });
+    }
 
     tensor_ui(ctx, ui, state, tensor);
 }
@@ -1246,53 +1276,27 @@
             }
         }
     }
-}
 
-<span class="kw">fn </span>color_mapping_ui(
-    ctx: <span class="kw-2">&amp;mut </span><span class="kw">crate</span>::misc::ViewerContext&lt;<span class="lifetime">&#39;_</span>&gt;,
-    ui: <span class="kw-2">&amp;mut </span>egui::Ui,
-    color_mapping: <span class="kw-2">&amp;mut </span>ColorMapping,
-    tensor: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>ClassicTensor&gt;,
-) {
-    ui.group(|ui| {
-        ui.strong(<span class="string">&quot;Color map&quot;</span>);
+    <span class="kw">fn </span>ui(<span class="kw-2">&amp;mut </span><span class="self">self</span>, re_ui: <span class="kw-2">&amp;</span>re_ui::ReUi, ui: <span class="kw-2">&amp;mut </span>egui::Ui) {
+        <span class="kw">let </span>ColorMapping { map, gamma } = <span class="self">self</span>;
 
+        re_ui.grid_left_hand_label(ui, <span class="string">&quot;Color map&quot;</span>);
         egui::ComboBox::from_id_source(<span class="string">&quot;color map select&quot;</span>)
-            .selected_text(color_mapping.map.to_string())
+            .selected_text(map.to_string())
             .show_ui(ui, |ui| {
                 ui.style_mut().wrap = <span class="prelude-val">Some</span>(<span class="bool-val">false</span>);
-                ui.selectable_value(
-                    <span class="kw-2">&amp;mut </span>color_mapping.map,
-                    ColorMap::Greyscale,
-                    ColorMap::Greyscale.to_string(),
-                );
-                ui.selectable_value(
-                    <span class="kw-2">&amp;mut </span>color_mapping.map,
-                    ColorMap::Virdis,
-                    ColorMap::Virdis.to_string(),
-                );
-                ui.selectable_value(
-                    <span class="kw-2">&amp;mut </span>color_mapping.map,
-                    ColorMap::Turbo,
-                    ColorMap::Turbo.to_string(),
-                );
+                ui.selectable_value(map, ColorMap::Greyscale, ColorMap::Greyscale.to_string());
+                ui.selectable_value(map, ColorMap::Virdis, ColorMap::Virdis.to_string());
+                ui.selectable_value(map, ColorMap::Turbo, ColorMap::Turbo.to_string());
             });
+        ui.end_row();
 
-        <span class="kw">let </span><span class="kw-2">mut </span>brightness = <span class="number">1.0 </span>/ color_mapping.gamma;
-        ui.add(
-            egui::Slider::new(<span class="kw-2">&amp;mut </span>brightness, <span class="number">0.1</span>..=<span class="number">10.0</span>)
-                .logarithmic(<span class="bool-val">true</span>)
-                .text(<span class="string">&quot;Brightness&quot;</span>),
-        );
-        color_mapping.gamma = <span class="number">1.0 </span>/ brightness;
-
-        <span class="kw">if let </span><span class="prelude-val">Some</span>(tensor) = <span class="kw-2">&amp;</span>tensor {
-            <span class="kw">let </span>tensor_stats = ctx.cache.tensor_stats(tensor);
-            <span class="kw">if let </span><span class="prelude-val">Some</span>((min, max)) = tensor_stats.range {
-                ui.monospace(<span class="macro">format!</span>(<span class="string">&quot;Data range: [{min} - {max}]&quot;</span>));
-            }
-        }
-    });
+        re_ui.grid_left_hand_label(ui, <span class="string">&quot;Brightness&quot;</span>);
+        <span class="kw">let </span><span class="kw-2">mut </span>brightness = <span class="number">1.0 </span>/ <span class="kw-2">*</span>gamma;
+        ui.add(egui::Slider::new(<span class="kw-2">&amp;mut </span>brightness, <span class="number">0.1</span>..=<span class="number">10.0</span>).logarithmic(<span class="bool-val">true</span>));
+        <span class="kw-2">*</span>gamma = <span class="number">1.0 </span>/ brightness;
+        ui.end_row();
+    }
 }
 
 <span class="comment">// ----------------------------------------------------------------------------
@@ -1391,52 +1395,52 @@
 
 <span class="comment">// ui
 </span><span class="kw">impl </span>TextureSettings {
-    <span class="kw">fn </span>show(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ui: <span class="kw-2">&amp;mut </span>egui::Ui) {
+    <span class="kw">fn </span>ui(<span class="kw-2">&amp;mut </span><span class="self">self</span>, re_ui: <span class="kw-2">&amp;</span>re_ui::ReUi, ui: <span class="kw-2">&amp;mut </span>egui::Ui) {
+        <span class="kw">let </span>TextureSettings {
+            keep_aspect_ratio,
+            scaling,
+            options,
+        } = <span class="self">self</span>;
+
+        re_ui.grid_left_hand_label(ui, <span class="string">&quot;Scale&quot;</span>);
+        ui.vertical(|ui| {
+            egui::ComboBox::from_id_source(<span class="string">&quot;texture_scaling&quot;</span>)
+                .selected_text(scaling.to_string())
+                .show_ui(ui, |ui| {
+                    ui.style_mut().wrap = <span class="prelude-val">Some</span>(<span class="bool-val">false</span>);
+                    ui.set_min_width(<span class="number">64.0</span>);
+
+                    <span class="kw">let </span><span class="kw-2">mut </span>selectable_value =
+                        |ui: <span class="kw-2">&amp;mut </span>egui::Ui, e| ui.selectable_value(scaling, e, e.to_string());
+                    selectable_value(ui, TextureScaling::Original);
+                    selectable_value(ui, TextureScaling::Fill);
+                });
+            <span class="kw">if </span><span class="kw-2">*</span>scaling == TextureScaling::Fill {
+                ui.checkbox(keep_aspect_ratio, <span class="string">&quot;Keep aspect ratio&quot;</span>);
+            }
+        });
+        ui.end_row();
+
+        re_ui.grid_left_hand_label(ui, <span class="string">&quot;Filtering&quot;</span>);
         <span class="kw">fn </span>tf_to_string(tf: egui::TextureFilter) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
             <span class="kw">match </span>tf {
                 egui::TextureFilter::Nearest =&gt; <span class="string">&quot;Nearest&quot;</span>,
                 egui::TextureFilter::Linear =&gt; <span class="string">&quot;Linear&quot;</span>,
             }
         }
+        egui::ComboBox::from_id_source(<span class="string">&quot;texture_filter&quot;</span>)
+            .selected_text(tf_to_string(options.magnification))
+            .show_ui(ui, |ui| {
+                ui.style_mut().wrap = <span class="prelude-val">Some</span>(<span class="bool-val">false</span>);
+                ui.set_min_width(<span class="number">64.0</span>);
 
-        ui.group(|ui| {
-            egui::Grid::new(<span class="string">&quot;texture_settings&quot;</span>).show(ui, |ui| {
-                ui.label(<span class="string">&quot;Scale:&quot;</span>);
-                egui::ComboBox::from_id_source(<span class="string">&quot;texture_scaling&quot;</span>)
-                    .selected_text(<span class="self">self</span>.scaling.to_string())
-                    .show_ui(ui, |ui| {
-                        ui.style_mut().wrap = <span class="prelude-val">Some</span>(<span class="bool-val">false</span>);
-                        ui.set_min_width(<span class="number">64.0</span>);
-
-                        <span class="kw">let </span><span class="kw-2">mut </span>selectable_value = |ui: <span class="kw-2">&amp;mut </span>egui::Ui, e| {
-                            ui.selectable_value(<span class="kw-2">&amp;mut </span><span class="self">self</span>.scaling, e, e.to_string())
-                        };
-                        selectable_value(ui, TextureScaling::Original);
-                        selectable_value(ui, TextureScaling::Fill);
-                    });
-
-                <span class="kw">if </span><span class="self">self</span>.scaling == TextureScaling::Fill {
-                    ui.checkbox(<span class="kw-2">&amp;mut </span><span class="self">self</span>.keep_aspect_ratio, <span class="string">&quot;Keep aspect ratio&quot;</span>);
-                }
-                ui.end_row();
-
-                ui.label(<span class="string">&quot;Filter:&quot;</span>)
-                    .on_hover_text(<span class="string">&quot;Texture magnification filter&quot;</span>);
-                egui::ComboBox::from_id_source(<span class="string">&quot;texture_filter&quot;</span>)
-                    .selected_text(tf_to_string(<span class="self">self</span>.options.magnification))
-                    .show_ui(ui, |ui| {
-                        ui.style_mut().wrap = <span class="prelude-val">Some</span>(<span class="bool-val">false</span>);
-                        ui.set_min_width(<span class="number">64.0</span>);
-
-                        <span class="kw">let </span><span class="kw-2">mut </span>selectable_value = |ui: <span class="kw-2">&amp;mut </span>egui::Ui, e| {
-                            ui.selectable_value(<span class="kw-2">&amp;mut </span><span class="self">self</span>.options.magnification, e, tf_to_string(e))
-                        };
-                        selectable_value(ui, egui::TextureFilter::Linear);
-                        selectable_value(ui, egui::TextureFilter::Nearest);
-                    });
-                ui.end_row();
+                <span class="kw">let </span><span class="kw-2">mut </span>selectable_value = |ui: <span class="kw-2">&amp;mut </span>egui::Ui, e| {
+                    ui.selectable_value(<span class="kw-2">&amp;mut </span>options.magnification, e, tf_to_string(e))
+                };
+                selectable_value(ui, egui::TextureFilter::Linear);
+                selectable_value(ui, egui::TextureFilter::Nearest);
             });
-        });
+        ui.end_row();
     }
 }
 
@@ -1516,7 +1520,9 @@
         };
 
         <span class="kw">let </span>image = into_image(<span class="kw-2">&amp;</span>slice, color_from_value);
-        image_ui(ui, view_state, image, dimension_labels);
+        egui::ScrollArea::both().show(ui, |ui| {
+            image_ui(ui, view_state, image, dimension_labels);
+        });
     } <span class="kw">else </span>{
         ui.label(ctx.re_ui.error_text(<span class="macro">format!</span>(
             <span class="string">&quot;Only 2D slices supported at the moment, but slice ndim {ndims}&quot;
@@ -1564,129 +1570,143 @@
 ) {
     <span class="macro">crate::profile_function!</span>();
 
-    egui::ScrollArea::both().show(ui, |ui| {
-        <span class="kw">let </span>font_id = egui::TextStyle::Body.resolve(ui.style());
+    <span class="kw">let </span>font_id = egui::TextStyle::Body.resolve(ui.style());
 
-        <span class="kw">let </span>margin = egui::vec2(<span class="number">0.0</span>, <span class="number">12.0</span>); <span class="comment">// Add some margin for the arrow overlay.
+    <span class="kw">let </span>margin = egui::vec2(<span class="number">0.0</span>, <span class="number">0.0</span>);
 
-        </span><span class="kw">let </span>(response, <span class="kw-2">mut </span>painter, image_rect) =
-            view_state.texture_settings.paint_image(ui, margin, image);
+    <span class="kw">let </span>(response, painter, image_rect) =
+        view_state.texture_settings.paint_image(ui, margin, image);
 
-        <span class="kw">let </span>is_anything_being_dragged = ui.memory(|mem| mem.is_anything_being_dragged());
-        <span class="kw">if </span>response.hovered() &amp;&amp; !is_anything_being_dragged {
-            <span class="comment">// Show axis names etc:
-            </span><span class="kw">let </span>[(width_name, invert_width), (height_name, invert_height)] = dimension_labels;
-            <span class="kw">let </span>text_color = ui.visuals().text_color();
+    <span class="kw">if </span>!response.hovered() {
+        paint_axis_names(ui, <span class="kw-2">&amp;</span>painter, image_rect, font_id, dimension_labels);
+    }
+}
 
-            painter.set_clip_rect(egui::Rect::EVERYTHING); <span class="comment">// Allow painting axis names outside of our bounds!
+<span class="kw">fn </span>paint_axis_names(
+    ui: <span class="kw-2">&amp;mut </span>egui::Ui,
+    painter: <span class="kw-2">&amp;</span>egui::Painter,
+    rect: egui::Rect,
+    font_id: egui::FontId,
+    dimension_labels: [(String, bool); <span class="number">2</span>],
+) {
+    <span class="comment">// Show axis names etc:
+    </span><span class="kw">let </span>[(width_name, invert_width), (height_name, invert_height)] = dimension_labels;
+    <span class="kw">let </span>text_color = ui.visuals().text_color();
 
-            // We make sure that the label for the X axis is always at Y=0,
-            // and that the label for the Y axis is always at X=0, no matter what inversions.
-            //
-            // For instance, with origin in the top right:
-            //
-            // foo ⬅
-            // ..........
-            // ..........
-            // ..........
-            // .......... ↓
-            // .......... b
-            // .......... a
-            // .......... r
+    <span class="kw">let </span>rounding = re_ui::ReUi::normal_rounding();
+    <span class="kw">let </span>inner_margin = rounding;
+    <span class="kw">let </span>outer_margin = <span class="number">8.0</span>;
 
-            // TODO(emilk): draw actual arrows behind the text instead of the ugly emoji arrows
+    <span class="kw">let </span>rect = rect.shrink(outer_margin + inner_margin);
 
-            // Label for X axis:
-            </span>{
-                <span class="kw">let </span>text_background = painter.add(egui::Shape::Noop);
-                <span class="kw">let </span>text_rect = <span class="kw">if </span>invert_width {
-                    <span class="comment">// On left, pointing left:
-                    </span><span class="kw">let </span>(pos, align) = <span class="kw">if </span>invert_height {
-                        (image_rect.left_bottom(), Align2::LEFT_TOP)
-                    } <span class="kw">else </span>{
-                        (image_rect.left_top(), Align2::LEFT_BOTTOM)
-                    };
-                    painter.text(
-                        pos,
-                        align,
-                        <span class="macro">format!</span>(<span class="string">&quot;{width_name} ⬅&quot;</span>),
-                        font_id.clone(),
-                        text_color,
-                    )
-                } <span class="kw">else </span>{
-                    <span class="comment">// On right, pointing right:
-                    </span><span class="kw">let </span>(pos, align) = <span class="kw">if </span>invert_height {
-                        (image_rect.right_bottom(), Align2::RIGHT_TOP)
-                    } <span class="kw">else </span>{
-                        (image_rect.right_top(), Align2::RIGHT_BOTTOM)
-                    };
-                    painter.text(
-                        pos,
-                        align,
-                        <span class="macro">format!</span>(<span class="string">&quot;➡ {width_name}&quot;</span>),
-                        font_id.clone(),
-                        text_color,
-                    )
-                };
-                painter.set(
-                    text_background,
-                    egui::Shape::rect_filled(text_rect, <span class="number">2.0</span>, ui.visuals().panel_fill),
-                );
-            }
+    <span class="comment">// We make sure that the label for the X axis is always at Y=0,
+    // and that the label for the Y axis is always at X=0, no matter what inversions.
+    //
+    // For instance, with origin in the top right:
+    //
+    // foo ⬅
+    // ..........
+    // ..........
+    // ..........
+    // .......... ↓
+    // .......... b
+    // .......... a
+    // .......... r
 
-            <span class="comment">// Label for Y axis:
-            </span>{
-                <span class="kw">let </span>text_background = painter.add(egui::Shape::Noop);
-                <span class="kw">let </span>text_rect = <span class="kw">if </span>invert_height {
-                    <span class="comment">// On top, pointing up:
-                    </span><span class="kw">let </span>galley =
-                        painter.layout_no_wrap(<span class="macro">format!</span>(<span class="string">&quot;➡ {height_name}&quot;</span>), font_id, text_color);
-                    <span class="kw">let </span>galley_size = galley.size();
-                    <span class="kw">let </span>pos = <span class="kw">if </span>invert_width {
-                        image_rect.right_top() - egui::vec2(<span class="number">0.0</span>, -galley_size.x)
-                    } <span class="kw">else </span>{
-                        image_rect.left_top() - egui::vec2(galley_size.y, -galley_size.x)
-                    };
-                    painter.add(TextShape {
-                        pos,
-                        galley,
-                        angle: -std::f32::consts::TAU / <span class="number">4.0</span>,
-                        underline: Default::default(),
-                        override_text_color: <span class="prelude-val">None</span>,
-                    });
-                    egui::Rect::from_min_size(
-                        pos - galley_size.x * egui::Vec2::Y,
-                        egui::vec2(galley_size.y, galley_size.x),
-                    )
-                } <span class="kw">else </span>{
-                    <span class="comment">// On bottom, pointing down:
-                    </span><span class="kw">let </span>galley =
-                        painter.layout_no_wrap(<span class="macro">format!</span>(<span class="string">&quot;{height_name} ⬅&quot;</span>), font_id, text_color);
-                    <span class="kw">let </span>galley_size = galley.size();
-                    <span class="kw">let </span>pos = <span class="kw">if </span>invert_width {
-                        image_rect.right_bottom()
-                    } <span class="kw">else </span>{
-                        image_rect.left_bottom() - egui::vec2(galley_size.y, <span class="number">0.0</span>)
-                    };
-                    painter.add(TextShape {
-                        pos,
-                        galley,
-                        angle: -std::f32::consts::TAU / <span class="number">4.0</span>,
-                        underline: Default::default(),
-                        override_text_color: <span class="prelude-val">None</span>,
-                    });
-                    egui::Rect::from_min_size(
-                        pos - galley_size.x * egui::Vec2::Y,
-                        egui::vec2(galley_size.y, galley_size.x),
-                    )
-                };
-                painter.set(
-                    text_background,
-                    egui::Shape::rect_filled(text_rect, <span class="number">2.0</span>, ui.visuals().panel_fill),
-                );
-            }
-        }
-    });
+    // TODO(emilk): draw actual arrows behind the text instead of the ugly emoji arrows
+
+    </span><span class="kw">let </span>paint_text_bg = |text_background, text_rect: egui::Rect| {
+        painter.set(
+            text_background,
+            egui::Shape::rect_filled(
+                text_rect.expand(inner_margin),
+                rounding,
+                ui.visuals().panel_fill,
+            ),
+        );
+    };
+
+    <span class="comment">// Label for X axis:
+    </span>{
+        <span class="kw">let </span>text_background = painter.add(egui::Shape::Noop);
+        <span class="kw">let </span>text_rect = <span class="kw">if </span>invert_width {
+            <span class="comment">// On left, pointing left:
+            </span><span class="kw">let </span>(pos, align) = <span class="kw">if </span>invert_height {
+                (rect.left_bottom(), Align2::LEFT_BOTTOM)
+            } <span class="kw">else </span>{
+                (rect.left_top(), Align2::LEFT_TOP)
+            };
+            painter.text(
+                pos,
+                align,
+                <span class="macro">format!</span>(<span class="string">&quot;{width_name} ⬅&quot;</span>),
+                font_id.clone(),
+                text_color,
+            )
+        } <span class="kw">else </span>{
+            <span class="comment">// On right, pointing right:
+            </span><span class="kw">let </span>(pos, align) = <span class="kw">if </span>invert_height {
+                (rect.right_bottom(), Align2::RIGHT_BOTTOM)
+            } <span class="kw">else </span>{
+                (rect.right_top(), Align2::RIGHT_TOP)
+            };
+            painter.text(
+                pos,
+                align,
+                <span class="macro">format!</span>(<span class="string">&quot;➡ {width_name}&quot;</span>),
+                font_id.clone(),
+                text_color,
+            )
+        };
+        paint_text_bg(text_background, text_rect);
+    }
+
+    <span class="comment">// Label for Y axis:
+    </span>{
+        <span class="kw">let </span>text_background = painter.add(egui::Shape::Noop);
+        <span class="kw">let </span>text_rect = <span class="kw">if </span>invert_height {
+            <span class="comment">// On top, pointing up:
+            </span><span class="kw">let </span>galley = painter.layout_no_wrap(<span class="macro">format!</span>(<span class="string">&quot;➡ {height_name}&quot;</span>), font_id, text_color);
+            <span class="kw">let </span>galley_size = galley.size();
+            <span class="kw">let </span>pos = <span class="kw">if </span>invert_width {
+                rect.right_top() + egui::vec2(-galley_size.y, galley_size.x)
+            } <span class="kw">else </span>{
+                rect.left_top() + egui::vec2(<span class="number">0.0</span>, galley_size.x)
+            };
+            painter.add(TextShape {
+                pos,
+                galley,
+                angle: -std::f32::consts::TAU / <span class="number">4.0</span>,
+                underline: Default::default(),
+                override_text_color: <span class="prelude-val">None</span>,
+            });
+            egui::Rect::from_min_size(
+                pos - galley_size.x * egui::Vec2::Y,
+                egui::vec2(galley_size.y, galley_size.x),
+            )
+        } <span class="kw">else </span>{
+            <span class="comment">// On bottom, pointing down:
+            </span><span class="kw">let </span>galley = painter.layout_no_wrap(<span class="macro">format!</span>(<span class="string">&quot;{height_name} ⬅&quot;</span>), font_id, text_color);
+            <span class="kw">let </span>galley_size = galley.size();
+            <span class="kw">let </span>pos = <span class="kw">if </span>invert_width {
+                rect.right_bottom() - egui::vec2(galley_size.y, <span class="number">0.0</span>)
+            } <span class="kw">else </span>{
+                rect.left_bottom()
+            };
+            painter.add(TextShape {
+                pos,
+                galley,
+                angle: -std::f32::consts::TAU / <span class="number">4.0</span>,
+                underline: Default::default(),
+                override_text_color: <span class="prelude-val">None</span>,
+            });
+            egui::Rect::from_min_size(
+                pos - galley_size.x * egui::Vec2::Y,
+                egui::vec2(galley_size.y, galley_size.x),
+            )
+        };
+        paint_text_bg(text_background, text_rect);
+    }
 }
 
 <span class="kw">fn </span>selectors_ui(ui: <span class="kw-2">&amp;mut </span>egui::Ui, state: <span class="kw-2">&amp;mut </span>ViewTensorState, tensor: <span class="kw-2">&amp;</span>ClassicTensor) {

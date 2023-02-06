@@ -296,6 +296,10 @@
 <a href="#296" id="296">296</a>
 <a href="#297" id="297">297</a>
 <a href="#298" id="298">298</a>
+<a href="#299" id="299">299</a>
+<a href="#300" id="300">300</a>
+<a href="#301" id="301">301</a>
+<a href="#302" id="302">302</a>
 </pre><pre class="rust"><code><span class="doccomment">//! Code for automatic layout of space views.
 //!
 //! This uses rough heuristics and have a lot of room for improvement.
@@ -353,7 +357,11 @@
         .filter(|(space_view_id, _space_view)| visible.contains(space_view_id))
         <span class="comment">// Sort for determinism:
         </span>.sorted_by_key(|(space_view_id, space_view)| {
-            (<span class="kw-2">&amp;</span>space_view.space_path, <span class="kw-2">&amp;</span>space_view.name, <span class="kw-2">*</span>space_view_id)
+            (
+                <span class="kw-2">&amp;</span>space_view.space_path,
+                <span class="kw-2">&amp;</span>space_view.display_name,
+                <span class="kw-2">*</span>space_view_id,
+            )
         })
         .map(|(space_view_id, space_view)| {
             <span class="kw">let </span>aspect_ratio = <span class="kw">match </span>space_view.category {

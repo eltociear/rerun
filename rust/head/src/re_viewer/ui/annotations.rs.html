@@ -323,20 +323,20 @@
     <span class="doccomment">/// For each `EntityPath` in the `SceneQuery`, walk up the tree and find the nearest ancestor
     ///
     /// An entity is considered its own (nearest) ancestor.
-    </span><span class="kw">pub fn </span>load(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>ViewerContext&lt;<span class="lifetime">&#39;_</span>&gt;, query: <span class="kw-2">&amp;</span>SceneQuery&lt;<span class="lifetime">&#39;_</span>&gt;) {
+    </span><span class="kw">pub fn </span>load(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>ViewerContext&lt;<span class="lifetime">&#39;_</span>&gt;, scene_query: <span class="kw-2">&amp;</span>SceneQuery&lt;<span class="lifetime">&#39;_</span>&gt;) {
         <span class="macro">crate::profile_function!</span>();
 
         <span class="kw">let </span><span class="kw-2">mut </span>visited = IntSet::&lt;EntityPath&gt;::default();
 
-        <span class="kw">let </span>arrow_store = <span class="kw-2">&amp;</span>ctx.log_db.entity_db.arrow_store;
-        <span class="kw">let </span>arrow_query = LatestAtQuery::new(query.timeline, query.latest_at);
+        <span class="kw">let </span>data_store = <span class="kw-2">&amp;</span>ctx.log_db.entity_db.data_store;
+        <span class="kw">let </span>latest_at_query = LatestAtQuery::new(scene_query.timeline, scene_query.latest_at);
 
         <span class="comment">// This logic is borrowed from `iter_ancestor_meta_field`, but using the arrow-store instead
         // not made generic as `AnnotationContext` was the only user of that function
-        </span><span class="kw">for </span>entity_path <span class="kw">in </span>query
+        </span><span class="kw">for </span>entity_path <span class="kw">in </span>scene_query
             .entity_paths
             .iter()
-            .filter(|entity_path| query.entity_props_map.get(entity_path).visible)
+            .filter(|entity_path| scene_query.entity_props_map.get(entity_path).visible)
         {
             <span class="kw">let </span><span class="kw-2">mut </span>next_parent = <span class="prelude-val">Some</span>(entity_path.clone());
             <span class="kw">while let </span><span class="prelude-val">Some</span>(parent) = next_parent {
@@ -354,8 +354,8 @@
                     // If we find one, insert it and then we can break.
                     </span>std::collections::btree_map::Entry::Vacant(entry) =&gt; {
                         <span class="kw">if </span>query_entity_with_primary::&lt;AnnotationContext&gt;(
-                            arrow_store,
-                            <span class="kw-2">&amp;</span>arrow_query,
+                            data_store,
+                            <span class="kw-2">&amp;</span>latest_at_query,
                             <span class="kw-2">&amp;</span>parent,
                             <span class="kw-2">&amp;</span>[MsgId::name()],
                         )

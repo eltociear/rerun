@@ -47,7 +47,7 @@
         verbosity: <span class="kw">crate</span>::ui::UiVerbosity,
         query: <span class="kw-2">&amp;</span>re_arrow_store::LatestAtQuery,
     ) {
-        <span class="kw">let </span>store = <span class="kw-2">&amp;</span>ctx.log_db.entity_db.arrow_store;
+        <span class="kw">let </span>store = <span class="kw-2">&amp;</span>ctx.log_db.entity_db.data_store;
 
         <span class="kw">match </span>re_query::get_component_with_instances(
             store,

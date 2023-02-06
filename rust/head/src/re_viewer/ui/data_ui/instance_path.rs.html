@@ -115,7 +115,7 @@
         verbosity: UiVerbosity,
         query: <span class="kw-2">&amp;</span>re_arrow_store::LatestAtQuery,
     ) {
-        <span class="kw">let </span>store = <span class="kw-2">&amp;</span>ctx.log_db.entity_db.arrow_store;
+        <span class="kw">let </span>store = <span class="kw-2">&amp;</span>ctx.log_db.entity_db.data_store;
 
         <span class="kw">let </span><span class="prelude-val">Some</span>(<span class="kw-2">mut </span>components) = store.all_components(<span class="kw-2">&amp;</span>query.timeline, <span class="kw-2">&amp;</span><span class="self">self</span>.entity_path) <span class="kw">else </span>{
             ui.label(<span class="macro">format!</span>(<span class="string">&quot;No components in entity {}&quot;</span>, <span class="self">self</span>.entity_path));

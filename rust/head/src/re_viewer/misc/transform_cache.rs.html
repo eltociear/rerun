@@ -305,14 +305,6 @@
 <a href="#305" id="305">305</a>
 <a href="#306" id="306">306</a>
 <a href="#307" id="307">307</a>
-<a href="#308" id="308">308</a>
-<a href="#309" id="309">309</a>
-<a href="#310" id="310">310</a>
-<a href="#311" id="311">311</a>
-<a href="#312" id="312">312</a>
-<a href="#313" id="313">313</a>
-<a href="#314" id="314">314</a>
-<a href="#315" id="315">315</a>
 </pre><pre class="rust"><code><span class="kw">use </span>nohash_hasher::IntMap;
 <span class="kw">use </span>re_arrow_store::LatestAtQuery;
 <span class="kw">use </span>re_data_store::{log_db::EntityDb, query_transform, EntityPath, EntityPropertyMap, EntityTree};
@@ -339,16 +331,15 @@
     </span>unreachable_descendants: Vec&lt;(EntityPath, UnreachableTransform)&gt;,
 
     <span class="doccomment">/// The first parent of reference_path that is no longer reachable.
-    </span>first_unreachable_parent: (EntityPath, UnreachableTransform),
+    </span>first_unreachable_parent: <span class="prelude-ty">Option</span>&lt;(EntityPath, UnreachableTransform)&gt;,
 }
 
 <span class="attr">#[derive(Clone, Copy)]
 </span><span class="kw">pub enum </span>UnreachableTransform {
-    <span class="doccomment">/// Not part of the hierarchy at all.
-    /// TODO(andreas): This is only needed for the &quot;breaking out of the root&quot; case that we want to scrap.
-    ///                 After that it&#39;s impossible to be unreachable since there can always be an identity matrix.
-    ///                 We already allow walking over unlogged paths (because why not)
-    </span>Unconnected,
+    <span class="doccomment">/// [`super::space_info::SpaceInfoCollection`] is outdated and can&#39;t find a corresponding space info for the given path.
+    ///
+    /// If at all, this should only happen for a single frame until space infos are rebuilt.
+    </span>UnknownSpaceInfo,
     <span class="doccomment">/// More than one pinhole camera between this and the reference space.
     </span>NestedPinholeCameras,
     <span class="doccomment">/// Exiting out of a space with a pinhole camera that doesn&#39;t have a resolution is not supported.
@@ -360,8 +351,8 @@
 <span class="kw">impl </span>std::fmt::Display <span class="kw">for </span>UnreachableTransform {
     <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>std::fmt::Formatter&lt;<span class="lifetime">&#39;_</span>&gt;) -&gt; std::fmt::Result {
         f.write_str(<span class="kw">match </span><span class="self">self </span>{
-            <span class="self">Self</span>::Unconnected =&gt;
-                <span class="string">&quot;No entity path connection from this space view.&quot;</span>,
+            <span class="self">Self</span>::UnknownSpaceInfo =&gt;
+                <span class="string">&quot;Can&#39;t determine transform because internal data structures are not in a valid state. Please file an issue on https://github.com/rerun-io/rerun/&quot;</span>,
             <span class="self">Self</span>::NestedPinholeCameras =&gt;
                 <span class="string">&quot;Can&#39;t display entities under nested pinhole cameras.&quot;</span>,
             <span class="self">Self</span>::UnknownTransform =&gt;
@@ -390,7 +381,7 @@
             reference_path: root_path.clone(),
             reference_from_entity_per_entity: Default::default(),
             unreachable_descendants: Default::default(),
-            first_unreachable_parent: (EntityPath::root(), UnreachableTransform::Unconnected),
+            first_unreachable_parent: <span class="prelude-val">None</span>,
         };
 
         <span class="comment">// Find the entity path tree for the root.
@@ -428,13 +419,6 @@
         </span><span class="kw">let </span><span class="kw-2">mut </span>encountered_pinhole = <span class="bool-val">false</span>;
         <span class="kw">let </span><span class="kw-2">mut </span>reference_from_ancestor = glam::Mat4::IDENTITY;
         <span class="kw">while let </span><span class="prelude-val">Some</span>(parent_tree) = parent_tree_stack.pop() {
-            <span class="comment">// By convention we regard the global hierarchy as a forest - don&#39;t allow breaking out of the current tree.
-            </span><span class="kw">if </span>parent_tree.path.is_root() {
-                transforms.first_unreachable_parent =
-                    (parent_tree.path.clone(), UnreachableTransform::Unconnected);
-                <span class="kw">break</span>;
-            }
-
             <span class="comment">// Note that the transform at the reference is the first that needs to be inverted to &quot;break out&quot; of its hierarchy.
             // Generally, the transform _at_ a node isn&#39;t relevant to it&#39;s children, but only to get to its parent in turn!
             </span><span class="kw">match </span>inverse_transform_at(
@@ -445,7 +429,7 @@
             ) {
                 <span class="prelude-val">Err</span>(unreachable_reason) =&gt; {
                     transforms.first_unreachable_parent =
-                        (parent_tree.path.clone(), unreachable_reason);
+                        <span class="prelude-val">Some</span>((parent_tree.path.clone(), unreachable_reason));
                     <span class="kw">break</span>;
                 }
                 <span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>) =&gt; {}

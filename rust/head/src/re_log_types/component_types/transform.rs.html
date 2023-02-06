@@ -258,6 +258,16 @@
 <a href="#258" id="258">258</a>
 <a href="#259" id="259">259</a>
 <a href="#260" id="260">260</a>
+<a href="#261" id="261">261</a>
+<a href="#262" id="262">262</a>
+<a href="#263" id="263">263</a>
+<a href="#264" id="264">264</a>
+<a href="#265" id="265">265</a>
+<a href="#266" id="266">266</a>
+<a href="#267" id="267">267</a>
+<a href="#268" id="268">268</a>
+<a href="#269" id="269">269</a>
+<a href="#270" id="270">270</a>
 </pre><pre class="rust"><code><span class="kw">use </span>arrow2_convert::{ArrowDeserialize, ArrowField, ArrowSerialize};
 
 <span class="kw">use </span><span class="kw">crate</span>::msg_bundle::Component;
@@ -295,7 +305,7 @@
 ///     ]),
 /// );
 /// ```
-</span><span class="attr">#[derive(Copy, Clone, Debug, PartialEq, ArrowField, ArrowSerialize, ArrowDeserialize)]
+</span><span class="attr">#[derive(Default, Copy, Clone, Debug, PartialEq, ArrowField, ArrowSerialize, ArrowDeserialize)]
 #[cfg_attr(feature = <span class="string">&quot;serde&quot;</span>, derive(serde::Deserialize, serde::Serialize))]
 </span><span class="kw">pub struct </span>Rigid3 {
     <span class="doccomment">/// How is the child rotated?
@@ -311,6 +321,16 @@
 
 <span class="attr">#[cfg(feature = <span class="string">&quot;glam&quot;</span>)]
 </span><span class="kw">impl </span>Rigid3 {
+    <span class="kw">pub const </span>IDENTITY: Rigid3 = Rigid3 {
+        rotation: Quaternion {
+            x: <span class="number">1.0</span>,
+            y: <span class="number">0.0</span>,
+            z: <span class="number">0.0</span>,
+            w: <span class="number">0.0</span>,
+        },
+        translation: Vec3D([<span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>]),
+    };
+
     <span class="attr">#[inline]
     </span><span class="kw">pub fn </span>new_parent_from_child(parent_from_child: macaw::IsoTransform) -&gt; <span class="self">Self </span>{
         <span class="self">Self </span>{

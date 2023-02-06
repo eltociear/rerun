@@ -1251,14 +1251,6 @@
 <a href="#1251" id="1251">1251</a>
 <a href="#1252" id="1252">1252</a>
 <a href="#1253" id="1253">1253</a>
-<a href="#1254" id="1254">1254</a>
-<a href="#1255" id="1255">1255</a>
-<a href="#1256" id="1256">1256</a>
-<a href="#1257" id="1257">1257</a>
-<a href="#1258" id="1258">1258</a>
-<a href="#1259" id="1259">1259</a>
-<a href="#1260" id="1260">1260</a>
-<a href="#1261" id="1261">1261</a>
 </pre><pre class="rust"><code><span class="kw">use </span>arrow2::{
     array::{new_empty_array, Array, ListArray, UInt64Array},
     datatypes::DataType,
@@ -1327,7 +1319,7 @@
     /// If the bundle doesn&#39;t carry a payload for the cluster key, one will be auto-generated
     /// based on the length of the components in the payload, in the form of an array of
     /// monotonically increasing u64s going from `0` to `N-1`.
-    </span><span class="kw">pub fn </span>insert(<span class="kw-2">&amp;mut </span><span class="self">self</span>, bundle: <span class="kw-2">&amp;</span>MsgBundle) -&gt; WriteResult&lt;()&gt; {
+    </span><span class="kw">pub fn </span>insert(<span class="kw-2">&amp;mut </span><span class="self">self</span>, msg: <span class="kw-2">&amp;</span>MsgBundle) -&gt; WriteResult&lt;()&gt; {
         <span class="comment">// TODO(cmc): kind &amp; insert_id need to somehow propagate through the span system.
         </span><span class="self">self</span>.insert_id += <span class="number">1</span>;
 
@@ -1335,28 +1327,24 @@
             msg_id,
             entity_path: ent_path,
             time_point,
-            components,
-        } = bundle;
+            components: bundles,
+        } = msg;
 
-        <span class="kw">if </span>components.is_empty() {
+        <span class="kw">if </span>bundles.is_empty() {
             <span class="kw">return </span><span class="prelude-val">Ok</span>(());
         }
 
         <span class="macro">crate::profile_function!</span>();
 
         <span class="kw">let </span>ent_path_hash = ent_path.hash();
-        <span class="kw">let </span>nb_rows = components[<span class="number">0</span>].value.len();
+        <span class="kw">let </span>nb_rows = bundles[<span class="number">0</span>].nb_rows();
 
         <span class="comment">// Effectively the same thing as having a non-unit length batch, except it&#39;s really not
         // worth more than an assertion since:
         // - A) `MsgBundle` should already guarantee this
         // - B) this limitation should be gone soon enough
         </span><span class="macro">debug_assert!</span>(
-            bundle
-                .components
-                .iter()
-                .map(|bundle| bundle.name)
-                .all_unique(),
+            msg.components.iter().map(|bundle| bundle.name).all_unique(),
             <span class="string">&quot;cannot insert same component multiple times, this is equivalent to multiple rows&quot;</span>,
         );
         <span class="comment">// Batches cannot contain more than 1 row at the moment.
@@ -1364,14 +1352,11 @@
             <span class="kw">return </span><span class="prelude-val">Err</span>(WriteError::MoreThanOneRow(nb_rows));
         }
         <span class="comment">// Components must share the same number of rows.
-        </span><span class="kw">if </span>!components
-            .iter()
-            .all(|bundle| bundle.value.len() == nb_rows)
-        {
+        </span><span class="kw">if </span>!bundles.iter().all(|bundle| bundle.nb_rows() == nb_rows) {
             <span class="kw">return </span><span class="prelude-val">Err</span>(WriteError::MismatchedRows(
-                components
+                bundles
                     .iter()
-                    .map(|bundle| (bundle.name, bundle.value.len()))
+                    .map(|bundle| (bundle.name, bundle.nb_rows()))
                     .collect(),
             ));
         }
@@ -1384,12 +1369,12 @@
                 .map(|(timeline, time)| (timeline.name(), timeline.typ().format(<span class="kw-2">*</span>time)))
                 .collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;(),
             entity = %ent_path,
-            components = <span class="question-mark">?</span>components.iter().map(|bundle| <span class="kw-2">&amp;</span>bundle.name).collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;(),
+            components = <span class="question-mark">?</span>bundles.iter().map(|bundle| <span class="kw-2">&amp;</span>bundle.name).collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;(),
             nb_rows,
             <span class="string">&quot;insertion started...&quot;
         </span>);
 
-        <span class="kw">let </span>cluster_comp_pos = components
+        <span class="kw">let </span>cluster_comp_pos = bundles
             .iter()
             .find_position(|bundle| bundle.name == <span class="self">self</span>.cluster_key)
             .map(|(pos, <span class="kw">_</span>)| pos);
@@ -1399,7 +1384,7 @@
 
             <span class="comment">// TODO(#589): support for batched row component insertions
             </span><span class="kw">for </span>row_nr <span class="kw">in </span><span class="number">0</span>..nb_rows {
-                <span class="self">self</span>.insert_timeless_row(row_nr, cluster_comp_pos, components, <span class="kw-2">&amp;mut </span>row_indices)<span class="question-mark">?</span>;
+                <span class="self">self</span>.insert_timeless_row(row_nr, cluster_comp_pos, bundles, <span class="kw-2">&amp;mut </span>row_indices)<span class="question-mark">?</span>;
             }
 
             <span class="kw">let </span>index = <span class="self">self
@@ -1416,7 +1401,7 @@
                     time_point,
                     row_nr,
                     cluster_comp_pos,
-                    components,
+                    bundles,
                     <span class="kw-2">&amp;mut </span>row_indices,
                 )<span class="question-mark">?</span>;
             }
@@ -1473,7 +1458,7 @@
             .iter()
             .filter(|bundle| bundle.name != <span class="self">self</span>.cluster_key)
         {
-            <span class="kw">let </span>ComponentBundle { name, value: rows } = bundle;
+            <span class="kw">let </span>(name, rows) = (bundle.name, bundle.value());
 
             <span class="comment">// Unwrapping a ListArray is somewhat costly, especially considering we&#39;re just
             // gonna rewrap it again in a minute... so we&#39;d rather just slice it to a list of
@@ -1485,13 +1470,12 @@
             // So use the fact that `rows` is always of unit-length for now.
             </span><span class="kw">let </span>rows_single = rows;
 
-            <span class="comment">// TODO(#440): support for splats
-            </span><span class="kw">let </span>nb_instances = rows_single.get_child_length(<span class="number">0</span>);
+            <span class="kw">let </span>nb_instances = rows_single.get_child_length(<span class="number">0</span>);
             <span class="kw">if </span>nb_instances != cluster_len {
                 <span class="kw">return </span><span class="prelude-val">Err</span>(WriteError::MismatchedInstances {
                     cluster_comp: <span class="self">self</span>.cluster_key,
                     cluster_comp_nb_instances: cluster_len,
-                    key: <span class="kw-2">*</span>name,
+                    key: name,
                     nb_instances,
                 });
             }
@@ -1501,13 +1485,13 @@
                 .entry(bundle.name)
                 .or_insert_with(|| {
                     PersistentComponentTable::new(
-                        <span class="kw-2">*</span>name,
+                        name,
                         ListArray::&lt;i32&gt;::get_child_type(rows_single.data_type()),
                     )
                 });
 
             <span class="kw">let </span>row_idx = table.push(rows_single.as_ref());
-            row_indices.insert(<span class="kw-2">*</span>name, row_idx);
+            row_indices.insert(name, row_idx);
         }
 
         <span class="prelude-val">Ok</span>(())
@@ -1546,7 +1530,7 @@
             .iter()
             .filter(|bundle| bundle.name != <span class="self">self</span>.cluster_key)
         {
-            <span class="kw">let </span>ComponentBundle { name, value: rows } = bundle;
+            <span class="kw">let </span>(name, rows) = (bundle.name, bundle.value());
 
             <span class="comment">// Unwrapping a ListArray is somewhat costly, especially considering we&#39;re just
             // gonna rewrap it again in a minute... so we&#39;d rather just slice it to a list of
@@ -1564,20 +1548,20 @@
                 <span class="kw">return </span><span class="prelude-val">Err</span>(WriteError::MismatchedInstances {
                     cluster_comp: <span class="self">self</span>.cluster_key,
                     cluster_comp_nb_instances: cluster_len,
-                    key: <span class="kw-2">*</span>name,
+                    key: name,
                     nb_instances,
                 });
             }
 
             <span class="kw">let </span>table = <span class="self">self</span>.components.entry(bundle.name).or_insert_with(|| {
                 ComponentTable::new(
-                    <span class="kw-2">*</span>name,
+                    name,
                     ListArray::&lt;i32&gt;::get_child_type(rows_single.data_type()),
                 )
             });
 
             <span class="kw">let </span>row_idx = table.push(<span class="kw-2">&amp;</span><span class="self">self</span>.config, time_point, rows_single.as_ref());
-            row_indices.insert(<span class="kw-2">*</span>name, row_idx);
+            row_indices.insert(name, row_idx);
         }
 
         <span class="prelude-val">Ok</span>(())
@@ -1610,7 +1594,7 @@
 
             </span><span class="kw">let </span>cluster_comp = <span class="kw-2">&amp;</span>components[cluster_comp_pos];
             <span class="kw">let </span>data = cluster_comp
-                .value
+                .value()
                 .as_any()
                 .downcast_ref::&lt;ListArray&lt;i32&gt;&gt;()
                 .unwrap()
@@ -1628,7 +1612,7 @@
 
             (
                 len,
-                ClusterData::UserData(cluster_comp.value.clone() <span class="comment">/* shallow */</span>),
+                ClusterData::UserData(cluster_comp.value().to_boxed() <span class="comment">/* shallow */</span>),
             )
         } <span class="kw">else </span>{
             <span class="comment">// The caller has not specified any cluster component, and so we&#39;ll have to generate
@@ -1639,7 +1623,7 @@
             // share the same length at this point anyway.
             </span><span class="kw">let </span>len = components
                 .first()
-                .map_or(<span class="number">0</span>, |comp| comp.value.get_child_length(<span class="number">0</span>));
+                .map_or(<span class="number">0</span>, |comp| comp.value().get_child_length(<span class="number">0</span>));
 
             <span class="kw">if let </span><span class="prelude-val">Some</span>(row_idx) = <span class="self">self</span>.cluster_comp_cache.get(<span class="kw-2">&amp;</span>len) {
                 <span class="comment">// Cache hit! Re-use that row index.

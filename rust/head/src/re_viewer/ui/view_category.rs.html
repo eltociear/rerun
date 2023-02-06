@@ -118,6 +118,18 @@
 <a href="#118" id="118">118</a>
 <a href="#119" id="119">119</a>
 <a href="#120" id="120">120</a>
+<a href="#121" id="121">121</a>
+<a href="#122" id="122">122</a>
+<a href="#123" id="123">123</a>
+<a href="#124" id="124">124</a>
+<a href="#125" id="125">125</a>
+<a href="#126" id="126">126</a>
+<a href="#127" id="127">127</a>
+<a href="#128" id="128">128</a>
+<a href="#129" id="129">129</a>
+<a href="#130" id="130">130</a>
+<a href="#131" id="131">131</a>
+<a href="#132" id="132">132</a>
 </pre><pre class="rust"><code><span class="kw">use </span>re_arrow_store::{LatestAtQuery, TimeInt};
 <span class="kw">use </span>re_data_store::{query_transform, EntityPath, LogDb, Timeline};
 <span class="kw">use </span>re_log_types::{
@@ -154,14 +166,26 @@
 }
 
 <span class="kw">impl </span>ViewCategory {
-    <span class="kw">pub fn </span>icon(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
+    <span class="kw">pub fn </span>icon(<span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>re_ui::Icon {
         <span class="kw">match </span><span class="self">self </span>{
-            ViewCategory::Text =&gt; <span class="string">&quot;📃&quot;</span>,
-            ViewCategory::TimeSeries =&gt; <span class="string">&quot;📈&quot;</span>,
-            ViewCategory::BarChart =&gt; <span class="string">&quot;📊&quot;</span>,
-            ViewCategory::Spatial =&gt; <span class="string">&quot;🖼&quot;</span>,
-            ViewCategory::Tensor =&gt; <span class="string">&quot;🇹&quot;</span>,
+            ViewCategory::Text =&gt; <span class="kw-2">&amp;</span>re_ui::icons::SPACE_VIEW_TEXT,
+            ViewCategory::TimeSeries =&gt; <span class="kw-2">&amp;</span>re_ui::icons::SPACE_VIEW_SCATTERPLOT,
+            ViewCategory::BarChart =&gt; <span class="kw-2">&amp;</span>re_ui::icons::SPACE_VIEW_HISTOGRAM,
+            ViewCategory::Spatial =&gt; <span class="kw-2">&amp;</span>re_ui::icons::SPACE_VIEW_3D,
+            ViewCategory::Tensor =&gt; <span class="kw-2">&amp;</span>re_ui::icons::SPACE_VIEW_TENSOR,
         }
+    }
+}
+
+<span class="kw">impl </span>std::fmt::Display <span class="kw">for </span>ViewCategory {
+    <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>std::fmt::Formatter&lt;<span class="lifetime">&#39;_</span>&gt;) -&gt; std::fmt::Result {
+        f.write_str(<span class="kw">match </span><span class="self">self </span>{
+            ViewCategory::Text =&gt; <span class="string">&quot;Text&quot;</span>,
+            ViewCategory::TimeSeries =&gt; <span class="string">&quot;Time Series&quot;</span>,
+            ViewCategory::BarChart =&gt; <span class="string">&quot;Bar Chart&quot;</span>,
+            ViewCategory::Spatial =&gt; <span class="string">&quot;Spatial&quot;</span>,
+            ViewCategory::Tensor =&gt; <span class="string">&quot;Tensor&quot;</span>,
+        })
     }
 }
 
@@ -193,7 +217,7 @@
 
     <span class="kw">for </span>component <span class="kw">in </span>log_db
         .entity_db
-        .arrow_store
+        .data_store
         .all_components(<span class="kw-2">&amp;</span>timeline, entity_path)
         .unwrap_or_default()
     {
@@ -216,7 +240,7 @@
             <span class="kw">let </span>timeline_query = LatestAtQuery::new(timeline, TimeInt::MAX);
 
             <span class="kw">if let </span><span class="prelude-val">Ok</span>(entity_view) = query_entity_with_primary::&lt;Tensor&gt;(
-                <span class="kw-2">&amp;</span>log_db.entity_db.arrow_store,
+                <span class="kw-2">&amp;</span>log_db.entity_db.data_store,
                 <span class="kw-2">&amp;</span>timeline_query,
                 entity_path,
                 <span class="kw-2">&amp;</span>[],

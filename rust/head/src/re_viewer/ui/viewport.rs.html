@@ -919,6 +919,14 @@
 <a href="#919" id="919">919</a>
 <a href="#920" id="920">920</a>
 <a href="#921" id="921">921</a>
+<a href="#922" id="922">922</a>
+<a href="#923" id="923">923</a>
+<a href="#924" id="924">924</a>
+<a href="#925" id="925">925</a>
+<a href="#926" id="926">926</a>
+<a href="#927" id="927">927</a>
+<a href="#928" id="928">928</a>
+<a href="#929" id="929">929</a>
 </pre><pre class="rust"><code><span class="doccomment">//! The viewport panel.
 //!
 //! Contains all space views.
@@ -931,7 +939,7 @@
 <span class="kw">use </span>re_data_store::{EntityPath, TimeInt};
 <span class="kw">use </span>re_log_types::component_types::{Tensor, TensorTrait};
 
-<span class="kw">use </span><span class="kw">crate</span>::misc::{space_info::SpaceInfoCollection, Selection, SpaceViewHighlights, ViewerContext};
+<span class="kw">use </span><span class="kw">crate</span>::misc::{space_info::SpaceInfoCollection, Item, SpaceViewHighlights, ViewerContext};
 
 <span class="kw">use super</span>::{
     data_blueprint::DataBlueprintGroupHandle, space_view_entity_picker::SpaceViewEntityPicker,
@@ -1030,7 +1038,7 @@
                 <span class="kw">let </span>space_view_ids = <span class="self">self
                     </span>.space_views
                     .keys()
-                    .sorted_by_key(|space_view_id| <span class="kw-2">&amp;</span><span class="self">self</span>.space_views[space_view_id].name)
+                    .sorted_by_key(|space_view_id| <span class="kw-2">&amp;</span><span class="self">self</span>.space_views[space_view_id].space_path)
                     .copied()
                     .collect_vec();
 
@@ -1075,8 +1083,7 @@
                 <span class="bool-val">true</span>,
                 is_space_view_visible,
                 |ui| {
-                    <span class="kw">let </span>label = space_view.display_text();
-                    <span class="kw">let </span>response = ctx.space_view_button_to(ui, label, <span class="kw-2">*</span>space_view_id);
+                    <span class="kw">let </span>response = ctx.space_view_button(ui, space_view);
                     <span class="kw">if </span>response.clicked() {
                         <span class="kw">if let </span><span class="prelude-val">Some</span>(tree) = <span class="self">self</span>.trees.get_mut(<span class="kw-2">&amp;</span><span class="self">self</span>.visible) {
                             focus_tab(tree, space_view_id);
@@ -1200,10 +1207,9 @@
                     group_is_visible,
                     child_group.properties_individual.visible,
                     |ui| {
-                        <span class="kw">let </span>label = <span class="macro">format!</span>(<span class="string">&quot;📁 {}&quot;</span>, child_group.display_name);
                         ctx.data_blueprint_group_button_to(
                             ui,
-                            label,
+                            child_group.display_name.clone(),
                             space_view.id,
                             <span class="kw-2">*</span>child_group_handle,
                         )
@@ -1442,24 +1448,27 @@
         <span class="kw">let </span><span class="kw-2">mut </span>space_views = Vec::new();
 
         <span class="kw">for </span>space_view_candidate <span class="kw">in </span><span class="self">Self</span>::all_possible_space_views(ctx, spaces_info) {
+            <span class="comment">// Skip root space for now, messes things up.
+            </span><span class="kw">if </span>space_view_candidate.space_path.is_root() {
+                <span class="kw">continue</span>;
+            }
+
             <span class="kw">let </span><span class="prelude-val">Some</span>(space_info) = spaces_info.get(<span class="kw-2">&amp;</span>space_view_candidate.space_path) <span class="kw">else </span>{
                 <span class="comment">// Should never happen.
                 </span><span class="kw">continue</span>;
             };
 
-            <span class="comment">// If it doesn&#39;t contain anything but the transform itself, skip,
-            </span><span class="kw">if </span>space_info.descendants_without_transform.is_empty() {
-                <span class="kw">continue</span>;
-            }
-
             <span class="kw">if </span>space_view_candidate.category == ViewCategory::Spatial {
-                <span class="comment">// Skip if connection to parent is via rigid (too trivial for a new space view!)
-                </span><span class="kw">if let </span><span class="prelude-val">Some</span>(parent_transform) = space_info.parent_transform() {
-                    <span class="kw">match </span>parent_transform {
-                        re_log_types::Transform::Rigid3(<span class="kw">_</span>) =&gt; {
-                            <span class="kw">continue</span>;
+                <span class="comment">// For every item that isn&#39;t a direct descendant of the root, skip if connection to parent is via rigid (too trivial for a new space view!)
+                </span><span class="kw">if </span>space_info.path.parent() != <span class="prelude-val">Some</span>(EntityPath::root()) {
+                    <span class="kw">if let </span><span class="prelude-val">Some</span>(parent_transform) = space_info.parent_transform() {
+                        <span class="kw">match </span>parent_transform {
+                            re_log_types::Transform::Rigid3(<span class="kw">_</span>) =&gt; {
+                                <span class="kw">continue</span>;
+                            }
+                            re_log_types::Transform::Pinhole(<span class="kw">_</span>)
+                            | re_log_types::Transform::Unknown =&gt; {}
                         }
-                        re_log_types::Transform::Pinhole(<span class="kw">_</span>) | re_log_types::Transform::Unknown =&gt; {}
                     }
                 }
 
@@ -1469,7 +1478,7 @@
                     .iter()
                     .filter_map(|entity_path| {
                         <span class="kw">if let </span><span class="prelude-val">Ok</span>(entity_view) = re_query::query_entity_with_primary::&lt;Tensor&gt;(
-                            <span class="kw-2">&amp;</span>ctx.log_db.entity_db.arrow_store,
+                            <span class="kw-2">&amp;</span>ctx.log_db.entity_db.data_store,
                             <span class="kw-2">&amp;</span>timeline_query,
                             entity_path,
                             <span class="kw-2">&amp;</span>[],
@@ -1541,17 +1550,23 @@
             ui.style_mut().wrap = <span class="prelude-val">Some</span>(<span class="bool-val">false</span>);
 
             <span class="kw">for </span>space_view <span class="kw">in </span><span class="self">Self</span>::all_possible_space_views(ctx, spaces_info) {
-                <span class="kw">if </span>ui
-                    .button(<span class="macro">format!</span>(
-                        <span class="string">&quot;{} {}&quot;</span>,
+                <span class="kw">if </span>ctx
+                    .re_ui
+                    .selectable_label_with_icon(
+                        ui,
                         space_view.category.icon(),
-                        space_view.name
-                    ))
+                        <span class="kw">if </span>space_view.space_path.is_root() {
+                            space_view.display_name.clone()
+                        } <span class="kw">else </span>{
+                            space_view.space_path.to_string()
+                        },
+                        <span class="bool-val">false</span>,
+                    )
                     .clicked()
                 {
                     ui.close_menu();
                     <span class="kw">let </span>new_space_view_id = <span class="self">self</span>.add_space_view(space_view);
-                    ctx.set_single_selection(Selection::SpaceView(new_space_view_id));
+                    ctx.set_single_selection(Item::SpaceView(new_space_view_id));
                 }
             }
         })
@@ -1703,9 +1718,10 @@
             .get_mut(tab)
             .expect(<span class="string">&quot;Should have been populated beforehand&quot;</span>);
 
-        <span class="kw">let </span><span class="kw-2">mut </span>text = space_view.display_text();
+        <span class="kw">let </span><span class="kw-2">mut </span>text =
+            egui::WidgetText::RichText(egui::RichText::new(space_view.display_name.clone()));
 
-        <span class="kw">if </span><span class="self">self</span>.ctx.selection().contains(<span class="kw-2">&amp;</span>Selection::SpaceView(<span class="kw-2">*</span>tab)) {
+        <span class="kw">if </span><span class="self">self</span>.ctx.selection().contains(<span class="kw-2">&amp;</span>Item::SpaceView(<span class="kw-2">*</span>tab)) {
             <span class="comment">// Show that it is selected:
             </span><span class="kw">let </span>egui_ctx = <span class="kw-2">&amp;</span><span class="self">self</span>.ctx.re_ui.egui_ctx;
             <span class="kw">let </span>selection_bg_color = egui_ctx.style().visuals.selection.bg_fill;
@@ -1717,7 +1733,7 @@
 
     <span class="kw">fn </span>on_tab_button(<span class="kw-2">&amp;mut </span><span class="self">self</span>, tab: <span class="kw-2">&amp;mut </span><span class="self">Self</span>::Tab, response: <span class="kw-2">&amp;</span>egui::Response) {
         <span class="kw">if </span>response.clicked() {
-            <span class="self">self</span>.ctx.set_single_selection(Selection::SpaceView(<span class="kw-2">*</span>tab));
+            <span class="self">self</span>.ctx.set_single_selection(Item::SpaceView(<span class="kw-2">*</span>tab));
         }
     }
 }
@@ -1773,7 +1789,7 @@
                     .clicked()
                 {
                     viewport.maximized = <span class="prelude-val">Some</span>(space_view_id);
-                    ctx.set_single_selection(Selection::SpaceView(space_view_id));
+                    ctx.set_single_selection(Item::SpaceView(space_view_id));
                 }
             }
 

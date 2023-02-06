@@ -279,13 +279,13 @@
     <span class="comment">// Although it would be nice to use the `re_query` helpers for this, we would need to move
     // this out of re_data_store to avoid a circular dep. Since we don&#39;t need to do a join for
     // transforms this is easy enough.
-    </span><span class="kw">let </span>arrow_store = <span class="kw-2">&amp;</span>entity_db.arrow_store;
+    </span><span class="kw">let </span>data_store = <span class="kw-2">&amp;</span>entity_db.data_store;
 
     <span class="kw">let </span>components = [Transform::name()];
 
-    <span class="kw">let </span>row_indices = arrow_store.latest_at(query, entity_path, Transform::name(), <span class="kw-2">&amp;</span>components)<span class="question-mark">?</span>;
+    <span class="kw">let </span>row_indices = data_store.latest_at(query, entity_path, Transform::name(), <span class="kw-2">&amp;</span>components)<span class="question-mark">?</span>;
 
-    <span class="kw">let </span>results = arrow_store.get(<span class="kw-2">&amp;</span>components, <span class="kw-2">&amp;</span>row_indices);
+    <span class="kw">let </span>results = data_store.get(<span class="kw-2">&amp;</span>components, <span class="kw-2">&amp;</span>row_indices);
     <span class="kw">let </span>arr = results.get(<span class="number">0</span>)<span class="question-mark">?</span>.as_ref()<span class="question-mark">?</span>.as_ref();
 
     <span class="kw">let </span><span class="kw-2">mut </span>iter = arrow_array_deserialize_iterator::&lt;Transform&gt;(arr).ok()<span class="question-mark">?</span>;

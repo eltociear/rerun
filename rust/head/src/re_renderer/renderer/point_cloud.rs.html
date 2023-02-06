@@ -570,6 +570,7 @@
 <a href="#570" id="570">570</a>
 <a href="#571" id="571">571</a>
 <a href="#572" id="572">572</a>
+<a href="#573" id="573">573</a>
 </pre><pre class="rust"><code><span class="doccomment">//! Point renderer for efficient rendering of point clouds.
 //!
 //!
@@ -705,7 +706,8 @@
 
 <span class="doccomment">/// Textures are 2D since 1D textures are very limited in size (8k typically).
 /// Need to keep this value in sync with `point_cloud.wgsl`!
-</span><span class="kw">const </span>DATA_TEXTURE_SIZE: u32 = <span class="number">1024</span>; <span class="comment">// 1024 x 1024 x (vec4&lt;f32&gt; + [u8;4]) == 20 MiB, ~1M points
+/// We store `vec4&lt;f32&gt; + [u8;4]` = 20 bytes per texel.
+</span><span class="kw">const </span>DATA_TEXTURE_SIZE: u32 = <span class="number">2048</span>; <span class="comment">// 2ki x 2ki = 4 Mi = 80 MiB
 
 </span><span class="kw">impl </span>PointCloudDrawData {
     <span class="doccomment">/// Maximum number of vertices per [`PointCloudDrawData`].

@@ -1483,9 +1483,86 @@
 <a href="#1483" id="1483">1483</a>
 <a href="#1484" id="1484">1484</a>
 <a href="#1485" id="1485">1485</a>
+<a href="#1486" id="1486">1486</a>
+<a href="#1487" id="1487">1487</a>
+<a href="#1488" id="1488">1488</a>
+<a href="#1489" id="1489">1489</a>
+<a href="#1490" id="1490">1490</a>
+<a href="#1491" id="1491">1491</a>
+<a href="#1492" id="1492">1492</a>
+<a href="#1493" id="1493">1493</a>
+<a href="#1494" id="1494">1494</a>
+<a href="#1495" id="1495">1495</a>
+<a href="#1496" id="1496">1496</a>
+<a href="#1497" id="1497">1497</a>
+<a href="#1498" id="1498">1498</a>
+<a href="#1499" id="1499">1499</a>
+<a href="#1500" id="1500">1500</a>
+<a href="#1501" id="1501">1501</a>
+<a href="#1502" id="1502">1502</a>
+<a href="#1503" id="1503">1503</a>
+<a href="#1504" id="1504">1504</a>
+<a href="#1505" id="1505">1505</a>
+<a href="#1506" id="1506">1506</a>
+<a href="#1507" id="1507">1507</a>
+<a href="#1508" id="1508">1508</a>
+<a href="#1509" id="1509">1509</a>
+<a href="#1510" id="1510">1510</a>
+<a href="#1511" id="1511">1511</a>
+<a href="#1512" id="1512">1512</a>
+<a href="#1513" id="1513">1513</a>
+<a href="#1514" id="1514">1514</a>
+<a href="#1515" id="1515">1515</a>
+<a href="#1516" id="1516">1516</a>
+<a href="#1517" id="1517">1517</a>
+<a href="#1518" id="1518">1518</a>
+<a href="#1519" id="1519">1519</a>
+<a href="#1520" id="1520">1520</a>
+<a href="#1521" id="1521">1521</a>
+<a href="#1522" id="1522">1522</a>
+<a href="#1523" id="1523">1523</a>
+<a href="#1524" id="1524">1524</a>
+<a href="#1525" id="1525">1525</a>
+<a href="#1526" id="1526">1526</a>
+<a href="#1527" id="1527">1527</a>
+<a href="#1528" id="1528">1528</a>
+<a href="#1529" id="1529">1529</a>
+<a href="#1530" id="1530">1530</a>
+<a href="#1531" id="1531">1531</a>
+<a href="#1532" id="1532">1532</a>
+<a href="#1533" id="1533">1533</a>
+<a href="#1534" id="1534">1534</a>
+<a href="#1535" id="1535">1535</a>
+<a href="#1536" id="1536">1536</a>
+<a href="#1537" id="1537">1537</a>
+<a href="#1538" id="1538">1538</a>
+<a href="#1539" id="1539">1539</a>
+<a href="#1540" id="1540">1540</a>
+<a href="#1541" id="1541">1541</a>
+<a href="#1542" id="1542">1542</a>
+<a href="#1543" id="1543">1543</a>
+<a href="#1544" id="1544">1544</a>
+<a href="#1545" id="1545">1545</a>
+<a href="#1546" id="1546">1546</a>
+<a href="#1547" id="1547">1547</a>
+<a href="#1548" id="1548">1548</a>
+<a href="#1549" id="1549">1549</a>
+<a href="#1550" id="1550">1550</a>
+<a href="#1551" id="1551">1551</a>
+<a href="#1552" id="1552">1552</a>
+<a href="#1553" id="1553">1553</a>
+<a href="#1554" id="1554">1554</a>
+<a href="#1555" id="1555">1555</a>
+<a href="#1556" id="1556">1556</a>
+<a href="#1557" id="1557">1557</a>
+<a href="#1558" id="1558">1558</a>
+<a href="#1559" id="1559">1559</a>
+<a href="#1560" id="1560">1560</a>
+<a href="#1561" id="1561">1561</a>
 </pre><pre class="rust"><code><span class="kw">use </span>std::{any::Any, hash::Hash};
 
 <span class="kw">use </span>ahash::HashMap;
+<span class="kw">use </span>egui::NumExt <span class="kw">as _</span>;
 <span class="kw">use </span>egui_notify::Toasts;
 <span class="kw">use </span>instant::Instant;
 <span class="kw">use </span>itertools::Itertools <span class="kw">as _</span>;
@@ -1868,6 +1945,12 @@
 }
 
 <span class="kw">impl </span>eframe::App <span class="kw">for </span>App {
+    <span class="kw">fn </span>clear_color(<span class="kw-2">&amp;</span><span class="self">self</span>, visuals: <span class="kw-2">&amp;</span>egui::Visuals) -&gt; [f32; <span class="number">4</span>] {
+        <span class="comment">// It&#39;s rare and subtle, but this color can get through at panel roundings.
+        // (duplicated for `RemoteViewerApp`)
+        </span>visuals.panel_fill.to_normalized_gamma_f32()
+    }
+
     <span class="kw">fn </span>save(<span class="kw-2">&amp;mut </span><span class="self">self</span>, storage: <span class="kw-2">&amp;mut </span><span class="kw">dyn </span>eframe::Storage) {
         eframe::set_value(storage, eframe::APP_KEY, <span class="kw-2">&amp;</span><span class="self">self</span>.state);
     }
@@ -1895,7 +1978,7 @@
             </span>render_ctx.gpu_resources.statistics()
         };
 
-        <span class="kw">let </span>store_stats = DataStoreStats::from_store(<span class="kw-2">&amp;</span><span class="self">self</span>.log_db().entity_db.arrow_store);
+        <span class="kw">let </span>store_stats = DataStoreStats::from_store(<span class="kw-2">&amp;</span><span class="self">self</span>.log_db().entity_db.data_store);
 
         <span class="self">self</span>.memory_panel.update(<span class="kw-2">&amp;</span>gpu_resource_stats, <span class="kw-2">&amp;</span>store_stats); <span class="comment">// do first, before doing too many allocations
 
@@ -1954,26 +2037,47 @@
             <span class="kw">if let </span>(<span class="bool-val">true</span>, <span class="prelude-val">Some</span>(rx)) = (log_db.is_empty(), <span class="kw-2">&amp;</span><span class="self">self</span>.rx) {
                 egui::CentralPanel::default().show(egui_ctx, |ui| {
                     ui.centered_and_justified(|ui| {
-                        <span class="kw">fn </span>ready_and_waiting(txt: <span class="kw-2">&amp;</span>str) -&gt; String {
-                            <span class="macro">format!</span>(<span class="string">&quot;Ready!\n\n{txt}&quot;</span>)
+                        <span class="kw">fn </span>ready_and_waiting(ui: <span class="kw-2">&amp;mut </span>egui::Ui, txt: <span class="kw-2">&amp;</span>str) {
+                            <span class="kw">let </span>style = ui.style();
+                            <span class="kw">let </span><span class="kw-2">mut </span>layout_job = egui::text::LayoutJob::default();
+                            layout_job.append(
+                                <span class="string">&quot;Ready&quot;</span>,
+                                <span class="number">0.0</span>,
+                                egui::TextFormat::simple(
+                                    egui::TextStyle::Heading.resolve(style),
+                                    style.visuals.strong_text_color(),
+                                ),
+                            );
+                            layout_job.append(
+                                <span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot;\n\n{txt}&quot;</span>),
+                                <span class="number">0.0</span>,
+                                egui::TextFormat::simple(
+                                    egui::TextStyle::Body.resolve(style),
+                                    style.visuals.text_color(),
+                                ),
+                            );
+                            layout_job.halign = egui::Align::Center;
+                            ui.label(layout_job);
                         }
 
-                        <span class="kw">let </span>text = <span class="kw">match </span>rx.source() {
+                        <span class="kw">match </span>rx.source() {
                             re_smart_channel::Source::File { path } =&gt; {
-                                <span class="macro">format!</span>(<span class="string">&quot;Loading {}…&quot;</span>, path.display())
+                                ui.strong(<span class="macro">format!</span>(<span class="string">&quot;Loading {}…&quot;</span>, path.display()));
                             }
                             re_smart_channel::Source::Sdk =&gt; {
-                                ready_and_waiting(<span class="string">&quot;Waiting for logging data from SDK&quot;</span>)
+                                ready_and_waiting(ui, <span class="string">&quot;Waiting for logging data from SDK&quot;</span>);
                             }
                             re_smart_channel::Source::WsClient { ws_server_url } =&gt; {
                                 <span class="comment">// TODO(emilk): it would be even better to know wether or not we are connected, or are attempting to connect
-                                </span>ready_and_waiting(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot;Waiting for data from {ws_server_url}&quot;</span>))
+                                </span>ready_and_waiting(
+                                    ui,
+                                    <span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot;Waiting for data from {ws_server_url}&quot;</span>),
+                                );
                             }
                             re_smart_channel::Source::TcpServer { port } =&gt; {
-                                ready_and_waiting(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot;Listening on port {port}&quot;</span>))
+                                ready_and_waiting(ui, <span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot;Listening on port {port}&quot;</span>));
                             }
                         };
-                        ui.strong(text);
                     });
                 });
             } <span class="kw">else </span>{
@@ -2335,7 +2439,7 @@
 
         <span class="kw">let </span>central_panel_frame = egui::Frame {
             fill: egui_ctx.style().visuals.panel_fill,
-            inner_margin: egui::style::Margin::same(<span class="number">0.0</span>),
+            inner_margin: egui::Margin::same(<span class="number">0.0</span>),
             ..Default::default()
         };
 
@@ -2368,24 +2472,22 @@
 ) {
     <span class="macro">crate::profile_function!</span>();
 
-    <span class="kw">let </span>panel_frame = {
-        egui::Frame {
-            inner_margin: egui::style::Margin::symmetric(<span class="number">8.0</span>, <span class="number">2.0</span>),
-            fill: app.re_ui.design_tokens.top_bar_color,
-            ..Default::default()
-        }
+    <span class="kw">let </span>panel_frame = egui::Frame {
+        inner_margin: re_ui::ReUi::top_bar_margin(),
+        fill: app.re_ui.design_tokens.top_bar_color,
+        ..Default::default()
     };
 
     <span class="kw">let </span>native_pixels_per_point = frame.info().native_pixels_per_point;
     <span class="kw">let </span>fullscreen = {
-        <span class="attr">#[cfg(target_os = <span class="string">&quot;macos&quot;</span>)]
-        </span>{
-            frame.info().window_info.fullscreen
-        }
-        <span class="attr">#[cfg(not(target_os = <span class="string">&quot;macos&quot;</span>))]
+        <span class="attr">#[cfg(target_arch = <span class="string">&quot;wasm32&quot;</span>)]
         </span>{
             <span class="bool-val">false
         </span>}
+        <span class="attr">#[cfg(not(target_arch = <span class="string">&quot;wasm32&quot;</span>))]
+        </span>{
+            frame.info().window_info.fullscreen
+        }
     };
     <span class="kw">let </span>top_bar_style = app.re_ui.top_bar_style(native_pixels_per_point, fullscreen);
 
@@ -2393,18 +2495,26 @@
         .frame(panel_frame)
         .exact_height(top_bar_style.height)
         .show(egui_ctx, |ui| {
-            egui::menu::bar(ui, |ui| {
+            <span class="kw">let </span>_response = egui::menu::bar(ui, |ui| {
                 ui.set_height(top_bar_style.height);
                 ui.add_space(top_bar_style.indent);
 
                 top_bar_ui(ui, frame, app, gpu_resource_stats);
-            });
+            })
+            .response;
+
+            <span class="attr">#[cfg(not(target_arch = <span class="string">&quot;wasm32&quot;</span>))]
+            </span><span class="kw">if </span>re_ui::FULLSIZE_CONTENT &amp;&amp; _response.interact(egui::Sense::click()).double_clicked()
+            {
+                frame.set_maximized(!frame.info().window_info.maximized);
+            }
         });
 }
 
 <span class="kw">fn </span>rerun_menu_button_ui(ui: <span class="kw-2">&amp;mut </span>egui::Ui, _frame: <span class="kw-2">&amp;mut </span>eframe::Frame, app: <span class="kw-2">&amp;mut </span>App) {
     <span class="comment">// let desired_icon_height = ui.max_rect().height() - 2.0 * ui.spacing_mut().button_padding.y;
     </span><span class="kw">let </span>desired_icon_height = ui.max_rect().height() - <span class="number">4.0</span>; <span class="comment">// TODO(emilk): figure out this fudge
+    </span><span class="kw">let </span>desired_icon_height = desired_icon_height.at_most(<span class="number">28.0</span>); <span class="comment">// figma size 2023-02-03
 
     </span><span class="kw">let </span>icon_image = app.re_ui.icon_image(<span class="kw-2">&amp;</span>re_ui::icons::RERUN_MENU);
     <span class="kw">let </span>image_size = icon_image.size_vec2() * (desired_icon_height / icon_image.size_vec2().y);
@@ -2481,8 +2591,13 @@
         input_latency_label_ui(ui, app);
     }
 
-    ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
-        <span class="kw">if let </span><span class="prelude-val">Some</span>(log_db) = app.log_dbs.get(<span class="kw-2">&amp;</span>app.state.selected_rec_id) {
+    <span class="kw">if let </span><span class="prelude-val">Some</span>(log_db) = app.log_dbs.get(<span class="kw-2">&amp;</span>app.state.selected_rec_id) {
+        ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
+            <span class="comment">// Make the first button the same distance form the side as from the top,
+            // no matter how high the top bar is.
+            </span><span class="kw">let </span>extra_margin = (ui.available_height() - <span class="number">24.0</span>) / <span class="number">2.0</span>;
+            ui.add_space(extra_margin);
+
             <span class="kw">let </span>selected_app_id = log_db
                 .recording_info()
                 .map_or_else(ApplicationId::unknown, |rec_info| {
@@ -2532,8 +2647,8 @@
                     </span>egui::warn_if_debug_build(ui);
                 });
             }
-        }
-    });
+        });
+    }
 }
 
 <span class="kw">fn </span>frame_time_label_ui(ui: <span class="kw-2">&amp;mut </span>egui::Ui, app: <span class="kw-2">&amp;mut </span>App) {
@@ -2822,6 +2937,43 @@
         .clicked()
     {
         ui.close_menu();
+    }
+
+    ui.separator();
+
+    <span class="kw">let </span><span class="kw-2">mut </span>debug = ui.style().debug;
+    <span class="kw">let </span><span class="kw-2">mut </span>any_clicked = <span class="bool-val">false</span>;
+
+    any_clicked |= ui
+        .checkbox(<span class="kw-2">&amp;mut </span>debug.debug_on_hover, <span class="string">&quot;Ui debug on hover&quot;</span>)
+        .on_hover_text(<span class="string">&quot;However over widgets to see their rectangles&quot;</span>)
+        .changed();
+    any_clicked |= ui
+        .checkbox(<span class="kw-2">&amp;mut </span>debug.show_expand_width, <span class="string">&quot;Show expand width&quot;</span>)
+        .on_hover_text(<span class="string">&quot;Show which widgets make their parent wider&quot;</span>)
+        .changed();
+    any_clicked |= ui
+        .checkbox(<span class="kw-2">&amp;mut </span>debug.show_expand_height, <span class="string">&quot;Show expand height&quot;</span>)
+        .on_hover_text(<span class="string">&quot;Show which widgets make their parent higher&quot;</span>)
+        .changed();
+    any_clicked |= ui.checkbox(<span class="kw-2">&amp;mut </span>debug.show_resize, <span class="string">&quot;Show resize&quot;</span>).changed();
+    any_clicked |= ui
+        .checkbox(
+            <span class="kw-2">&amp;mut </span>debug.show_interactive_widgets,
+            <span class="string">&quot;Show interactive widgets&quot;</span>,
+        )
+        .on_hover_text(<span class="string">&quot;Show an overlay on all interactive widgets.&quot;</span>)
+        .changed();
+    <span class="comment">// This option currently causes the viewer to hang.
+    // any_clicked |= ui
+    //     .checkbox(&amp;mut debug.show_blocking_widget, &quot;Show blocking widgets&quot;)
+    //     .on_hover_text(&quot;Show what widget blocks the interaction of another widget.&quot;)
+    //     .changed();
+
+    </span><span class="kw">if </span>any_clicked {
+        <span class="kw">let </span><span class="kw-2">mut </span>style = (<span class="kw-2">*</span>ui.ctx().style()).clone();
+        style.debug = debug;
+        ui.ctx().set_style(style);
     }
 
     ui.separator();

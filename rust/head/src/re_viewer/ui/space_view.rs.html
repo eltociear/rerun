@@ -433,25 +433,6 @@
 <a href="#433" id="433">433</a>
 <a href="#434" id="434">434</a>
 <a href="#435" id="435">435</a>
-<a href="#436" id="436">436</a>
-<a href="#437" id="437">437</a>
-<a href="#438" id="438">438</a>
-<a href="#439" id="439">439</a>
-<a href="#440" id="440">440</a>
-<a href="#441" id="441">441</a>
-<a href="#442" id="442">442</a>
-<a href="#443" id="443">443</a>
-<a href="#444" id="444">444</a>
-<a href="#445" id="445">445</a>
-<a href="#446" id="446">446</a>
-<a href="#447" id="447">447</a>
-<a href="#448" id="448">448</a>
-<a href="#449" id="449">449</a>
-<a href="#450" id="450">450</a>
-<a href="#451" id="451">451</a>
-<a href="#452" id="452">452</a>
-<a href="#453" id="453">453</a>
-<a href="#454" id="454">454</a>
 </pre><pre class="rust"><code><span class="kw">use </span>std::collections::BTreeMap;
 
 <span class="kw">use </span>re_arrow_store::Timeline;
@@ -493,12 +474,7 @@
 </span><span class="attr">#[derive(Clone, serde::Deserialize, serde::Serialize)]
 </span><span class="kw">pub struct </span>SpaceView {
     <span class="kw">pub </span>id: SpaceViewId,
-    <span class="kw">pub </span>name: String,
-
-    <span class="doccomment">/// Everything under this root *can* be shown in the space view.
-    ///
-    /// TODO(andreas): We decided to remove this concept.
-    </span><span class="kw">pub </span>root_path: EntityPath,
+    <span class="kw">pub </span>display_name: String,
 
     <span class="doccomment">/// The &quot;anchor point&quot; of this space view.
     /// It refers to a [`SpaceInfo`] which forms our reference point for all scene-&gt;world transforms in this space view.
@@ -525,16 +501,14 @@
         space_info: <span class="kw-2">&amp;</span>SpaceInfo,
         queries_entities: <span class="kw-2">&amp;</span>[EntityPath],
     ) -&gt; <span class="self">Self </span>{
-        <span class="kw">let </span>root_path = space_info.path.iter().next().map_or_else(
-            || space_info.path.clone(),
-            |c| EntityPath::from(<span class="macro">vec!</span>[c.clone()]),
-        );
-
-        <span class="kw">let </span>name = <span class="kw">if </span>queries_entities.len() == <span class="number">1 </span>{
-            <span class="comment">// a single entity in this space-view - name the space after it
+        <span class="kw">let </span>display_name = <span class="kw">if </span>queries_entities.len() == <span class="number">1 </span>{
+            <span class="comment">// A single entity in this space-view - name the space after it.
             </span>queries_entities[<span class="number">0</span>].to_string()
+        } <span class="kw">else if let </span><span class="prelude-val">Some</span>(name) = space_info.path.iter().last() {
+            name.to_string()
         } <span class="kw">else </span>{
-            space_info.path.to_string()
+            <span class="comment">// Include category name in the display for root paths because they look a tad bit too short otherwise.
+            </span><span class="macro">format!</span>(<span class="string">&quot;/ ({category})&quot;</span>)
         };
 
         <span class="kw">let </span><span class="kw-2">mut </span>data_blueprint_tree = DataBlueprintTree::default();
@@ -542,20 +516,14 @@
             .insert_entities_according_to_hierarchy(queries_entities.iter(), <span class="kw-2">&amp;</span>space_info.path);
 
         <span class="self">Self </span>{
-            name,
+            display_name,
             id: SpaceViewId::random(),
-            root_path,
             space_path: space_info.path.clone(),
             data_blueprint: data_blueprint_tree,
             view_state: ViewState::default(),
             category,
             entities_determined_by_user: <span class="bool-val">false</span>,
         }
-    }
-
-    <span class="doccomment">/// How to show the name in the ui
-    </span><span class="kw">pub fn </span>display_text(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; egui::WidgetText {
-        <span class="macro">format!</span>(<span class="string">&quot;{} {}&quot;</span>, <span class="self">self</span>.category.icon(), <span class="kw-2">&amp;</span><span class="self">self</span>.name).into()
     }
 
     <span class="doccomment">/// List of entities a space view queries by default for a given category.
@@ -822,47 +790,41 @@
         ui: <span class="kw-2">&amp;mut </span>egui::Ui,
         scene: <span class="kw-2">&amp;</span>view_tensor::SceneTensor,
     ) {
-        egui::Frame {
-            inner_margin: re_ui::ReUi::view_padding().into(),
-            ..egui::Frame::default()
-        }
-        .show(ui, |ui| {
-            <span class="kw">if </span>scene.tensors.is_empty() {
-                ui.centered_and_justified(|ui| ui.label(<span class="string">&quot;(empty)&quot;</span>));
-                <span class="self">self</span>.selected_tensor = <span class="prelude-val">None</span>;
-            } <span class="kw">else </span>{
-                <span class="kw">if let </span><span class="prelude-val">Some</span>(selected_tensor) = <span class="kw-2">&amp;</span><span class="self">self</span>.selected_tensor {
-                    <span class="kw">if </span>!scene.tensors.contains_key(selected_tensor) {
-                        <span class="self">self</span>.selected_tensor = <span class="prelude-val">None</span>;
-                    }
-                }
-                <span class="kw">if </span><span class="self">self</span>.selected_tensor.is_none() {
-                    <span class="self">self</span>.selected_tensor = <span class="prelude-val">Some</span>(scene.tensors.iter().next().unwrap().<span class="number">0</span>.clone());
-                }
-
-                <span class="kw">if </span>scene.tensors.len() &gt; <span class="number">1 </span>{
-                    <span class="comment">// Show radio buttons for the different tensors we have in this view - better than nothing!
-                    </span>ui.horizontal(|ui| {
-                        <span class="kw">for </span>instance_path <span class="kw">in </span>scene.tensors.keys() {
-                            <span class="kw">let </span>is_selected = <span class="self">self</span>.selected_tensor.as_ref() == <span class="prelude-val">Some</span>(instance_path);
-                            <span class="kw">if </span>ui.radio(is_selected, instance_path.to_string()).clicked() {
-                                <span class="self">self</span>.selected_tensor = <span class="prelude-val">Some</span>(instance_path.clone());
-                            }
-                        }
-                    });
-                }
-
-                <span class="kw">if let </span><span class="prelude-val">Some</span>(selected_tensor) = <span class="kw-2">&amp;</span><span class="self">self</span>.selected_tensor {
-                    <span class="kw">if let </span><span class="prelude-val">Some</span>(tensor) = scene.tensors.get(selected_tensor) {
-                        <span class="kw">let </span>state_tensor = <span class="self">self
-                            </span>.state_tensors
-                            .entry(selected_tensor.clone())
-                            .or_insert_with(|| view_tensor::ViewTensorState::create(tensor));
-                        view_tensor::view_tensor(ctx, ui, state_tensor, tensor);
-                    }
+        <span class="kw">if </span>scene.tensors.is_empty() {
+            ui.centered_and_justified(|ui| ui.label(<span class="string">&quot;(empty)&quot;</span>));
+            <span class="self">self</span>.selected_tensor = <span class="prelude-val">None</span>;
+        } <span class="kw">else </span>{
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(selected_tensor) = <span class="kw-2">&amp;</span><span class="self">self</span>.selected_tensor {
+                <span class="kw">if </span>!scene.tensors.contains_key(selected_tensor) {
+                    <span class="self">self</span>.selected_tensor = <span class="prelude-val">None</span>;
                 }
             }
-        });
+            <span class="kw">if </span><span class="self">self</span>.selected_tensor.is_none() {
+                <span class="self">self</span>.selected_tensor = <span class="prelude-val">Some</span>(scene.tensors.iter().next().unwrap().<span class="number">0</span>.clone());
+            }
+
+            <span class="kw">if </span>scene.tensors.len() &gt; <span class="number">1 </span>{
+                <span class="comment">// Show radio buttons for the different tensors we have in this view - better than nothing!
+                </span>ui.horizontal(|ui| {
+                    <span class="kw">for </span>instance_path <span class="kw">in </span>scene.tensors.keys() {
+                        <span class="kw">let </span>is_selected = <span class="self">self</span>.selected_tensor.as_ref() == <span class="prelude-val">Some</span>(instance_path);
+                        <span class="kw">if </span>ui.radio(is_selected, instance_path.to_string()).clicked() {
+                            <span class="self">self</span>.selected_tensor = <span class="prelude-val">Some</span>(instance_path.clone());
+                        }
+                    }
+                });
+            }
+
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(selected_tensor) = <span class="kw-2">&amp;</span><span class="self">self</span>.selected_tensor {
+                <span class="kw">if let </span><span class="prelude-val">Some</span>(tensor) = scene.tensors.get(selected_tensor) {
+                    <span class="kw">let </span>state_tensor = <span class="self">self
+                        </span>.state_tensors
+                        .entry(selected_tensor.clone())
+                        .or_insert_with(|| view_tensor::ViewTensorState::create(tensor));
+                    view_tensor::view_tensor(ctx, ui, state_tensor, tensor);
+                }
+            }
+        }
     }
 
     <span class="kw">fn </span>ui_text(

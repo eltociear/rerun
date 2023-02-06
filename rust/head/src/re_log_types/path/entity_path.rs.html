@@ -246,9 +246,14 @@
 <a href="#246" id="246">246</a>
 <a href="#247" id="247">247</a>
 <a href="#248" id="248">248</a>
+<a href="#249" id="249">249</a>
+<a href="#250" id="250">250</a>
+<a href="#251" id="251">251</a>
 </pre><pre class="rust"><code><span class="kw">use </span>std::sync::Arc;
 
-<span class="kw">use crate</span>::{hash::Hash128, path::entity_path_impl::EntityPathImpl, EntityPathPart};
+<span class="kw">use crate</span>::{
+    hash::Hash128, parse_entity_path, path::entity_path_impl::EntityPathImpl, EntityPathPart,
+};
 
 <span class="comment">// ----------------------------------------------------------------------------
 
@@ -410,17 +415,18 @@
     }
 }
 
-<span class="kw">impl </span>From&lt;<span class="kw-2">&amp;</span>str&gt; <span class="kw">for </span>EntityPath {
+<span class="attr">#[allow(clippy::fallible_impl_from)]
+</span><span class="kw">impl </span>From&lt;<span class="kw-2">&amp;</span>str&gt; <span class="kw">for </span>EntityPath {
     <span class="attr">#[inline]
-    </span><span class="kw">fn </span>from(component: <span class="kw-2">&amp;</span>str) -&gt; <span class="self">Self </span>{
-        <span class="self">Self</span>::from(<span class="macro">vec!</span>[EntityPathPart::from(component)])
+    </span><span class="kw">fn </span>from(path: <span class="kw-2">&amp;</span>str) -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::from(parse_entity_path(path).unwrap())
     }
 }
 
 <span class="kw">impl </span>From&lt;String&gt; <span class="kw">for </span>EntityPath {
     <span class="attr">#[inline]
-    </span><span class="kw">fn </span>from(component: String) -&gt; <span class="self">Self </span>{
-        <span class="self">Self</span>::from(<span class="macro">vec!</span>[EntityPathPart::from(component)])
+    </span><span class="kw">fn </span>from(path: String) -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::from(path.as_str())
     }
 }
 

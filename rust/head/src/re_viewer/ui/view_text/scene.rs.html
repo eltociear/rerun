@@ -148,7 +148,7 @@
     ) {
         <span class="macro">crate::profile_function!</span>();
 
-        <span class="kw">let </span>store = <span class="kw-2">&amp;</span>ctx.log_db.entity_db.arrow_store;
+        <span class="kw">let </span>store = <span class="kw-2">&amp;</span>ctx.log_db.entity_db.data_store;
 
         <span class="kw">for </span>entity_path <span class="kw">in </span>query.entity_paths {
             <span class="kw">let </span>ent_path = entity_path;

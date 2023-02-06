@@ -45,8 +45,8 @@
 </pre><pre class="rust"><code><span class="kw">mod </span>app_options;
 <span class="kw">pub mod </span>caches;
 <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">mod </span>color_map;
+<span class="kw">mod </span>item;
 <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">mod </span>mesh_loader;
-<span class="kw">mod </span>selection;
 <span class="kw">mod </span>selection_state;
 <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">mod </span>space_info;
 <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">mod </span>time_axis;
@@ -72,7 +72,7 @@
 <span class="kw">pub use </span>transform_cache::{TransformCache, UnreachableTransform};
 <span class="kw">pub use </span>{
     app_options::<span class="kw-2">*</span>,
-    selection::{MultiSelection, Selection},
+    item::{Item, ItemCollection},
     selection_state::{
         HoverHighlight, HoveredSpace, InteractionHighlight, OptionalSpaceViewEntityHighlight,
         SelectionHighlight, SelectionState, SpaceViewHighlights,

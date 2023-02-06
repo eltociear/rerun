@@ -319,6 +319,25 @@
 <a href="#319" id="319">319</a>
 <a href="#320" id="320">320</a>
 <a href="#321" id="321">321</a>
+<a href="#322" id="322">322</a>
+<a href="#323" id="323">323</a>
+<a href="#324" id="324">324</a>
+<a href="#325" id="325">325</a>
+<a href="#326" id="326">326</a>
+<a href="#327" id="327">327</a>
+<a href="#328" id="328">328</a>
+<a href="#329" id="329">329</a>
+<a href="#330" id="330">330</a>
+<a href="#331" id="331">331</a>
+<a href="#332" id="332">332</a>
+<a href="#333" id="333">333</a>
+<a href="#334" id="334">334</a>
+<a href="#335" id="335">335</a>
+<a href="#336" id="336">336</a>
+<a href="#337" id="337">337</a>
+<a href="#338" id="338">338</a>
+<a href="#339" id="339">339</a>
+<a href="#340" id="340">340</a>
 </pre><pre class="rust"><code><span class="kw">use </span>re_data_store::{log_db::LogDb, InstancePath};
 <span class="kw">use </span>re_log_types::{ComponentPath, EntityPath, MsgId, TimeInt, Timeline};
 
@@ -328,7 +347,7 @@
 };
 
 <span class="kw">use super</span>::{
-    selection::{MultiSelection, Selection},
+    item::{Item, ItemCollection},
     HoverHighlight,
 };
 
@@ -358,7 +377,7 @@
 <span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; ViewerContext&lt;<span class="lifetime">&#39;a</span>&gt; {
     <span class="doccomment">/// Show an [`MsgId`] and make it selectable
     </span><span class="kw">pub fn </span>msg_id_button(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ui: <span class="kw-2">&amp;mut </span>egui::Ui, msg_id: MsgId) -&gt; egui::Response {
-        <span class="kw">let </span>selection = Selection::MsgId(msg_id);
+        <span class="kw">let </span>selection = Item::MsgId(msg_id);
         <span class="kw">let </span>response = ui
             .selectable_label(<span class="self">self</span>.selection().contains(<span class="kw-2">&amp;</span>selection), msg_id.short_string())
             .on_hover_ui(|ui| {
@@ -418,7 +437,7 @@
         instance_path: <span class="kw-2">&amp;</span>InstancePath,
         text: <span class="kw">impl </span>Into&lt;egui::WidgetText&gt;,
     ) -&gt; egui::Response {
-        <span class="kw">let </span>selection = Selection::InstancePath(space_view_id, instance_path.clone());
+        <span class="kw">let </span>selection = Item::InstancePath(space_view_id, instance_path.clone());
         <span class="kw">let </span>subtype_string = <span class="kw">if </span>instance_path.instance_key.is_splat() {
             <span class="string">&quot;Entity&quot;
         </span>} <span class="kw">else </span>{
@@ -448,9 +467,22 @@
         text: <span class="kw">impl </span>Into&lt;egui::WidgetText&gt;,
         component_path: <span class="kw-2">&amp;</span>ComponentPath,
     ) -&gt; egui::Response {
-        <span class="kw">let </span>selection = Selection::ComponentPath(component_path.clone());
+        <span class="kw">let </span>selection = Item::ComponentPath(component_path.clone());
         <span class="kw">let </span>response = ui.selectable_label(<span class="self">self</span>.selection().contains(<span class="kw-2">&amp;</span>selection), text);
         <span class="self">self</span>.cursor_interact_with_selectable(response, selection)
+    }
+
+    <span class="kw">pub fn </span>space_view_button(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        ui: <span class="kw-2">&amp;mut </span>egui::Ui,
+        space_view: <span class="kw-2">&amp;</span><span class="kw">crate</span>::ui::SpaceView,
+    ) -&gt; egui::Response {
+        <span class="self">self</span>.space_view_button_to(
+            ui,
+            space_view.display_name.clone(),
+            space_view.id,
+            space_view.category,
+        )
     }
 
     <span class="kw">pub fn </span>space_view_button_to(
@@ -458,11 +490,14 @@
         ui: <span class="kw-2">&amp;mut </span>egui::Ui,
         text: <span class="kw">impl </span>Into&lt;egui::WidgetText&gt;,
         space_view_id: SpaceViewId,
+        space_view_category: <span class="kw">crate</span>::ui::ViewCategory,
     ) -&gt; egui::Response {
-        <span class="kw">let </span>selection = Selection::SpaceView(space_view_id);
+        <span class="kw">let </span>selection = Item::SpaceView(space_view_id);
         <span class="kw">let </span>is_selected = <span class="self">self</span>.selection().contains(<span class="kw-2">&amp;</span>selection);
-        <span class="kw">let </span>response = ui
-            .selectable_label(is_selected, text)
+
+        <span class="kw">let </span>response = <span class="self">self
+            </span>.re_ui
+            .selectable_label_with_icon(ui, space_view_category.icon(), text, is_selected)
             .on_hover_text(<span class="string">&quot;Space View&quot;</span>);
         <span class="self">self</span>.cursor_interact_with_selectable(response, selection)
     }
@@ -474,9 +509,15 @@
         space_view_id: SpaceViewId,
         group_handle: DataBlueprintGroupHandle,
     ) -&gt; egui::Response {
-        <span class="kw">let </span>selection = Selection::DataBlueprintGroup(space_view_id, group_handle);
-        <span class="kw">let </span>response = ui
-            .selectable_label(<span class="self">self</span>.selection().contains(<span class="kw-2">&amp;</span>selection), text)
+        <span class="kw">let </span>selection = Item::DataBlueprintGroup(space_view_id, group_handle);
+        <span class="kw">let </span>response = <span class="self">self
+            </span>.re_ui
+            .selectable_label_with_icon(
+                ui,
+                <span class="kw-2">&amp;</span>re_ui::icons::CONTAINER,
+                text,
+                <span class="self">self</span>.selection().contains(<span class="kw-2">&amp;</span>selection),
+            )
             .on_hover_text(<span class="string">&quot;Group&quot;</span>);
         <span class="self">self</span>.cursor_interact_with_selectable(response, selection)
     }
@@ -488,7 +529,7 @@
         space_view_id: SpaceViewId,
         entity_path: <span class="kw-2">&amp;</span>EntityPath,
     ) -&gt; egui::Response {
-        <span class="kw">let </span>selection = Selection::InstancePath(
+        <span class="kw">let </span>selection = Item::InstancePath(
             <span class="prelude-val">Some</span>(space_view_id),
             InstancePath::entity_splat(entity_path.clone()),
         );
@@ -548,17 +589,14 @@
     </span><span class="doccomment">/// Sets a single selection, updating history as needed.
     ///
     /// Returns the previous selection.
-    </span><span class="kw">pub fn </span>set_single_selection(<span class="kw-2">&amp;mut </span><span class="self">self</span>, item: Selection) -&gt; MultiSelection {
+    </span><span class="kw">pub fn </span>set_single_selection(<span class="kw-2">&amp;mut </span><span class="self">self</span>, item: Item) -&gt; ItemCollection {
         <span class="self">self</span>.rec_cfg.selection_state.set_single_selection(item)
     }
 
     <span class="doccomment">/// Sets several objects to be selected, updating history as needed.
     ///
     /// Returns the previous selection.
-    </span><span class="kw">pub fn </span>set_multi_selection(
-        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
-        items: <span class="kw">impl </span>Iterator&lt;Item = Selection&gt;,
-    ) -&gt; MultiSelection {
+    </span><span class="kw">pub fn </span>set_multi_selection(<span class="kw-2">&amp;mut </span><span class="self">self</span>, items: <span class="kw">impl </span>Iterator&lt;Item = Item&gt;) -&gt; ItemCollection {
         <span class="self">self</span>.rec_cfg.selection_state.set_multi_selection(items)
     }
 
@@ -579,7 +617,7 @@
     <span class="kw">pub fn </span>cursor_interact_with_selectable(
         <span class="kw-2">&amp;mut </span><span class="self">self</span>,
         response: egui::Response,
-        selectable: Selection,
+        selectable: Item,
     ) -&gt; egui::Response {
         <span class="kw">let </span>is_item_hovered =
             <span class="self">self</span>.selection_state().highlight_for_ui_element(<span class="kw-2">&amp;</span>selectable) == HoverHighlight::Hovered;
@@ -600,17 +638,17 @@
     }
 
     <span class="doccomment">/// Returns the current selection.
-    </span><span class="kw">pub fn </span>selection(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>MultiSelection {
+    </span><span class="kw">pub fn </span>selection(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>ItemCollection {
         <span class="self">self</span>.rec_cfg.selection_state.current()
     }
 
     <span class="doccomment">/// Returns the currently hovered objects.
-    </span><span class="kw">pub fn </span>hovered(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>MultiSelection {
+    </span><span class="kw">pub fn </span>hovered(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>ItemCollection {
         <span class="self">self</span>.rec_cfg.selection_state.hovered()
     }
 
     <span class="doccomment">/// Set the hovered objects. Will be in [`Self::hovered`] on the next frame.
-    </span><span class="kw">pub fn </span>set_hovered(<span class="kw-2">&amp;mut </span><span class="self">self</span>, hovered: <span class="kw">impl </span>Iterator&lt;Item = Selection&gt;) {
+    </span><span class="kw">pub fn </span>set_hovered(<span class="kw-2">&amp;mut </span><span class="self">self</span>, hovered: <span class="kw">impl </span>Iterator&lt;Item = Item&gt;) {
         <span class="self">self</span>.rec_cfg.selection_state.set_hovered(hovered);
     }
 

@@ -256,6 +256,26 @@
 <a href="#256" id="256">256</a>
 <a href="#257" id="257">257</a>
 <a href="#258" id="258">258</a>
+<a href="#259" id="259">259</a>
+<a href="#260" id="260">260</a>
+<a href="#261" id="261">261</a>
+<a href="#262" id="262">262</a>
+<a href="#263" id="263">263</a>
+<a href="#264" id="264">264</a>
+<a href="#265" id="265">265</a>
+<a href="#266" id="266">266</a>
+<a href="#267" id="267">267</a>
+<a href="#268" id="268">268</a>
+<a href="#269" id="269">269</a>
+<a href="#270" id="270">270</a>
+<a href="#271" id="271">271</a>
+<a href="#272" id="272">272</a>
+<a href="#273" id="273">273</a>
+<a href="#274" id="274">274</a>
+<a href="#275" id="275">275</a>
+<a href="#276" id="276">276</a>
+<a href="#277" id="277">277</a>
+<a href="#278" id="278">278</a>
 </pre><pre class="rust"><code><span class="kw">use </span>egui::Color32;
 
 <span class="doccomment">/// The look and feel of the UI.
@@ -266,6 +286,9 @@
 </span><span class="kw">pub struct </span>DesignTokens {
     <span class="kw">pub </span>top_bar_color: egui::Color32,
     <span class="kw">pub </span>bottom_bar_color: egui::Color32,
+    <span class="kw">pub </span>bottom_bar_stroke: egui::Stroke,
+    <span class="kw">pub </span>bottom_bar_rounding: egui::Rounding,
+    <span class="kw">pub </span>shadow_gradient_dark_start: egui::Color32,
 }
 
 <span class="kw">impl </span>DesignTokens {
@@ -361,7 +384,12 @@
         egui_style.visuals.widgets.open.expansion = <span class="number">2.0</span>;
     }
 
-    <span class="kw">let </span>subudued = get_aliased_color(<span class="kw-2">&amp;</span>json, <span class="string">&quot;{Alias.Color.Text.Subdued.value}&quot;</span>);
+    egui_style.visuals.selection.bg_fill =
+        get_aliased_color(<span class="kw-2">&amp;</span>json, <span class="string">&quot;{Alias.Color.Highlight.Default.value}&quot;</span>);
+
+    egui_style.visuals.widgets.noninteractive.bg_stroke.color = Color32::from_gray(<span class="number">30</span>); <span class="comment">// from figma. separator lines, panel lines, etc
+
+    </span><span class="kw">let </span>subudued = get_aliased_color(<span class="kw-2">&amp;</span>json, <span class="string">&quot;{Alias.Color.Text.Subdued.value}&quot;</span>);
     <span class="kw">let </span>default = get_aliased_color(<span class="kw-2">&amp;</span>json, <span class="string">&quot;{Alias.Color.Text.Default.value}&quot;</span>);
     <span class="kw">let </span>strong = get_aliased_color(<span class="kw-2">&amp;</span>json, <span class="string">&quot;{Alias.Color.Text.Strong.value}&quot;</span>);
 
@@ -405,15 +433,27 @@
     ctx.set_style(egui_style);
 
     DesignTokens {
-        top_bar_color: Color32::from_gray(<span class="number">20</span>),    <span class="comment">// copied from figma
-        </span>bottom_bar_color: Color32::from_gray(<span class="number">25</span>), <span class="comment">// copied from figma
-    </span>}
+        top_bar_color: Color32::from_gray(<span class="number">20</span>), <span class="comment">// copied from figma
+        </span>bottom_bar_color: get_global_color(<span class="kw-2">&amp;</span>json, <span class="string">&quot;{Global.Color.Grey.150}&quot;</span>),
+        bottom_bar_stroke: egui::Stroke::new(<span class="number">1.0</span>, egui::Color32::from_gray(<span class="number">47</span>)), <span class="comment">// copied from figma
+        </span>bottom_bar_rounding: egui::Rounding {
+            nw: <span class="number">6.0</span>,
+            ne: <span class="number">6.0</span>,
+            sw: <span class="number">0.0</span>,
+            se: <span class="number">0.0</span>,
+        }, <span class="comment">// copied from figma, should be top only
+        </span>shadow_gradient_dark_start: egui::Color32::from_black_alpha(<span class="number">77</span>),
+    }
 }
 
 <span class="comment">// ----------------------------------------------------------------------------
 
 </span><span class="kw">fn </span>get_aliased_color(json: <span class="kw-2">&amp;</span>serde_json::Value, alias_path: <span class="kw-2">&amp;</span>str) -&gt; egui::Color32 {
     parse_color(get_alias_str(json, alias_path))
+}
+
+<span class="kw">fn </span>get_global_color(json: <span class="kw-2">&amp;</span>serde_json::Value, global_path: <span class="kw-2">&amp;</span>str) -&gt; egui::Color32 {
+    parse_color(global_path_value(json, global_path).as_str().unwrap())
 }
 
 <span class="kw">fn </span>get_alias_str&lt;<span class="lifetime">&#39;json</span>&gt;(json: <span class="kw-2">&amp;</span><span class="lifetime">&#39;json </span>serde_json::Value, alias_path: <span class="kw-2">&amp;</span>str) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;json </span>str {

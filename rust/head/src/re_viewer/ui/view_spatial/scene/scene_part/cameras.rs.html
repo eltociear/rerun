@@ -409,7 +409,7 @@
             <span class="kw">let </span>query = re_arrow_store::LatestAtQuery::new(query.timeline, query.latest_at);
 
             <span class="kw">match </span>query_entity_with_primary::&lt;Transform&gt;(
-                <span class="kw-2">&amp;</span>ctx.log_db.entity_db.arrow_store,
+                <span class="kw-2">&amp;</span>ctx.log_db.entity_db.data_store,
                 <span class="kw-2">&amp;</span>query,
                 ent_path,
                 <span class="kw-2">&amp;</span>[],

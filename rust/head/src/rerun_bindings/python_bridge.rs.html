@@ -907,6 +907,11 @@
 <a href="#907" id="907">907</a>
 <a href="#908" id="908">908</a>
 <a href="#909" id="909">909</a>
+<a href="#910" id="910">910</a>
+<a href="#911" id="911">911</a>
+<a href="#912" id="912">912</a>
+<a href="#913" id="913">913</a>
+<a href="#914" id="914">914</a>
 </pre><pre class="rust"><code><span class="attr">#![allow(clippy::needless_pass_by_value)] </span><span class="comment">// A lot of arguments to #[pufunction] need to be by value
 </span><span class="attr">#![allow(clippy::borrow_deref_ref)] </span><span class="comment">// False positive due to #[pufunction] macro
 </span><span class="attr">#![allow(unsafe_op_in_unsafe_fn)] </span><span class="comment">// False positive due to #[pufunction] macro
@@ -1352,9 +1357,8 @@ authkey = multiprocessing.current_process().authkey
     timeless: bool,
 ) -&gt; PyResult&lt;()&gt; {
     <span class="kw">let </span>entity_path = parse_entity_path(entity_path)<span class="question-mark">?</span>;
-    <span class="kw">if </span>entity_path.len() == <span class="number">1 </span>{
-        <span class="comment">// Stop people from logging a transform to a root-entity, such as &quot;world&quot; (which doesn&#39;t have a parent).
-        </span><span class="kw">return </span><span class="prelude-val">Err</span>(PyTypeError::new_err(<span class="string">&quot;Transforms are between a child entity and its parent, so root entities cannot have transforms&quot;</span>));
+    <span class="kw">if </span>entity_path.is_root() {
+        <span class="kw">return </span><span class="prelude-val">Err</span>(PyTypeError::new_err(<span class="string">&quot;Transforms are between a child entity and its parent, so the root cannot have a transform&quot;</span>));
     }
     <span class="kw">let </span><span class="kw-2">mut </span>session = global_session();
     <span class="kw">let </span>time_point = time(timeless);
@@ -1426,7 +1430,7 @@ authkey = multiprocessing.current_process().authkey
 }
 
 <span class="kw">fn </span>log_view_coordinates(
-    entity_path: <span class="kw-2">&amp;</span>str,
+    entity_path_str: <span class="kw-2">&amp;</span>str,
     coordinates: ViewCoordinates,
     timeless: bool,
 ) -&gt; PyResult&lt;()&gt; {
@@ -1434,8 +1438,14 @@ authkey = multiprocessing.current_process().authkey
         <span class="macro">re_log::warn_once!</span>(<span class="string">&quot;Left-handed coordinate systems are not yet fully supported by Rerun&quot;</span>);
     }
 
+    <span class="comment">// We normally disallow logging to root, but we make an exception for view_coordinates
+    </span><span class="kw">let </span>entity_path = <span class="kw">if </span>entity_path_str == <span class="string">&quot;/&quot; </span>{
+        EntityPath::root()
+    } <span class="kw">else </span>{
+        parse_entity_path(entity_path_str)<span class="question-mark">?
+    </span>};
+
     <span class="kw">let </span><span class="kw-2">mut </span>session = global_session();
-    <span class="kw">let </span>entity_path = parse_entity_path(entity_path)<span class="question-mark">?</span>;
     <span class="kw">let </span>time_point = time(timeless);
 
     <span class="comment">// We currently log view coordinates from inside the bridge because the code

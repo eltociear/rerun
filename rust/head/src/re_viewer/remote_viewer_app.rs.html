@@ -98,6 +98,16 @@
 <a href="#98" id="98">98</a>
 <a href="#99" id="99">99</a>
 <a href="#100" id="100">100</a>
+<a href="#101" id="101">101</a>
+<a href="#102" id="102">102</a>
+<a href="#103" id="103">103</a>
+<a href="#104" id="104">104</a>
+<a href="#105" id="105">105</a>
+<a href="#106" id="106">106</a>
+<a href="#107" id="107">107</a>
+<a href="#108" id="108">108</a>
+<a href="#109" id="109">109</a>
+<a href="#110" id="110">110</a>
 </pre><pre class="rust"><code><span class="kw">use </span><span class="kw">crate</span>::App;
 
 <span class="doccomment">/// Connects to a server over `WebSockets`.
@@ -170,6 +180,12 @@
 }
 
 <span class="kw">impl </span>eframe::App <span class="kw">for </span>RemoteViewerApp {
+    <span class="kw">fn </span>clear_color(<span class="kw-2">&amp;</span><span class="self">self</span>, visuals: <span class="kw-2">&amp;</span>egui::Visuals) -&gt; [f32; <span class="number">4</span>] {
+        <span class="comment">// It&#39;s rare and subtle, but this color can get through at panel roundings.
+        // (duplicated for `App`)
+        </span>visuals.panel_fill.to_normalized_gamma_f32()
+    }
+
     <span class="kw">fn </span>save(<span class="kw-2">&amp;mut </span><span class="self">self</span>, storage: <span class="kw-2">&amp;mut </span><span class="kw">dyn </span>eframe::Storage) {
         <span class="kw">if let </span><span class="prelude-val">Some</span>((<span class="kw">_</span>, app)) = <span class="kw-2">&amp;mut </span><span class="self">self</span>.app {
             app.save(storage);
@@ -177,21 +193,25 @@
     }
 
     <span class="kw">fn </span>update(<span class="kw-2">&amp;mut </span><span class="self">self</span>, egui_ctx: <span class="kw-2">&amp;</span>egui::Context, frame: <span class="kw-2">&amp;mut </span>eframe::Frame) {
-        egui::TopBottomPanel::top(<span class="string">&quot;server&quot;</span>).show(egui_ctx, |ui| {
-            ui.horizontal(|ui| {
-                ui.label(<span class="string">&quot;URL:&quot;</span>);
-                <span class="kw">if </span>ui.text_edit_singleline(<span class="kw-2">&amp;mut </span><span class="self">self</span>.url).lost_focus()
-                    &amp;&amp; ui.input(|i| i.key_pressed(egui::Key::Enter))
-                {
-                    <span class="kw">if let </span><span class="prelude-val">Some</span>(storage) = frame.storage_mut() {
-                        <span class="kw">if let </span><span class="prelude-val">Some</span>((<span class="kw">_</span>, <span class="kw-2">mut </span>app)) = <span class="self">self</span>.app.take() {
-                            app.save(storage);
+        <span class="kw">if </span><span class="bool-val">false </span>{
+            <span class="comment">// TODO(emilk): move this url selection into the main app.
+            // but for now, just remove it, because it is ugly (see https://github.com/rerun-io/rerun/issues/1079).
+            </span>egui::TopBottomPanel::top(<span class="string">&quot;server&quot;</span>).show(egui_ctx, |ui| {
+                ui.horizontal(|ui| {
+                    ui.label(<span class="string">&quot;URL:&quot;</span>);
+                    <span class="kw">if </span>ui.text_edit_singleline(<span class="kw-2">&amp;mut </span><span class="self">self</span>.url).lost_focus()
+                        &amp;&amp; ui.input(|i| i.key_pressed(egui::Key::Enter))
+                    {
+                        <span class="kw">if let </span><span class="prelude-val">Some</span>(storage) = frame.storage_mut() {
+                            <span class="kw">if let </span><span class="prelude-val">Some</span>((<span class="kw">_</span>, <span class="kw-2">mut </span>app)) = <span class="self">self</span>.app.take() {
+                                app.save(storage);
+                            }
                         }
+                        <span class="self">self</span>.connect(frame.storage());
                     }
-                    <span class="self">self</span>.connect(frame.storage());
-                }
+                });
             });
-        });
+        }
 
         <span class="kw">if let </span><span class="prelude-val">Some</span>((<span class="kw">_</span>, app)) = <span class="kw-2">&amp;mut </span><span class="self">self</span>.app {
             app.update(egui_ctx, frame);
