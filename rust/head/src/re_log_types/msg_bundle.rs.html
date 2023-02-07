@@ -593,6 +593,37 @@
 <a href="#593" id="593">593</a>
 <a href="#594" id="594">594</a>
 <a href="#595" id="595">595</a>
+<a href="#596" id="596">596</a>
+<a href="#597" id="597">597</a>
+<a href="#598" id="598">598</a>
+<a href="#599" id="599">599</a>
+<a href="#600" id="600">600</a>
+<a href="#601" id="601">601</a>
+<a href="#602" id="602">602</a>
+<a href="#603" id="603">603</a>
+<a href="#604" id="604">604</a>
+<a href="#605" id="605">605</a>
+<a href="#606" id="606">606</a>
+<a href="#607" id="607">607</a>
+<a href="#608" id="608">608</a>
+<a href="#609" id="609">609</a>
+<a href="#610" id="610">610</a>
+<a href="#611" id="611">611</a>
+<a href="#612" id="612">612</a>
+<a href="#613" id="613">613</a>
+<a href="#614" id="614">614</a>
+<a href="#615" id="615">615</a>
+<a href="#616" id="616">616</a>
+<a href="#617" id="617">617</a>
+<a href="#618" id="618">618</a>
+<a href="#619" id="619">619</a>
+<a href="#620" id="620">620</a>
+<a href="#621" id="621">621</a>
+<a href="#622" id="622">622</a>
+<a href="#623" id="623">623</a>
+<a href="#624" id="624">624</a>
+<a href="#625" id="625">625</a>
+<a href="#626" id="626">626</a>
 </pre><pre class="rust"><code><span class="doccomment">//! Structs and functions used for framing and de-framing a Rerun log message in Arrow.
 //!
 //! An example main message (outer) schema:
@@ -707,50 +738,74 @@
 </span><span class="attr">#[derive(Debug, Clone)]
 </span><span class="kw">pub struct </span>ComponentBundle {
     <span class="doccomment">/// The name of the Component, used as column name in the table `Field`.
-    </span><span class="kw">pub </span>name: ComponentName,
+    </span>name: ComponentName,
     <span class="doccomment">/// The Component payload `Array`.
-    </span><span class="kw">pub </span>value: Box&lt;<span class="kw">dyn </span>Array&gt;,
+    </span>value: ListArray&lt;i32&gt;,
 }
 
 <span class="kw">impl </span>ComponentBundle {
-    <span class="kw">pub fn </span>new_empty(name: ComponentName, data_type: DataType) -&gt; <span class="self">Self </span>{
-        <span class="kw">let </span>empty_array = wrap_in_listarray(new_empty_array(data_type)).boxed();
+    <span class="attr">#[inline]
+    </span><span class="kw">pub fn </span>new_empty(name: ComponentName, data_type: DataType) -&gt; <span class="self">Self </span>{
         <span class="self">Self </span>{
             name,
-            value: empty_array,
+            value: wrap_in_listarray(new_empty_array(data_type)),
         }
     }
 
-    <span class="kw">pub fn </span>new(name: ComponentName, value: Box&lt;<span class="kw">dyn </span>Array&gt;) -&gt; <span class="self">Self </span>{
+    <span class="attr">#[inline]
+    </span><span class="kw">pub fn </span>new(name: ComponentName, value: ListArray&lt;i32&gt;) -&gt; <span class="self">Self </span>{
         <span class="self">Self </span>{ name, value }
     }
 
+    <span class="doccomment">/// Create a new `ComponentBundle` from a boxed `Array`. The `Array` must be a `ListArray&lt;i32&gt;`.
+    </span><span class="attr">#[inline]
+    </span><span class="kw">pub fn </span>new_from_boxed(name: ComponentName, value: <span class="kw-2">&amp;</span><span class="kw">dyn </span>Array) -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{
+            name,
+            value: value
+                .as_any()
+                .downcast_ref::&lt;ListArray&lt;i32&gt;&gt;()
+                .unwrap()
+                .clone(),
+        }
+    }
+
     <span class="doccomment">/// Returns the datatype of the bundled component, discarding the list array that wraps it (!).
+    </span><span class="attr">#[inline]
     </span><span class="kw">pub fn </span>data_type(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>DataType {
         ListArray::&lt;i32&gt;::get_child_type(<span class="self">self</span>.value.data_type())
     }
 
-    <span class="kw">pub fn </span>value(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="kw">dyn </span>Array {
-        <span class="kw-2">&amp;*</span><span class="self">self</span>.value
+    <span class="attr">#[inline]
+    </span><span class="kw">pub fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; ComponentName {
+        <span class="self">self</span>.name
+    }
+
+    <span class="doccomment">/// Get the `ComponentBundle` value, cast to a boxed `Array`.
+    </span><span class="attr">#[inline]
+    </span><span class="kw">pub fn </span>value(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Box&lt;<span class="kw">dyn </span>Array&gt; {
+        <span class="self">self</span>.value.to_boxed()
+    }
+
+    <span class="doccomment">/// Get the `ComponentBundle` value
+    </span><span class="attr">#[inline]
+    </span><span class="kw">pub fn </span>value_list(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>ListArray&lt;i32&gt; {
+        <span class="kw-2">&amp;</span><span class="self">self</span>.value
     }
 
     <span class="doccomment">/// Returns the number of _rows_ in this bundle, i.e. the length of the bundle.
     ///
     /// Currently always 1 as we don&#39;t yet support batch insertions.
+    </span><span class="attr">#[inline]
     </span><span class="kw">pub fn </span>nb_rows(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; usize {
         <span class="self">self</span>.value.len()
     }
 
     <span class="doccomment">/// Returns the number of _instances_ for a given `row` in the bundle, i.e. the length of a
     /// specific row within the bundle.
+    </span><span class="attr">#[inline]
     </span><span class="kw">pub fn </span>nb_instances(<span class="kw-2">&amp;</span><span class="self">self</span>, row: usize) -&gt; <span class="prelude-ty">Option</span>&lt;usize&gt; {
-        <span class="self">self</span>.value
-            .as_any()
-            .downcast_ref::&lt;ListArray&lt;i32&gt;&gt;()
-            .unwrap()
-            .offsets()
-            .lengths()
-            .nth(row)
+        <span class="self">self</span>.value.offsets().lengths().nth(row)
     }
 }
 
@@ -759,7 +814,7 @@
 
     <span class="kw">fn </span>try_from(c: <span class="kw-2">&amp;</span>[C]) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>&gt; {
         <span class="kw">let </span>array: Box&lt;<span class="kw">dyn </span>Array&gt; = TryIntoArrow::try_into_arrow(c)<span class="question-mark">?</span>;
-        <span class="kw">let </span>wrapped = wrap_in_listarray(array).boxed();
+        <span class="kw">let </span>wrapped = wrap_in_listarray(array);
         <span class="prelude-val">Ok</span>(ComponentBundle::new(C::name(), wrapped))
     }
 }
@@ -809,7 +864,7 @@
 /// ];
 /// let mut bundle = MsgBundle::new(MsgId::ZERO, EntityPath::root(), TimePoint::default(), vec![]);
 /// bundle.try_append_component(&amp;component).unwrap();
-/// println!(&quot;{:?}&quot;, &amp;bundle.components[0].value);
+/// println!(&quot;{:?}&quot;, &amp;bundle.components[0].value());
 /// ```
 ///
 /// The resultant Arrow [`arrow2::array::Array`] for the `Rect2D` component looks as follows:
@@ -891,7 +946,7 @@
         Collection: IntoIterator&lt;Item = <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>Component&gt;,
     {
         <span class="kw">let </span>array: Box&lt;<span class="kw">dyn </span>Array&gt; = TryIntoArrow::try_into_arrow(component)<span class="question-mark">?</span>;
-        <span class="kw">let </span>wrapped = wrap_in_listarray(array).boxed();
+        <span class="kw">let </span>wrapped = wrap_in_listarray(array);
 
         <span class="kw">let </span>bundle = ComponentBundle::new(Component::name(), wrapped);
 
@@ -901,6 +956,7 @@
 
     <span class="doccomment">/// Returns the number of component collections in this bundle, i.e. the length of the bundle
     /// itself.
+    </span><span class="attr">#[inline]
     </span><span class="kw">pub fn </span>nb_components(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; usize {
         <span class="self">self</span>.components.len()
     }
@@ -911,6 +967,7 @@
     /// All component collections within a `MsgBundle` must share the same number of rows!
     ///
     /// Currently always 1 as we don&#39;t yet support batch insertions.
+    </span><span class="attr">#[inline]
     </span><span class="kw">pub fn </span>nb_rows(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; usize {
         <span class="self">self</span>.components.first().map_or(<span class="number">0</span>, |bundle| bundle.nb_rows())
     }
@@ -921,6 +978,7 @@
     /// Since we don&#39;t yet support batch insertions and all components within a single row must
     /// have the same number of instances, we simply pick the value for the first component
     /// collection.
+    </span><span class="attr">#[inline]
     </span><span class="kw">pub fn </span>nb_instances(<span class="kw-2">&amp;</span><span class="self">self</span>, row: usize) -&gt; <span class="prelude-ty">Option</span>&lt;usize&gt; {
         <span class="self">self</span>.components
             .first()
@@ -930,6 +988,7 @@
     <span class="doccomment">/// Returns the index of `component` in the bundle, if it exists.
     ///
     /// This is `O(n)`.
+    </span><span class="attr">#[inline]
     </span><span class="kw">pub fn </span>find_component(<span class="kw-2">&amp;</span><span class="self">self</span>, component: <span class="kw-2">&amp;</span>ComponentName) -&gt; <span class="prelude-ty">Option</span>&lt;usize&gt; {
         <span class="self">self</span>.components
             .iter()
@@ -940,7 +999,7 @@
 
 <span class="kw">impl </span>std::fmt::Display <span class="kw">for </span>MsgBundle {
     <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>std::fmt::Formatter&lt;<span class="lifetime">&#39;_</span>&gt;) -&gt; std::fmt::Result {
-        <span class="kw">let </span>values = <span class="self">self</span>.components.iter().map(|bundle| <span class="kw-2">&amp;</span>bundle.value);
+        <span class="kw">let </span>values = <span class="self">self</span>.components.iter().map(|bundle| bundle.value());
         <span class="kw">let </span>names = <span class="self">self</span>.components.iter().map(|bundle| bundle.name.as_str());
         <span class="kw">let </span>table = re_format::arrow::format_table(values, names);
         f.write_fmt(<span class="macro">format_args!</span>(
@@ -1098,7 +1157,10 @@
         .iter()
         .zip(components.values())
         .map(|(field, component)| {
-            ComponentBundle::new(ComponentName::from(field.name.as_str()), component.clone())
+            ComponentBundle::new_from_boxed(
+                ComponentName::from(field.name.as_str()),
+                component.as_ref(),
+            )
         })
         .collect())
 }

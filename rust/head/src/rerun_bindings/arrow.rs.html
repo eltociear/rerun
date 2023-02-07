@@ -119,9 +119,6 @@
 <a href="#119" id="119">119</a>
 <a href="#120" id="120">120</a>
 <a href="#121" id="121">121</a>
-<a href="#122" id="122">122</a>
-<a href="#123" id="123">123</a>
-<a href="#124" id="124">124</a>
 </pre><pre class="rust"><code><span class="doccomment">//! Methods for handling Arrow datamodel log ingest
 
 </span><span class="kw">use </span>arrow2::{array::Array, datatypes::Field, ffi};
@@ -226,10 +223,7 @@
         .into_iter()
         .zip(fields.into_iter())
         .map(|(value, field)| {
-            ComponentBundle::new(
-                field.name.into(),
-                msg_bundle::wrap_in_listarray(value).boxed(),
-            )
+            ComponentBundle::new(field.name.into(), msg_bundle::wrap_in_listarray(value))
         })
         .collect();
 

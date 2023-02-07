@@ -203,7 +203,7 @@
         _query: <span class="kw-2">&amp;</span>re_arrow_store::LatestAtQuery,
     ) {
         <span class="kw">let </span><span class="kw-2">mut </span>sorted = <span class="self">self</span>.to_vec();
-        sorted.sort_by_key(|cb| cb.name);
+        sorted.sort_by_key(|cb| cb.name());
 
         <span class="kw">match </span>verbosity {
             UiVerbosity::Small | UiVerbosity::MaxHeight(<span class="kw">_</span>) =&gt; {
@@ -226,7 +226,7 @@
     </span><span class="macro">format!</span>(
         <span class="string">&quot;{}x {}&quot;</span>,
         bundle.nb_instances(<span class="number">0</span>).unwrap(), <span class="comment">// all of our bundles have exactly 1 row as of today
-        </span>bundle.name.short_name()
+        </span>bundle.name().short_name()
     )
 }
 

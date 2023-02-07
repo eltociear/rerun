@@ -13,7 +13,7 @@
 ];
 <span class="kw">let </span><span class="kw-2">mut </span>bundle = MsgBundle::new(MsgId::ZERO, EntityPath::root(), TimePoint::default(), <span class="macro">vec!</span>[]);
 bundle.try_append_component(<span class="kw-2">&amp;</span>component).unwrap();
-<span class="macro">println!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="kw-2">&amp;</span>bundle.components[<span class="number">0</span>].value);</code></pre></div>
+<span class="macro">println!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="kw-2">&amp;</span>bundle.components[<span class="number">0</span>].value());</code></pre></div>
 <p>The resultant Arrow [<code>arrow2::array::Array</code>] for the <code>Rect2D</code> component looks as follows:</p>
 <div class="example-wrap"><pre class="language-text"><code>┌─────────────────┬──────────────────────────────┐
 │ rerun.msg_id    ┆ rerun.rect2d                 │

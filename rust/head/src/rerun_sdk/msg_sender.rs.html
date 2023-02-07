@@ -668,7 +668,7 @@
             <span class="kw">let </span>collections = <span class="self">self
                 </span>.instanced
                 .into_iter()
-                .map(|bundle| (bundle.name, bundle.nb_instances(<span class="number">0</span>).unwrap_or(<span class="number">0</span>)))
+                .map(|bundle| (bundle.name(), bundle.nb_instances(<span class="number">0</span>).unwrap_or(<span class="number">0</span>)))
                 .collect();
             <span class="kw">return </span><span class="prelude-val">Err</span>(MsgSenderError::MismatchedRowLengths(collections));
         }
@@ -759,7 +759,7 @@
         </span><span class="kw">let </span><span class="kw-2">mut </span>all_bundles: Vec&lt;<span class="kw">_</span>&gt; = instanced.into_iter().map(<span class="prelude-val">Some</span>).collect();
         <span class="kw">let </span>standard_bundles: Vec&lt;<span class="kw">_</span>&gt; = all_bundles
             .iter_mut()
-            .filter(|bundle| bundle.as_ref().unwrap().name != Transform::name())
+            .filter(|bundle| bundle.as_ref().unwrap().name() != Transform::name())
             .map(|bundle| bundle.take().unwrap())
             .collect();
         <span class="kw">let </span>transform_bundles: Vec&lt;<span class="kw">_</span>&gt; = all_bundles
@@ -767,7 +767,7 @@
             .filter(|bundle| {
                 bundle
                     .as_ref()
-                    .map_or(<span class="bool-val">false</span>, |bundle| bundle.name == Transform::name())
+                    .map_or(<span class="bool-val">false</span>, |bundle| bundle.name() == Transform::name())
             })
             .map(|bundle| bundle.take().unwrap())
             .collect();
@@ -784,7 +784,7 @@
             .chain(<span class="kw-2">&amp;</span>transform_bundles)
             .chain(<span class="kw-2">&amp;</span>splatted)
         {
-            <span class="kw-2">*</span>rows_per_comptype.entry(bundle.name).or_default() += bundle.nb_rows();
+            <span class="kw-2">*</span>rows_per_comptype.entry(bundle.name()).or_default() += bundle.nb_rows();
         }
         <span class="kw">if </span>rows_per_comptype.values().any(|nb_rows| <span class="kw-2">*</span>nb_rows &gt; <span class="number">1</span>) {
             <span class="kw">return </span><span class="prelude-val">Err</span>(MsgSenderError::MoreThanOneRow(
@@ -840,7 +840,7 @@
     // kinda force us to :/
 
     </span><span class="kw">let </span>array: Box&lt;<span class="kw">dyn </span>Array&gt; = TryIntoArrow::try_into_arrow(data)<span class="question-mark">?</span>;
-    <span class="kw">let </span>wrapped = wrap_in_listarray(array).boxed();
+    <span class="kw">let </span>wrapped = wrap_in_listarray(array);
 
     <span class="prelude-val">Ok</span>(ComponentBundle::new(C::name(), wrapped))
 }

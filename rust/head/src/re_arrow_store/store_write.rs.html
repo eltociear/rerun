@@ -1249,8 +1249,6 @@
 <a href="#1249" id="1249">1249</a>
 <a href="#1250" id="1250">1250</a>
 <a href="#1251" id="1251">1251</a>
-<a href="#1252" id="1252">1252</a>
-<a href="#1253" id="1253">1253</a>
 </pre><pre class="rust"><code><span class="kw">use </span>arrow2::{
     array::{new_empty_array, Array, ListArray, UInt64Array},
     datatypes::DataType,
@@ -1344,7 +1342,10 @@
         // - A) `MsgBundle` should already guarantee this
         // - B) this limitation should be gone soon enough
         </span><span class="macro">debug_assert!</span>(
-            msg.components.iter().map(|bundle| bundle.name).all_unique(),
+            msg.components
+                .iter()
+                .map(|bundle| bundle.name())
+                .all_unique(),
             <span class="string">&quot;cannot insert same component multiple times, this is equivalent to multiple rows&quot;</span>,
         );
         <span class="comment">// Batches cannot contain more than 1 row at the moment.
@@ -1356,7 +1357,7 @@
             <span class="kw">return </span><span class="prelude-val">Err</span>(WriteError::MismatchedRows(
                 bundles
                     .iter()
-                    .map(|bundle| (bundle.name, bundle.nb_rows()))
+                    .map(|bundle| (bundle.name(), bundle.nb_rows()))
                     .collect(),
             ));
         }
@@ -1369,14 +1370,14 @@
                 .map(|(timeline, time)| (timeline.name(), timeline.typ().format(<span class="kw-2">*</span>time)))
                 .collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;(),
             entity = %ent_path,
-            components = <span class="question-mark">?</span>bundles.iter().map(|bundle| <span class="kw-2">&amp;</span>bundle.name).collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;(),
+            components = <span class="question-mark">?</span>bundles.iter().map(|bundle| bundle.name()).collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;(),
             nb_rows,
             <span class="string">&quot;insertion started...&quot;
         </span>);
 
         <span class="kw">let </span>cluster_comp_pos = bundles
             .iter()
-            .find_position(|bundle| bundle.name == <span class="self">self</span>.cluster_key)
+            .find_position(|bundle| bundle.name() == <span class="self">self</span>.cluster_key)
             .map(|(pos, <span class="kw">_</span>)| pos);
 
         <span class="kw">if </span>time_point.is_timeless() {
@@ -1456,9 +1457,9 @@
 
         <span class="kw">for </span>bundle <span class="kw">in </span>components
             .iter()
-            .filter(|bundle| bundle.name != <span class="self">self</span>.cluster_key)
+            .filter(|bundle| bundle.name() != <span class="self">self</span>.cluster_key)
         {
-            <span class="kw">let </span>(name, rows) = (bundle.name, bundle.value());
+            <span class="kw">let </span>(name, rows) = (bundle.name(), bundle.value());
 
             <span class="comment">// Unwrapping a ListArray is somewhat costly, especially considering we&#39;re just
             // gonna rewrap it again in a minute... so we&#39;d rather just slice it to a list of
@@ -1482,7 +1483,7 @@
 
             <span class="kw">let </span>table = <span class="self">self
                 </span>.timeless_components
-                .entry(bundle.name)
+                .entry(bundle.name())
                 .or_insert_with(|| {
                     PersistentComponentTable::new(
                         name,
@@ -1528,9 +1529,9 @@
 
         <span class="kw">for </span>bundle <span class="kw">in </span>components
             .iter()
-            .filter(|bundle| bundle.name != <span class="self">self</span>.cluster_key)
+            .filter(|bundle| bundle.name() != <span class="self">self</span>.cluster_key)
         {
-            <span class="kw">let </span>(name, rows) = (bundle.name, bundle.value());
+            <span class="kw">let </span>(name, rows) = (bundle.name(), bundle.value());
 
             <span class="comment">// Unwrapping a ListArray is somewhat costly, especially considering we&#39;re just
             // gonna rewrap it again in a minute... so we&#39;d rather just slice it to a list of
@@ -1553,7 +1554,7 @@
                 });
             }
 
-            <span class="kw">let </span>table = <span class="self">self</span>.components.entry(bundle.name).or_insert_with(|| {
+            <span class="kw">let </span>table = <span class="self">self</span>.components.entry(bundle.name()).or_insert_with(|| {
                 ComponentTable::new(
                     name,
                     ListArray::&lt;i32&gt;::get_child_type(rows_single.data_type()),
@@ -1593,12 +1594,7 @@
             // valid (dense, sorted, no duplicates) and use that if so.
 
             </span><span class="kw">let </span>cluster_comp = <span class="kw-2">&amp;</span>components[cluster_comp_pos];
-            <span class="kw">let </span>data = cluster_comp
-                .value()
-                .as_any()
-                .downcast_ref::&lt;ListArray&lt;i32&gt;&gt;()
-                .unwrap()
-                .values(); <span class="comment">// abusing the fact that nb_rows==1
+            <span class="kw">let </span>data = cluster_comp.value_list().values(); <span class="comment">// abusing the fact that nb_rows==1
             </span><span class="kw">let </span>len = data.len();
 
             <span class="comment">// Clustering component must be dense.
