@@ -1,176 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1675762848542,
+  "lastUpdate": 1675772295417,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
-      {
-        "commit": {
-          "author": {
-            "email": "andreas@rerun.io",
-            "name": "Andreas Reich",
-            "username": "Wumpf"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "b58af6a60a075a35458305d8d83e7b94c107cfed",
-          "message": "more spaceview blueprint improvements (#1057)\n\n* don't show space view name, show space path only for spatial views and rename it root\r\n\r\n* remove remove button for space view. Put add/remove & clone next to each other\r\n\r\n* clean up spatial view selection view\r\n\r\n* grid_left_hand_label in re_ui\r\n\r\n* selection_grid on re_ui\r\n\r\n* tooltips!\r\n\r\n* code cleanliness, improved label",
-          "timestamp": "2023-02-02T19:59:56+01:00",
-          "tree_id": "85a57861facb6c7b26fcbe404416fe349ae19577",
-          "url": "https://github.com/rerun-io/rerun/commit/b58af6a60a075a35458305d8d83e7b94c107cfed"
-        },
-        "date": 1675364911103,
-        "tool": "cargo",
-        "benches": [
-          {
-            "name": "datastore/insert/batch/rects/insert",
-            "value": 590605,
-            "range": "± 3295",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "datastore/latest_at/batch/rects/query",
-            "value": 1773,
-            "range": "± 6",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "datastore/latest_at/missing_components/primary",
-            "value": 305,
-            "range": "± 1",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "datastore/latest_at/missing_components/secondaries",
-            "value": 379,
-            "range": "± 1",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "datastore/range/batch/rects/query",
-            "value": 154809,
-            "range": "± 6076",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "mono_points_arrow/generate_message_bundles",
-            "value": 50025048,
-            "range": "± 1864692",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "mono_points_arrow/generate_messages",
-            "value": 137926029,
-            "range": "± 6301212",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "mono_points_arrow/encode_log_msg",
-            "value": 164185687,
-            "range": "± 1793142",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "mono_points_arrow/encode_total",
-            "value": 351260650,
-            "range": "± 6034523",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "mono_points_arrow/decode_log_msg",
-            "value": 187781949,
-            "range": "± 3791069",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "mono_points_arrow/decode_message_bundles",
-            "value": 72546506,
-            "range": "± 1575330",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "mono_points_arrow/decode_total",
-            "value": 255154699,
-            "range": "± 2371274",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "batch_points_arrow/generate_message_bundles",
-            "value": 327823,
-            "range": "± 486",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "batch_points_arrow/generate_messages",
-            "value": 6056,
-            "range": "± 15",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "batch_points_arrow/encode_log_msg",
-            "value": 362532,
-            "range": "± 2200",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "batch_points_arrow/encode_total",
-            "value": 715453,
-            "range": "± 2759",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "batch_points_arrow/decode_log_msg",
-            "value": 349605,
-            "range": "± 728",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "batch_points_arrow/decode_message_bundles",
-            "value": 2014,
-            "range": "± 12",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "batch_points_arrow/decode_total",
-            "value": 355797,
-            "range": "± 944",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "arrow_mono_points/insert",
-            "value": 7036163977,
-            "range": "± 11457202",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "arrow_mono_points/query",
-            "value": 1716667,
-            "range": "± 36054",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "arrow_batch_points/insert",
-            "value": 2672637,
-            "range": "± 25590",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "arrow_batch_points/query",
-            "value": 17254,
-            "range": "± 55",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "tuid/Tuid::random",
-            "value": 34,
-            "range": "± 0",
-            "unit": "ns/iter"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -5038,6 +4870,174 @@ window.BENCHMARK_DATA = {
           {
             "name": "tuid/Tuid::random",
             "value": 34,
+            "range": "± 0",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "emil@rerun.io",
+            "name": "Emil Ernerfeldt",
+            "username": "emilk"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "6f821c206d5fb51b189e95e3f9565cd955ec1455",
+          "message": "Windows/Linux: work towards replacing native window frame with our own custom buttons (#1094)\n\n* Windows/Linux: replace native window frame with our own custom buttons\r\n\r\n* Update egui with a cursor bug fix\r\n\r\n* Work on adding rounded corners\r\n\r\n* Set bottom panel frame in re_ui\r\n\r\n* Refactor: break out wait_screen_ui\r\n\r\n* Put all other panels within one master CentralPanel\r\n\r\n* Paint a window frame around it all\r\n\r\n* Round the corners of the memory panel\r\n\r\n* Fill in gap above time panel rounding\r\n\r\n* Fix web build\r\n\r\n* Disable the custom window frame feature\r\n\r\n* update egui with fix for wgpu transparency\r\n\r\n* Enable the custom window frame for !mac\r\n\r\n* Disable the custom window decorations until we solve the problems\r\n\r\n* Use transparent clear_color",
+          "timestamp": "2023-02-07T13:09:45+01:00",
+          "tree_id": "93b50fc13d1c156ffa3ade880df73e5cc05bdedc",
+          "url": "https://github.com/rerun-io/rerun/commit/6f821c206d5fb51b189e95e3f9565cd955ec1455"
+        },
+        "date": 1675772293547,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/insert/batch/rects/insert",
+            "value": 820255,
+            "range": "± 11670",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/latest_at/batch/rects/query",
+            "value": 1776,
+            "range": "± 18",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/latest_at/missing_components/primary",
+            "value": 339,
+            "range": "± 6",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/latest_at/missing_components/secondaries",
+            "value": 410,
+            "range": "± 8",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/range/batch/rects/query",
+            "value": 148002,
+            "range": "± 2172",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/generate_message_bundles",
+            "value": 39593044,
+            "range": "± 1878927",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/generate_messages",
+            "value": 120011728,
+            "range": "± 2169726",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/encode_log_msg",
+            "value": 148438286,
+            "range": "± 3317634",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/encode_total",
+            "value": 313723148,
+            "range": "± 4350450",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/decode_log_msg",
+            "value": 167188332,
+            "range": "± 2153283",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/decode_message_bundles",
+            "value": 59861605,
+            "range": "± 1211675",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/decode_total",
+            "value": 228067870,
+            "range": "± 3782052",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/generate_message_bundles",
+            "value": 311642,
+            "range": "± 4460",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/generate_messages",
+            "value": 5842,
+            "range": "± 77",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/encode_log_msg",
+            "value": 355631,
+            "range": "± 3947",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/encode_total",
+            "value": 712626,
+            "range": "± 9230",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/decode_log_msg",
+            "value": 342260,
+            "range": "± 3414",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/decode_message_bundles",
+            "value": 1979,
+            "range": "± 32",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/decode_total",
+            "value": 352742,
+            "range": "± 3568",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_mono_points/insert",
+            "value": 7459667968,
+            "range": "± 33985239",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_mono_points/query",
+            "value": 1637274,
+            "range": "± 25646",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_batch_points/insert",
+            "value": 3944573,
+            "range": "± 49194",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_batch_points/query",
+            "value": 17230,
+            "range": "± 273",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "tuid/Tuid::random",
+            "value": 33,
             "range": "± 0",
             "unit": "ns/iter"
           }
