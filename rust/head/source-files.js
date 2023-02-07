@@ -22,7 +22,7 @@ var sourcesIndex = JSON.parse('{\
 "re_ws_comms":["",[],["client.rs","lib.rs","server.rs"]],\
 "rerun":["",[],["lib.rs"]],\
 "rerun_bindings":["",[],["arrow.rs","lib.rs","python_bridge.rs"]],\
-"rerun_sdk":["",[],["global.rs","lib.rs","msg_sender.rs","session.rs","time.rs","viewer.rs"]],\
+"rerun_sdk":["",[],["global.rs","lib.rs","msg_sender.rs","session.rs","viewer.rs"]],\
 "run_wasm":["",[],["main.rs"]]\
 }');
 createSourceSidebar();
