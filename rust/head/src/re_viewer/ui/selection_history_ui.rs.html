@@ -199,6 +199,19 @@
 <a href="#199" id="199">199</a>
 <a href="#200" id="200">200</a>
 <a href="#201" id="201">201</a>
+<a href="#202" id="202">202</a>
+<a href="#203" id="203">203</a>
+<a href="#204" id="204">204</a>
+<a href="#205" id="205">205</a>
+<a href="#206" id="206">206</a>
+<a href="#207" id="207">207</a>
+<a href="#208" id="208">208</a>
+<a href="#209" id="209">209</a>
+<a href="#210" id="210">210</a>
+<a href="#211" id="211">211</a>
+<a href="#212" id="212">212</a>
+<a href="#213" id="213">213</a>
+<a href="#214" id="214">214</a>
 </pre><pre class="rust"><code><span class="kw">use </span>egui::RichText;
 <span class="kw">use </span>re_ui::Command;
 
@@ -210,14 +223,17 @@
 </span><span class="kw">impl </span>SelectionHistory {
     <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>selection_ui(
         <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        re_ui: <span class="kw-2">&amp;</span>re_ui::ReUi,
         ui: <span class="kw-2">&amp;mut </span>egui::Ui,
         blueprint: <span class="kw-2">&amp;</span>Blueprint,
     ) -&gt; <span class="prelude-ty">Option</span>&lt;ItemCollection&gt; {
-        <span class="self">self</span>.control_bar_ui(ui, blueprint).map(|sel| sel.selection)
+        <span class="self">self</span>.control_bar_ui(re_ui, ui, blueprint)
+            .map(|sel| sel.selection)
     }
 
     <span class="kw">fn </span>control_bar_ui(
         <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        re_ui: <span class="kw-2">&amp;</span>re_ui::ReUi,
         ui: <span class="kw-2">&amp;mut </span>egui::Ui,
         blueprint: <span class="kw-2">&amp;</span>Blueprint,
     ) -&gt; <span class="prelude-ty">Option</span>&lt;HistoricalSelection&gt; {
@@ -229,8 +245,8 @@
                 ui.available_size_before_wrap(),
                 egui::Layout::right_to_left(egui::Align::Center),
                 |ui| {
-                    <span class="kw">let </span>next = <span class="self">self</span>.next_button_ui(ui, blueprint);
-                    <span class="kw">let </span>prev = <span class="self">self</span>.prev_button_ui(ui, blueprint);
+                    <span class="kw">let </span>next = <span class="self">self</span>.next_button_ui(re_ui, ui, blueprint);
+                    <span class="kw">let </span>prev = <span class="self">self</span>.prev_button_ui(re_ui, ui, blueprint);
                     prev.or(next)
                 }).inner
         }).inner
@@ -264,20 +280,22 @@
 
     <span class="kw">fn </span>prev_button_ui(
         <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        re_ui: <span class="kw-2">&amp;</span>re_ui::ReUi,
         ui: <span class="kw-2">&amp;mut </span>egui::Ui,
         blueprint: <span class="kw-2">&amp;</span>Blueprint,
     ) -&gt; <span class="prelude-ty">Option</span>&lt;HistoricalSelection&gt; {
         <span class="comment">// undo selection
-        </span><span class="kw">let </span>button = egui::Button::new(<span class="string">&quot;⬅&quot;</span>);
-        <span class="kw">if let </span><span class="prelude-val">Some</span>(previous) = <span class="self">self</span>.previous() {
-            <span class="kw">let </span>response = ui.add(button).on_hover_text(<span class="macro">format!</span>(
-                <span class="string">&quot;Go to previous selection{}:\n\
+        </span><span class="kw">if let </span><span class="prelude-val">Some</span>(previous) = <span class="self">self</span>.previous() {
+            <span class="kw">let </span>response = re_ui
+                .small_icon_button(ui, <span class="kw-2">&amp;</span>re_ui::icons::ARROW_LEFT)
+                .on_hover_text(<span class="macro">format!</span>(
+                    <span class="string">&quot;Go to previous selection{}:\n\
                 {}\n\
                 \n\
                 Right-click for more.&quot;</span>,
-                Command::SelectionPrevious.format_shortcut_tooltip_suffix(ui.ctx()),
-                item_collection_to_string(blueprint, <span class="kw-2">&amp;</span>previous.selection),
-            ));
+                    Command::SelectionPrevious.format_shortcut_tooltip_suffix(ui.ctx()),
+                    item_collection_to_string(blueprint, <span class="kw-2">&amp;</span>previous.selection),
+                ));
 
             <span class="kw">let </span>response = response.context_menu(|ui| {
                 <span class="comment">// undo: newest on top, oldest on bottom
@@ -293,8 +311,11 @@
                 <span class="kw">return </span><span class="self">self</span>.select_previous();
             }
         } <span class="kw">else </span>{
-            ui.add_enabled(<span class="bool-val">false</span>, button)
-                .on_disabled_hover_text(<span class="string">&quot;No past selections found&quot;</span>);
+            ui.add_enabled_ui(<span class="bool-val">false</span>, |ui| {
+                re_ui
+                    .small_icon_button(ui, <span class="kw-2">&amp;</span>re_ui::icons::ARROW_LEFT)
+                    .on_disabled_hover_text(<span class="string">&quot;No past selections found&quot;</span>);
+            });
         }
 
         <span class="prelude-val">None
@@ -302,20 +323,22 @@
 
     <span class="kw">fn </span>next_button_ui(
         <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        re_ui: <span class="kw-2">&amp;</span>re_ui::ReUi,
         ui: <span class="kw-2">&amp;mut </span>egui::Ui,
         blueprint: <span class="kw-2">&amp;</span>Blueprint,
     ) -&gt; <span class="prelude-ty">Option</span>&lt;HistoricalSelection&gt; {
         <span class="comment">// redo selection
-        </span><span class="kw">let </span>button = egui::Button::new(<span class="string">&quot;➡&quot;</span>);
-        <span class="kw">if let </span><span class="prelude-val">Some</span>(next) = <span class="self">self</span>.next() {
-            <span class="kw">let </span>response = ui.add(button).on_hover_text(<span class="macro">format!</span>(
-                <span class="string">&quot;Go to next selection{}:\n\
+        </span><span class="kw">if let </span><span class="prelude-val">Some</span>(next) = <span class="self">self</span>.next() {
+            <span class="kw">let </span>response = re_ui
+                .small_icon_button(ui, <span class="kw-2">&amp;</span>re_ui::icons::ARROW_RIGHT)
+                .on_hover_text(<span class="macro">format!</span>(
+                    <span class="string">&quot;Go to next selection{}:\n\
                 {}\n\
                 \n\
                 Right-click for more.&quot;</span>,
-                Command::SelectionNext.format_shortcut_tooltip_suffix(ui.ctx()),
-                item_collection_to_string(blueprint, <span class="kw-2">&amp;</span>next.selection),
-            ));
+                    Command::SelectionNext.format_shortcut_tooltip_suffix(ui.ctx()),
+                    item_collection_to_string(blueprint, <span class="kw-2">&amp;</span>next.selection),
+                ));
 
             <span class="kw">let </span>response = response.context_menu(|ui| {
                 <span class="comment">// redo: oldest on top, most recent on bottom
@@ -331,8 +354,11 @@
                 <span class="kw">return </span><span class="self">self</span>.select_next();
             }
         } <span class="kw">else </span>{
-            ui.add_enabled(<span class="bool-val">false</span>, button)
-                .on_disabled_hover_text(<span class="string">&quot;No future selections found&quot;</span>);
+            ui.add_enabled_ui(<span class="bool-val">false</span>, |ui| {
+                re_ui
+                    .small_icon_button(ui, <span class="kw-2">&amp;</span>re_ui::icons::ARROW_RIGHT)
+                    .on_disabled_hover_text(<span class="string">&quot;No future selections found&quot;</span>);
+            });
         }
 
         <span class="prelude-val">None
