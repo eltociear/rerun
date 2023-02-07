@@ -49,6 +49,11 @@
 <a href="#49" id="49">49</a>
 <a href="#50" id="50">50</a>
 <a href="#51" id="51">51</a>
+<a href="#52" id="52">52</a>
+<a href="#53" id="53">53</a>
+<a href="#54" id="54">54</a>
+<a href="#55" id="55">55</a>
+<a href="#56" id="56">56</a>
 </pre><pre class="rust"><code><span class="kw">use </span>re_log_types::LogMsg;
 
 <span class="kw">type </span>AppCreator =
@@ -61,6 +66,11 @@
 
         </span><span class="attr">#[cfg(target_os = <span class="string">&quot;macos&quot;</span>)]
         </span>fullsize_content: re_ui::FULLSIZE_CONTENT,
+
+        <span class="comment">// Maybe hide the OS-specific &quot;chrome&quot; around the window:
+        </span>decorated: !re_ui::CUSTOM_WINDOW_DECORATIONS,
+        <span class="comment">// To have rounded corners we need transparency:
+        </span>transparent: re_ui::CUSTOM_WINDOW_DECORATIONS,
 
         follow_system_theme: <span class="bool-val">false</span>,
         default_theme: eframe::Theme::Dark,
