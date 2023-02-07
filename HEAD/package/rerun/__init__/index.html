@@ -797,13 +797,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#rerun.spawn_and_connect" class="md-nav__link">
-    spawn_and_connect()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#rerun.connect" class="md-nav__link">
     connect()
   </a>
@@ -811,8 +804,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#rerun.spawn_viewer" class="md-nav__link">
-    spawn_viewer()
+  <a href="#rerun.spawn" class="md-nav__link">
+    spawn()
   </a>
   
 </li>
@@ -1790,13 +1783,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#rerun.spawn_and_connect" class="md-nav__link">
-    spawn_and_connect()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#rerun.connect" class="md-nav__link">
     connect()
   </a>
@@ -1804,8 +1790,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#rerun.spawn_viewer" class="md-nav__link">
-    spawn_viewer()
+  <a href="#rerun.spawn" class="md-nav__link">
+    spawn()
   </a>
   
 </li>
@@ -4347,7 +4333,7 @@ See <a class="autorefs autorefs-internal" href="#rerun.log_annotation_context">r
 
 
 <h4 id="rerun.init" class="doc doc-heading">
-<code class="highlight language-python"><span class="k">def</span> <span class="nf">init</span><span class="p">(</span><span class="n">application_id</span><span class="p">,</span> <span class="n">spawn_and_connect</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="k">def</span> <span class="nf">init</span><span class="p">(</span><span class="n">application_id</span><span class="p">,</span> <span class="n">spawn</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
 </h4>
 
@@ -4382,12 +4368,12 @@ and another doing camera calibration, you could have
           </td>
         </tr>
         <tr>
-          <td><code>spawn_and_connect</code></td>
+          <td><code>spawn</code></td>
           <td>
                 <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></code>
           </td>
           <td><p>Spawn a Rerun Viewer and stream logging data to it.
-Short for calling <code>spawn_and_connect</code> separately.
+Short for calling <code>spawn</code> separately.
 If you don't call this, log events will be buffered indefinitely until
 you call either <code>connect</code>, <code>show</code>, or <code>save</code></p></td>
           <td>
@@ -4630,54 +4616,6 @@ colors and labels.</p>
 
 
 
-<h4 id="rerun.spawn_and_connect" class="doc doc-heading">
-<code class="highlight language-python"><span class="k">def</span> <span class="nf">spawn_and_connect</span><span class="p">(</span><span class="n">port</span><span class="o">=</span><span class="mi">9876</span><span class="p">)</span></code>
-
-</h4>
-
-
-  <div class="doc doc-contents ">
-  
-      <p>Spawn a Rerun Viewer and stream logging data to it.</p>
-<p>This is often the easiest and best way to use Rerun.
-Just call this once at the start of your program.</p>
-
-  <p><strong>Parameters:</strong></p>
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-        <th>Default</th>
-      </tr>
-    </thead>
-    <tbody>
-        <tr>
-          <td><code>port</code></td>
-          <td>
-                <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
-          </td>
-          <td><p>The port to connect to</p></td>
-          <td>
-                <code>9876</code>
-          </td>
-        </tr>
-    </tbody>
-  </table>
-      <h6 id="rerun.spawn_and_connect--see-also">See Also</h6>
-<ul>
-<li><a class="autorefs autorefs-internal" href="#rerun.connect">rerun.connect</a></li>
-</ul>
-
-  </div>
-
-</div>
-
-<div class="doc doc-object doc-function">
-
-
-
 <h4 id="rerun.connect" class="doc doc-heading">
 <code class="highlight language-python"><span class="k">def</span> <span class="nf">connect</span><span class="p">(</span><span class="n">addr</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
 
@@ -4721,8 +4659,8 @@ Just call this once at the start of your program.</p>
 
 
 
-<h4 id="rerun.spawn_viewer" class="doc doc-heading">
-<code class="highlight language-python"><span class="k">def</span> <span class="nf">spawn_viewer</span><span class="p">(</span><span class="n">port</span><span class="o">=</span><span class="mi">9876</span><span class="p">)</span></code>
+<h4 id="rerun.spawn" class="doc doc-heading">
+<code class="highlight language-python"><span class="k">def</span> <span class="nf">spawn</span><span class="p">(</span><span class="n">port</span><span class="o">=</span><span class="mi">9876</span><span class="p">,</span> <span class="n">connect</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code>
 
 </h4>
 
@@ -4730,6 +4668,9 @@ Just call this once at the start of your program.</p>
   <div class="doc doc-contents ">
   
       <p>Spawn a Rerun Viewer, listening on the given port.</p>
+<p>This is often the easiest and best way to use Rerun.
+Just call this once at the start of your program.</p>
+<p>You can also call <a class="autorefs autorefs-internal" href="#rerun.init">rerun.init</a> with a <code>spawn=True</code> argument.</p>
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -4750,6 +4691,16 @@ Just call this once at the start of your program.</p>
           <td><p>The port to listen on.</p></td>
           <td>
                 <code>9876</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>connect</code></td>
+          <td>
+                <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></code>
+          </td>
+          <td><p>also connect to the viewer and stream logging data to it.</p></td>
+          <td>
+                <code>True</code>
           </td>
         </tr>
     </tbody>
