@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"struct":[["InstanceKey","A number used to specify a specific instance in an entity."]]};

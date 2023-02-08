@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"fn":[["determine_view_coordinates","Determine the view coordinates (i.e.) the axis semantics."]],"struct":[["CamerasPart",""]]};

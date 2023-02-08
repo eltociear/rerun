@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"fn":[["commands_that_match",""],["format_match",""]],"struct":[["CommandPalette",""],["FuzzyMatch",""]]};

@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"fn":[["init_arboard",""]],"struct":[["Clipboard","Handles interfacing with the OS clipboard."]]};

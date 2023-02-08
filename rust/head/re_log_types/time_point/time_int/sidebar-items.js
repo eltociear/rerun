@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"struct":[["TimeInt","Either nanoseconds or sequence numbers."]]};

@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"struct":[["MutableSize3DArray",""],["Size3D",""],["Size3DArray",""],["Size3DArrayIterator",""]]};

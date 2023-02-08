@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"struct":[["TcpClient","Connect to a rerun server and send log messages."]]};

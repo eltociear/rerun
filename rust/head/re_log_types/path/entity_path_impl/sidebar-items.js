@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"struct":[["EntityPathImpl","`camera / \"left\" / points / #42`"]]};

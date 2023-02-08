@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"struct":[["Boxes3DPart",""]]};

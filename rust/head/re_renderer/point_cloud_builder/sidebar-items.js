@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"struct":[["PointBuilder",""],["PointCloudBatchBuilder",""],["PointCloudBuilder","Builder for point clouds, making it easy to create [`crate::renderer::PointCloudDrawData`]."],["PointsBuilder",""]]};

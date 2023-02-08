@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"constant":[["TABLE_SCROLL_AREA_HEIGHT",""]],"fn":[["annotation_info_table_ui",""]]};

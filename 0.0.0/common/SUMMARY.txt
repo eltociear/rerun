@@ -1,6 +1,0 @@
-* [index](index.md)
-* [Initialization](initialization.md)
-* [Logging Primitives](primitives.md)
-* [Logging Images](images.md)
-* [Plotting](plotting.md)
-* [Transforms](transforms.md)

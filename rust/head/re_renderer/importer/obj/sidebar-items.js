@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"fn":[["load_obj_from_buffer","Load a Wavefront .obj file into the mesh & texture manager."]]};

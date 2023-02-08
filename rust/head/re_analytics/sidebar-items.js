@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"constant":[["DISCLAIMER",""]],"enum":[["AnalyticsError",""],["EventKind",""],["Property",""]],"mod":[["cli",""],["config_native",""],["events","All of our telemetry events are defined in this one file, to facilitate auditing."],["pipeline_native",""],["sink_native",""]],"struct":[["Analytics",""],["Event",""]]};

@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"struct":[["MaterialUniformBuffer","Keep in sync with [`MaterialUniformBuffer`] in `instanced_mesh.wgsl`"]]};

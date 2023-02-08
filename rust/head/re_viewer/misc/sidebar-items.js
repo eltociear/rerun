@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"fn":[["help_hover_button",""]],"mod":[["app_options",""],["caches",""],["clipboard",""],["color_map",""],["item",""],["mesh_loader",""],["profiler",""],["selection_state",""],["space_info",""],["time_axis",""],["time_control",""],["time_control_ui",""],["transform_cache",""],["viewer_context",""]]};

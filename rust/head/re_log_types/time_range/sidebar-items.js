@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"struct":[["TimeRange",""],["TimeRangeF","Like [`TimeRange`], but using [`TimeReal`] for improved precison."]]};

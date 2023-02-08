@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"struct":[["ComponentUiRegistry","How to display components in a Ui"]],"type":[["ComponentUiCallback",""]]};

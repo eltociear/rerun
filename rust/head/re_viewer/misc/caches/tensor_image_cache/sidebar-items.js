@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"fn":[["dynamic_image_to_egui_color_image",""]],"struct":[["CachedImage",""],["ImageCache",""],["ImageCacheKey",""],["TensorImageView","The `TensorImageView` is a wrapper on top of `re_log_types::Tensor`"]],"trait":[["AsDynamicImage",""]]};

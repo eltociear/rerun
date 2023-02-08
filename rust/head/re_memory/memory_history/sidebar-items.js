@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"struct":[["MemoryHistory","Tracks memory use over time."]]};

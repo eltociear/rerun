@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"enum":[["HardwareTier","Hardware tiers `re_renderer` distinguishes."]],"fn":[["supported_backends","Backends that are officially supported by `re_renderer`."]],"struct":[["RenderContextConfig","Startup configuration for a [`crate::RenderContext`]"]]};

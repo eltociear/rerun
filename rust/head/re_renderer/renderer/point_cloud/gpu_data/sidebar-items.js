@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"struct":[["BatchUniformBuffer","Uniform buffer that changes for every batch of line strips."],["PositionData",""]]};

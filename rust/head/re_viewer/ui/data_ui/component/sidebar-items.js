@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"struct":[["EntityComponentWithInstances","All the values of a specific [`re_log_types::ComponentPath`]."]]};
