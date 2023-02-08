@@ -211,6 +211,12 @@
 <a href="#211" id="211">211</a>
 <a href="#212" id="212">212</a>
 <a href="#213" id="213">213</a>
+<a href="#214" id="214">214</a>
+<a href="#215" id="215">215</a>
+<a href="#216" id="216">216</a>
+<a href="#217" id="217">217</a>
+<a href="#218" id="218">218</a>
+<a href="#219" id="219">219</a>
 </pre><pre class="rust"><code><span class="kw">use </span>arrow2::{
     array::{MutableFixedSizeListArray, MutablePrimitiveArray},
     datatypes::DataType,
@@ -253,7 +259,8 @@
 }
 
 <span class="kw">impl </span>Component <span class="kw">for </span>LineStrip2D {
-    <span class="kw">fn </span>name() -&gt; <span class="kw">crate</span>::ComponentName {
+    <span class="attr">#[inline]
+    </span><span class="kw">fn </span>name() -&gt; <span class="kw">crate</span>::ComponentName {
         <span class="string">&quot;rerun.linestrip2d&quot;</span>.into()
     }
 }
@@ -262,7 +269,9 @@
 
 <span class="kw">impl </span>ArrowField <span class="kw">for </span>LineStrip2D {
     <span class="kw">type </span>Type = <span class="self">Self</span>;
-    <span class="kw">fn </span>data_type() -&gt; DataType {
+
+    <span class="attr">#[inline]
+    </span><span class="kw">fn </span>data_type() -&gt; DataType {
         &lt;Vec&lt;Vec2D&gt; <span class="kw">as </span>ArrowField&gt;::data_type()
     }
 }
@@ -336,7 +345,8 @@
 }
 
 <span class="kw">impl </span>Component <span class="kw">for </span>LineStrip3D {
-    <span class="kw">fn </span>name() -&gt; <span class="kw">crate</span>::ComponentName {
+    <span class="attr">#[inline]
+    </span><span class="kw">fn </span>name() -&gt; <span class="kw">crate</span>::ComponentName {
         <span class="string">&quot;rerun.linestrip3d&quot;</span>.into()
     }
 }
@@ -345,7 +355,9 @@
 
 <span class="kw">impl </span>ArrowField <span class="kw">for </span>LineStrip3D {
     <span class="kw">type </span>Type = <span class="self">Self</span>;
-    <span class="kw">fn </span>data_type() -&gt; DataType {
+
+    <span class="attr">#[inline]
+    </span><span class="kw">fn </span>data_type() -&gt; DataType {
         &lt;Vec&lt;Vec3D&gt; <span class="kw">as </span>ArrowField&gt;::data_type()
     }
 }

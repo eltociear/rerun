@@ -90,6 +90,7 @@
 <a href="#90" id="90">90</a>
 <a href="#91" id="91">91</a>
 <a href="#92" id="92">92</a>
+<a href="#93" id="93">93</a>
 </pre><pre class="rust"><code><span class="kw">use </span>arrow2_convert::{ArrowDeserialize, ArrowField, ArrowSerialize};
 
 <span class="kw">use </span><span class="kw">crate</span>::msg_bundle::Component;
@@ -178,7 +179,8 @@
 }
 
 <span class="kw">impl </span>Component <span class="kw">for </span>Rect2D {
-    <span class="kw">fn </span>name() -&gt; <span class="kw">crate</span>::ComponentName {
+    <span class="attr">#[inline]
+    </span><span class="kw">fn </span>name() -&gt; <span class="kw">crate</span>::ComponentName {
         <span class="string">&quot;rerun.rect2d&quot;</span>.into()
     }
 }

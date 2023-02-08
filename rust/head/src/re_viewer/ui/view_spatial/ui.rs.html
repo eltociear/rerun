@@ -412,7 +412,6 @@
 <a href="#412" id="412">412</a>
 <a href="#413" id="413">413</a>
 <a href="#414" id="414">414</a>
-<a href="#415" id="415">415</a>
 </pre><pre class="rust"><code><span class="kw">use </span>re_data_store::EntityPath;
 <span class="kw">use </span>re_format::format_f32;
 
@@ -420,7 +419,7 @@
 <span class="kw">use </span>macaw::BoundingBox;
 
 <span class="kw">use crate</span>::{
-    misc::{space_info::SpaceInfo, SpaceViewHighlights, ViewerContext},
+    misc::{space_info::query_view_coordinates, SpaceViewHighlights, ViewerContext},
     ui::{data_blueprint::DataBlueprintTree, SpaceViewId},
 };
 
@@ -687,14 +686,12 @@
     }
 
     <span class="comment">// TODO(andreas): split into smaller parts, some of it shouldn&#39;t be part of the ui path and instead scene loading.
-    </span><span class="attr">#[allow(clippy::too_many_arguments)]
     </span><span class="kw">pub fn </span>view_spatial(
         <span class="kw-2">&amp;mut </span><span class="self">self</span>,
         ctx: <span class="kw-2">&amp;mut </span>ViewerContext&lt;<span class="lifetime">&#39;_</span>&gt;,
         ui: <span class="kw-2">&amp;mut </span>egui::Ui,
         space: <span class="kw-2">&amp;</span>EntityPath,
         scene: SceneSpatial,
-        space_info: <span class="kw-2">&amp;</span>SpaceInfo,
         space_view_id: SpaceViewId,
         highlights: <span class="kw-2">&amp;</span>SpaceViewHighlights,
     ) {
@@ -711,7 +708,8 @@
 
         <span class="kw">match </span><span class="self">self</span>.nav_mode {
             SpatialNavigationMode::ThreeD =&gt; {
-                <span class="kw">let </span>coordinates = space_info.coordinates;
+                <span class="kw">let </span>coordinates =
+                    query_view_coordinates(<span class="kw-2">&amp;</span>ctx.log_db.entity_db, space, <span class="kw-2">&amp;</span>ctx.current_query());
                 <span class="self">self</span>.state_3d.space_specs = SpaceSpecs::from_view_coordinates(coordinates);
                 <span class="kw">super</span>::view_3d(ctx, ui, <span class="self">self</span>, space, space_view_id, scene);
             }

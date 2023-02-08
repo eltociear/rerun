@@ -387,6 +387,7 @@
 <a href="#387" id="387">387</a>
 <a href="#388" id="388">388</a>
 <a href="#389" id="389">389</a>
+<a href="#390" id="390">390</a>
 </pre><pre class="rust"><code><span class="kw">use </span>std::collections::BTreeMap;
 
 <span class="kw">use </span>egui::{Color32, RichText};
@@ -616,6 +617,7 @@
         .vscroll(<span class="bool-val">true</span>)
         .auto_shrink([<span class="bool-val">false</span>; <span class="number">2</span>]) <span class="comment">// expand to take up the whole Space View
         </span>.min_scrolled_height(<span class="number">0.0</span>) <span class="comment">// we can go as small as we need to be in order to fit within the space view!
+        </span>.max_scroll_height(f32::INFINITY) <span class="comment">// Fill up whole height
         </span>.cell_layout(egui::Layout::left_to_right(egui::Align::TOP));
 
     <span class="kw">if let </span><span class="prelude-val">Some</span>(scroll_to_row) = scroll_to_row {

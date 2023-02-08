@@ -28,6 +28,7 @@
 <a href="#28" id="28">28</a>
 <a href="#29" id="29">29</a>
 <a href="#30" id="30">30</a>
+<a href="#31" id="31">31</a>
 </pre><pre class="rust"><code><span class="kw">use </span>arrow2_convert::{ArrowDeserialize, ArrowField, ArrowSerialize};
 
 <span class="kw">use </span><span class="kw">crate</span>::msg_bundle::Component;
@@ -54,7 +55,8 @@
 </span><span class="kw">pub struct </span>ClassId(<span class="kw">pub </span>u16);
 
 <span class="kw">impl </span>Component <span class="kw">for </span>ClassId {
-    <span class="kw">fn </span>name() -&gt; <span class="kw">crate</span>::ComponentName {
+    <span class="attr">#[inline]
+    </span><span class="kw">fn </span>name() -&gt; <span class="kw">crate</span>::ComponentName {
         <span class="string">&quot;rerun.class_id&quot;</span>.into()
     }
 }

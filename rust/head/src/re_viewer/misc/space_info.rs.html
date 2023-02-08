@@ -288,54 +288,6 @@
 <a href="#288" id="288">288</a>
 <a href="#289" id="289">289</a>
 <a href="#290" id="290">290</a>
-<a href="#291" id="291">291</a>
-<a href="#292" id="292">292</a>
-<a href="#293" id="293">293</a>
-<a href="#294" id="294">294</a>
-<a href="#295" id="295">295</a>
-<a href="#296" id="296">296</a>
-<a href="#297" id="297">297</a>
-<a href="#298" id="298">298</a>
-<a href="#299" id="299">299</a>
-<a href="#300" id="300">300</a>
-<a href="#301" id="301">301</a>
-<a href="#302" id="302">302</a>
-<a href="#303" id="303">303</a>
-<a href="#304" id="304">304</a>
-<a href="#305" id="305">305</a>
-<a href="#306" id="306">306</a>
-<a href="#307" id="307">307</a>
-<a href="#308" id="308">308</a>
-<a href="#309" id="309">309</a>
-<a href="#310" id="310">310</a>
-<a href="#311" id="311">311</a>
-<a href="#312" id="312">312</a>
-<a href="#313" id="313">313</a>
-<a href="#314" id="314">314</a>
-<a href="#315" id="315">315</a>
-<a href="#316" id="316">316</a>
-<a href="#317" id="317">317</a>
-<a href="#318" id="318">318</a>
-<a href="#319" id="319">319</a>
-<a href="#320" id="320">320</a>
-<a href="#321" id="321">321</a>
-<a href="#322" id="322">322</a>
-<a href="#323" id="323">323</a>
-<a href="#324" id="324">324</a>
-<a href="#325" id="325">325</a>
-<a href="#326" id="326">326</a>
-<a href="#327" id="327">327</a>
-<a href="#328" id="328">328</a>
-<a href="#329" id="329">329</a>
-<a href="#330" id="330">330</a>
-<a href="#331" id="331">331</a>
-<a href="#332" id="332">332</a>
-<a href="#333" id="333">333</a>
-<a href="#334" id="334">334</a>
-<a href="#335" id="335">335</a>
-<a href="#336" id="336">336</a>
-<a href="#337" id="337">337</a>
-<a href="#338" id="338">338</a>
 </pre><pre class="rust"><code><span class="kw">use </span>std::collections::BTreeMap;
 
 <span class="kw">use </span>nohash_hasher::IntSet;
@@ -356,9 +308,6 @@
 </span><span class="kw">pub struct </span>SpaceInfo {
     <span class="kw">pub </span>path: EntityPath,
 
-    <span class="doccomment">/// The latest known coordinate system for this space.
-    </span><span class="kw">pub </span>coordinates: <span class="prelude-ty">Option</span>&lt;ViewCoordinates&gt;,
-
     <span class="doccomment">/// All paths in this space (including self and children connected by the identity transform).
     </span><span class="kw">pub </span>descendants_without_transform: IntSet&lt;EntityPath&gt;,
 
@@ -374,7 +323,6 @@
     <span class="kw">pub fn </span>new(path: EntityPath) -&gt; <span class="self">Self </span>{
         <span class="self">Self </span>{
             path,
-            coordinates: Default::default(),
             descendants_without_transform: Default::default(),
             parent: Default::default(),
             child_spaces: Default::default(),
@@ -398,7 +346,7 @@
             visitor(space_info);
 
             <span class="kw">for </span>(child_path, transform) <span class="kw">in </span><span class="kw-2">&amp;</span>space_info.child_spaces {
-                <span class="kw">let </span><span class="prelude-val">Some</span>(child_space) = space_info_collection.get(child_path) <span class="kw">else </span>{
+                <span class="kw">let </span><span class="prelude-val">Some</span>(child_space) = space_info_collection.spaces.get(child_path) <span class="kw">else </span>{
                     <span class="macro">re_log::warn_once!</span>(<span class="string">&quot;Child space info {} not part of space info collection&quot;</span>, child_path);
                     <span class="kw">continue</span>;
                 };
@@ -426,10 +374,6 @@
         }
 
         visit_descendants_with_reachable_transform_recursively(<span class="self">self</span>, spaces_info, <span class="bool-val">false</span>, visitor);
-    }
-
-    <span class="kw">pub fn </span>parent_transform(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>Transform&gt; {
-        <span class="self">self</span>.parent.as_ref().map(|(<span class="kw">_</span>, transform)| transform)
     }
 }
 
@@ -501,70 +445,35 @@
 
         <span class="kw">let </span><span class="kw-2">mut </span>spaces_info = <span class="self">Self</span>::default();
 
-        <span class="comment">// The root itself.
-        // To make our heuristics work we pretend direct child of the root has a transform,
-        // breaking the pattern applied for everything else where we create a SpaceInfo once we hit a transform.
-        //
-        // TODO(andreas): Our dependency on SpaceInfo in this way is quite telling - we should be able to create a SpaceView without having a corresponding SpaceInfo
-        //                Currently too many things depend on every SpaceView being backed up by a concrete SpaceInfo on its space path.
+        <span class="comment">// Start at the root. The root is always part of the collection!
         </span><span class="kw">if </span>query_transform(entity_db, <span class="kw-2">&amp;</span>EntityPath::root(), <span class="kw-2">&amp;</span>query).is_some() {
             <span class="macro">re_log::warn_once!</span>(<span class="string">&quot;The root entity has a &#39;transform&#39; component! This will have no effect. Did you mean to apply the transform elsewhere?&quot;</span>);
         }
         <span class="kw">let </span><span class="kw-2">mut </span>root_space_info = SpaceInfo::new(EntityPath::root());
-        root_space_info
-            .descendants_without_transform
-            .insert(EntityPath::root());
-
-        <span class="kw">for </span>tree <span class="kw">in </span>entity_db.tree.children.values() {
-            <span class="kw">let </span><span class="kw-2">mut </span>space_info = SpaceInfo::new(tree.path.clone());
-            <span class="kw">let </span>transform = query_transform(entity_db, <span class="kw-2">&amp;</span>EntityPath::root(), <span class="kw-2">&amp;</span>query)
-                .unwrap_or(Transform::Rigid3(re_log_types::Rigid3::IDENTITY));
-            space_info.parent = <span class="prelude-val">Some</span>((EntityPath::root(), transform.clone()));
-            space_info
-                .descendants_without_transform
-                .insert(tree.path.clone());
-
-            root_space_info
-                .child_spaces
-                .insert(tree.path.clone(), transform);
-
-            <span class="kw">for </span>child_tree <span class="kw">in </span>tree.children.values() {
-                add_children(
-                    entity_db,
-                    <span class="kw-2">&amp;mut </span>spaces_info,
-                    <span class="kw-2">&amp;mut </span>space_info,
-                    child_tree,
-                    <span class="kw-2">&amp;</span>query,
-                );
-            }
-            spaces_info.spaces.insert(tree.path.clone(), space_info);
-        }
+        add_children(
+            entity_db,
+            <span class="kw-2">&amp;mut </span>spaces_info,
+            <span class="kw-2">&amp;mut </span>root_space_info,
+            <span class="kw-2">&amp;</span>entity_db.tree,
+            <span class="kw-2">&amp;</span>query,
+        );
         spaces_info
             .spaces
             .insert(EntityPath::root(), root_space_info);
 
-        <span class="kw">for </span>(entity_path, space_info) <span class="kw">in </span><span class="kw-2">&amp;mut </span>spaces_info.spaces {
-            space_info.coordinates = query_view_coordinates(entity_db, entity_path, <span class="kw-2">&amp;</span>query);
-        }
-
         spaces_info
     }
 
-    <span class="kw">pub fn </span>get(<span class="kw-2">&amp;</span><span class="self">self</span>, path: <span class="kw-2">&amp;</span>EntityPath) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>SpaceInfo&gt; {
-        <span class="self">self</span>.spaces.get(path)
-    }
-
-    <span class="kw">pub fn </span>get_first_parent_with_info(<span class="kw-2">&amp;</span><span class="self">self</span>, path: <span class="kw-2">&amp;</span>EntityPath) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>SpaceInfo&gt; {
+    <span class="kw">pub fn </span>get_first_parent_with_info(<span class="kw-2">&amp;</span><span class="self">self</span>, path: <span class="kw-2">&amp;</span>EntityPath) -&gt; <span class="kw-2">&amp;</span>SpaceInfo {
         <span class="kw">let </span><span class="kw-2">mut </span>path = path.clone();
-        <span class="kw">while let </span><span class="prelude-val">Some</span>(parent) = path.parent() {
-            <span class="kw">let </span>space_info = <span class="self">self</span>.get(<span class="kw-2">&amp;</span>path);
-            <span class="kw">if </span>space_info.is_some() {
+        <span class="kw">loop </span>{
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(space_info) = <span class="self">self</span>.spaces.get(<span class="kw-2">&amp;</span>path) {
                 <span class="kw">return </span>space_info;
             }
-            path = parent;
+            path = path.parent().expect(
+                <span class="string">&quot;The root path is part of SpaceInfoCollection, as such it&#39;s impossible to not have a space info parent!&quot;</span>);
         }
-        <span class="prelude-val">None
-    </span>}
+    }
 
     <span class="kw">pub fn </span>iter(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw">impl </span>Iterator&lt;Item = <span class="kw-2">&amp;</span>SpaceInfo&gt; {
         <span class="self">self</span>.spaces.values()
@@ -582,14 +491,8 @@
         <span class="macro">crate::profile_function!</span>();
 
         <span class="comment">// Get closest space infos for the given entity paths.
-        </span><span class="kw">let </span><span class="prelude-val">Some</span>(<span class="kw-2">mut </span>from_space) = <span class="self">self</span>.get_first_parent_with_info(from) <span class="kw">else </span>{
-            <span class="macro">re_log::warn_once!</span>(<span class="string">&quot;{} not part of space infos&quot;</span>, from);
-            <span class="kw">return </span><span class="prelude-val">Err</span>(UnreachableTransform::UnknownSpaceInfo);
-        };
-        <span class="kw">let </span><span class="prelude-val">Some</span>(<span class="kw-2">mut </span>to_reference_space) = <span class="self">self</span>.get_first_parent_with_info(to_reference) <span class="kw">else </span>{
-            <span class="macro">re_log::warn_once!</span>(<span class="string">&quot;{} not part of space infos&quot;</span>, to_reference);
-            <span class="kw">return </span><span class="prelude-val">Err</span>(UnreachableTransform::UnknownSpaceInfo);
-        };
+        </span><span class="kw">let </span><span class="kw-2">mut </span>from_space = <span class="self">self</span>.get_first_parent_with_info(from);
+        <span class="kw">let </span><span class="kw-2">mut </span>to_reference_space = <span class="self">self</span>.get_first_parent_with_info(to_reference);
 
         <span class="comment">// Reachability is (mostly) commutative!
         // This means we can simply walk from both nodes up until we find a common ancestor!
@@ -628,7 +531,8 @@
                     }
                 }<span class="question-mark">?</span>;
 
-                <span class="kw">let </span><span class="prelude-val">Some</span>(parent_space) = <span class="self">self</span>.get(parent_path) <span class="kw">else </span>{
+                <span class="kw">let </span><span class="prelude-val">Some</span>(parent_space) = <span class="self">self</span>.spaces.get(parent_path)
+                <span class="kw">else </span>{
                     <span class="macro">re_log::warn_once!</span>(<span class="string">&quot;{} not part of space infos&quot;</span>, parent_path);
                     <span class="kw">return </span><span class="prelude-val">Err</span>(UnreachableTransform::UnknownSpaceInfo);
                 };

@@ -481,6 +481,9 @@
 <a href="#481" id="481">481</a>
 <a href="#482" id="482">482</a>
 <a href="#483" id="483">483</a>
+<a href="#484" id="484">484</a>
+<a href="#485" id="485">485</a>
+<a href="#486" id="486">486</a>
 </pre><pre class="rust"><code><span class="kw">use </span>arrow2::array::Array;
 <span class="kw">use </span>nohash_hasher::IntMap;
 <span class="kw">use </span>re_log_types::external::arrow2_convert::serialize::TryIntoArrow;
@@ -602,6 +605,7 @@
     ///
     /// `MsgSender` automatically keeps track of the logging time, which is recorded when
     /// [`Self::new`] is first called.
+    </span><span class="attr">#[inline]
     </span><span class="kw">pub fn </span>with_timepoint(<span class="kw-2">mut </span><span class="self">self</span>, timepoint: TimePoint) -&gt; <span class="self">Self </span>{
         <span class="kw">for </span>(timeline, time) <span class="kw">in </span>timepoint {
             <span class="self">self</span>.timepoint.insert(timeline, time);
@@ -617,6 +621,7 @@
     ///
     /// `MsgSender` automatically keeps track of the logging time, which is recorded when
     /// [`Self::new`] is first called.
+    </span><span class="attr">#[inline]
     </span><span class="kw">pub fn </span>with_time(<span class="kw-2">mut </span><span class="self">self</span>, timeline: Timeline, time: <span class="kw">impl </span>Into&lt;TimeInt&gt;) -&gt; <span class="self">Self </span>{
         <span class="self">self</span>.timepoint.insert(timeline, time.into());
         <span class="self">self
@@ -629,6 +634,7 @@
     /// into the past.
     ///
     /// Always `false` by default.
+    </span><span class="attr">#[inline]
     </span><span class="kw">pub fn </span>with_timeless(<span class="kw-2">mut </span><span class="self">self</span>, timeless: bool) -&gt; <span class="self">Self </span>{
         <span class="self">self</span>.timeless = timeless;
         <span class="self">self

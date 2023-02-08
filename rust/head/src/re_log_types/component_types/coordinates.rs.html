@@ -493,6 +493,14 @@
 <a href="#493" id="493">493</a>
 <a href="#494" id="494">494</a>
 <a href="#495" id="495">495</a>
+<a href="#496" id="496">496</a>
+<a href="#497" id="497">497</a>
+<a href="#498" id="498">498</a>
+<a href="#499" id="499">499</a>
+<a href="#500" id="500">500</a>
+<a href="#501" id="501">501</a>
+<a href="#502" id="502">502</a>
+<a href="#503" id="503">503</a>
 </pre><pre class="rust"><code><span class="kw">use </span>arrow2::datatypes::DataType;
 <span class="kw">use </span>arrow2_convert::{
     deserialize::ArrowDeserialize,
@@ -556,7 +564,8 @@
 <span class="kw">impl </span>TryFrom&lt;u8&gt; <span class="kw">for </span>ViewDir {
     <span class="kw">type </span>Error = <span class="kw">super</span>::FieldError;
 
-    <span class="kw">fn </span>try_from(i: u8) -&gt; <span class="kw">super</span>::Result&lt;<span class="self">Self</span>&gt; {
+    <span class="attr">#[inline]
+    </span><span class="kw">fn </span>try_from(i: u8) -&gt; <span class="kw">super</span>::Result&lt;<span class="self">Self</span>&gt; {
         <span class="kw">match </span>i {
             <span class="number">1 </span>=&gt; <span class="prelude-val">Ok</span>(<span class="self">Self</span>::Up),
             <span class="number">2 </span>=&gt; <span class="prelude-val">Ok</span>(<span class="self">Self</span>::Down),
@@ -592,7 +601,8 @@
 </span><span class="kw">pub struct </span>ViewCoordinates(<span class="kw">pub </span>[ViewDir; <span class="number">3</span>]);
 
 <span class="kw">impl </span>Component <span class="kw">for </span>ViewCoordinates {
-    <span class="kw">fn </span>name() -&gt; <span class="kw">crate</span>::ComponentName {
+    <span class="attr">#[inline]
+    </span><span class="kw">fn </span>name() -&gt; <span class="kw">crate</span>::ComponentName {
         <span class="string">&quot;rerun.view_coordinates&quot;</span>.into()
     }
 }
@@ -700,6 +710,7 @@
     ///
     /// (RUB: X=Right, Y=Up, B=Back)
     </span><span class="attr">#[cfg(feature = <span class="string">&quot;glam&quot;</span>)]
+    #[inline]
     </span><span class="kw">pub fn </span>from_rub(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; glam::Mat3 {
         <span class="self">self</span>.to_rub().transpose()
     }
@@ -708,6 +719,7 @@
     ///
     /// (RUB: X=Right, Y=Up, B=Back)
     </span><span class="attr">#[cfg(feature = <span class="string">&quot;glam&quot;</span>)]
+    #[inline]
     </span><span class="kw">pub fn </span>to_rub(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; glam::Mat3 {
         <span class="kw">fn </span>rub(dir: ViewDir) -&gt; [f32; <span class="number">3</span>] {
             <span class="kw">match </span>dir {
@@ -724,6 +736,7 @@
     }
 
     <span class="attr">#[cfg(feature = <span class="string">&quot;glam&quot;</span>)]
+    #[inline]
     </span><span class="kw">pub fn </span>handedness(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;Handedness&gt; {
         <span class="kw">let </span>to_rub = <span class="self">self</span>.to_rub();
         <span class="kw">let </span>det = to_rub.determinant();
@@ -740,7 +753,8 @@
 <span class="kw">impl </span>std::str::FromStr <span class="kw">for </span>ViewCoordinates {
     <span class="kw">type </span><span class="prelude-val">Err </span>= String;
 
-    <span class="kw">fn </span>from_str(s: <span class="kw-2">&amp;</span>str) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, <span class="self">Self</span>::Err&gt; {
+    <span class="attr">#[inline]
+    </span><span class="kw">fn </span>from_str(s: <span class="kw-2">&amp;</span>str) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, <span class="self">Self</span>::Err&gt; {
         <span class="kw">match </span>s.as_bytes() {
             [x, y, z] =&gt; {
                 <span class="kw">let </span>slf = <span class="self">Self</span>([
@@ -758,7 +772,9 @@
 
 <span class="kw">impl </span>ArrowField <span class="kw">for </span>ViewCoordinates {
     <span class="kw">type </span>Type = <span class="self">Self</span>;
-    <span class="kw">fn </span>data_type() -&gt; DataType {
+
+    <span class="attr">#[inline]
+    </span><span class="kw">fn </span>data_type() -&gt; DataType {
         &lt;FixedSizeBinary&lt;<span class="number">3</span>&gt; <span class="kw">as </span>ArrowField&gt;::data_type()
     }
 }

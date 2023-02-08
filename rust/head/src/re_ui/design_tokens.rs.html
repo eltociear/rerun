@@ -276,6 +276,14 @@
 <a href="#276" id="276">276</a>
 <a href="#277" id="277">277</a>
 <a href="#278" id="278">278</a>
+<a href="#279" id="279">279</a>
+<a href="#280" id="280">280</a>
+<a href="#281" id="281">281</a>
+<a href="#282" id="282">282</a>
+<a href="#283" id="283">283</a>
+<a href="#284" id="284">284</a>
+<a href="#285" id="285">285</a>
+<a href="#286" id="286">286</a>
 </pre><pre class="rust"><code><span class="kw">use </span>egui::Color32;
 
 <span class="doccomment">/// The look and feel of the UI.
@@ -338,7 +346,15 @@
         ] {
             egui_style.text_styles.get_mut(<span class="kw-2">&amp;</span>text_style).unwrap().size = font_size;
         }
-    }
+
+        <span class="comment">// We want labels and buttons to have the same height.
+        // Intuitively, we would just assign font_size to
+        // the interact_size, but in practice text height does not match
+        // font size (for unknown reason), so we fudge it for now:
+
+        </span>egui_style.spacing.interact_size.y = <span class="number">15.0</span>;
+        <span class="comment">// egui_style.spacing.interact_size.y = font_size;
+    </span>}
 
     <span class="kw">let </span>panel_bg_color = get_aliased_color(<span class="kw-2">&amp;</span>json, <span class="string">&quot;{Alias.Color.Surface.Default.value}&quot;</span>);
     <span class="comment">// let floating_color = get_aliased_color(&amp;json, &quot;{Alias.Color.Surface.Floating.value}&quot;);
@@ -413,13 +429,13 @@
     egui_style.visuals.widgets.active.rounding = small_rounding;
     egui_style.visuals.widgets.open.rounding = small_rounding;
 
-    egui_style.spacing.item_spacing = egui::vec2(<span class="number">8.0</span>, <span class="number">4.0</span>);
+    egui_style.spacing.item_spacing = egui::vec2(<span class="number">8.0</span>, <span class="number">8.0</span>);
     egui_style.spacing.menu_margin = <span class="kw">crate</span>::ReUi::view_padding().into();
 
     <span class="comment">// Add stripes to grids and tables?
     </span>egui_style.visuals.striped = <span class="bool-val">false</span>;
     egui_style.visuals.indent_has_left_vline = <span class="bool-val">false</span>;
-    egui_style.spacing.button_padding = egui::Vec2::new(<span class="number">1.0</span>, <span class="number">1.0</span>); <span class="comment">// Makes the icons in the blueprint panel align
+    egui_style.spacing.button_padding = egui::Vec2::new(<span class="number">1.0</span>, <span class="number">0.0</span>); <span class="comment">// Makes the icons in the blueprint panel align
     </span>egui_style.spacing.indent = <span class="number">14.0</span>; <span class="comment">// From figma
 
     </span>egui_style.debug.show_blocking_widget = <span class="bool-val">false</span>; <span class="comment">// turn this on to debug interaction problems

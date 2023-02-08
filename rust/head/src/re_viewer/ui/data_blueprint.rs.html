@@ -400,6 +400,10 @@
 <a href="#400" id="400">400</a>
 <a href="#401" id="401">401</a>
 <a href="#402" id="402">402</a>
+<a href="#403" id="403">403</a>
+<a href="#404" id="404">404</a>
+<a href="#405" id="405">405</a>
+<a href="#406" id="406">406</a>
 </pre><pre class="rust"><code><span class="kw">use </span>std::collections::BTreeSet;
 
 <span class="kw">use </span>nohash_hasher::{IntMap, IntSet};
@@ -501,7 +505,11 @@
         <span class="self">self</span>.root_group_handle
     }
 
-    <span class="kw">pub fn </span>root_group(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>DataBlueprintGroup {
+    <span class="doccomment">/// Returns the root data blueprint.
+    ///
+    /// Even if there are no other groups, we always have a root group at the top.
+    /// Typically, we don&#39;t show the root group in the ui.
+    </span><span class="kw">pub fn </span>root_group(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>DataBlueprintGroup {
         <span class="self">self</span>.groups.get(<span class="self">self</span>.root_group_handle).unwrap()
     }
 

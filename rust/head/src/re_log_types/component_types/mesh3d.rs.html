@@ -403,6 +403,15 @@
 <a href="#403" id="403">403</a>
 <a href="#404" id="404">404</a>
 <a href="#405" id="405">405</a>
+<a href="#406" id="406">406</a>
+<a href="#407" id="407">407</a>
+<a href="#408" id="408">408</a>
+<a href="#409" id="409">409</a>
+<a href="#410" id="410">410</a>
+<a href="#411" id="411">411</a>
+<a href="#412" id="412">412</a>
+<a href="#413" id="413">413</a>
+<a href="#414" id="414">414</a>
 </pre><pre class="rust"><code><span class="kw">use </span>std::sync::Arc;
 
 <span class="kw">use </span>arrow2::array::{FixedSizeBinaryArray, MutableFixedSizeBinaryArray};
@@ -446,7 +455,8 @@
 <span class="kw">impl </span>ArrowField <span class="kw">for </span>MeshId {
     <span class="kw">type </span>Type = <span class="self">Self</span>;
 
-    <span class="kw">fn </span>data_type() -&gt; arrow2::datatypes::DataType {
+    <span class="attr">#[inline]
+    </span><span class="kw">fn </span>data_type() -&gt; arrow2::datatypes::DataType {
         arrow2::datatypes::DataType::FixedSizeBinary(<span class="number">16</span>)
     }
 }
@@ -454,11 +464,13 @@
 <span class="kw">impl </span>ArrowSerialize <span class="kw">for </span>MeshId {
     <span class="kw">type </span>MutableArrayType = MutableFixedSizeBinaryArray;
 
-    <span class="kw">fn </span>new_array() -&gt; <span class="self">Self</span>::MutableArrayType {
+    <span class="attr">#[inline]
+    </span><span class="kw">fn </span>new_array() -&gt; <span class="self">Self</span>::MutableArrayType {
         MutableFixedSizeBinaryArray::new(<span class="number">16</span>)
     }
 
-    <span class="kw">fn </span>arrow_serialize(
+    <span class="attr">#[inline]
+    </span><span class="kw">fn </span>arrow_serialize(
         v: <span class="kw-2">&amp;</span>&lt;<span class="self">Self </span><span class="kw">as </span>arrow2_convert::field::ArrowField&gt;::Type,
         array: <span class="kw-2">&amp;mut </span><span class="self">Self</span>::MutableArrayType,
     ) -&gt; arrow2::error::Result&lt;()&gt; {
@@ -469,7 +481,8 @@
 <span class="kw">impl </span>ArrowDeserialize <span class="kw">for </span>MeshId {
     <span class="kw">type </span>ArrayType = FixedSizeBinaryArray;
 
-    <span class="kw">fn </span>arrow_deserialize(
+    <span class="attr">#[inline]
+    </span><span class="kw">fn </span>arrow_deserialize(
         v: &lt;<span class="kw-2">&amp;</span><span class="self">Self</span>::ArrayType <span class="kw">as </span>IntoIterator&gt;::Item,
     ) -&gt; <span class="prelude-ty">Option</span>&lt;&lt;<span class="self">Self </span><span class="kw">as </span>ArrowField&gt;::Type&gt; {
         v.and_then(|bytes| uuid::Uuid::from_slice(bytes).ok())
@@ -582,7 +595,8 @@
         <span class="prelude-val">Ok</span>(())
     }
 
-    <span class="kw">pub fn </span>num_triangles(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; usize {
+    <span class="attr">#[inline]
+    </span><span class="kw">pub fn </span>num_triangles(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; usize {
         <span class="attr">#[cfg(debug_assertions)]
         </span><span class="self">self</span>.sanity_check().unwrap();
 
@@ -680,7 +694,9 @@
 
 <span class="kw">impl </span>ArrowField <span class="kw">for </span>EncodedMesh3D {
     <span class="kw">type </span>Type = <span class="self">Self</span>;
-    <span class="kw">fn </span>data_type() -&gt; DataType {
+
+    <span class="attr">#[inline]
+    </span><span class="kw">fn </span>data_type() -&gt; DataType {
         &lt;EncodedMesh3DArrow <span class="kw">as </span>ArrowField&gt;::data_type()
     }
 }
@@ -757,13 +773,15 @@
 }
 
 <span class="kw">impl </span>Component <span class="kw">for </span>Mesh3D {
-    <span class="kw">fn </span>name() -&gt; <span class="kw">crate</span>::ComponentName {
+    <span class="attr">#[inline]
+    </span><span class="kw">fn </span>name() -&gt; <span class="kw">crate</span>::ComponentName {
         <span class="string">&quot;rerun.mesh3d&quot;</span>.into()
     }
 }
 
 <span class="kw">impl </span>Mesh3D {
-    <span class="kw">pub fn </span>mesh_id(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; MeshId {
+    <span class="attr">#[inline]
+    </span><span class="kw">pub fn </span>mesh_id(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; MeshId {
         <span class="kw">match </span><span class="self">self </span>{
             Mesh3D::Encoded(mesh) =&gt; mesh.mesh_id,
             Mesh3D::Raw(mesh) =&gt; mesh.mesh_id,

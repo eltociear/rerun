@@ -292,6 +292,11 @@
 <a href="#292" id="292">292</a>
 <a href="#293" id="293">293</a>
 <a href="#294" id="294">294</a>
+<a href="#295" id="295">295</a>
+<a href="#296" id="296">296</a>
+<a href="#297" id="297">297</a>
+<a href="#298" id="298">298</a>
+<a href="#299" id="299">299</a>
 </pre><pre class="rust"><code><span class="kw">use </span>ahash::HashMap;
 <span class="kw">use </span>arrow2::{array::TryExtend, datatypes::DataType};
 <span class="kw">use </span>arrow2_convert::{
@@ -467,7 +472,8 @@
 }
 
 <span class="kw">impl </span>Component <span class="kw">for </span>AnnotationContext {
-    <span class="kw">fn </span>name() -&gt; <span class="kw">crate</span>::ComponentName {
+    <span class="attr">#[inline]
+    </span><span class="kw">fn </span>name() -&gt; <span class="kw">crate</span>::ComponentName {
         <span class="string">&quot;rerun.annotation_context&quot;</span>.into()
     }
 }
@@ -482,7 +488,8 @@
 <span class="kw">type </span>AnnotationContextArrow = Vec&lt;ClassMapElemArrow&gt;;
 
 <span class="kw">impl </span>From&lt;<span class="kw-2">&amp;</span>AnnotationContext&gt; <span class="kw">for </span>AnnotationContextArrow {
-    <span class="kw">fn </span>from(v: <span class="kw-2">&amp;</span>AnnotationContext) -&gt; <span class="self">Self </span>{
+    <span class="attr">#[inline]
+    </span><span class="kw">fn </span>from(v: <span class="kw-2">&amp;</span>AnnotationContext) -&gt; <span class="self">Self </span>{
         v.class_map
             .iter()
             .map(|(class_id, class_description)| ClassMapElemArrow {
@@ -494,7 +501,8 @@
 }
 
 <span class="kw">impl </span>From&lt;Vec&lt;ClassMapElemArrow&gt;&gt; <span class="kw">for </span>AnnotationContext {
-    <span class="kw">fn </span>from(v: AnnotationContextArrow) -&gt; <span class="self">Self </span>{
+    <span class="attr">#[inline]
+    </span><span class="kw">fn </span>from(v: AnnotationContextArrow) -&gt; <span class="self">Self </span>{
         AnnotationContext {
             class_map: v
                 .into_iter()
@@ -506,7 +514,9 @@
 
 <span class="kw">impl </span>ArrowField <span class="kw">for </span>AnnotationContext {
     <span class="kw">type </span>Type = <span class="self">Self</span>;
-    <span class="kw">fn </span>data_type() -&gt; DataType {
+
+    <span class="attr">#[inline]
+    </span><span class="kw">fn </span>data_type() -&gt; DataType {
         &lt;AnnotationContextArrow <span class="kw">as </span>ArrowField&gt;::data_type()
     }
 }

@@ -62,6 +62,7 @@
 <a href="#62" id="62">62</a>
 <a href="#63" id="63">63</a>
 <a href="#64" id="64">64</a>
+<a href="#65" id="65">65</a>
 </pre><pre class="rust"><code><span class="kw">use </span><span class="kw">super</span>::Vec3D;
 <span class="kw">use </span>arrow2_convert::{ArrowDeserialize, ArrowField, ArrowSerialize};
 
@@ -102,7 +103,8 @@
 }
 
 <span class="kw">impl </span>Component <span class="kw">for </span>Arrow3D {
-    <span class="kw">fn </span>name() -&gt; <span class="kw">crate</span>::ComponentName {
+    <span class="attr">#[inline]
+    </span><span class="kw">fn </span>name() -&gt; <span class="kw">crate</span>::ComponentName {
         <span class="string">&quot;rerun.arrow3d&quot;</span>.into()
     }
 }

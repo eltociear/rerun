@@ -353,101 +353,17 @@
 <a href="#353" id="353">353</a>
 <a href="#354" id="354">354</a>
 <a href="#355" id="355">355</a>
-<a href="#356" id="356">356</a>
-<a href="#357" id="357">357</a>
-<a href="#358" id="358">358</a>
-<a href="#359" id="359">359</a>
-<a href="#360" id="360">360</a>
-<a href="#361" id="361">361</a>
-<a href="#362" id="362">362</a>
-<a href="#363" id="363">363</a>
-<a href="#364" id="364">364</a>
-<a href="#365" id="365">365</a>
-<a href="#366" id="366">366</a>
-<a href="#367" id="367">367</a>
-<a href="#368" id="368">368</a>
-<a href="#369" id="369">369</a>
-<a href="#370" id="370">370</a>
-<a href="#371" id="371">371</a>
-<a href="#372" id="372">372</a>
-<a href="#373" id="373">373</a>
-<a href="#374" id="374">374</a>
-<a href="#375" id="375">375</a>
-<a href="#376" id="376">376</a>
-<a href="#377" id="377">377</a>
-<a href="#378" id="378">378</a>
-<a href="#379" id="379">379</a>
-<a href="#380" id="380">380</a>
-<a href="#381" id="381">381</a>
-<a href="#382" id="382">382</a>
-<a href="#383" id="383">383</a>
-<a href="#384" id="384">384</a>
-<a href="#385" id="385">385</a>
-<a href="#386" id="386">386</a>
-<a href="#387" id="387">387</a>
-<a href="#388" id="388">388</a>
-<a href="#389" id="389">389</a>
-<a href="#390" id="390">390</a>
-<a href="#391" id="391">391</a>
-<a href="#392" id="392">392</a>
-<a href="#393" id="393">393</a>
-<a href="#394" id="394">394</a>
-<a href="#395" id="395">395</a>
-<a href="#396" id="396">396</a>
-<a href="#397" id="397">397</a>
-<a href="#398" id="398">398</a>
-<a href="#399" id="399">399</a>
-<a href="#400" id="400">400</a>
-<a href="#401" id="401">401</a>
-<a href="#402" id="402">402</a>
-<a href="#403" id="403">403</a>
-<a href="#404" id="404">404</a>
-<a href="#405" id="405">405</a>
-<a href="#406" id="406">406</a>
-<a href="#407" id="407">407</a>
-<a href="#408" id="408">408</a>
-<a href="#409" id="409">409</a>
-<a href="#410" id="410">410</a>
-<a href="#411" id="411">411</a>
-<a href="#412" id="412">412</a>
-<a href="#413" id="413">413</a>
-<a href="#414" id="414">414</a>
-<a href="#415" id="415">415</a>
-<a href="#416" id="416">416</a>
-<a href="#417" id="417">417</a>
-<a href="#418" id="418">418</a>
-<a href="#419" id="419">419</a>
-<a href="#420" id="420">420</a>
-<a href="#421" id="421">421</a>
-<a href="#422" id="422">422</a>
-<a href="#423" id="423">423</a>
-<a href="#424" id="424">424</a>
-<a href="#425" id="425">425</a>
-<a href="#426" id="426">426</a>
-<a href="#427" id="427">427</a>
-<a href="#428" id="428">428</a>
-<a href="#429" id="429">429</a>
-<a href="#430" id="430">430</a>
-<a href="#431" id="431">431</a>
-<a href="#432" id="432">432</a>
-<a href="#433" id="433">433</a>
-<a href="#434" id="434">434</a>
-<a href="#435" id="435">435</a>
-</pre><pre class="rust"><code><span class="kw">use </span>std::collections::BTreeMap;
-
-<span class="kw">use </span>re_arrow_store::Timeline;
+</pre><pre class="rust"><code><span class="kw">use </span>re_arrow_store::Timeline;
 <span class="kw">use </span>re_data_store::{EntityPath, EntityTree, InstancePath, TimeInt};
 
 <span class="kw">use crate</span>::{
-    misc::{
-        space_info::{SpaceInfo, SpaceInfoCollection},
-        SpaceViewHighlights, TransformCache, ViewerContext,
-    },
+    misc::{space_info::SpaceInfoCollection, SpaceViewHighlights, TransformCache, ViewerContext},
     ui::view_category::categorize_entity_path,
 };
 
 <span class="kw">use super</span>::{
     data_blueprint::DataBlueprintTree,
+    space_view_heuristics::default_queried_entities,
     view_bar_chart,
     view_category::ViewCategory,
     view_spatial::{<span class="self">self</span>},
@@ -477,7 +393,7 @@
     <span class="kw">pub </span>display_name: String,
 
     <span class="doccomment">/// The &quot;anchor point&quot; of this space view.
-    /// It refers to a [`SpaceInfo`] which forms our reference point for all scene-&gt;world transforms in this space view.
+    /// The transform at this path forms the reference point for all scene-&gt;world transforms in this space view.
     /// I.e. the position of this entity path in space forms the origin of the coordinate system in this space view.
     /// Furthermore, this is the primary indicator for heuristics on what entities we show in this space view.
     </span><span class="kw">pub </span>space_path: EntityPath,
@@ -498,13 +414,15 @@
 <span class="kw">impl </span>SpaceView {
     <span class="kw">pub fn </span>new(
         category: ViewCategory,
-        space_info: <span class="kw-2">&amp;</span>SpaceInfo,
+        space_path: <span class="kw-2">&amp;</span>EntityPath,
         queries_entities: <span class="kw-2">&amp;</span>[EntityPath],
     ) -&gt; <span class="self">Self </span>{
         <span class="kw">let </span>display_name = <span class="kw">if </span>queries_entities.len() == <span class="number">1 </span>{
             <span class="comment">// A single entity in this space-view - name the space after it.
-            </span>queries_entities[<span class="number">0</span>].to_string()
-        } <span class="kw">else if let </span><span class="prelude-val">Some</span>(name) = space_info.path.iter().last() {
+            </span>queries_entities[<span class="number">0</span>]
+                .last()
+                .map_or_else(|| <span class="string">&quot;/&quot;</span>.to_owned(), |part| part.to_string())
+        } <span class="kw">else if let </span><span class="prelude-val">Some</span>(name) = space_path.iter().last() {
             name.to_string()
         } <span class="kw">else </span>{
             <span class="comment">// Include category name in the display for root paths because they look a tad bit too short otherwise.
@@ -513,75 +431,17 @@
 
         <span class="kw">let </span><span class="kw-2">mut </span>data_blueprint_tree = DataBlueprintTree::default();
         data_blueprint_tree
-            .insert_entities_according_to_hierarchy(queries_entities.iter(), <span class="kw-2">&amp;</span>space_info.path);
+            .insert_entities_according_to_hierarchy(queries_entities.iter(), space_path);
 
         <span class="self">Self </span>{
             display_name,
             id: SpaceViewId::random(),
-            space_path: space_info.path.clone(),
+            space_path: space_path.clone(),
             data_blueprint: data_blueprint_tree,
             view_state: ViewState::default(),
             category,
             entities_determined_by_user: <span class="bool-val">false</span>,
         }
-    }
-
-    <span class="doccomment">/// List of entities a space view queries by default for a given category.
-    ///
-    /// These are all entities in the given space which have the requested category and are reachable by a transform.
-    </span><span class="kw">pub fn </span>default_queries_entities(
-        ctx: <span class="kw-2">&amp;</span>ViewerContext&lt;<span class="lifetime">&#39;_</span>&gt;,
-        spaces_info: <span class="kw-2">&amp;</span>SpaceInfoCollection,
-        space_info: <span class="kw-2">&amp;</span>SpaceInfo,
-        category: ViewCategory,
-    ) -&gt; Vec&lt;EntityPath&gt; {
-        <span class="macro">crate::profile_function!</span>();
-
-        <span class="kw">let </span>timeline = Timeline::log_time();
-        <span class="kw">let </span>log_db = <span class="kw-2">&amp;</span>ctx.log_db;
-
-        <span class="kw">let </span><span class="kw-2">mut </span>entities = Vec::new();
-
-        space_info.visit_descendants_with_reachable_transform(spaces_info, <span class="kw-2">&amp;mut </span>|space_info| {
-            entities.extend(
-                space_info
-                    .descendants_without_transform
-                    .iter()
-                    .filter(|entity_path| {
-                        categorize_entity_path(timeline, log_db, entity_path).contains(category)
-                    })
-                    .cloned(),
-            );
-        });
-
-        entities
-    }
-
-    <span class="doccomment">/// List of entities a space view queries by default for all any possible category.
-    </span><span class="kw">pub fn </span>default_queries_entities_by_category(
-        ctx: <span class="kw-2">&amp;</span>ViewerContext&lt;<span class="lifetime">&#39;_</span>&gt;,
-        spaces_info: <span class="kw-2">&amp;</span>SpaceInfoCollection,
-        space_info: <span class="kw-2">&amp;</span>SpaceInfo,
-    ) -&gt; BTreeMap&lt;ViewCategory, Vec&lt;EntityPath&gt;&gt; {
-        <span class="macro">crate::profile_function!</span>();
-
-        <span class="kw">let </span>timeline = Timeline::log_time();
-        <span class="kw">let </span>log_db = <span class="kw-2">&amp;</span>ctx.log_db;
-
-        <span class="kw">let </span><span class="kw-2">mut </span>groups: BTreeMap&lt;ViewCategory, Vec&lt;EntityPath&gt;&gt; = BTreeMap::default();
-
-        space_info.visit_descendants_with_reachable_transform(spaces_info, <span class="kw-2">&amp;mut </span>|space_info| {
-            <span class="kw">for </span>entity_path <span class="kw">in </span><span class="kw-2">&amp;</span>space_info.descendants_without_transform {
-                <span class="kw">for </span>category <span class="kw">in </span>categorize_entity_path(timeline, log_db, entity_path) {
-                    groups
-                        .entry(category)
-                        .or_default()
-                        .push(entity_path.clone());
-                }
-            }
-        });
-
-        groups
     }
 
     <span class="kw">pub fn </span>on_frame_start(
@@ -591,14 +451,10 @@
     ) {
         <span class="self">self</span>.data_blueprint.on_frame_start();
 
-        <span class="kw">let </span><span class="prelude-val">Some</span>(space_info) = spaces_info.get(<span class="kw-2">&amp;</span><span class="self">self</span>.space_path) <span class="kw">else </span>{
-            <span class="kw">return</span>;
-        };
-
         <span class="kw">if </span>!<span class="self">self</span>.entities_determined_by_user {
             <span class="comment">// Add entities that have been logged since we were created
             </span><span class="kw">let </span>queries_entities =
-                <span class="self">Self</span>::default_queries_entities(ctx, spaces_info, space_info, <span class="self">self</span>.category);
+                default_queried_entities(ctx, <span class="kw-2">&amp;</span><span class="self">self</span>.space_path, spaces_info, <span class="self">self</span>.category);
             <span class="self">self</span>.data_blueprint
                 .insert_entities_according_to_hierarchy(queries_entities.iter(), <span class="kw-2">&amp;</span><span class="self">self</span>.space_path);
         }
@@ -637,7 +493,6 @@
         <span class="kw-2">&amp;mut </span><span class="self">self</span>,
         ctx: <span class="kw-2">&amp;mut </span>ViewerContext&lt;<span class="lifetime">&#39;_</span>&gt;,
         ui: <span class="kw-2">&amp;mut </span>egui::Ui,
-        reference_space_info: <span class="kw-2">&amp;</span>SpaceInfo,
         latest_at: TimeInt,
         highlights: <span class="kw-2">&amp;</span>SpaceViewHighlights,
     ) {
@@ -678,15 +533,8 @@
                 );
                 <span class="kw">let </span><span class="kw-2">mut </span>scene = view_spatial::SceneSpatial::default();
                 scene.load(ctx, <span class="kw-2">&amp;</span>query, <span class="kw-2">&amp;</span>transforms, highlights);
-                <span class="self">self</span>.view_state.ui_spatial(
-                    ctx,
-                    ui,
-                    <span class="kw-2">&amp;</span><span class="self">self</span>.space_path,
-                    reference_space_info,
-                    scene,
-                    <span class="self">self</span>.id,
-                    highlights,
-                );
+                <span class="self">self</span>.view_state
+                    .ui_spatial(ctx, ui, <span class="kw-2">&amp;</span><span class="self">self</span>.space_path, scene, <span class="self">self</span>.id, highlights);
             }
 
             ViewCategory::Tensor =&gt; {
@@ -766,21 +614,13 @@
         ctx: <span class="kw-2">&amp;mut </span>ViewerContext&lt;<span class="lifetime">&#39;_</span>&gt;,
         ui: <span class="kw-2">&amp;mut </span>egui::Ui,
         space: <span class="kw-2">&amp;</span>EntityPath,
-        space_info: <span class="kw-2">&amp;</span>SpaceInfo,
         scene: view_spatial::SceneSpatial,
         space_view_id: SpaceViewId,
         highlights: <span class="kw-2">&amp;</span>SpaceViewHighlights,
     ) {
         ui.vertical(|ui| {
-            <span class="self">self</span>.state_spatial.view_spatial(
-                ctx,
-                ui,
-                space,
-                scene,
-                space_info,
-                space_view_id,
-                highlights,
-            );
+            <span class="self">self</span>.state_spatial
+                .view_spatial(ctx, ui, space, scene, space_view_id, highlights);
         });
     }
 

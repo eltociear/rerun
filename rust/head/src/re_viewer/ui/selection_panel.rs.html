@@ -431,6 +431,8 @@
 <a href="#431" id="431">431</a>
 <a href="#432" id="432">432</a>
 <a href="#433" id="433">433</a>
+<a href="#434" id="434">434</a>
+<a href="#435" id="435">435</a>
 </pre><pre class="rust"><code><span class="kw">use </span>re_data_store::{query_transform, EntityPath, EntityProperties};
 <span class="kw">use </span>re_log_types::TimeType;
 
@@ -709,6 +711,8 @@
                     }
                 }
             });
+
+            ui.add_space(ui.spacing().item_spacing.y);
 
             <span class="kw">if let </span><span class="prelude-val">Some</span>(space_view) = blueprint.viewport.space_view_mut(space_view_id) {
                 space_view.selection_ui(ctx, ui);

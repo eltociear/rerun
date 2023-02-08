@@ -22,6 +22,8 @@
 <a href="#22" id="22">22</a>
 <a href="#23" id="23">23</a>
 <a href="#24" id="24">24</a>
+<a href="#25" id="25">25</a>
+<a href="#26" id="26">26</a>
 </pre><pre class="rust"><code><span class="kw">use </span>arrow2_convert::{ArrowDeserialize, ArrowField, ArrowSerialize};
 
 <span class="kw">use </span><span class="kw">crate</span>::msg_bundle::Component;
@@ -36,13 +38,15 @@
 
 <span class="attr">#[cfg(feature = <span class="string">&quot;glam&quot;</span>)]
 </span><span class="kw">impl </span>From&lt;Size3D&gt; <span class="kw">for </span>glam::Vec3 {
-    <span class="kw">fn </span>from(size: Size3D) -&gt; <span class="self">Self </span>{
+    <span class="attr">#[inline]
+    </span><span class="kw">fn </span>from(size: Size3D) -&gt; <span class="self">Self </span>{
         glam::vec3(size.x, size.y, size.z)
     }
 }
 
 <span class="kw">impl </span>Component <span class="kw">for </span>Size3D {
-    <span class="kw">fn </span>name() -&gt; <span class="kw">crate</span>::ComponentName {
+    <span class="attr">#[inline]
+    </span><span class="kw">fn </span>name() -&gt; <span class="kw">crate</span>::ComponentName {
         <span class="string">&quot;rerun.size3d&quot;</span>.into()
     }
 }

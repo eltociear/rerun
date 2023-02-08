@@ -85,6 +85,8 @@
 <a href="#85" id="85">85</a>
 <a href="#86" id="86">86</a>
 <a href="#87" id="87">87</a>
+<a href="#88" id="88">88</a>
+<a href="#89" id="89">89</a>
 </pre><pre class="rust"><code><span class="kw">use </span>arrow2_convert::{ArrowDeserialize, ArrowField, ArrowSerialize};
 
 <span class="kw">use crate</span>::{msg_bundle::Component, ComponentName};
@@ -147,6 +149,7 @@
     }
 
     <span class="doccomment">/// A shortened string representation of the message id.
+    </span><span class="attr">#[inline]
     </span><span class="kw">pub fn </span>short_string(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; String {
         <span class="comment">// We still want this to look like a part of the full message id (i.e. what is printed on std::fmt::Display).
         // Per Thread randomness plus increment is in the last part, so show only that.
@@ -157,7 +160,8 @@
 }
 
 <span class="kw">impl </span>Component <span class="kw">for </span>MsgId {
-    <span class="kw">fn </span>name() -&gt; ComponentName {
+    <span class="attr">#[inline]
+    </span><span class="kw">fn </span>name() -&gt; ComponentName {
         <span class="string">&quot;rerun.msg_id&quot;</span>.into()
     }
 }

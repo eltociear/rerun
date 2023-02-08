@@ -99,6 +99,18 @@
 <a href="#99" id="99">99</a>
 <a href="#100" id="100">100</a>
 <a href="#101" id="101">101</a>
+<a href="#102" id="102">102</a>
+<a href="#103" id="103">103</a>
+<a href="#104" id="104">104</a>
+<a href="#105" id="105">105</a>
+<a href="#106" id="106">106</a>
+<a href="#107" id="107">107</a>
+<a href="#108" id="108">108</a>
+<a href="#109" id="109">109</a>
+<a href="#110" id="110">110</a>
+<a href="#111" id="111">111</a>
+<a href="#112" id="112">112</a>
+<a href="#113" id="113">113</a>
 </pre><pre class="rust"><code><span class="kw">use </span>arrow2::{array::PrimitiveArray, datatypes::DataType};
 <span class="kw">use </span>arrow2_convert::{
     arrow_enable_vec_for_type,
@@ -128,27 +140,37 @@
 </span><span class="attr">#[derive(Copy, Clone, Debug, PartialEq)]
 #[cfg_attr(feature = <span class="string">&quot;serde&quot;</span>, derive(serde::Deserialize, serde::Serialize))]
 </span><span class="kw">pub struct </span>Box3D {
-    x: f32,
-    y: f32,
-    z: f32,
+    <span class="kw">pub </span>x: f32,
+    <span class="kw">pub </span>y: f32,
+    <span class="kw">pub </span>z: f32,
+}
+
+<span class="kw">impl </span>Box3D {
+    <span class="attr">#[inline]
+    </span><span class="kw">pub fn </span>new(x: f32, y: f32, z: f32) -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{ x, y, z }
+    }
 }
 
 <span class="kw">impl </span>Component <span class="kw">for </span>Box3D {
-    <span class="kw">fn </span>name() -&gt; <span class="kw">crate</span>::ComponentName {
+    <span class="attr">#[inline]
+    </span><span class="kw">fn </span>name() -&gt; <span class="kw">crate</span>::ComponentName {
         <span class="string">&quot;rerun.box3d&quot;</span>.into()
     }
 }
 
 <span class="attr">#[cfg(feature = <span class="string">&quot;glam&quot;</span>)]
 </span><span class="kw">impl </span>From&lt;Box3D&gt; <span class="kw">for </span>glam::Vec3 {
-    <span class="kw">fn </span>from(b: Box3D) -&gt; <span class="self">Self </span>{
+    <span class="attr">#[inline]
+    </span><span class="kw">fn </span>from(b: Box3D) -&gt; <span class="self">Self </span>{
         <span class="self">Self</span>::new(b.x, b.y, b.z)
     }
 }
 
 <span class="attr">#[cfg(feature = <span class="string">&quot;glam&quot;</span>)]
 </span><span class="kw">impl </span>From&lt;glam::Vec3&gt; <span class="kw">for </span>Box3D {
-    <span class="kw">fn </span>from(v: glam::Vec3) -&gt; <span class="self">Self </span>{
+    <span class="attr">#[inline]
+    </span><span class="kw">fn </span>from(v: glam::Vec3) -&gt; <span class="self">Self </span>{
         <span class="kw">let </span>(x, y, z) = v.into();
         <span class="self">Self </span>{ x, y, z }
     }
@@ -158,7 +180,9 @@
 
 <span class="kw">impl </span>ArrowField <span class="kw">for </span>Box3D {
     <span class="kw">type </span>Type = <span class="self">Self</span>;
-    <span class="kw">fn </span>data_type() -&gt; DataType {
+
+    <span class="attr">#[inline]
+    </span><span class="kw">fn </span>data_type() -&gt; DataType {
         &lt;FixedSizeVec&lt;f32, <span class="number">3</span>&gt; <span class="kw">as </span>ArrowField&gt;::data_type()
     }
 }

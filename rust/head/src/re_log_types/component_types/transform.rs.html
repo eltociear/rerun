@@ -442,7 +442,6 @@
     /// [see definition of intrinsic matrix](https://en.wikipedia.org/wiki/Camera_resectioning#Intrinsic_parameters)
     </span><span class="attr">#[cfg(feature = <span class="string">&quot;glam&quot;</span>)]
     #[inline]
-    #[cfg(feature = <span class="string">&quot;glam&quot;</span>)]
     </span><span class="kw">pub fn </span>principal_point(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; glam::Vec2 {
         glam::vec2(<span class="self">self</span>.image_from_cam[<span class="number">2</span>][<span class="number">0</span>], <span class="self">self</span>.image_from_cam[<span class="number">2</span>][<span class="number">1</span>])
     }
@@ -505,7 +504,8 @@
 }
 
 <span class="kw">impl </span>Component <span class="kw">for </span>Transform {
-    <span class="kw">fn </span>name() -&gt; <span class="kw">crate</span>::ComponentName {
+    <span class="attr">#[inline]
+    </span><span class="kw">fn </span>name() -&gt; <span class="kw">crate</span>::ComponentName {
         <span class="string">&quot;rerun.transform&quot;</span>.into()
     }
 }

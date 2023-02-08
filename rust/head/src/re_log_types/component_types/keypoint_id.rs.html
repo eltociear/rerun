@@ -30,6 +30,7 @@
 <a href="#30" id="30">30</a>
 <a href="#31" id="31">31</a>
 <a href="#32" id="32">32</a>
+<a href="#33" id="33">33</a>
 </pre><pre class="rust"><code><span class="kw">use </span>arrow2_convert::{ArrowDeserialize, ArrowField, ArrowSerialize};
 
 <span class="kw">use </span><span class="kw">crate</span>::msg_bundle::Component;
@@ -58,7 +59,8 @@
 </span><span class="kw">pub struct </span>KeypointId(<span class="kw">pub </span>u16);
 
 <span class="kw">impl </span>Component <span class="kw">for </span>KeypointId {
-    <span class="kw">fn </span>name() -&gt; <span class="kw">crate</span>::ComponentName {
+    <span class="attr">#[inline]
+    </span><span class="kw">fn </span>name() -&gt; <span class="kw">crate</span>::ComponentName {
         <span class="string">&quot;rerun.keypoint_id&quot;</span>.into()
     }
 }
