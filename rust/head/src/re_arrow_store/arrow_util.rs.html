@@ -653,8 +653,8 @@
 
     <span class="comment">// Colors don&#39;t need polars cleaning
     </span><span class="kw">let </span>bundle: ComponentBundle = build_some_colors(<span class="number">5</span>).try_into().unwrap();
-    <span class="kw">let </span>cleaned = bundle.value().clean_for_polars();
-    <span class="macro">assert_eq!</span>(bundle.value(), cleaned);
+    <span class="kw">let </span>cleaned = bundle.value_boxed().clean_for_polars();
+    <span class="macro">assert_eq!</span>(bundle.value_boxed(), cleaned);
 }
 
 <span class="attr">#[test]
@@ -669,7 +669,7 @@
 
     <span class="kw">let </span>bundle: ComponentBundle = transforms.try_into().unwrap();
     <span class="macro">assert_eq!</span>(
-        <span class="kw-2">*</span>bundle.value().data_type(),
+        <span class="kw-2">*</span>bundle.value_boxed().data_type(),
         DataType::List(Box::new(Field::new(
             <span class="string">&quot;item&quot;</span>,
             DataType::Union(
@@ -727,7 +727,7 @@
         </span>)))
     );
 
-    <span class="kw">let </span>cleaned = bundle.value().clean_for_polars();
+    <span class="kw">let </span>cleaned = bundle.value_boxed().clean_for_polars();
 
     <span class="macro">assert_eq!</span>(
         <span class="kw-2">*</span>cleaned.data_type(),

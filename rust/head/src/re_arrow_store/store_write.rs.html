@@ -1246,9 +1246,6 @@
 <a href="#1246" id="1246">1246</a>
 <a href="#1247" id="1247">1247</a>
 <a href="#1248" id="1248">1248</a>
-<a href="#1249" id="1249">1249</a>
-<a href="#1250" id="1250">1250</a>
-<a href="#1251" id="1251">1251</a>
 </pre><pre class="rust"><code><span class="kw">use </span>arrow2::{
     array::{new_empty_array, Array, ListArray, UInt64Array},
     datatypes::DataType,
@@ -1459,7 +1456,7 @@
             .iter()
             .filter(|bundle| bundle.name() != <span class="self">self</span>.cluster_key)
         {
-            <span class="kw">let </span>(name, rows) = (bundle.name(), bundle.value());
+            <span class="kw">let </span>(name, rows) = (bundle.name(), bundle.value_list());
 
             <span class="comment">// Unwrapping a ListArray is somewhat costly, especially considering we&#39;re just
             // gonna rewrap it again in a minute... so we&#39;d rather just slice it to a list of
@@ -1471,7 +1468,7 @@
             // So use the fact that `rows` is always of unit-length for now.
             </span><span class="kw">let </span>rows_single = rows;
 
-            <span class="kw">let </span>nb_instances = rows_single.get_child_length(<span class="number">0</span>);
+            <span class="kw">let </span>nb_instances = rows_single.offsets().lengths().next().unwrap();
             <span class="kw">if </span>nb_instances != cluster_len {
                 <span class="kw">return </span><span class="prelude-val">Err</span>(WriteError::MismatchedInstances {
                     cluster_comp: <span class="self">self</span>.cluster_key,
@@ -1491,7 +1488,7 @@
                     )
                 });
 
-            <span class="kw">let </span>row_idx = table.push(rows_single.as_ref());
+            <span class="kw">let </span>row_idx = table.push(rows_single);
             row_indices.insert(name, row_idx);
         }
 
@@ -1531,7 +1528,7 @@
             .iter()
             .filter(|bundle| bundle.name() != <span class="self">self</span>.cluster_key)
         {
-            <span class="kw">let </span>(name, rows) = (bundle.name(), bundle.value());
+            <span class="kw">let </span>(name, rows) = (bundle.name(), bundle.value_list());
 
             <span class="comment">// Unwrapping a ListArray is somewhat costly, especially considering we&#39;re just
             // gonna rewrap it again in a minute... so we&#39;d rather just slice it to a list of
@@ -1544,7 +1541,7 @@
             </span><span class="kw">let </span>rows_single = rows;
 
             <span class="comment">// TODO(#440): support for splats
-            </span><span class="kw">let </span>nb_instances = rows_single.get_child_length(<span class="number">0</span>);
+            </span><span class="kw">let </span>nb_instances = rows_single.offsets().lengths().next().unwrap();
             <span class="kw">if </span>nb_instances != cluster_len {
                 <span class="kw">return </span><span class="prelude-val">Err</span>(WriteError::MismatchedInstances {
                     cluster_comp: <span class="self">self</span>.cluster_key,
@@ -1561,7 +1558,7 @@
                 )
             });
 
-            <span class="kw">let </span>row_idx = table.push(<span class="kw-2">&amp;</span><span class="self">self</span>.config, time_point, rows_single.as_ref());
+            <span class="kw">let </span>row_idx = table.push(<span class="kw-2">&amp;</span><span class="self">self</span>.config, time_point, rows_single);
             row_indices.insert(name, row_idx);
         }
 
@@ -1583,10 +1580,10 @@
     ) -&gt; WriteResult&lt;(RowIndex, usize)&gt; {
         <span class="macro">crate::profile_function!</span>();
 
-        <span class="kw">enum </span>ClusterData {
+        <span class="kw">enum </span>ClusterData&lt;<span class="lifetime">&#39;a</span>&gt; {
             Cached(RowIndex),
             GenData(Box&lt;<span class="kw">dyn </span>Array&gt;),
-            UserData(Box&lt;<span class="kw">dyn </span>Array&gt;),
+            UserData(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>ListArray&lt;i32&gt;),
         }
 
         <span class="kw">let </span>(cluster_len, cluster_data) = <span class="kw">if let </span><span class="prelude-val">Some</span>(cluster_comp_pos) = cluster_comp_pos {
@@ -1606,10 +1603,7 @@
                 <span class="kw">return </span><span class="prelude-val">Err</span>(WriteError::InvalidClusteringComponent(data.clone()));
             }
 
-            (
-                len,
-                ClusterData::UserData(cluster_comp.value().to_boxed() <span class="comment">/* shallow */</span>),
-            )
+            (len, ClusterData::UserData(cluster_comp.value_list()))
         } <span class="kw">else </span>{
             <span class="comment">// The caller has not specified any cluster component, and so we&#39;ll have to generate
             // one... unless we&#39;ve already generated one of this exact length in the past,
@@ -1617,9 +1611,9 @@
 
             // Use the length of any other component in the batch, they are guaranteed to all
             // share the same length at this point anyway.
-            </span><span class="kw">let </span>len = components
-                .first()
-                .map_or(<span class="number">0</span>, |comp| comp.value().get_child_length(<span class="number">0</span>));
+            </span><span class="kw">let </span>len = components.first().map_or(<span class="number">0</span>, |comp| {
+                comp.value_list().offsets().lengths().next().unwrap()
+            });
 
             <span class="kw">if let </span><span class="prelude-val">Some</span>(row_idx) = <span class="self">self</span>.cluster_comp_cache.get(<span class="kw-2">&amp;</span>len) {
                 <span class="comment">// Cache hit! Re-use that row index.
@@ -1667,7 +1661,7 @@
                                 ListArray::&lt;i32&gt;::get_child_type(data.data_type()),
                             )
                         });
-                    table.push(<span class="kw-2">&amp;*</span>data)
+                    table.push(data)
                 } <span class="kw">else </span>{
                     <span class="kw">let </span>table = <span class="self">self</span>.components.entry(<span class="self">self</span>.cluster_key).or_insert_with(|| {
                         ComponentTable::new(
@@ -1675,7 +1669,7 @@
                             ListArray::&lt;i32&gt;::get_child_type(data.data_type()),
                         )
                     });
-                    table.push(<span class="kw-2">&amp;</span><span class="self">self</span>.config, time_point, <span class="kw-2">&amp;*</span>data)
+                    table.push(<span class="kw-2">&amp;</span><span class="self">self</span>.config, time_point, data)
                 };
 
                 <span class="prelude-val">Ok</span>((row_idx, cluster_len))

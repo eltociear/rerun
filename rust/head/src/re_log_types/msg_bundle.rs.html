@@ -781,9 +781,9 @@
         <span class="self">self</span>.name
     }
 
-    <span class="doccomment">/// Get the `ComponentBundle` value, cast to a boxed `Array`.
+    <span class="doccomment">/// Get the `ComponentBundle` value as a boxed `Array`.
     </span><span class="attr">#[inline]
-    </span><span class="kw">pub fn </span>value(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Box&lt;<span class="kw">dyn </span>Array&gt; {
+    </span><span class="kw">pub fn </span>value_boxed(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Box&lt;<span class="kw">dyn </span>Array&gt; {
         <span class="self">self</span>.value.to_boxed()
     }
 
@@ -864,7 +864,7 @@
 /// ];
 /// let mut bundle = MsgBundle::new(MsgId::ZERO, EntityPath::root(), TimePoint::default(), vec![]);
 /// bundle.try_append_component(&amp;component).unwrap();
-/// println!(&quot;{:?}&quot;, &amp;bundle.components[0].value());
+/// println!(&quot;{:?}&quot;, &amp;bundle.components[0].value_boxed());
 /// ```
 ///
 /// The resultant Arrow [`arrow2::array::Array`] for the `Rect2D` component looks as follows:
@@ -999,7 +999,7 @@
 
 <span class="kw">impl </span>std::fmt::Display <span class="kw">for </span>MsgBundle {
     <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>std::fmt::Formatter&lt;<span class="lifetime">&#39;_</span>&gt;) -&gt; std::fmt::Result {
-        <span class="kw">let </span>values = <span class="self">self</span>.components.iter().map(|bundle| bundle.value());
+        <span class="kw">let </span>values = <span class="self">self</span>.components.iter().map(|bundle| bundle.value_boxed());
         <span class="kw">let </span>names = <span class="self">self</span>.components.iter().map(|bundle| bundle.name.as_str());
         <span class="kw">let </span>table = re_format::arrow::format_table(values, names);
         f.write_fmt(<span class="macro">format_args!</span>(
