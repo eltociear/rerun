@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":[["query_transform","Get the latest value of the transform"]],"struct":[["EntityProperties",""],["EntityPropertyMap","Properties for a collection of entities."],["ExtraQueryHistory","When showing an entity in the history view, add this much history to it."]]};
