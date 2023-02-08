@@ -1359,33 +1359,33 @@
 <p>A high-level overview of writing and previewing the Rerun python documentation.</p>
 <h2 id="getting-started-with-docs">Getting started with docs</h2>
 <h3 id="dependencies">Dependencies</h3>
-<p>All of the dependencies for documentation generation are captured in the requirements file:</p>
-<pre><code>pip install -r rerun_py/requirements-doc.txt
-</code></pre>
+<p>All of the dependencies for documentation generation are captured in the requirements file:
+<div class="highlight"><pre><span></span><code>pip install -r rerun_py/requirements-doc.txt
+</code></pre></div></p>
 <h3 id="serving-the-docs-locally">Serving the docs locally</h3>
 <p>The docs can be previewed locally using <code>mkdocs</code></p>
-<p>This will watch the contents of the <code>rerun_py</code> folder and refresh documentation live as files are changed.</p>
-<pre><code>mkdocs serve -f rerun_py/mkdocs.yml -w rerun_py
-</code></pre>
-<p>or</p>
-<pre><code>just serve-py-docs
-</code></pre>
+<p>This will watch the contents of the <code>rerun_py</code> folder and refresh documentation live as files are changed.
+<div class="highlight"><pre><span></span><code>mkdocs serve -f rerun_py/mkdocs.yml -w rerun_py
+</code></pre></div>
+or
+<div class="highlight"><pre><span></span><code>just serve-py-docs
+</code></pre></div></p>
 <h3 id="how-versioned-docs-are-generated-and-served">How versioned docs are generated and served</h3>
 <p>Our documentation is versioned with releases and generated via <a href="https://github.com/jimporter/mike">mike</a></p>
 <p>The documentation exists as a <a href="https://pages.github.com/">Github Pages</a> project which is hosted from the
 contents of the <code>gh-pages</code> branch.</p>
 <p><code>mike</code> updates this branch with new content as part of CI</p>
 <p>Every commit that lands to main will generate bleeding edge documentation as HEAD. Behind the scenes, a
-github action is just running:</p>
-<pre><code>mike deploy -F rerun_py/mkdocs.yml HEAD
-</code></pre>
-<p>On release, when github sees a new tag: <code>X.Y.Z</code>, the github action will instead deploy with a version tag:</p>
-<pre><code>mike deploy -F rerun_py/mkdocs.yml X.Y.Z latest
-</code></pre>
-<p>You can also locally preview the publicly hosted site with all versions, using mike:</p>
-<pre><code>mike serve -F rerun_py/mkdocs.yml
-</code></pre>
-<p>though when locally developing docs you are better off using <code>mkdocs serve</code> as described
+github action is just running:
+<div class="highlight"><pre><span></span><code>mike deploy -F rerun_py/mkdocs.yml HEAD
+</code></pre></div></p>
+<p>On release, when github sees a new tag: <code>X.Y.Z</code>, the github action will instead deploy with a version tag:
+<div class="highlight"><pre><span></span><code>mike deploy -F rerun_py/mkdocs.yml X.Y.Z latest
+</code></pre></div></p>
+<p>You can also locally preview the publicly hosted site with all versions, using mike:
+<div class="highlight"><pre><span></span><code>mike serve -F rerun_py/mkdocs.yml
+</code></pre></div>
+though when locally developing docs you are better off using <code>mkdocs serve</code> as described
 above since it will handle hot-reloading for you as you edit.</p>
 
 

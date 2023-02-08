@@ -1359,15 +1359,15 @@
   <div class="doc doc-contents ">
   
       <p>Log a perspective camera model.</p>
-<p>This logs the pinhole model that projects points from the parent (camera) space to this space (image) such that:</p>
-<pre><code>point_image_hom = child_from_parent * point_cam
+<p>This logs the pinhole model that projects points from the parent (camera) space to this space (image) such that:
+<div class="highlight"><pre><span></span><code>point_image_hom = child_from_parent * point_cam
 point_image = point_image_hom[:,1] / point_image_hom[2]
-</code></pre>
+</code></pre></div></p>
 <p>Where <code>point_image_hom</code> is the projected point in the image space expressed in homogeneous coordinates.</p>
 <h6 id="rerun.log.camera.log_pinhole--example">Example</h6>
-<pre><code>rerun.log_rigid3(&quot;world/camera&quot;, …)
+<div class="highlight"><pre><span></span><code>rerun.log_rigid3(&quot;world/camera&quot;, …)
 rerun.log_pinhole(&quot;world/camera/image&quot;, …)
-</code></pre>
+</code></pre></div>
 
   <p><strong>Parameters:</strong></p>
   <table>

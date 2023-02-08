@@ -71,7 +71,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#rerun.script_add_args" class="md-skip">
+        <a href="#rerun.script_helpers" class="md-skip">
           Skip to content
         </a>
       
@@ -462,6 +462,26 @@
       Table of contents
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#rerun.script_helpers" class="md-nav__link">
+    rerun.script_helpers
+  </a>
+  
+    <nav class="md-nav" aria-label="rerun.script_helpers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rerun.script_helpers--example" class="md-nav__link">
+    Example
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
   <a href="#rerun.script_add_args" class="md-nav__link">
@@ -1286,6 +1306,26 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#rerun.script_helpers" class="md-nav__link">
+    rerun.script_helpers
+  </a>
+  
+    <nav class="md-nav" aria-label="rerun.script_helpers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rerun.script_helpers--example" class="md-nav__link">
+    Example
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#rerun.script_add_args" class="md-nav__link">
     script_add_args()
   </a>
@@ -1323,6 +1363,47 @@
 
 
   <h1>Helpers</h1>
+
+<div class="doc doc-object doc-module">
+
+
+<a id="rerun.script_helpers"></a>
+  <div class="doc doc-contents first">
+  
+      <p>Helper functions for Rerun scripts.</p>
+<p>These helper functions can be used to wire up common Rerun features to your script CLi arguments.</p>
+<h4 id="rerun.script_helpers--example">Example</h4>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">import</span> <span class="nn">rerun</span> <span class="k">as</span> <span class="nn">rr</span>
+
+<span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+<span class="n">rr</span><span class="o">.</span><span class="n">script_add_args</span><span class="p">(</span><span class="n">parser</span><span class="p">)</span>
+<span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+<span class="n">rr</span><span class="o">.</span><span class="n">script_setup</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="s2">&quot;my_application&quot;</span><span class="p">)</span>
+<span class="c1"># ... Run your logging code here ...</span>
+<span class="n">rr</span><span class="o">.</span><span class="n">script_teardown</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+</code></pre></div>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+  </div>
+
+</div><hr />
+
 
 <div class="doc doc-object doc-function">
 

@@ -1375,10 +1375,10 @@ will be the type that is used for all future logs of that component. The API wil
 a best effort to do type conversion if supported by numpy and arrow. Any components that
 can't be converted will be dropped.</p>
 <p>If you are want to inspect how your component will be converted to the underlying
-arrow code, the following snippet is what is happening internally:</p>
-<pre><code>np_value = np.atleast_1d(np.array(value, copy=False))
+arrow code, the following snippet is what is happening internally:
+<div class="highlight"><pre><span></span><code>np_value = np.atleast_1d(np.array(value, copy=False))
 pa_value = pa.array(value)
-</code></pre>
+</code></pre></div></p>
 
   <p><strong>Parameters:</strong></p>
   <table>

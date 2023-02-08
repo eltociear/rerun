@@ -1907,15 +1907,15 @@
   <div class="doc doc-contents ">
   
       <p>Log a perspective camera model.</p>
-<p>This logs the pinhole model that projects points from the parent (camera) space to this space (image) such that:</p>
-<pre><code>point_image_hom = child_from_parent * point_cam
+<p>This logs the pinhole model that projects points from the parent (camera) space to this space (image) such that:
+<div class="highlight"><pre><span></span><code>point_image_hom = child_from_parent * point_cam
 point_image = point_image_hom[:,1] / point_image_hom[2]
-</code></pre>
+</code></pre></div></p>
 <p>Where <code>point_image_hom</code> is the projected point in the image space expressed in homogeneous coordinates.</p>
 <h6 id="rerun.log_pinhole--example">Example</h6>
-<pre><code>rerun.log_rigid3(&quot;world/camera&quot;, …)
+<div class="highlight"><pre><span></span><code>rerun.log_rigid3(&quot;world/camera&quot;, …)
 rerun.log_pinhole(&quot;world/camera/image&quot;, …)
-</code></pre>
+</code></pre></div>
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -2010,12 +2010,12 @@ rerun.log_pinhole(&quot;world/camera/image&quot;, …)
   RGBA (vec4) value.</li>
 </ul>
 <h6 id="rerun.log_mesh--example">Example:</h6>
-<pre><code># A simple red triangle:
+<div class="highlight"><pre><span></span><code># A simple red triangle:
 positions = np.array([0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0])
 indices = np.array([0, 1, 2])
 normals = np.array([0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0])
 albedo_factor = np.array([1.0, 0.0, 0.0])
-</code></pre>
+</code></pre></div>
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -2128,13 +2128,13 @@ This is for instance useful for camera entities ("what axis is forward?").</p>
 <li>"RUF": X=Right Y=Up   Z=Forward  (left-handed)</li>
 </ul>
 <h6 id="rerun.log_view_coordinates--example">Example</h6>
-<pre><code>rerun.log_view_coordinates(&quot;world/camera&quot;, xyz=&quot;RUB&quot;)
-</code></pre>
+<div class="highlight"><pre><span></span><code>rerun.log_view_coordinates(&quot;world/camera&quot;, xyz=&quot;RUB&quot;)
+</code></pre></div>
 <p>For world-coordinates it's often convenient to just specify an up-axis.
 You can do so by using the <code>up</code>-parameter (where <code>up</code> is one of "+X", "-X", "+Y", "-Y", "+Z", "-Z"):</p>
-<pre><code>rerun.log_view_coordinates(&quot;world&quot;, up=&quot;+Z&quot;, right_handed=True, timeless=True)
+<div class="highlight"><pre><span></span><code>rerun.log_view_coordinates(&quot;world&quot;, up=&quot;+Z&quot;, right_handed=True, timeless=True)
 rerun.log_view_coordinates(&quot;world&quot;, up=&quot;-Y&quot;, right_handed=False, timeless=True)
-</code></pre>
+</code></pre></div>
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -2316,11 +2316,11 @@ will be inferred in turn!</p>
 <li>Each entity path within a space that contains scalar data is a line within that plot.</li>
 <li>Each logged scalar is a point.</li>
 </ul>
-<p>E.g. the following:</p>
-<pre><code>rerun.log_scalar(&quot;trig/sin&quot;, sin(t), label=&quot;sin(t)&quot;, color=RED)
+<p>E.g. the following:
+<div class="highlight"><pre><span></span><code>rerun.log_scalar(&quot;trig/sin&quot;, sin(t), label=&quot;sin(t)&quot;, color=RED)
 rerun.log_scalar(&quot;trig/cos&quot;, cos(t), label=&quot;cos(t)&quot;, color=BLUE)
-</code></pre>
-<p>will yield a single plot (space = <code>trig</code>), comprised of two lines
+</code></pre></div>
+will yield a single plot (space = <code>trig</code>), comprised of two lines
 (entity paths <code>trig/sin</code> and <code>trig/cos</code>).</p>
 
   <p><strong>Parameters:</strong></p>
@@ -2564,12 +2564,12 @@ The tip is rendered as a cone with <code>height = 2.0 * width_scale</code> and <
   
       <p>Log a 3D path.</p>
 <p>A path is a list of points connected by line segments. It can be used to draw approximations of smooth curves.</p>
-<p>The points will be connected in order, like so:</p>
-<pre><code>       2------3     5
+<p>The points will be connected in order, like so:
+<div class="highlight"><pre><span></span><code>       2------3     5
       /        \   /
 0----1          \ /
                  4
-</code></pre>
+</code></pre></div></p>
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -3182,12 +3182,12 @@ See <a class="autorefs autorefs-internal" href="#rerun.log_annotation_context">r
       <p>Log the contents of a mesh file (.gltf, .glb, .obj, …).</p>
 <p><code>transform</code> is an optional 3x4 affine transform matrix applied to the mesh.</p>
 <h6 id="rerun.log_mesh_file--example">Example:</h6>
-<pre><code># Move mesh 10 units along the X axis.
+<div class="highlight"><pre><span></span><code># Move mesh 10 units along the X axis.
 transform=np.array([
     [1, 0, 0, 10],
     [0, 1, 0, 0],
     [0, 0, 1, 0]])
-</code></pre>
+</code></pre></div>
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -3338,10 +3338,10 @@ will be the type that is used for all future logs of that component. The API wil
 a best effort to do type conversion if supported by numpy and arrow. Any components that
 can't be converted will be dropped.</p>
 <p>If you are want to inspect how your component will be converted to the underlying
-arrow code, the following snippet is what is happening internally:</p>
-<pre><code>np_value = np.atleast_1d(np.array(value, copy=False))
+arrow code, the following snippet is what is happening internally:
+<div class="highlight"><pre><span></span><code>np_value = np.atleast_1d(np.array(value, copy=False))
 pa_value = pa.array(value)
-</code></pre>
+</code></pre></div></p>
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -3564,12 +3564,12 @@ your entity.</p>
 be used for matching the class and may optionally include a label and color.
 Colors should either be in 0-255 gamma space or in 0-1 linear space. Colors
 can be RGB or RGBA.</p>
-<p>These can either be specified verbosely as:</p>
-<pre><code>[AnnotationInfo(id=23, label='foo', color=(255, 0, 0)), ...]
-</code></pre>
-<p>Or using short-hand tuples.</p>
-<pre><code>[(23, 'bar'), ...]
-</code></pre>
+<p>These can either be specified verbosely as:
+<div class="highlight"><pre><span></span><code>[AnnotationInfo(id=23, label=&#39;foo&#39;, color=(255, 0, 0)), ...]
+</code></pre></div></p>
+<p>Or using short-hand tuples.
+<div class="highlight"><pre><span></span><code>[(23, &#39;bar&#39;), ...]
+</code></pre></div></p>
 <p>Unspecified colors will be filled in by the visualizer randomly.</p>
 
   <p><strong>Parameters:</strong></p>
@@ -3782,11 +3782,11 @@ you have millimeter precision and a range of up to ~65 meters (2^16 / 1000).</p>
   
       <p>Log many 2D or 3D line segments.</p>
 <p>The points will be connected in even-odd pairs, like so:</p>
-<pre><code>       2------3     5
+<div class="highlight"><pre><span></span><code>       2------3     5
                    /
 0----1            /
                  4
-</code></pre>
+</code></pre></div>
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -3978,9 +3978,9 @@ The resulting transform from child to parent corresponds to taking a point in th
 rotating it by the given rotations, and then translating it by the given translation:</p>
 <p><code>point_parent = translation + quat * point_child * quat*</code></p>
 <h6 id="rerun.log_rigid3--example">Example</h6>
-<pre><code>rerun.log_rigid3(&quot;world/camera&quot;, parent_from_child=(t,q))
+<div class="highlight"><pre><span></span><code>rerun.log_rigid3(&quot;world/camera&quot;, parent_from_child=(t,q))
 rerun.log_pinhole(&quot;world/camera/image&quot;, …)
-</code></pre>
+</code></pre></div>
 
   <p><strong>Parameters:</strong></p>
   <table>

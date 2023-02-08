@@ -1327,11 +1327,11 @@ will be inferred in turn!</p>
 <li>Each entity path within a space that contains scalar data is a line within that plot.</li>
 <li>Each logged scalar is a point.</li>
 </ul>
-<p>E.g. the following:</p>
-<pre><code>rerun.log_scalar(&quot;trig/sin&quot;, sin(t), label=&quot;sin(t)&quot;, color=RED)
+<p>E.g. the following:
+<div class="highlight"><pre><span></span><code>rerun.log_scalar(&quot;trig/sin&quot;, sin(t), label=&quot;sin(t)&quot;, color=RED)
 rerun.log_scalar(&quot;trig/cos&quot;, cos(t), label=&quot;cos(t)&quot;, color=BLUE)
-</code></pre>
-<p>will yield a single plot (space = <code>trig</code>), comprised of two lines
+</code></pre></div>
+will yield a single plot (space = <code>trig</code>), comprised of two lines
 (entity paths <code>trig/sin</code> and <code>trig/cos</code>).</p>
 
   <p><strong>Parameters:</strong></p>

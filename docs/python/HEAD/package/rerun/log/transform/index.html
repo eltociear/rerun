@@ -1407,13 +1407,13 @@ This is for instance useful for camera entities ("what axis is forward?").</p>
 <li>"RUF": X=Right Y=Up   Z=Forward  (left-handed)</li>
 </ul>
 <h6 id="rerun.log.transform.log_view_coordinates--example">Example</h6>
-<pre><code>rerun.log_view_coordinates(&quot;world/camera&quot;, xyz=&quot;RUB&quot;)
-</code></pre>
+<div class="highlight"><pre><span></span><code>rerun.log_view_coordinates(&quot;world/camera&quot;, xyz=&quot;RUB&quot;)
+</code></pre></div>
 <p>For world-coordinates it's often convenient to just specify an up-axis.
 You can do so by using the <code>up</code>-parameter (where <code>up</code> is one of "+X", "-X", "+Y", "-Y", "+Z", "-Z"):</p>
-<pre><code>rerun.log_view_coordinates(&quot;world&quot;, up=&quot;+Z&quot;, right_handed=True, timeless=True)
+<div class="highlight"><pre><span></span><code>rerun.log_view_coordinates(&quot;world&quot;, up=&quot;+Z&quot;, right_handed=True, timeless=True)
 rerun.log_view_coordinates(&quot;world&quot;, up=&quot;-Y&quot;, right_handed=False, timeless=True)
-</code></pre>
+</code></pre></div>
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -1522,9 +1522,9 @@ The resulting transform from child to parent corresponds to taking a point in th
 rotating it by the given rotations, and then translating it by the given translation:</p>
 <p><code>point_parent = translation + quat * point_child * quat*</code></p>
 <h6 id="rerun.log.transform.log_rigid3--example">Example</h6>
-<pre><code>rerun.log_rigid3(&quot;world/camera&quot;, parent_from_child=(t,q))
+<div class="highlight"><pre><span></span><code>rerun.log_rigid3(&quot;world/camera&quot;, parent_from_child=(t,q))
 rerun.log_pinhole(&quot;world/camera/image&quot;, …)
-</code></pre>
+</code></pre></div>
 
   <p><strong>Parameters:</strong></p>
   <table>

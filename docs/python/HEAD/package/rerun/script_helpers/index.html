@@ -1365,16 +1365,16 @@
       <p>Helper functions for Rerun scripts.</p>
 <p>These helper functions can be used to wire up common Rerun features to your script CLi arguments.</p>
 <h5 id="rerun.script_helpers--example">Example</h5>
-<pre><code class="language-python">import argparse
-import rerun as rr
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">import</span> <span class="nn">rerun</span> <span class="k">as</span> <span class="nn">rr</span>
 
-parser = argparse.ArgumentParser()
-rr.script_add_args(parser)
-args = parser.parse_args()
-rr.script_setup(args, &quot;my_application&quot;)
-# ... Run your logging code here ...
-rr.script_teardown(args)
-</code></pre>
+<span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+<span class="n">rr</span><span class="o">.</span><span class="n">script_add_args</span><span class="p">(</span><span class="n">parser</span><span class="p">)</span>
+<span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+<span class="n">rr</span><span class="o">.</span><span class="n">script_setup</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="s2">&quot;my_application&quot;</span><span class="p">)</span>
+<span class="c1"># ... Run your logging code here ...</span>
+<span class="n">rr</span><span class="o">.</span><span class="n">script_teardown</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+</code></pre></div>
 
   
 

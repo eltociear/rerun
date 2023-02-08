@@ -1450,17 +1450,17 @@
   
       <p>Transform color values from linear [0.0, 1.0] to gamma encoded [0, 255].</p>
 <p>Linear colors are expected to have dtype <a class="autorefs autorefs-external" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.floating">numpy.floating</a></p>
-<p>Intended to implement the following per color value:</p>
-<pre><code class="language-Rust">if l &lt;= 0.0 {
-    0
-} else if l &lt;= 0.0031308 {
-    round(3294.6 * l)
-} else if l &lt;= 1.0 {
-    round(269.025 * l.powf(1.0 / 2.4) - 14.025)
-} else {
-    255
-}
-</code></pre>
+<p>Intended to implement the following per color value:
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="n">l</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mf">0.0</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="mi">0</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">l</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mf">0.0031308</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">round</span><span class="p">(</span><span class="mf">3294.6</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">l</span><span class="p">)</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">l</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mf">1.0</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">round</span><span class="p">(</span><span class="mf">269.025</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">l</span><span class="p">.</span><span class="n">powf</span><span class="p">(</span><span class="mf">1.0</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">2.4</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">14.025</span><span class="p">)</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="mi">255</span>
+<span class="p">}</span>
+</code></pre></div></p>
 
   <p><strong>Parameters:</strong></p>
   <table>
