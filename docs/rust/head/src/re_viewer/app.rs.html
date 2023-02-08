@@ -2237,7 +2237,7 @@
 
             <span class="kw">while let </span><span class="prelude-val">Ok</span>(msg) = rx.try_recv() {
                 <span class="kw">if let </span>LogMsg::BeginRecordingMsg(msg) = <span class="kw-2">&amp;</span>msg {
-                    <span class="macro">re_log::info!</span>(<span class="string">&quot;Beginning a new recording: {:?}&quot;</span>, msg.info);
+                    <span class="macro">re_log::debug!</span>(<span class="string">&quot;Beginning a new recording: {:?}&quot;</span>, msg.info);
                     <span class="self">self</span>.state.selected_rec_id = msg.info.recording_id;
 
                     <span class="attr">#[cfg(all(not(target_arch = <span class="string">&quot;wasm32&quot;</span>), feature = <span class="string">&quot;analytics&quot;</span>))]

@@ -302,6 +302,20 @@
 <a href="#302" id="302">302</a>
 <a href="#303" id="303">303</a>
 <a href="#304" id="304">304</a>
+<a href="#305" id="305">305</a>
+<a href="#306" id="306">306</a>
+<a href="#307" id="307">307</a>
+<a href="#308" id="308">308</a>
+<a href="#309" id="309">309</a>
+<a href="#310" id="310">310</a>
+<a href="#311" id="311">311</a>
+<a href="#312" id="312">312</a>
+<a href="#313" id="313">313</a>
+<a href="#314" id="314">314</a>
+<a href="#315" id="315">315</a>
+<a href="#316" id="316">316</a>
+<a href="#317" id="317">317</a>
+<a href="#318" id="318">318</a>
 </pre><pre class="rust"><code><span class="doccomment">//! TODO(emilk): use tokio instead
 
 </span><span class="kw">use </span>std::time::Instant;
@@ -317,12 +331,16 @@
     <span class="doccomment">/// If the latency in the [`LogMsg`] channel is greater than this,
     /// then start dropping messages in order to keep up.
     </span><span class="kw">pub </span>max_latency_sec: f32,
+
+    <span class="doccomment">/// Turns `info`-level logs into `debug`-level logs.
+    </span><span class="kw">pub </span>quiet: bool,
 }
 
 <span class="kw">impl </span>Default <span class="kw">for </span>ServerOptions {
     <span class="kw">fn </span>default() -&gt; <span class="self">Self </span>{
         <span class="self">Self </span>{
             max_latency_sec: f32::INFINITY,
+            quiet: <span class="bool-val">false</span>,
         }
     }
 }
@@ -359,9 +377,15 @@
         })
         .expect(<span class="string">&quot;Failed to spawn thread&quot;</span>);
 
-    <span class="macro">re_log::info!</span>(
-        <span class="string">&quot;Hosting a SDK server over TCP at {bind_addr}. Connect with the Rerun logging SDK.&quot;
-    </span>);
+    <span class="kw">if </span>options.quiet {
+        <span class="macro">re_log::debug!</span>(
+            <span class="string">&quot;Hosting a SDK server over TCP at {bind_addr}. Connect with the Rerun logging SDK.&quot;
+        </span>);
+    } <span class="kw">else </span>{
+        <span class="macro">re_log::info!</span>(
+            <span class="string">&quot;Hosting a SDK server over TCP at {bind_addr}. Connect with the Rerun logging SDK.&quot;
+        </span>);
+    }
 
     <span class="prelude-val">Ok</span>(rx)
 }
@@ -373,7 +397,11 @@
             stream.peer_addr()
         ))
         .spawn(<span class="kw">move </span>|| {
-            <span class="macro">re_log::info!</span>(<span class="string">&quot;New SDK client connected: {:?}&quot;</span>, stream.peer_addr());
+            <span class="kw">if </span>options.quiet {
+                <span class="macro">re_log::debug!</span>(<span class="string">&quot;New SDK client connected: {:?}&quot;</span>, stream.peer_addr());
+            } <span class="kw">else </span>{
+                <span class="macro">re_log::info!</span>(<span class="string">&quot;New SDK client connected: {:?}&quot;</span>, stream.peer_addr());
+            }
 
             <span class="kw">if let </span><span class="prelude-val">Err</span>(err) = run_client(stream, <span class="kw-2">&amp;</span>tx, options) {
                 <span class="macro">re_log::warn!</span>(<span class="string">&quot;Closing connection to client: {err}&quot;</span>);
