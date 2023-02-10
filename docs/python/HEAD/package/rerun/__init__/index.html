@@ -2190,7 +2190,7 @@ albedo_factor = np.array([1.0, 0.0, 0.0])
       <p>Log the view coordinates for an entity.</p>
 <p>Each entity defines its own coordinate system, called a space.
 By logging view coordinates you can give semantic meaning to the XYZ axes of the space.
-This is for instance useful for camera entities ("what axis is forward?").</p>
+This is for example useful for camera entities ("what axis is forward?").</p>
 <p>For full control, set the <code>xyz</code> parameter to a three-letter acronym (<code>xyz="RDF"</code>). Each letter represents:</p>
 <ul>
 <li>R: Right</li>
@@ -4440,7 +4440,7 @@ See <a class="autorefs autorefs-internal" href="#rerun.log_annotation_context">r
           </td>
           <td><p>Your Rerun recordings will be categorized by this application id, so
 try to pick a unique one for each application that uses the Rerun SDK.</p>
-<p>For instance, if you have one application doing object detection
+<p>For example, if you have one application doing object detection
 and another doing camera calibration, you could have
 <code>rerun.init("object_detector")</code> and <code>rerun.init("calibrator")</code>.</p></td>
           <td>
@@ -4795,7 +4795,7 @@ Just call this once at the start of your program.</p>
 
 
 <h4 id="rerun.serve" class="doc doc-heading">
-<code class="highlight language-python"><span class="k">def</span> <span class="nf">serve</span><span class="p">()</span></code>
+<code class="highlight language-python"><span class="k">def</span> <span class="nf">serve</span><span class="p">(</span><span class="n">open_browser</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code>
 
 </h4>
 
@@ -4804,6 +4804,30 @@ Just call this once at the start of your program.</p>
   
       <p>Serve a Rerun Web Viewer.</p>
 <p>WARNING: This is an experimental feature.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>open_browser</code></td>
+          <td>
+                <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></code>
+          </td>
+          <td><p>Open the default browser to the viewer.</p></td>
+          <td>
+                <code>True</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
 
   </div>
 
@@ -4907,7 +4931,7 @@ Just call this once at the start of your program.</p>
       <p>Set the current time for this thread as an integer sequence.</p>
 <p>Used for all subsequent logging on the same thread,
 until the next call to <code>set_time_sequence</code>.</p>
-<p>For instance: <code>set_time_sequence("frame_nr", frame_nr)</code>.</p>
+<p>For example: <code>set_time_sequence("frame_nr", frame_nr)</code>.</p>
 <p>You can remove a timeline again using <code>set_time_sequence("frame_nr", None)</code>.</p>
 <p>There is no requirement of monoticity. You can move the time backwards if you like.</p>
 
@@ -4964,7 +4988,7 @@ until the next call to <code>set_time_sequence</code>.</p>
       <p>Set the current time for this thread in seconds.</p>
 <p>Used for all subsequent logging on the same thread,
 until the next call to <code>set_time_seconds</code>.</p>
-<p>For instance: <code>set_time_seconds("capture_time", seconds_since_unix_epoch)</code>.</p>
+<p>For example: <code>set_time_seconds("capture_time", seconds_since_unix_epoch)</code>.</p>
 <p>You can remove a timeline again using <code>set_time_seconds("capture_time", None)</code>.</p>
 <p>The argument should be in seconds, and should be measured either from the
 unix epoch (1970-01-01), or from some recent time (e.g. your program startup).</p>
@@ -5025,7 +5049,7 @@ since unix epoch.</p>
       <p>Set the current time for this thread.</p>
 <p>Used for all subsequent logging on the same thread,
 until the next call to <code>set_time_nanos</code>.</p>
-<p>For instance: <code>set_time_nanos("capture_time", nanos_since_unix_epoch)</code>.</p>
+<p>For example: <code>set_time_nanos("capture_time", nanos_since_unix_epoch)</code>.</p>
 <p>You can remove a timeline again using <code>set_time_nanos("capture_time", None)</code>.</p>
 <p>The argument should be in nanoseconds, and should be measured either from the
 unix epoch (1970-01-01), or from some recent time (e.g. your program startup).</p>
