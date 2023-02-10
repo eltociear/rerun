@@ -418,6 +418,17 @@
 <a href="#418" id="418">418</a>
 <a href="#419" id="419">419</a>
 <a href="#420" id="420">420</a>
+<a href="#421" id="421">421</a>
+<a href="#422" id="422">422</a>
+<a href="#423" id="423">423</a>
+<a href="#424" id="424">424</a>
+<a href="#425" id="425">425</a>
+<a href="#426" id="426">426</a>
+<a href="#427" id="427">427</a>
+<a href="#428" id="428">428</a>
+<a href="#429" id="429">429</a>
+<a href="#430" id="430">430</a>
+<a href="#431" id="431">431</a>
 </pre><pre class="rust"><code><span class="kw">use </span>std::sync::Arc;
 
 <span class="kw">use </span>arrow2::array::{FixedSizeBinaryArray, MutableFixedSizeBinaryArray};
@@ -510,8 +521,10 @@
 </span><span class="kw">pub enum </span>RawMeshError {
     <span class="attr">#[error(<span class="string">&quot;Positions array length must be divisible by 3 (triangle list), got {0}&quot;</span>)]
     </span>PositionsNotDivisibleBy3(usize),
+
     <span class="attr">#[error(<span class="string">&quot;Indices array length must be divisible by 3 (triangle list), got {0}&quot;</span>)]
     </span>IndicesNotDivisibleBy3(usize),
+
     <span class="attr">#[error(
         <span class="string">&quot;Positions &amp; normals array must have the same length, \
         got positions={0} vs. normals={1}&quot;
@@ -555,11 +568,13 @@
     /// Meshes are always triangle lists, i.e. the length of this vector should always be
     /// divisible by 3.
     </span><span class="kw">pub </span>positions: Vec&lt;f32&gt;,
+
     <span class="doccomment">/// Optionally, the flattened indices array for this mesh.
     ///
     /// Meshes are always triangle lists, i.e. the length of this vector should always be
     /// divisible by 3.
     </span><span class="kw">pub </span>indices: <span class="prelude-ty">Option</span>&lt;Vec&lt;u32&gt;&gt;,
+
     <span class="doccomment">/// Optionally, the flattened normals array for this mesh.
     ///
     /// If specified, this must match the length of `Self::positions`.
@@ -639,8 +654,11 @@
 #[cfg_attr(feature = <span class="string">&quot;serde&quot;</span>, derive(serde::Deserialize, serde::Serialize))]
 </span><span class="kw">pub struct </span>EncodedMesh3D {
     <span class="kw">pub </span>mesh_id: MeshId,
+
     <span class="kw">pub </span>format: MeshFormat,
+
     <span class="kw">pub </span>bytes: Arc&lt;[u8]&gt;,
+
     <span class="doccomment">/// four columns of an affine transformation matrix
     </span><span class="kw">pub </span>transform: [[f32; <span class="number">3</span>]; <span class="number">4</span>],
 }
@@ -649,8 +667,11 @@
 </span><span class="attr">#[derive(ArrowField, ArrowSerialize, ArrowDeserialize)]
 </span><span class="kw">pub struct </span>EncodedMesh3DArrow {
     <span class="kw">pub </span>mesh_id: MeshId,
+
     <span class="kw">pub </span>format: MeshFormat,
+
     <span class="kw">pub </span>bytes: Vec&lt;u8&gt;,
+
     <span class="attr">#[arrow_field(<span class="kw">type </span>= <span class="string">&quot;arrow2_convert::field::FixedSizeVec&lt;f32, 12&gt;&quot;</span>)]
     </span><span class="kw">pub </span>transform: Vec&lt;f32&gt;,
 }
@@ -674,6 +695,7 @@
 
 <span class="kw">impl </span>TryFrom&lt;EncodedMesh3DArrow&gt; <span class="kw">for </span>EncodedMesh3D {
     <span class="kw">type </span>Error = FieldError;
+
     <span class="kw">fn </span>try_from(v: EncodedMesh3DArrow) -&gt; <span class="kw">super</span>::Result&lt;<span class="self">Self</span>&gt; {
         <span class="kw">let </span>EncodedMesh3DArrow {
             mesh_id,

@@ -812,6 +812,8 @@
 <a href="#812" id="812">812</a>
 <a href="#813" id="813">813</a>
 <a href="#814" id="814">814</a>
+<a href="#815" id="815">815</a>
+<a href="#816" id="816">816</a>
 </pre><pre class="rust"><code><span class="doccomment">//! The histogram is implemented as a tree.
 //!
 //! The branches are based on the next few bits of the key (also known as the &quot;address&quot;).
@@ -836,8 +838,10 @@
 
 </span><span class="doccomment">/// How many bits we progress in each [`BranchNode`]
 </span><span class="kw">const </span>LEVEL_STEP: u64 = <span class="number">3</span>;
+
 <span class="doccomment">/// The level used for [`DenseLeaf`].
 </span><span class="kw">const </span>BOTTOM_LEVEL: Level = <span class="number">1</span>;
+
 <span class="doccomment">/// Number of children in [`DenseLeaf`].
 </span><span class="kw">const </span>NUM_CHILDREN_IN_DENSE: u64 = <span class="number">16</span>;
 

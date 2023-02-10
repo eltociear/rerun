@@ -168,6 +168,7 @@
 <a href="#168" id="168">168</a>
 <a href="#169" id="169">169</a>
 <a href="#170" id="170">170</a>
+<a href="#171" id="171">171</a>
 </pre><pre class="rust"><code><span class="kw">use </span>std::sync::Arc;
 
 <span class="kw">use </span>slotmap::{Key, SlotMap};
@@ -186,6 +187,7 @@
     <span class="doccomment">/// Handle that is valid for a single frame
     </span>Frame {
         key: InnerHandle,
+
         <span class="doccomment">/// This handle is only valid for this frame.
         /// Querying it during any other frame will fail.
         </span>valid_frame_index: u64,

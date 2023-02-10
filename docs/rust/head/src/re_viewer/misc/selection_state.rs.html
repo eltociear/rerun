@@ -421,6 +421,9 @@
 <a href="#421" id="421">421</a>
 <a href="#422" id="422">422</a>
 <a href="#423" id="423">423</a>
+<a href="#424" id="424">424</a>
+<a href="#425" id="425">425</a>
+<a href="#426" id="426">426</a>
 </pre><pre class="rust"><code><span class="kw">use </span>ahash::{HashMap, HashSet};
 <span class="kw">use </span>nohash_hasher::IntMap;
 <span class="kw">use </span>re_data_store::{EntityPath, LogDb};
@@ -434,12 +437,15 @@
 </span><span class="kw">pub enum </span>HoveredSpace {
     <span class="attr">#[default]
     </span><span class="prelude-val">None</span>,
+
     <span class="doccomment">/// Hovering in a 2D space.
     </span>TwoD {
         space_2d: EntityPath,
+
         <span class="doccomment">/// Where in this 2D space (+ depth)?
         </span>pos: glam::Vec3,
     },
+
     <span class="doccomment">/// Hovering in a 3D space.
     </span>ThreeD {
         <span class="doccomment">/// The 3D space with the camera(s)

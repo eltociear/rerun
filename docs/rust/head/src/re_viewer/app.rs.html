@@ -1623,6 +1623,8 @@
 <a href="#1623" id="1623">1623</a>
 <a href="#1624" id="1624">1624</a>
 <a href="#1625" id="1625">1625</a>
+<a href="#1626" id="1626">1626</a>
+<a href="#1627" id="1627">1627</a>
 </pre><pre class="rust"><code><span class="kw">use </span>std::{any::Any, hash::Hash};
 
 <span class="kw">use </span>ahash::HashMap;
@@ -2796,6 +2798,7 @@
             .on_hover_text(<span class="string">&quot;CPU time used by Rerun Viewer each frame. Lower is better.&quot;</span>);
     }
 }
+
 <span class="kw">fn </span>memory_use_label_ui(ui: <span class="kw-2">&amp;mut </span>egui::Ui, gpu_resource_stats: <span class="kw-2">&amp;</span>WgpuResourcePoolStatistics) {
     <span class="kw">if let </span><span class="prelude-val">Some</span>(count) = re_memory::accounting_allocator::global_allocs() {
         <span class="comment">// we use monospace so the width doesn&#39;t fluctuate as the numbers change.
@@ -3113,6 +3116,7 @@
 
     <span class="kw">if </span>ui.button(<span class="string">&quot;panic! during unwind&quot;</span>).clicked() {
         <span class="kw">struct </span>PanicOnDrop {}
+
         <span class="kw">impl </span>Drop <span class="kw">for </span>PanicOnDrop {
             <span class="kw">fn </span>drop(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
                 <span class="macro">panic!</span>(<span class="string">&quot;Second intentional panic in Drop::drop&quot;</span>);

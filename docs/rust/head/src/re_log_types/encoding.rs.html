@@ -182,6 +182,8 @@
 <a href="#182" id="182">182</a>
 <a href="#183" id="183">183</a>
 <a href="#184" id="184">184</a>
+<a href="#185" id="185">185</a>
+<a href="#186" id="186">186</a>
 </pre><pre class="rust"><code><span class="doccomment">//! Saving/loading [`LogMsg`]:es to/from a file.
 </span><span class="kw">use </span><span class="kw">crate</span>::LogMsg;
 
@@ -252,6 +254,7 @@
 #[cfg(not(target_arch = <span class="string">&quot;wasm32&quot;</span>))]
 </span><span class="kw">impl</span>&lt;<span class="lifetime">&#39;r</span>, R: std::io::BufRead&gt; Iterator <span class="kw">for </span>Decoder&lt;<span class="lifetime">&#39;r</span>, R&gt; {
     <span class="kw">type </span>Item = anyhow::Result&lt;LogMsg&gt;;
+
     <span class="kw">fn </span>next(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>::Item&gt; {
         <span class="macro">crate::profile_function!</span>();
         <span class="kw">use </span>std::io::Read <span class="kw">as _</span>;
@@ -313,6 +316,7 @@
 #[cfg(target_arch = <span class="string">&quot;wasm32&quot;</span>)]
 </span><span class="kw">impl</span>&lt;R: std::io::Read&gt; Iterator <span class="kw">for </span>Decoder&lt;R&gt; {
     <span class="kw">type </span>Item = anyhow::Result&lt;LogMsg&gt;;
+
     <span class="kw">fn </span>next(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>::Item&gt; {
         <span class="macro">crate::profile_function!</span>();
         <span class="kw">use </span>std::io::Read <span class="kw">as _</span>;

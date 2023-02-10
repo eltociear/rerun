@@ -107,6 +107,9 @@
 <a href="#107" id="107">107</a>
 <a href="#108" id="108">108</a>
 <a href="#109" id="109">109</a>
+<a href="#110" id="110">110</a>
+<a href="#111" id="111">111</a>
+<a href="#112" id="112">112</a>
 </pre><pre class="rust"><code><span class="kw">use </span>std::{
     collections::HashMap,
     fs::File,
@@ -152,6 +155,7 @@
     <span class="doccomment">/// The path of the config file.
     </span><span class="attr">#[serde(rename = <span class="string">&quot;config_file_path&quot;</span>)]
     </span><span class="kw">pub </span>config_file_path: PathBuf,
+
     <span class="doccomment">/// The directory where pending data is stored.
     </span><span class="attr">#[serde(rename = <span class="string">&quot;data_dir_path&quot;</span>)]
     </span><span class="kw">pub </span>data_dir_path: PathBuf,
@@ -201,9 +205,11 @@
     <span class="kw">pub fn </span>config_dir(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>Path {
         <span class="self">self</span>.config_file_path.parent().unwrap()
     }
+
     <span class="kw">pub fn </span>config_file(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>Path {
         <span class="kw-2">&amp;</span><span class="self">self</span>.config_file_path
     }
+
     <span class="kw">pub fn </span>data_dir(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>Path {
         <span class="kw-2">&amp;</span><span class="self">self</span>.data_dir_path
     }

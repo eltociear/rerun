@@ -197,6 +197,7 @@
 <a href="#197" id="197">197</a>
 <a href="#198" id="198">198</a>
 <a href="#199" id="199">199</a>
+<a href="#200" id="200">200</a>
 </pre><pre class="rust"><code><span class="kw">use </span>std::{num::NonZeroU32, sync::Arc};
 
 <span class="kw">use crate</span>::{
@@ -225,6 +226,7 @@
 /// It is *not* stored along side the resulting texture resource!
 </span><span class="kw">pub struct </span>Texture2DCreationDesc&lt;<span class="lifetime">&#39;a</span>&gt; {
     <span class="kw">pub </span>label: DebugLabel,
+
     <span class="doccomment">/// Data for the highest mipmap level.
     /// Must be padded according to wgpu rules and ready for upload.
     /// TODO(andreas): This should be a kind of factory function/builder instead which gets target memory passed in.

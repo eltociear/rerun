@@ -638,6 +638,7 @@
 <a href="#638" id="638">638</a>
 <a href="#639" id="639">639</a>
 <a href="#640" id="640">640</a>
+<a href="#641" id="641">641</a>
 </pre><pre class="rust"><code><span class="kw">use </span>eframe::{emath::RectTransform, epaint::text::TextWrapping};
 <span class="kw">use </span>egui::{
     pos2, vec2, Align, Align2, Color32, NumExt <span class="kw">as _</span>, Pos2, Rect, Response, ScrollArea, Shape,
@@ -693,6 +694,7 @@
         ZoomState2D::Auto
     }
 }
+
 <span class="kw">impl </span>View2DState {
     <span class="doccomment">/// Determine the optimal sub-region and size based on the `ZoomState` and
     /// available size. This will generally be used to construct the painter and

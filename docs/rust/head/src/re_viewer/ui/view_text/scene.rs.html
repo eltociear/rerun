@@ -103,6 +103,9 @@
 <a href="#103" id="103">103</a>
 <a href="#104" id="104">104</a>
 <a href="#105" id="105">105</a>
+<a href="#106" id="106">106</a>
+<a href="#107" id="107">107</a>
+<a href="#108" id="108">108</a>
 </pre><pre class="rust"><code><span class="kw">use </span>re_arrow_store::TimeRange;
 <span class="kw">use </span>re_data_store::EntityPath;
 <span class="kw">use </span>re_log_types::{
@@ -122,13 +125,16 @@
 </span><span class="kw">pub struct </span>TextEntry {
     <span class="comment">// props
     </span><span class="kw">pub </span>msg_id: MsgId,
+
     <span class="kw">pub </span>entity_path: EntityPath,
+
     <span class="doccomment">/// `None` for timeless data.
     </span><span class="kw">pub </span>time: <span class="prelude-ty">Option</span>&lt;i64&gt;,
+
     <span class="kw">pub </span>color: <span class="prelude-ty">Option</span>&lt;[u8; <span class="number">4</span>]&gt;,
 
-    <span class="comment">// text entry
-    </span><span class="kw">pub </span>level: <span class="prelude-ty">Option</span>&lt;String&gt;,
+    <span class="kw">pub </span>level: <span class="prelude-ty">Option</span>&lt;String&gt;,
+
     <span class="kw">pub </span>body: String,
 }
 

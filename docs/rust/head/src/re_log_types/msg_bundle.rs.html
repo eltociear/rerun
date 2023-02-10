@@ -629,6 +629,8 @@
 <a href="#629" id="629">629</a>
 <a href="#630" id="630">630</a>
 <a href="#631" id="631">631</a>
+<a href="#632" id="632">632</a>
+<a href="#633" id="633">633</a>
 </pre><pre class="rust"><code><span class="doccomment">//! Structs and functions used for framing and de-framing a Rerun log message in Arrow.
 //!
 //! An example main message (outer) schema:
@@ -726,6 +728,7 @@
     </span><span class="self">Self</span>: Component + ArrowSerialize + ArrowField&lt;Type = <span class="self">Self</span>&gt; + <span class="lifetime">&#39;static</span>,
 {
 }
+
 <span class="kw">impl</span>&lt;C&gt; SerializableComponent <span class="kw">for </span>C <span class="kw">where
     </span>C: Component + ArrowSerialize + ArrowField&lt;Type = C&gt; + <span class="lifetime">&#39;static
 </span>{
@@ -747,6 +750,7 @@
 </span><span class="kw">pub struct </span>ComponentBundle {
     <span class="doccomment">/// The name of the Component, used as column name in the table `Field`.
     </span>name: ComponentName,
+
     <span class="doccomment">/// The Component payload `Array`.
     </span>value: ListArray&lt;i32&gt;,
 }

@@ -303,6 +303,9 @@
 <a href="#303" id="303">303</a>
 <a href="#304" id="304">304</a>
 <a href="#305" id="305">305</a>
+<a href="#306" id="306">306</a>
+<a href="#307" id="307">307</a>
+<a href="#308" id="308">308</a>
 </pre><pre class="rust"><code><span class="kw">use </span>nohash_hasher::IntMap;
 <span class="kw">use </span>re_arrow_store::LatestAtQuery;
 <span class="kw">use </span>re_data_store::{log_db::EntityDb, query_transform, EntityPath, EntityPropertyMap, EntityTree};
@@ -338,10 +341,13 @@
     ///
     /// If at all, this should only happen for a single frame until space infos are rebuilt.
     </span>UnknownSpaceInfo,
+
     <span class="doccomment">/// More than one pinhole camera between this and the reference space.
     </span>NestedPinholeCameras,
+
     <span class="doccomment">/// Exiting out of a space with a pinhole camera that doesn&#39;t have a resolution is not supported.
     </span>InversePinholeCameraWithoutResolution,
+
     <span class="doccomment">/// Unknown transform between this and the reference space.
     </span>UnknownTransform,
 }

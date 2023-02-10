@@ -224,6 +224,8 @@
 <a href="#224" id="224">224</a>
 <a href="#225" id="225">225</a>
 <a href="#226" id="226">226</a>
+<a href="#227" id="227">227</a>
+<a href="#228" id="228">228</a>
 </pre><pre class="rust"><code><span class="kw">use crate</span>::{
     ui::{annotations::AnnotationMap, DefaultColor, SceneQuery},
     ViewerContext,
@@ -244,6 +246,7 @@
     <span class="kw">pub </span>radius: f32,
     <span class="kw">pub </span>scattered: bool,
 }
+
 <span class="kw">impl </span>PartialEq <span class="kw">for </span>PlotPointAttrs {
     <span class="kw">fn </span>eq(<span class="kw-2">&amp;</span><span class="self">self</span>, rhs: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; bool {
         <span class="kw">let </span><span class="self">Self </span>{
@@ -258,6 +261,7 @@
             &amp;&amp; scattered.eq(<span class="kw-2">&amp;</span>rhs.scattered)
     }
 }
+
 <span class="kw">impl </span>Eq <span class="kw">for </span>PlotPointAttrs {}
 
 <span class="attr">#[derive(Clone, Debug)]

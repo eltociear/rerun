@@ -222,6 +222,8 @@
 <a href="#222" id="222">222</a>
 <a href="#223" id="223">223</a>
 <a href="#224" id="224">224</a>
+<a href="#225" id="225">225</a>
+<a href="#226" id="226">226</a>
 </pre><pre class="rust"><code><span class="doccomment">//! Rerun&#39;s analytics SDK.
 
 </span><span class="kw">use </span>std::borrow::Cow;
@@ -240,6 +242,7 @@
     ///
     /// Used e.g. to send an event everytime the app start.
     </span>Append,
+
     <span class="doccomment">/// Update the permanent state associated with this analytics ID.
     ///
     /// Used e.g. to associate an OS with a particular analytics ID upon its creation.
@@ -348,6 +351,7 @@
 
 <span class="kw">pub struct </span>Analytics {
     config: Config,
+
     <span class="doccomment">/// `None` if analytics are disabled.
     </span>pipeline: <span class="prelude-ty">Option</span>&lt;Pipeline&gt;,
 

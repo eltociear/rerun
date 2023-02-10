@@ -501,6 +501,8 @@
 <a href="#501" id="501">501</a>
 <a href="#502" id="502">502</a>
 <a href="#503" id="503">503</a>
+<a href="#504" id="504">504</a>
+<a href="#505" id="505">505</a>
 </pre><pre class="rust"><code><span class="kw">use </span>arrow2::array::Array;
 <span class="kw">use </span>nohash_hasher::IntMap;
 <span class="kw">use </span>re_log_types::external::arrow2_convert::serialize::TryIntoArrow;
@@ -576,6 +578,7 @@
     ///
     /// The logging time is automatically inserted during creation ([`Self::new`]).
     </span>timepoint: TimePoint,
+
     <span class="doccomment">/// If true, all timestamp data associated with this message will be dropped right before
     /// sending it to Rerun.
     ///
@@ -591,6 +594,7 @@
     /// The number of instances per row, on the other hand, will be decided based upon the first
     /// component collection that&#39;s appended.
     </span>num_instances: <span class="prelude-ty">Option</span>&lt;usize&gt;,
+
     <span class="doccomment">/// All the instanced component collections that have been appended to this message.
     ///
     /// As of today, they must have exactly 1 row of data (no batching), which itself must have

@@ -242,6 +242,7 @@
 <a href="#242" id="242">242</a>
 <a href="#243" id="243">243</a>
 <a href="#244" id="244">244</a>
+<a href="#245" id="245">245</a>
 </pre><pre class="rust"><code><span class="kw">use </span>re_log_types::component_types;
 
 <span class="attr">#[derive(Clone, Debug, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
@@ -445,6 +446,7 @@
     <span class="kw">fn </span>named(size: u64, name: <span class="kw-2">&amp;</span>str) -&gt; component_types::TensorDimension {
         component_types::TensorDimension::named(size, name.to_owned())
     }
+
     <span class="kw">fn </span>dim(size: u64) -&gt; component_types::TensorDimension {
         component_types::TensorDimension::unnamed(size)
     }

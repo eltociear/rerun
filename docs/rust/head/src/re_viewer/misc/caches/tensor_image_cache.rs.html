@@ -540,6 +540,7 @@
 <a href="#540" id="540">540</a>
 <a href="#541" id="541">541</a>
 <a href="#542" id="542">542</a>
+<a href="#543" id="543">543</a>
 </pre><pre class="rust"><code><span class="kw">use </span>std::sync::Arc;
 
 <span class="kw">use </span>egui::{Color32, ColorImage};
@@ -592,6 +593,7 @@
     tensor_id: component_types::TensorId,
     annotation_msg_id: MsgId,
 }
+
 <span class="kw">impl </span>nohash_hasher::IsEnabled <span class="kw">for </span>ImageCacheKey {}
 
 <span class="comment">// required for [`nohash_hasher`].

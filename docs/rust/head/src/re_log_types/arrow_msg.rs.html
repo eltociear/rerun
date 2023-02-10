@@ -175,6 +175,7 @@
 <a href="#175" id="175">175</a>
 <a href="#176" id="176">176</a>
 <a href="#177" id="177">177</a>
+<a href="#178" id="178">178</a>
 </pre><pre class="rust"><code><span class="doccomment">//! [`ArrowMsg`] is the [`crate::LogMsg`] sub-type containing an Arrow payload.
 //!
 //! We have custom implementations of [`serde::Serialize`] and [`serde::Deserialize`] that wraps
@@ -240,6 +241,7 @@
         <span class="kw">use </span>arrow2::io::ipc::read::{read_stream_metadata, StreamReader, StreamState};
 
         <span class="kw">struct </span>FieldVisitor;
+
         <span class="kw">impl</span>&lt;<span class="lifetime">&#39;de</span>&gt; serde::de::Visitor&lt;<span class="lifetime">&#39;de</span>&gt; <span class="kw">for </span>FieldVisitor {
             <span class="kw">type </span>Value = ArrowMsg;
 

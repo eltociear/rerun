@@ -1412,6 +1412,21 @@
 <a href="#1412" id="1412">1412</a>
 <a href="#1413" id="1413">1413</a>
 <a href="#1414" id="1414">1414</a>
+<a href="#1415" id="1415">1415</a>
+<a href="#1416" id="1416">1416</a>
+<a href="#1417" id="1417">1417</a>
+<a href="#1418" id="1418">1418</a>
+<a href="#1419" id="1419">1419</a>
+<a href="#1420" id="1420">1420</a>
+<a href="#1421" id="1421">1421</a>
+<a href="#1422" id="1422">1422</a>
+<a href="#1423" id="1423">1423</a>
+<a href="#1424" id="1424">1424</a>
+<a href="#1425" id="1425">1425</a>
+<a href="#1426" id="1426">1426</a>
+<a href="#1427" id="1427">1427</a>
+<a href="#1428" id="1428">1428</a>
+<a href="#1429" id="1429">1429</a>
 </pre><pre class="rust"><code><span class="kw">use </span>std::collections::{BTreeMap, HashMap, VecDeque};
 <span class="kw">use </span>std::num::NonZeroU64;
 <span class="kw">use </span>std::sync::atomic::AtomicU64;
@@ -1470,6 +1485,7 @@
 /// See [`DataStore::latest_at`], [`DataStore::range`] &amp; [`DataStore::get`].
 </span><span class="attr">#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
 </span><span class="kw">pub struct </span>RowIndex(<span class="kw">pub</span>(<span class="kw">crate</span>) NonZeroU64);
+
 <span class="kw">impl </span>RowIndex {
     <span class="kw">const </span>KIND_MASK: u64 = <span class="number">0x8000_0000_0000_0000</span>;
 
@@ -1493,6 +1509,7 @@
         }
     }
 }
+
 <span class="kw">impl </span>std::fmt::Display <span class="kw">for </span>RowIndex {
     <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>std::fmt::Formatter&lt;<span class="lifetime">&#39;_</span>&gt;) -&gt; std::fmt::Result {
         <span class="kw">match </span><span class="self">self</span>.kind() {
@@ -1504,6 +1521,7 @@
 
 <span class="attr">#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
 </span><span class="kw">pub struct </span>IndexRowNr(<span class="kw">pub</span>(<span class="kw">crate</span>) u64);
+
 <span class="kw">impl </span>std::fmt::Display <span class="kw">for </span>IndexRowNr {
     <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>std::fmt::Formatter&lt;<span class="lifetime">&#39;_</span>&gt;) -&gt; std::fmt::Result {
         f.write_fmt(<span class="macro">format_args!</span>(<span class="string">&quot;{}&quot;</span>, <span class="self">self</span>.<span class="number">0</span>))
@@ -1530,6 +1548,7 @@
     ///
     /// See [`Self::DEFAULT`] for defaults.
     </span><span class="kw">pub </span>component_bucket_size_bytes: u64,
+
     <span class="doccomment">/// The maximum number of rows in a component bucket before triggering a split.
     /// Does not apply to timeless data.
     ///
@@ -1562,6 +1581,7 @@
     ///
     /// See [`Self::DEFAULT`] for defaults.
     </span><span class="kw">pub </span>index_bucket_size_bytes: u64,
+
     <span class="doccomment">/// The maximum number of rows in an index bucket before triggering a split.
     /// Does not apply to timeless data.
     ///
@@ -1632,6 +1652,7 @@
     ///
     /// See [`Self::insert`] for more information.
     </span><span class="kw">pub</span>(<span class="kw">crate</span>) cluster_key: ComponentName,
+
     <span class="doccomment">/// The configuration of the data store (e.g. bucket sizes).
     </span><span class="kw">pub</span>(<span class="kw">crate</span>) config: DataStoreConfig,
 
@@ -1648,6 +1669,7 @@
     ///
     /// See also `Self::indices`.
     </span><span class="kw">pub</span>(<span class="kw">crate</span>) timeless_indices: IntMap&lt;EntityPathHash, PersistentIndexTable&gt;,
+
     <span class="doccomment">/// Dedicated component tables for timeless data. Never garbage collected.
     ///
     /// See also `Self::components`.
@@ -1657,6 +1679,7 @@
     ///
     /// An index maps specific points in time to rows in component tables.
     </span><span class="kw">pub</span>(<span class="kw">crate</span>) indices: HashMap&lt;(Timeline, EntityPathHash), IndexTable&gt;,
+
     <span class="doccomment">/// Maps a component name to its associated table, for all timelines and all entities.
     ///
     /// A component table holds all the values ever inserted for a given component.
@@ -1664,8 +1687,10 @@
 
     <span class="doccomment">/// Monotonically increasing ID for insertions.
     </span><span class="kw">pub</span>(<span class="kw">crate</span>) insert_id: u64,
+
     <span class="doccomment">/// Monotonically increasing ID for queries.
     </span><span class="kw">pub</span>(<span class="kw">crate</span>) query_id: AtomicU64,
+
     <span class="doccomment">/// Monotonically increasing ID for GCs.
     </span><span class="kw">pub</span>(<span class="kw">crate</span>) gc_id: u64,
 }
@@ -2153,6 +2178,7 @@
 </span><span class="kw">pub struct </span>IndexTable {
     <span class="doccomment">/// The timeline this table operates in, for debugging purposes.
     </span><span class="kw">pub</span>(<span class="kw">crate</span>) timeline: Timeline,
+
     <span class="doccomment">/// The entity this table is related to, for debugging purposes.
     </span><span class="kw">pub</span>(<span class="kw">crate</span>) ent_path: EntityPath,
 
@@ -2434,6 +2460,7 @@
 </span><span class="kw">pub struct </span>PersistentComponentTable {
     <span class="doccomment">/// Name of the underlying component, for debugging purposes.
     </span><span class="kw">pub</span>(<span class="kw">crate</span>) name: ComponentName,
+
     <span class="doccomment">/// Type of the underlying component.
     </span><span class="kw">pub</span>(<span class="kw">crate</span>) datatype: DataType,
 
@@ -2465,6 +2492,7 @@
 
     <span class="doccomment">/// The total number of rows present in this bucket, across all chunks.
     </span><span class="kw">pub</span>(<span class="kw">crate</span>) total_rows: u64,
+
     <span class="doccomment">/// The size of this bucket in bytes, across all chunks.
     ///
     /// Accurately computing the size of arrow arrays is surprisingly costly, which is why we
@@ -2614,6 +2642,7 @@
 </span><span class="kw">pub struct </span>ComponentTable {
     <span class="doccomment">/// Name of the underlying component.
     </span><span class="kw">pub</span>(<span class="kw">crate</span>) name: ComponentName,
+
     <span class="doccomment">/// Type of the underlying component.
     </span><span class="kw">pub</span>(<span class="kw">crate</span>) datatype: DataType,
 
@@ -2752,6 +2781,7 @@
 
     <span class="doccomment">/// The total number of rows present in this bucket, across all chunks.
     </span><span class="kw">pub</span>(<span class="kw">crate</span>) total_rows: u64,
+
     <span class="doccomment">/// The size of this bucket in bytes, across all chunks.
     ///
     /// Accurately computing the size of arrow arrays is surprisingly costly, which is why we

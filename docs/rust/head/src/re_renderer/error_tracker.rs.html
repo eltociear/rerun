@@ -301,6 +301,12 @@
 <a href="#301" id="301">301</a>
 <a href="#302" id="302">302</a>
 <a href="#303" id="303">303</a>
+<a href="#304" id="304">304</a>
+<a href="#305" id="305">305</a>
+<a href="#306" id="306">306</a>
+<a href="#307" id="307">307</a>
+<a href="#308" id="308">308</a>
+<a href="#309" id="309">309</a>
 </pre><pre class="rust"><code><span class="doccomment">//! Special error handling datastructures for debug builds (never crash!).
 
 </span><span class="kw">use </span>ahash::HashSet;
@@ -479,6 +485,7 @@
 /// Used for deduplication purposes.
 </span><span class="attr">#[derive(Debug)]
 </span><span class="kw">pub struct </span>WrappedContextError(Box&lt;ContextError&gt;);
+
 <span class="kw">impl </span>std::hash::Hash <span class="kw">for </span>WrappedContextError {
     <span class="kw">fn </span>hash&lt;H: std::hash::Hasher&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, state: <span class="kw-2">&amp;mut </span>H) {
         <span class="self">self</span>.<span class="number">0</span>.label.hash(state); <span class="comment">// e.g. &quot;composite_encoder&quot;
@@ -492,6 +499,7 @@
         }
     }
 }
+
 <span class="kw">impl </span>PartialEq <span class="kw">for </span>WrappedContextError {
     <span class="kw">fn </span>eq(<span class="kw-2">&amp;</span><span class="self">self</span>, rhs: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; bool {
         <span class="kw">let </span><span class="kw-2">mut </span>is_eq = <span class="self">self</span>.<span class="number">0</span>.label.eq(<span class="kw-2">&amp;</span>rhs.<span class="number">0</span>.label)
@@ -511,6 +519,7 @@
         is_eq
     }
 }
+
 <span class="kw">impl </span>Eq <span class="kw">for </span>WrappedContextError {}
 
 <span class="comment">// ---
@@ -521,6 +530,7 @@
 /// is in a poisoned state.
 </span><span class="kw">pub struct </span>ErrorTracker {
     tick_nr: AtomicUsize,
+
     <span class="doccomment">/// This countdown reaching 0 indicates that the pipeline has stabilized into a
     /// sane state, which might take a few frames if we&#39;ve just left a poisoned state.
     ///
@@ -528,6 +538,7 @@
     </span>clear_countdown: AtomicI64,
     errors: Mutex&lt;HashSet&lt;WrappedContextError&gt;&gt;,
 }
+
 <span class="kw">impl </span>Default <span class="kw">for </span>ErrorTracker {
     <span class="kw">fn </span>default() -&gt; <span class="self">Self </span>{
         <span class="self">Self </span>{
@@ -537,6 +548,7 @@
         }
     }
 }
+
 <span class="kw">impl </span>ErrorTracker {
     <span class="doccomment">/// Increment tick count used in logged errors, and clear the tracker as needed.
     </span><span class="kw">pub fn </span>tick(<span class="kw-2">&amp;</span><span class="self">self</span>) {

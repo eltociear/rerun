@@ -372,6 +372,7 @@
 <a href="#372" id="372">372</a>
 <a href="#373" id="373">373</a>
 <a href="#374" id="374">374</a>
+<a href="#375" id="375">375</a>
 </pre><pre class="rust"><code><span class="kw">use </span>std::collections::{BTreeMap, BTreeSet};
 
 <span class="kw">use </span>itertools::Itertools;
@@ -471,6 +472,7 @@
 
     <span class="doccomment">/// Book-keeping around whether we should clear fields when data is added
     </span><span class="kw">pub </span>nonrecursive_clears: BTreeMap&lt;MsgId, TimePoint&gt;,
+
     <span class="doccomment">/// Book-keeping around whether we should clear recursively when data is added
     </span><span class="kw">pub </span>recursive_clears: BTreeMap&lt;MsgId, TimePoint&gt;,
 

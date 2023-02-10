@@ -670,6 +670,7 @@
 <a href="#670" id="670">670</a>
 <a href="#671" id="671">671</a>
 <a href="#672" id="672">672</a>
+<a href="#673" id="673">673</a>
 </pre><pre class="rust"><code><span class="kw">use </span>egui::NumExt <span class="kw">as _</span>;
 <span class="kw">use </span>glam::Affine3A;
 <span class="kw">use </span>macaw::{vec3, BoundingBox, Quat, Vec3};
@@ -709,6 +710,7 @@
 
     <span class="doccomment">/// Currently tracked camera.
     </span>tracked_camera: <span class="prelude-ty">Option</span>&lt;InstancePath&gt;,
+
     <span class="doccomment">/// Camera pose just before we took over another camera via [Self::tracked_camera].
     </span>camera_before_tracked_camera: <span class="prelude-ty">Option</span>&lt;Eye&gt;,
 

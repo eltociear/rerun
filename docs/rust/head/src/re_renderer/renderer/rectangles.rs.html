@@ -369,6 +369,8 @@
 <a href="#369" id="369">369</a>
 <a href="#370" id="370">370</a>
 <a href="#371" id="371">371</a>
+<a href="#372" id="372">372</a>
+<a href="#373" id="373">373</a>
 </pre><pre class="rust"><code><span class="doccomment">//! Renderer that makes it easy to draw textured 2d rectangles with transparency
 //!
 //! Transparency: (TODO(andreas):)
@@ -437,8 +439,10 @@
 <span class="kw">pub struct </span>TexturedRect {
     <span class="doccomment">/// Top left corner position in world space.
     </span><span class="kw">pub </span>top_left_corner_position: glam::Vec3,
+
     <span class="doccomment">/// Vector that spans up the rectangle from its top left corner along the u axis of the texture.
     </span><span class="kw">pub </span>extent_u: glam::Vec3,
+
     <span class="doccomment">/// Vector that spans up the rectangle from its top left corner along the v axis of the texture.
     </span><span class="kw">pub </span>extent_v: glam::Vec3,
 

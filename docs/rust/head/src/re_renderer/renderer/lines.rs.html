@@ -720,6 +720,9 @@
 <a href="#720" id="720">720</a>
 <a href="#721" id="721">721</a>
 <a href="#722" id="722">722</a>
+<a href="#723" id="723">723</a>
+<a href="#724" id="724">724</a>
+<a href="#725" id="725">725</a>
 </pre><pre class="rust"><code><span class="doccomment">//! Line renderer for efficient rendering of many line(strips)
 //!
 //!
@@ -917,10 +920,13 @@
     </span><span class="kw">pub struct </span>LineStripFlags : u8 {
         <span class="doccomment">/// Puts a equilateral triangle at the end of the line strip (excludes other end caps).
         </span><span class="kw">const </span>CAP_END_TRIANGLE = <span class="number">0b0000_0001</span>;
+
         <span class="doccomment">/// Adds a round cap at the end of a line strip (excludes other end caps).
         </span><span class="kw">const </span>CAP_END_ROUND = <span class="number">0b0000_0010</span>;
+
         <span class="doccomment">/// Puts a equilateral triangle at the start of the line strip (excludes other start caps).
         </span><span class="kw">const </span>CAP_START_TRIANGLE = <span class="number">0b0000_0100</span>;
+
         <span class="doccomment">/// Adds a round cap at the start of a line strip (excludes other start caps).
         </span><span class="kw">const </span>CAP_START_ROUND = <span class="number">0b0000_1000</span>;
 
