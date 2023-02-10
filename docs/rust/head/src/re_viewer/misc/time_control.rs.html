@@ -564,6 +564,16 @@
 <a href="#564" id="564">564</a>
 <a href="#565" id="565">565</a>
 <a href="#566" id="566">566</a>
+<a href="#567" id="567">567</a>
+<a href="#568" id="568">568</a>
+<a href="#569" id="569">569</a>
+<a href="#570" id="570">570</a>
+<a href="#571" id="571">571</a>
+<a href="#572" id="572">572</a>
+<a href="#573" id="573">573</a>
+<a href="#574" id="574">574</a>
+<a href="#575" id="575">575</a>
+<a href="#576" id="576">576</a>
 </pre><pre class="rust"><code><span class="kw">use </span>std::collections::{BTreeMap, BTreeSet};
 
 <span class="kw">use </span>egui::NumExt <span class="kw">as _</span>;
@@ -573,7 +583,7 @@
 
 <span class="doccomment">/// The time range we are currently zoomed in on.
 </span><span class="attr">#[derive(Clone, Copy, Debug, serde::Deserialize, serde::Serialize)]
-</span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">struct </span>TimeView {
+</span><span class="kw">pub struct </span>TimeView {
     <span class="doccomment">/// Where start of the the range.
     </span><span class="kw">pub </span>min: TimeReal,
 
@@ -996,6 +1006,16 @@
             .loop_selection = <span class="prelude-val">Some</span>(selection);
     }
 
+    <span class="doccomment">/// Remove the current loop selection.
+    </span><span class="kw">pub fn </span>remove_loop_selection(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(state) = <span class="self">self</span>.states.get_mut(<span class="kw-2">&amp;</span><span class="self">self</span>.timeline) {
+            state.loop_selection = <span class="prelude-val">None</span>;
+        }
+        <span class="kw">if </span><span class="self">self</span>.looping() == Looping::Selection {
+            <span class="self">self</span>.set_looping(Looping::Off);
+        }
+    }
+
     <span class="doccomment">/// Is the current time in the selection range (if any), or at the current time mark?
     </span><span class="kw">pub fn </span>is_time_selected(<span class="kw-2">&amp;</span><span class="self">self</span>, timeline: <span class="kw-2">&amp;</span>Timeline, needle: TimeInt) -&gt; bool {
         <span class="kw">if </span>timeline != <span class="kw-2">&amp;</span><span class="self">self</span>.timeline {
@@ -1131,4 +1151,4 @@
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="re_viewer" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.0 (fc594f156 2023-01-24)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="re_viewer" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.1 (d5a82bbd2 2023-02-07)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>

@@ -82,6 +82,12 @@
 <a href="#82" id="82">82</a>
 <a href="#83" id="83">83</a>
 <a href="#84" id="84">84</a>
+<a href="#85" id="85">85</a>
+<a href="#86" id="86">86</a>
+<a href="#87" id="87">87</a>
+<a href="#88" id="88">88</a>
+<a href="#89" id="89">89</a>
+<a href="#90" id="90">90</a>
 </pre><pre class="rust"><code><span class="attr">#[derive(Clone, Copy, Debug)]
 </span><span class="kw">pub struct </span>Icon {
     <span class="doccomment">/// Human readable unique id
@@ -95,6 +101,12 @@
         <span class="self">Self </span>{ id, png_bytes }
     }
 }
+
+<span class="attr">#[cfg(target_os = <span class="string">&quot;macos&quot;</span>)]
+</span><span class="kw">pub const </span>APP_ICON: Icon = Icon::new(
+    <span class="string">&quot;app_icon_mac&quot;</span>,
+    <span class="macro">include_bytes!</span>(<span class="string">&quot;../data/icons/app_icon_mac.png&quot;</span>),
+);
 
 <span class="kw">pub const </span>RERUN_MENU: Icon =
     Icon::new(<span class="string">&quot;rerun_menu&quot;</span>, <span class="macro">include_bytes!</span>(<span class="string">&quot;../data/icons/rerun_menu.png&quot;</span>));
@@ -167,4 +179,4 @@
 
 <span class="kw">pub const </span>CONTAINER: Icon = Icon::new(<span class="string">&quot;container&quot;</span>, <span class="macro">include_bytes!</span>(<span class="string">&quot;../data/icons/container.png&quot;</span>));
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="re_ui" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.0 (fc594f156 2023-01-24)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="re_ui" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.1 (d5a82bbd2 2023-02-07)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>

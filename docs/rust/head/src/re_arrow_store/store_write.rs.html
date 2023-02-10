@@ -1289,13 +1289,13 @@
     </span><span class="attr">#[error(
         <span class="string">&quot;All components within a row must have the same number of instances as the \
             cluster component, got {cluster_comp}={cluster_comp_nb_instances} vs. \
-                {key}={nb_instances}&quot;
+                {key}={num_instances}&quot;
     </span>)]
     </span>MismatchedInstances {
         cluster_comp: ComponentName,
         cluster_comp_nb_instances: usize,
         key: ComponentName,
-        nb_instances: usize,
+        num_instances: usize,
     },
 
     <span class="comment">// Misc
@@ -1332,7 +1332,7 @@
         <span class="macro">crate::profile_function!</span>();
 
         <span class="kw">let </span>ent_path_hash = ent_path.hash();
-        <span class="kw">let </span>nb_rows = bundles[<span class="number">0</span>].nb_rows();
+        <span class="kw">let </span>num_rows = bundles[<span class="number">0</span>].num_rows();
 
         <span class="comment">// Effectively the same thing as having a non-unit length batch, except it&#39;s really not
         // worth more than an assertion since:
@@ -1346,15 +1346,15 @@
             <span class="string">&quot;cannot insert same component multiple times, this is equivalent to multiple rows&quot;</span>,
         );
         <span class="comment">// Batches cannot contain more than 1 row at the moment.
-        </span><span class="kw">if </span>nb_rows != <span class="number">1 </span>{
-            <span class="kw">return </span><span class="prelude-val">Err</span>(WriteError::MoreThanOneRow(nb_rows));
+        </span><span class="kw">if </span>num_rows != <span class="number">1 </span>{
+            <span class="kw">return </span><span class="prelude-val">Err</span>(WriteError::MoreThanOneRow(num_rows));
         }
         <span class="comment">// Components must share the same number of rows.
-        </span><span class="kw">if </span>!bundles.iter().all(|bundle| bundle.nb_rows() == nb_rows) {
+        </span><span class="kw">if </span>!bundles.iter().all(|bundle| bundle.num_rows() == num_rows) {
             <span class="kw">return </span><span class="prelude-val">Err</span>(WriteError::MismatchedRows(
                 bundles
                     .iter()
-                    .map(|bundle| (bundle.name(), bundle.nb_rows()))
+                    .map(|bundle| (bundle.name(), bundle.num_rows()))
                     .collect(),
             ));
         }
@@ -1368,7 +1368,7 @@
                 .collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;(),
             entity = %ent_path,
             components = <span class="question-mark">?</span>bundles.iter().map(|bundle| bundle.name()).collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;(),
-            nb_rows,
+            num_rows,
             <span class="string">&quot;insertion started...&quot;
         </span>);
 
@@ -1381,7 +1381,7 @@
             <span class="kw">let </span><span class="kw-2">mut </span>row_indices = IntMap::default();
 
             <span class="comment">// TODO(#589): support for batched row component insertions
-            </span><span class="kw">for </span>row_nr <span class="kw">in </span><span class="number">0</span>..nb_rows {
+            </span><span class="kw">for </span>row_nr <span class="kw">in </span><span class="number">0</span>..num_rows {
                 <span class="self">self</span>.insert_timeless_row(row_nr, cluster_comp_pos, bundles, <span class="kw-2">&amp;mut </span>row_indices)<span class="question-mark">?</span>;
             }
 
@@ -1394,7 +1394,7 @@
             <span class="kw">let </span><span class="kw-2">mut </span>row_indices = IntMap::default();
 
             <span class="comment">// TODO(#589): support for batched row component insertions
-            </span><span class="kw">for </span>row_nr <span class="kw">in </span><span class="number">0</span>..nb_rows {
+            </span><span class="kw">for </span>row_nr <span class="kw">in </span><span class="number">0</span>..num_rows {
                 <span class="self">self</span>.insert_row(
                     time_point,
                     row_nr,
@@ -1468,13 +1468,13 @@
             // So use the fact that `rows` is always of unit-length for now.
             </span><span class="kw">let </span>rows_single = rows;
 
-            <span class="kw">let </span>nb_instances = rows_single.offsets().lengths().next().unwrap();
-            <span class="kw">if </span>nb_instances != cluster_len {
+            <span class="kw">let </span>num_instances = rows_single.offsets().lengths().next().unwrap();
+            <span class="kw">if </span>num_instances != cluster_len {
                 <span class="kw">return </span><span class="prelude-val">Err</span>(WriteError::MismatchedInstances {
                     cluster_comp: <span class="self">self</span>.cluster_key,
                     cluster_comp_nb_instances: cluster_len,
                     key: name,
-                    nb_instances,
+                    num_instances,
                 });
             }
 
@@ -1541,13 +1541,13 @@
             </span><span class="kw">let </span>rows_single = rows;
 
             <span class="comment">// TODO(#440): support for splats
-            </span><span class="kw">let </span>nb_instances = rows_single.offsets().lengths().next().unwrap();
-            <span class="kw">if </span>nb_instances != cluster_len {
+            </span><span class="kw">let </span>num_instances = rows_single.offsets().lengths().next().unwrap();
+            <span class="kw">if </span>num_instances != cluster_len {
                 <span class="kw">return </span><span class="prelude-val">Err</span>(WriteError::MismatchedInstances {
                     cluster_comp: <span class="self">self</span>.cluster_key,
                     cluster_comp_nb_instances: cluster_len,
                     key: name,
-                    nb_instances,
+                    num_instances,
                 });
             }
 
@@ -1591,7 +1591,7 @@
             // valid (dense, sorted, no duplicates) and use that if so.
 
             </span><span class="kw">let </span>cluster_comp = <span class="kw-2">&amp;</span>components[cluster_comp_pos];
-            <span class="kw">let </span>data = cluster_comp.value_list().values(); <span class="comment">// abusing the fact that nb_rows==1
+            <span class="kw">let </span>data = cluster_comp.value_list().values(); <span class="comment">// abusing the fact that num_rows==1
             </span><span class="kw">let </span>len = data.len();
 
             <span class="comment">// Clustering component must be dense.
@@ -1693,7 +1693,7 @@
             cluster_key,
             ent_path,
             indices: Default::default(),
-            nb_rows: <span class="number">0</span>,
+            num_rows: <span class="number">0</span>,
             all_components: Default::default(),
         }
     }
@@ -1709,7 +1709,7 @@
             <span class="kw">let </span>index = <span class="self">self
                 </span>.indices
                 .entry(<span class="kw-2">*</span>name)
-                .or_insert_with(|| <span class="macro">vec!</span>[<span class="prelude-val">None</span>; <span class="self">self</span>.nb_rows <span class="kw">as </span>usize]);
+                .or_insert_with(|| <span class="macro">vec!</span>[<span class="prelude-val">None</span>; <span class="self">self</span>.num_rows <span class="kw">as </span>usize]);
             index.push(<span class="prelude-val">Some</span>(<span class="kw-2">*</span>row_idx));
         }
 
@@ -1722,7 +1722,7 @@
             }
         }
 
-        <span class="self">self</span>.nb_rows += <span class="number">1</span>;
+        <span class="self">self</span>.num_rows += <span class="number">1</span>;
 
         <span class="attr">#[cfg(debug_assertions)]
         </span><span class="self">self</span>.sanity_check().unwrap();
@@ -2495,4 +2495,4 @@
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="re_arrow_store" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.0 (fc594f156 2023-01-24)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="re_arrow_store" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.1 (d5a82bbd2 2023-02-07)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>

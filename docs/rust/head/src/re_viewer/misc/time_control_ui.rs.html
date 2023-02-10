@@ -197,6 +197,7 @@
 <a href="#197" id="197">197</a>
 <a href="#198" id="198">198</a>
 <a href="#199" id="199">199</a>
+<a href="#200" id="200">200</a>
 </pre><pre class="rust"><code><span class="kw">use </span>egui::NumExt <span class="kw">as _</span>;
 
 <span class="kw">use </span>re_data_store::TimesPerTimeline;
@@ -353,6 +354,7 @@
                     }
                 }
                 Looping::All =&gt; {
+                    ui.visuals_mut().selection.bg_fill = re_ui::ReUi::loop_everything_color();
                     <span class="kw">if </span>re_ui
                         .large_button_selected(ui, icon, <span class="bool-val">true</span>)
                         .on_hover_text(<span class="string">&quot;Looping entire recording&quot;</span>)
@@ -362,8 +364,8 @@
                     }
                 }
                 Looping::Selection =&gt; {
-                    ui.visuals_mut().selection.bg_fill = re_ui::ReUi::loop_selection_color();
-                    <span class="attr">#[allow(clippy::collapsible_else_if)]
+                    <span class="comment">// ui.visuals_mut().selection.bg_fill = re_ui::ReUi::loop_selection_color(); // we have one color for the button, and a slightly different shade of it for the actual selection :/
+                    </span><span class="attr">#[allow(clippy::collapsible_else_if)]
                     </span><span class="kw">if </span>re_ui
                         .large_button_selected(ui, icon, <span class="bool-val">true</span>)
                         .on_hover_text(<span class="string">&quot;Looping selection&quot;</span>)
@@ -397,4 +399,4 @@
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="re_viewer" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.0 (fc594f156 2023-01-24)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="re_viewer" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.1 (d5a82bbd2 2023-02-07)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>

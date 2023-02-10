@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"struct":[["MutableSize3DArray",""],["Size3D",""],["Size3DArray",""],["Size3DArrayIterator",""]]};
+window.SIDEBAR_ITEMS = {"struct":[["MutableSize3DArray",""],["Size3D","A 3D size, e.g. the size of a 3D box."],["Size3DArray",""],["Size3DArrayIterator",""]]};

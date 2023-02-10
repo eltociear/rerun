@@ -591,7 +591,7 @@
     quit_rx: <span class="kw-2">&amp;</span>Receiver&lt;InterruptMsg&gt;,
 ) -&gt; <span class="prelude-ty">Option</span>&lt;InterruptMsg&gt; {
     <span class="comment">// Early exit if tcp_client is disconnected
-    </span><span class="kw">if </span>drop_if_disconnected &amp;&amp; !tcp_client.is_connected() {
+    </span><span class="kw">if </span>drop_if_disconnected &amp;&amp; tcp_client.has_disconnected() {
         <span class="macro">re_log::debug_once!</span>(<span class="string">&quot;Dropping messages because we&#39;re disconnected.&quot;</span>);
         <span class="kw">return </span><span class="prelude-val">None</span>;
     }
@@ -620,7 +620,7 @@
 
                         <span class="comment">// Only produce subsequent warnings once we&#39;ve saturated the back-off
                         </span><span class="kw">if </span>sleep_ms == MAX_SLEEP_MS &amp;&amp; new_err.to_string() != err.to_string() {
-                                <span class="macro">re_log::warn!</span>(<span class="string">&quot;Still failing to send message: {err}&quot;</span>);
+                            <span class="macro">re_log::warn!</span>(<span class="string">&quot;Still failing to send message: {err}&quot;</span>);
                         }
                     } <span class="kw">else </span>{
                         <span class="kw">return </span><span class="prelude-val">None</span>;
@@ -633,4 +633,4 @@
     </span>}
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="re_sdk_comms" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.0 (fc594f156 2023-01-24)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="re_sdk_comms" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.1 (d5a82bbd2 2023-02-07)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>

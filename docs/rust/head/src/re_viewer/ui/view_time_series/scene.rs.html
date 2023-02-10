@@ -388,7 +388,7 @@
     </span><span class="kw">fn </span>add_line_segments(<span class="kw-2">&amp;mut </span><span class="self">self</span>, line_label: <span class="kw-2">&amp;</span>str, points: Vec&lt;PlotPoint&gt;) {
         <span class="macro">crate::profile_function!</span>();
 
-        <span class="kw">let </span>nb_points = points.len();
+        <span class="kw">let </span>num_points = points.len();
         <span class="kw">let </span><span class="kw-2">mut </span>attrs = points[<span class="number">0</span>].attrs.clone();
         <span class="kw">let </span><span class="kw-2">mut </span>line: PlotSeries = PlotSeries {
             label: line_label.to_owned(),
@@ -399,7 +399,7 @@
             } <span class="kw">else </span>{
                 PlotSeriesKind::Continuous
             },
-            points: Vec::with_capacity(nb_points),
+            points: Vec::with_capacity(num_points),
         };
 
         <span class="kw">for </span>(i, p) <span class="kw">in </span>points.into_iter().enumerate() {
@@ -425,7 +425,7 @@
                         color: attrs.color,
                         width: attrs.radius,
                         kind,
-                        points: Vec::with_capacity(nb_points - i),
+                        points: Vec::with_capacity(num_points - i),
                     },
                 );
                 <span class="kw">let </span>prev_point = <span class="kw-2">*</span>prev_line.points.last().unwrap();
@@ -451,4 +451,4 @@
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-static-root-path="../../../../static.files/" data-current-crate="re_viewer" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.0 (fc594f156 2023-01-24)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-static-root-path="../../../../static.files/" data-current-crate="re_viewer" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.1 (d5a82bbd2 2023-02-07)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>

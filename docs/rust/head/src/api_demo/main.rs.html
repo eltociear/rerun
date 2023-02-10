@@ -665,6 +665,8 @@
 <a href="#665" id="665">665</a>
 <a href="#666" id="666">666</a>
 <a href="#667" id="667">667</a>
+<a href="#668" id="668">668</a>
+<a href="#669" id="669">669</a>
 </pre><pre class="rust"><code><span class="doccomment">//! Minimal examples of Rerun SDK usage.
 //!
 //! Run all demos:
@@ -683,17 +685,20 @@
     net::SocketAddr,
 };
 
-<span class="kw">use </span>rerun::external::{
-    re_log,
-    re_log_types::external::{arrow2, arrow2_convert},
-};
 <span class="kw">use </span>rerun::{
-    AnnotationContext, AnnotationInfo, Box3D, ClassDescription, ClassId, ColorRGBA, Component,
-    ComponentName, EntityPath, Label, LineStrip3D, Point2D, Point3D, Quaternion, Radius, Rect2D,
-    Rigid3, SignedAxis3, Tensor, TensorDataMeaning, TextEntry, Transform, Vec3D, ViewCoordinates,
+    components::{
+        AnnotationContext, AnnotationInfo, Box3D, ClassDescription, ClassId, ColorRGBA, Label,
+        LineStrip3D, Point2D, Point3D, Quaternion, Radius, Rect2D, Rigid3, Tensor,
+        TensorDataMeaning, TextEntry, Transform, Vec3D, ViewCoordinates,
+    },
+    coordinates::SignedAxis3,
+    external::{
+        re_log,
+        re_log_types::external::{arrow2, arrow2_convert},
+    },
+    time::{Time, TimePoint, TimeType, Timeline},
+    ApplicationId, Component, ComponentName, EntityPath, MsgSender, RecordingId, Session,
 };
-<span class="kw">use </span>rerun::{ApplicationId, MsgSender, RecordingId, Session};
-<span class="kw">use </span>rerun::{Time, TimePoint, TimeType, Timeline};
 
 <span class="comment">// --- Rerun logging ---
 
@@ -711,7 +716,7 @@
             rotation: Quaternion::new(<span class="number">0.0</span>, <span class="number">0.0</span>, (PI / <span class="number">4.0</span>).sin(), (PI / <span class="number">4.0</span>).cos()),
             translation: Vec3D::default(),
         })])<span class="question-mark">?
-        </span>.with_component(<span class="kw-2">&amp;</span>[ColorRGBA::from([<span class="number">0</span>, <span class="number">255</span>, <span class="number">0</span>, <span class="number">255</span>])])<span class="question-mark">?
+        </span>.with_component(<span class="kw-2">&amp;</span>[ColorRGBA::from_rgb(<span class="number">0</span>, <span class="number">255</span>, <span class="number">0</span>)])<span class="question-mark">?
         </span>.with_component(<span class="kw-2">&amp;</span>[Radius(<span class="number">0.005</span>)])<span class="question-mark">?
         </span>.with_component(<span class="kw-2">&amp;</span>[Label(<span class="string">&quot;box/t0&quot;</span>.to_owned())])<span class="question-mark">?
         </span>.send(session)<span class="question-mark">?</span>;
@@ -723,7 +728,7 @@
             rotation: Quaternion::new(<span class="number">0.0</span>, <span class="number">0.0</span>, (PI / <span class="number">4.0</span>).sin(), (PI / <span class="number">4.0</span>).cos()),
             translation: Vec3D::new(<span class="number">1.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>),
         })])<span class="question-mark">?
-        </span>.with_component(<span class="kw-2">&amp;</span>[ColorRGBA::from([<span class="number">255</span>, <span class="number">255</span>, <span class="number">0</span>, <span class="number">255</span>])])<span class="question-mark">?
+        </span>.with_component(<span class="kw-2">&amp;</span>[ColorRGBA::from_rgb(<span class="number">255</span>, <span class="number">255</span>, <span class="number">0</span>)])<span class="question-mark">?
         </span>.with_component(<span class="kw-2">&amp;</span>[Radius(<span class="number">0.01</span>)])<span class="question-mark">?
         </span>.with_component(<span class="kw-2">&amp;</span>[Label(<span class="string">&quot;box/t1&quot;</span>.to_owned())])<span class="question-mark">?
         </span>.send(session)<span class="question-mark">?</span>;
@@ -755,7 +760,7 @@
     </span>MsgSender::new(<span class="string">&quot;extension_components/point&quot;</span>)
         .with_timepoint(sim_time(<span class="number">0 </span><span class="kw">as _</span>))
         .with_component(<span class="kw-2">&amp;</span>[Point2D::new(<span class="number">64.0</span>, <span class="number">64.0</span>)])<span class="question-mark">?
-        </span>.with_component(<span class="kw-2">&amp;</span>[ColorRGBA::from([<span class="number">255</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>])])<span class="question-mark">?
+        </span>.with_component(<span class="kw-2">&amp;</span>[ColorRGBA::from_rgb(<span class="number">255</span>, <span class="number">0</span>, <span class="number">0</span>)])<span class="question-mark">?
         </span>.with_component(<span class="kw-2">&amp;</span>[Confidence(<span class="number">0.9</span>)])<span class="question-mark">?
         </span>.send(session)<span class="question-mark">?</span>;
 
@@ -787,7 +792,7 @@
             Point2D::new(<span class="number">96.0</span>, <span class="number">32.0</span>),
             Point2D::new(<span class="number">96.0</span>, <span class="number">96.0</span>),
         ])<span class="question-mark">?
-        </span>.with_splat(ColorRGBA::from([<span class="number">0</span>, <span class="number">255</span>, <span class="number">0</span>, <span class="number">255</span>]))<span class="question-mark">?
+        </span>.with_splat(ColorRGBA::from_rgb(<span class="number">0</span>, <span class="number">255</span>, <span class="number">0</span>))<span class="question-mark">?
         </span>.with_component(<span class="kw-2">&amp;</span>[
             Corner(<span class="string">&quot;upper left&quot;</span>.into()),
             Corner(<span class="string">&quot;lower left&quot;</span>.into()),
@@ -821,13 +826,13 @@
     </span>MsgSender::new(<span class="string">&quot;null_demo/rect/0&quot;</span>)
         .with_timepoint(sim_time(<span class="number">1 </span><span class="kw">as _</span>))
         .with_component(<span class="kw-2">&amp;</span>[Rect2D::from_xywh(<span class="number">5.0</span>, <span class="number">5.0</span>, <span class="number">4.0</span>, <span class="number">4.0</span>)])<span class="question-mark">?
-        </span>.with_component(<span class="kw-2">&amp;</span>[ColorRGBA::from([<span class="number">255</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>])])<span class="question-mark">?
+        </span>.with_component(<span class="kw-2">&amp;</span>[ColorRGBA::from_rgb(<span class="number">255</span>, <span class="number">0</span>, <span class="number">0</span>)])<span class="question-mark">?
         </span>.with_component(<span class="kw-2">&amp;</span>[Label(<span class="string">&quot;Rect1&quot;</span>.into())])<span class="question-mark">?
         </span>.send(session)<span class="question-mark">?</span>;
     MsgSender::new(<span class="string">&quot;null_demo/rect/1&quot;</span>)
         .with_timepoint(sim_time(<span class="number">1 </span><span class="kw">as _</span>))
         .with_component(<span class="kw-2">&amp;</span>[Rect2D::from_xywh(<span class="number">10.0</span>, <span class="number">5.0</span>, <span class="number">4.0</span>, <span class="number">4.0</span>)])<span class="question-mark">?
-        </span>.with_component(<span class="kw-2">&amp;</span>[ColorRGBA::from([<span class="number">0</span>, <span class="number">255</span>, <span class="number">0</span>, <span class="number">255</span>])])<span class="question-mark">?
+        </span>.with_component(<span class="kw-2">&amp;</span>[ColorRGBA::from_rgb(<span class="number">0</span>, <span class="number">255</span>, <span class="number">0</span>)])<span class="question-mark">?
         </span>.with_component(<span class="kw-2">&amp;</span>[Label(<span class="string">&quot;Rect2&quot;</span>.into())])<span class="question-mark">?
         </span>.send(session)<span class="question-mark">?</span>;
 
@@ -879,7 +884,7 @@
                 Label(i.to_string()),
                 Point3D::new(x((i * <span class="number">0.2</span>).sin()), y((i * <span class="number">0.2</span>).cos()), z(i)),
                 Radius(t * <span class="number">0.1 </span>+ (<span class="number">1.0 </span>- t) * <span class="number">2.0</span>), <span class="comment">// lerp(0.1, 2.0, t)
-                </span>ColorRGBA::from([rng.gen(), rng.gen(), rng.gen(), <span class="number">255</span>]),
+                </span>ColorRGBA::from_rgb(rng.gen(), rng.gen(), rng.gen()),
             )
         }))
     }
@@ -926,7 +931,7 @@
         .collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;();
     <span class="kw">let </span>colors = Array::random((<span class="number">20</span>, <span class="number">3</span>), Uniform::new(<span class="number">0</span>, <span class="number">255</span>))
         .axis_iter(Axis(<span class="number">0</span>))
-        .map(|c| ColorRGBA::from([c[<span class="number">0</span>], c[<span class="number">1</span>], c[<span class="number">2</span>], <span class="number">255</span>]))
+        .map(|c| ColorRGBA::from_rgb(c[<span class="number">0</span>], c[<span class="number">1</span>], c[<span class="number">2</span>]))
         .collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;();
     MsgSender::new(<span class="string">&quot;rects_demo/rects&quot;</span>)
         .with_timepoint(sim_time(<span class="number">2 </span><span class="kw">as _</span>))
@@ -1030,7 +1035,7 @@
                 info: AnnotationInfo {
                     id,
                     label: label.map(|label| Label(label.into())),
-                    color: color.map(|c| ColorRGBA::from([c[<span class="number">0</span>], c[<span class="number">1</span>], c[<span class="number">2</span>], <span class="number">255</span>])),
+                    color: color.map(|c| ColorRGBA::from_rgb(c[<span class="number">0</span>], c[<span class="number">1</span>], c[<span class="number">2</span>])),
                 },
                 ..Default::default()
             },
@@ -1106,7 +1111,7 @@
         // same system for the Rust SDK?
         </span>.with_timepoint(sim_time(<span class="number">0 </span><span class="kw">as _</span>))
         .with_component(<span class="kw-2">&amp;</span>[TextEntry::new(<span class="string">&quot;Text with explicitly set color&quot;</span>, <span class="prelude-val">None</span>)])<span class="question-mark">?
-        </span>.with_component(<span class="kw-2">&amp;</span>[ColorRGBA::from([<span class="number">255</span>, <span class="number">215</span>, <span class="number">0</span>, <span class="number">255</span>])])<span class="question-mark">?
+        </span>.with_component(<span class="kw-2">&amp;</span>[ColorRGBA::from_rgb(<span class="number">255</span>, <span class="number">215</span>, <span class="number">0</span>)])<span class="question-mark">?
         </span>.send(session)<span class="question-mark">?</span>;
 
     MsgSender::new(<span class="string">&quot;logs&quot;</span>)
@@ -1133,12 +1138,12 @@
     ) -&gt; anyhow::Result&lt;()&gt; {
         <span class="kw">let </span>view_coords = ViewCoordinates::from_up_and_handedness(
             SignedAxis3::POSITIVE_Z,
-            rerun::Handedness::Right,
+            rerun::coordinates::Handedness::Right,
         );
         MsgSender::new(ent_path.into())
             .with_timeless(<span class="bool-val">true</span>)
             .with_component(<span class="kw-2">&amp;</span>[view_coords])<span class="question-mark">?
-            </span>.with_component(<span class="kw-2">&amp;</span>[ColorRGBA::from([<span class="number">255</span>, <span class="number">215</span>, <span class="number">0</span>, <span class="number">255</span>])])<span class="question-mark">?
+            </span>.with_component(<span class="kw-2">&amp;</span>[ColorRGBA::from_rgb(<span class="number">255</span>, <span class="number">215</span>, <span class="number">0</span>)])<span class="question-mark">?
             </span>.send(session)
             .map_err(Into::into)
     }
@@ -1158,7 +1163,7 @@
             .with_timepoint(sim_time(<span class="number">0 </span><span class="kw">as _</span>))
             .with_component(<span class="kw-2">&amp;</span>[Point3D::ZERO])<span class="question-mark">?
             </span>.with_component(<span class="kw-2">&amp;</span>[Radius(radius)])<span class="question-mark">?
-            </span>.with_component(<span class="kw-2">&amp;</span>[ColorRGBA::from([color[<span class="number">0</span>], color[<span class="number">1</span>], color[<span class="number">2</span>], <span class="number">255</span>])])<span class="question-mark">?
+            </span>.with_component(<span class="kw-2">&amp;</span>[ColorRGBA::from_rgb(color[<span class="number">0</span>], color[<span class="number">1</span>], color[<span class="number">2</span>])])<span class="question-mark">?
             </span>.send(session)
             .map_err(Into::into)
     }
@@ -1191,7 +1196,7 @@
         .with_timepoint(sim_time(<span class="number">0 </span><span class="kw">as _</span>))
         .with_component(<span class="kw-2">&amp;</span>points)<span class="question-mark">?
         </span>.with_splat(Radius(<span class="number">0.025</span>))<span class="question-mark">?
-        </span>.with_splat(ColorRGBA::from([<span class="number">80</span>, <span class="number">80</span>, <span class="number">80</span>, <span class="number">255</span>]))<span class="question-mark">?
+        </span>.with_splat(ColorRGBA::from_rgb(<span class="number">80</span>, <span class="number">80</span>, <span class="number">80</span>))<span class="question-mark">?
         </span>.send(session)<span class="question-mark">?</span>;
 
     <span class="comment">// paths where the planet &amp; moon move
@@ -1289,7 +1294,7 @@
     <span class="kw">let </span>args = Args::parse();
     <span class="kw">let </span>addr = <span class="kw">match </span>args.connect {
         <span class="prelude-val">Some</span>(<span class="prelude-val">Some</span>(addr)) =&gt; <span class="prelude-val">Some</span>(addr),
-        <span class="prelude-val">Some</span>(<span class="prelude-val">None</span>) =&gt; <span class="prelude-val">Some</span>(rerun::default_server_addr()),
+        <span class="prelude-val">Some</span>(<span class="prelude-val">None</span>) =&gt; <span class="prelude-val">Some</span>(rerun::log::default_server_addr()),
         <span class="prelude-val">None </span>=&gt; <span class="prelude-val">None</span>,
     };
 
@@ -1326,11 +1331,10 @@
     // TODO(cmc): missing flags: save, serve
     // TODO(cmc): expose an easy to use async local mode.
     </span><span class="kw">if </span>args.connect.is_none() {
-        <span class="kw">let </span>log_messages = session.drain_log_messages_buffer();
-        rerun::viewer::show(log_messages)<span class="question-mark">?</span>;
+        session.show()<span class="question-mark">?</span>;
     }
 
     <span class="prelude-val">Ok</span>(())
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="api_demo" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.0 (fc594f156 2023-01-24)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="api_demo" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.1 (d5a82bbd2 2023-02-07)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>

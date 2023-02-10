@@ -1936,13 +1936,13 @@
     </span><span class="kw">pub</span>(<span class="kw">crate</span>) cluster_key: ComponentName,
 
     <span class="doccomment">/// The number of rows in the table: all indices should always be exactly of that length.
-    </span><span class="kw">pub</span>(<span class="kw">crate</span>) nb_rows: u64,
+    </span><span class="kw">pub</span>(<span class="kw">crate</span>) num_rows: u64,
 
     <span class="doccomment">/// All component indices for this bucket.
     ///
     /// One index per component: new components (and as such, new indices) can be added at any
     /// time!
-    /// When that happens, they will be retro-filled with nulls until they are [`Self::nb_rows`]
+    /// When that happens, they will be retro-filled with nulls until they are [`Self::num_rows`]
     /// long.
     </span><span class="kw">pub</span>(<span class="kw">crate</span>) indices: IntMap&lt;ComponentName, SecondaryIndex&gt;,
 
@@ -1956,7 +1956,7 @@
         <span class="kw">let </span><span class="self">Self </span>{
             ent_path,
             cluster_key: <span class="kw">_</span>,
-            nb_rows: <span class="kw">_</span>,
+            num_rows: <span class="kw">_</span>,
             indices: <span class="kw">_</span>,
             all_components: <span class="kw">_</span>,
         } = <span class="self">self</span>;
@@ -1991,19 +1991,19 @@
         <span class="kw">let </span><span class="self">Self </span>{
             ent_path: <span class="kw">_</span>,
             cluster_key,
-            nb_rows,
+            num_rows,
             indices,
             all_components: <span class="kw">_</span>,
         } = <span class="self">self</span>;
 
-        <span class="comment">// All indices should be `Self::nb_rows` long.
+        <span class="comment">// All indices should be `Self::num_rows` long.
         </span>{
             <span class="kw">for </span>(comp, index) <span class="kw">in </span>indices {
                 <span class="kw">let </span>secondary_len = index.len() <span class="kw">as </span>u64;
                 <span class="macro">ensure!</span>(
-                    <span class="kw-2">*</span>nb_rows == secondary_len,
+                    <span class="kw-2">*</span>num_rows == secondary_len,
                     <span class="string">&quot;found rogue secondary index for {comp:?}: \
-                        expected {nb_rows} rows, got {secondary_len} instead&quot;</span>,
+                        expected {num_rows} rows, got {secondary_len} instead&quot;</span>,
                 );
             }
         }
@@ -2827,4 +2827,4 @@
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="re_arrow_store" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.0 (fc594f156 2023-01-24)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="re_arrow_store" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.1 (d5a82bbd2 2023-02-07)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>

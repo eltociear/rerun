@@ -66,9 +66,19 @@
 <a href="#66" id="66">66</a>
 <a href="#67" id="67">67</a>
 <a href="#68" id="68">68</a>
-</pre><pre class="rust"><code><span class="doccomment">//! The Rerun Arrow-based datastore.
+<a href="#69" id="69">69</a>
+<a href="#70" id="70">70</a>
+<a href="#71" id="71">71</a>
+<a href="#72" id="72">72</a>
+<a href="#73" id="73">73</a>
+</pre><pre class="rust"><code><span class="doccomment">//! The Rerun datastore, implemented on top of [Apache Arrow](https://arrow.apache.org/)
+//! using the [`arrow2`] crate.
 //!
-//! * See [`DataStore`] for an overview of the core datastructures.
+//! This crate is an in-memory time series database for Rerun log data.
+//! It is indexed by Entity path, component, timeline, and time.
+//! It supports out-of-order insertions, and fast `O(log(N))` queries.
+//!
+//! * See [`DataStore`] for an overview of the core data structures.
 //! * See [`DataStore::latest_at`] and [`DataStore::range`] for the documentation of the public
 //!   read APIs.
 //! * See [`DataStore::insert`] for the documentation of the public write APIs.
@@ -135,4 +145,4 @@
     };
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="re_arrow_store" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.0 (fc594f156 2023-01-24)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="re_arrow_store" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.1 (d5a82bbd2 2023-02-07)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>

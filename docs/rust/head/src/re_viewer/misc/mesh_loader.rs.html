@@ -288,14 +288,14 @@
 
         <span class="kw">let </span>positions: Vec&lt;glam::Vec3&gt; =
             bytemuck::try_cast_vec(positions.clone()).map_err(|(err, <span class="kw">_</span>)| <span class="macro">anyhow!</span>(err))<span class="question-mark">?</span>;
-        <span class="kw">let </span>nb_positions = positions.len();
+        <span class="kw">let </span>num_positions = positions.len();
 
         <span class="kw">let </span>indices = <span class="kw">if let </span><span class="prelude-val">Some</span>(indices) = indices {
             indices.clone()
         } <span class="kw">else </span>{
             (<span class="number">0</span>..positions.len() <span class="kw">as </span>u32).collect()
         };
-        <span class="kw">let </span>nb_indices = indices.len();
+        <span class="kw">let </span>num_indices = indices.len();
 
         <span class="kw">let </span>normals = <span class="kw">if let </span><span class="prelude-val">Some</span>(normals) = normals {
             normals
@@ -313,7 +313,7 @@
                 normal: glam::Vec3::ZERO,
                 texcoord: glam::Vec2::ZERO,
             })
-            .take(nb_positions)
+            .take(num_positions)
             .collect()
         };
 
@@ -330,7 +330,7 @@
                     vertex_data: normals,
                     materials: <span class="macro">smallvec::smallvec!</span>[re_renderer::mesh::Material {
                         label: name.clone().into(),
-                        index_range: <span class="number">0</span>..nb_indices <span class="kw">as _</span>,
+                        index_range: <span class="number">0</span>..num_indices <span class="kw">as _</span>,
                         albedo: render_ctx.texture_manager_2d.white_texture_handle().clone(),
                         albedo_multiplier: albedo_factor.map_or(re_renderer::Rgba::WHITE, |v| {
                             re_renderer::Rgba::from_rgba_unmultiplied(v.x(), v.y(), v.z(), v.w())
@@ -361,4 +361,4 @@
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="re_viewer" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.0 (fc594f156 2023-01-24)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="re_viewer" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.1 (d5a82bbd2 2023-02-07)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>

@@ -677,6 +677,12 @@
 <a href="#677" id="677">677</a>
 <a href="#678" id="678">678</a>
 <a href="#679" id="679">679</a>
+<a href="#680" id="680">680</a>
+<a href="#681" id="681">681</a>
+<a href="#682" id="682">682</a>
+<a href="#683" id="683">683</a>
+<a href="#684" id="684">684</a>
+<a href="#685" id="685">685</a>
 </pre><pre class="rust"><code><span class="doccomment">//! Rerun GUI theme and helpers, built around [`egui`](https://www.egui.rs/).
 
 </span><span class="kw">mod </span>command;
@@ -883,9 +889,15 @@
             .color(style.visuals.error_fg_color)
     }
 
-    <span class="kw">pub fn </span>loop_selection_color() -&gt; egui::Color32 {
-        egui::Color32::from_rgb(<span class="number">30</span>, <span class="number">140</span>, <span class="number">90</span>)
-    }
+    <span class="doccomment">/// The color we use to mean &quot;loop this selection&quot;
+    </span><span class="kw">pub fn </span>loop_selection_color() -&gt; egui::Color32 {
+        egui::Color32::from_rgb(<span class="number">1</span>, <span class="number">37</span>, <span class="number">105</span>) <span class="comment">// from figma 2023-02-09
+    </span>}
+
+    <span class="doccomment">/// The color we use to mean &quot;loop all the data&quot;
+    </span><span class="kw">pub fn </span>loop_everything_color() -&gt; egui::Color32 {
+        egui::Color32::from_rgb(<span class="number">2</span>, <span class="number">80</span>, <span class="number">45</span>) <span class="comment">// from figma 2023-02-09
+    </span>}
 
     <span class="doccomment">/// Paint a watermark
     </span><span class="kw">pub fn </span>paint_watermark(<span class="kw-2">&amp;</span><span class="self">self</span>) {
@@ -1357,4 +1369,4 @@
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="re_ui" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.0 (fc594f156 2023-01-24)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="re_ui" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.1 (d5a82bbd2 2023-02-07)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>

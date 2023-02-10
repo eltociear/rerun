@@ -129,13 +129,13 @@
 }
 
 <span class="doccomment">/// Create `len` dummy `InstanceKey` keys. These keys will be sorted.
-</span><span class="kw">pub fn </span>build_some_instances(nb_instances: usize) -&gt; Vec&lt;InstanceKey&gt; {
+</span><span class="kw">pub fn </span>build_some_instances(num_instances: usize) -&gt; Vec&lt;InstanceKey&gt; {
     <span class="kw">use </span>rand::seq::SliceRandom;
     <span class="kw">let </span><span class="kw-2">mut </span>rng = rand::thread_rng();
 
     <span class="comment">// Allocate pool of 10x the potential instance keys, draw a random sampling, and then sort it
-    </span><span class="kw">let </span><span class="kw-2">mut </span>instance_pool = (<span class="number">0</span>..(nb_instances * <span class="number">10</span>)).collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;();
-    <span class="kw">let </span>(rand_instances, <span class="kw">_</span>) = instance_pool.partial_shuffle(<span class="kw-2">&amp;mut </span>rng, nb_instances);
+    </span><span class="kw">let </span><span class="kw-2">mut </span>instance_pool = (<span class="number">0</span>..(num_instances * <span class="number">10</span>)).collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;();
+    <span class="kw">let </span>(rand_instances, <span class="kw">_</span>) = instance_pool.partial_shuffle(<span class="kw-2">&amp;mut </span>rng, num_instances);
     <span class="kw">let </span><span class="kw-2">mut </span>sorted_instances = rand_instances.to_vec();
     sorted_instances.sort();
 
@@ -151,4 +151,4 @@
     instances
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="re_log_types" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.0 (fc594f156 2023-01-24)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="re_log_types" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.1 (d5a82bbd2 2023-02-07)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>

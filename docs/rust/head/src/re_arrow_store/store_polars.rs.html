@@ -384,12 +384,12 @@
             <span class="kw">let </span>ent_path = index.ent_path.clone();
 
             <span class="kw">let </span><span class="kw-2">mut </span>df = index.to_dataframe(<span class="self">self</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.config);
-            <span class="kw">let </span>nb_rows = df.get_columns()[<span class="number">0</span>].len();
+            <span class="kw">let </span>num_rows = df.get_columns()[<span class="number">0</span>].len();
 
             <span class="comment">// Add a column where every row is a boolean true (timeless)
             </span><span class="kw">let </span>timeless = {
-                <span class="kw">let </span>timeless = BooleanArray::from(<span class="macro">vec!</span>[<span class="prelude-val">Some</span>(<span class="bool-val">true</span>); nb_rows]).boxed();
-                new_infallible_series(IS_TIMELESS_COL, timeless.as_ref(), nb_rows)
+                <span class="kw">let </span>timeless = BooleanArray::from(<span class="macro">vec!</span>[<span class="prelude-val">Some</span>(<span class="bool-val">true</span>); num_rows]).boxed();
+                new_infallible_series(IS_TIMELESS_COL, timeless.as_ref(), num_rows)
             };
             <span class="kw">let </span>df = df.with_column(timeless).unwrap(); <span class="comment">// cannot fail
 
@@ -403,14 +403,14 @@
                 .map(|bucket| (index.ent_path.clone(), bucket))
                 .map(|(ent_path, bucket)| {
                     <span class="kw">let </span><span class="kw-2">mut </span>df = bucket.to_dataframe(<span class="self">self</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.config);
-                    <span class="kw">let </span>nb_rows = df.get_columns()[<span class="number">0</span>].len();
+                    <span class="kw">let </span>num_rows = df.get_columns()[<span class="number">0</span>].len();
 
                     <span class="comment">// Add a column where every row is the entity path.
                     </span><span class="kw">let </span>entities = {
                         <span class="kw">let </span>ent_path = ent_path.to_string();
                         <span class="kw">let </span>ent_path = <span class="prelude-val">Some</span>(ent_path.as_str());
-                        <span class="kw">let </span>entities = Utf8Array::&lt;i32&gt;::from(<span class="macro">vec!</span>[ent_path; nb_rows]).boxed();
-                        new_infallible_series(<span class="string">&quot;entity&quot;</span>, entities.as_ref(), nb_rows)
+                        <span class="kw">let </span>entities = Utf8Array::&lt;i32&gt;::from(<span class="macro">vec!</span>[ent_path; num_rows]).boxed();
+                        new_infallible_series(<span class="string">&quot;entity&quot;</span>, entities.as_ref(), num_rows)
                     };
                     <span class="kw">let </span>df = df.with_column(entities).unwrap(); <span class="comment">// cannot fail
 
@@ -432,13 +432,13 @@
         <span class="kw">let </span>dfs: Vec&lt;<span class="kw">_</span>&gt; = timeless_dfs
             .chain(temporal_dfs)
             .map(|(ent_path, <span class="kw-2">mut </span>df)| {
-                <span class="kw">let </span>nb_rows = df.get_columns()[<span class="number">0</span>].len();
+                <span class="kw">let </span>num_rows = df.get_columns()[<span class="number">0</span>].len();
                 <span class="comment">// Add a column where every row is the entity path.
                 </span><span class="kw">let </span>entities = {
                     <span class="kw">let </span>ent_path = ent_path.to_string();
                     <span class="kw">let </span>ent_path = <span class="prelude-val">Some</span>(ent_path.as_str());
-                    <span class="kw">let </span>entities = Utf8Array::&lt;i32&gt;::from(<span class="macro">vec!</span>[ent_path; nb_rows]).boxed();
-                    new_infallible_series(<span class="string">&quot;entity&quot;</span>, entities.as_ref(), nb_rows)
+                    <span class="kw">let </span>entities = Utf8Array::&lt;i32&gt;::from(<span class="macro">vec!</span>[ent_path; num_rows]).boxed();
+                    new_infallible_series(<span class="string">&quot;entity&quot;</span>, entities.as_ref(), num_rows)
                 };
                 df.with_column(entities).unwrap().clone() <span class="comment">// cannot fail
             </span>})
@@ -490,14 +490,14 @@
         <span class="kw">let </span><span class="self">Self </span>{
             ent_path: <span class="kw">_</span>,
             cluster_key: <span class="kw">_</span>,
-            nb_rows,
+            num_rows,
             indices,
             all_components: <span class="kw">_</span>,
         } = <span class="self">self</span>;
 
         <span class="kw">let </span>insert_ids = config
             .store_insert_ids
-            .then(|| insert_ids_as_series(<span class="kw-2">*</span>nb_rows <span class="kw">as </span>usize, indices))
+            .then(|| insert_ids_as_series(<span class="kw-2">*</span>num_rows <span class="kw">as </span>usize, indices))
             .flatten();
 
         <span class="kw">let </span>comp_series =
@@ -507,7 +507,7 @@
             // One column for each component index.
             </span>.chain(indices.iter().filter_map(|(component, comp_row_nrs)| {
             <span class="kw">let </span>datatype = find_component_datatype(store, component)<span class="question-mark">?</span>;
-                component_as_series(store, <span class="kw-2">*</span>nb_rows <span class="kw">as </span>usize, datatype, <span class="kw-2">*</span>component, comp_row_nrs).into()
+                component_as_series(store, <span class="kw-2">*</span>num_rows <span class="kw">as </span>usize, datatype, <span class="kw-2">*</span>component, comp_row_nrs).into()
             }));
 
         DataFrame::new(comp_series.collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;())
@@ -526,7 +526,7 @@
         <span class="macro">crate::profile_function!</span>();
 
         <span class="kw">let </span>(<span class="kw">_</span>, times) = <span class="self">self</span>.times();
-        <span class="kw">let </span>nb_rows = times.len();
+        <span class="kw">let </span>num_rows = times.len();
 
         <span class="kw">let </span>IndexBucketIndices {
             is_sorted: <span class="kw">_</span>,
@@ -537,7 +537,7 @@
 
         <span class="kw">let </span>insert_ids = config
             .store_insert_ids
-            .then(|| insert_ids_as_series(nb_rows, indices))
+            .then(|| insert_ids_as_series(num_rows, indices))
             .flatten();
 
         <span class="comment">// Need to create one `Series` for the time index and one for each component index.
@@ -548,7 +548,7 @@
             </span><span class="prelude-val">Some</span>(new_infallible_series(
                 <span class="self">self</span>.timeline.name().as_str(),
                 <span class="kw-2">&amp;</span>times,
-                nb_rows,
+                num_rows,
             )),
         ]
         .into_iter()
@@ -556,7 +556,7 @@
         // One column for each component index.
         </span>.chain(indices.iter().filter_map(|(component, comp_row_nrs)| {
             <span class="kw">let </span>datatype = find_component_datatype(store, component)<span class="question-mark">?</span>;
-            component_as_series(store, nb_rows, datatype, <span class="kw-2">*</span>component, comp_row_nrs).into()
+            component_as_series(store, num_rows, datatype, <span class="kw-2">*</span>component, comp_row_nrs).into()
         }));
 
         DataFrame::new(comp_series.collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;())
@@ -569,7 +569,7 @@
 <span class="comment">// ---
 
 </span><span class="kw">fn </span>insert_ids_as_series(
-    nb_rows: usize,
+    num_rows: usize,
     indices: <span class="kw-2">&amp;</span>IntMap&lt;ComponentName, SecondaryIndex&gt;,
 ) -&gt; <span class="prelude-ty">Option</span>&lt;Series&gt; {
     <span class="macro">crate::profile_function!</span>();
@@ -580,7 +580,7 @@
             .map(|id| id.map(|id| id.<span class="number">0</span>.get()))
             .collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;();
         <span class="kw">let </span>insert_ids = UInt64Array::from(insert_ids);
-        new_infallible_series(DataStore::insert_id_key().as_str(), <span class="kw-2">&amp;</span>insert_ids, nb_rows)
+        new_infallible_series(DataStore::insert_id_key().as_str(), <span class="kw-2">&amp;</span>insert_ids, num_rows)
     })
 }
 
@@ -603,7 +603,7 @@
 
 <span class="kw">fn </span>component_as_series(
     store: <span class="kw-2">&amp;</span>DataStore,
-    nb_rows: usize,
+    num_rows: usize,
     datatype: arrow2::datatypes::DataType,
     component: ComponentName,
     comp_row_nrs: <span class="kw-2">&amp;</span>[<span class="prelude-ty">Option</span>&lt;RowIndex&gt;],
@@ -645,7 +645,7 @@
         <span class="prelude-val">Some</span>(Bitmap::from(comp_validity)),
     );
 
-    new_infallible_series(component.as_str(), <span class="kw-2">&amp;</span>comp_values, nb_rows)
+    new_infallible_series(component.as_str(), <span class="kw-2">&amp;</span>comp_values, num_rows)
 }
 
 <span class="comment">// ---
@@ -709,4 +709,4 @@
     df.select(columns).unwrap()
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="re_arrow_store" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.0 (fc594f156 2023-01-24)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="re_arrow_store" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.1 (d5a82bbd2 2023-02-07)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>

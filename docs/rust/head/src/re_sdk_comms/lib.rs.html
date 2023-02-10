@@ -53,7 +53,8 @@
 <a href="#53" id="53">53</a>
 <a href="#54" id="54">54</a>
 <a href="#55" id="55">55</a>
-</pre><pre class="rust"><code><span class="doccomment">//! Communications between server and viewer.
+<a href="#56" id="56">56</a>
+</pre><pre class="rust"><code><span class="doccomment">//! TCP communications between a Rerun logging SDK and server/viewer.
 //!
 //! ## Feature flags
 </span><span class="attr">#![doc = <span class="macro">document_features::document_features!</span>()]
@@ -82,7 +83,8 @@
 
 <span class="kw">pub const </span>DEFAULT_SERVER_PORT: u16 = <span class="number">9876</span>;
 
-<span class="kw">pub fn </span>default_server_addr() -&gt; std::net::SocketAddr {
+<span class="doccomment">/// The default address of a Rerun TCP server which an SDK connects to.
+</span><span class="kw">pub fn </span>default_server_addr() -&gt; std::net::SocketAddr {
     std::net::SocketAddr::from(([<span class="number">127</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>], DEFAULT_SERVER_PORT))
 }
 
@@ -109,4 +111,4 @@
         .context(<span class="string">&quot;bincode&quot;</span>)
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="re_sdk_comms" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.0 (fc594f156 2023-01-24)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="re_sdk_comms" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.1 (d5a82bbd2 2023-02-07)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>

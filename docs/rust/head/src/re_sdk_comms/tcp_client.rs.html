@@ -94,15 +94,98 @@
 <a href="#94" id="94">94</a>
 <a href="#95" id="95">95</a>
 <a href="#96" id="96">96</a>
+<a href="#97" id="97">97</a>
+<a href="#98" id="98">98</a>
+<a href="#99" id="99">99</a>
+<a href="#100" id="100">100</a>
+<a href="#101" id="101">101</a>
+<a href="#102" id="102">102</a>
+<a href="#103" id="103">103</a>
+<a href="#104" id="104">104</a>
+<a href="#105" id="105">105</a>
+<a href="#106" id="106">106</a>
+<a href="#107" id="107">107</a>
+<a href="#108" id="108">108</a>
+<a href="#109" id="109">109</a>
+<a href="#110" id="110">110</a>
+<a href="#111" id="111">111</a>
+<a href="#112" id="112">112</a>
+<a href="#113" id="113">113</a>
+<a href="#114" id="114">114</a>
+<a href="#115" id="115">115</a>
+<a href="#116" id="116">116</a>
+<a href="#117" id="117">117</a>
+<a href="#118" id="118">118</a>
+<a href="#119" id="119">119</a>
+<a href="#120" id="120">120</a>
+<a href="#121" id="121">121</a>
+<a href="#122" id="122">122</a>
+<a href="#123" id="123">123</a>
+<a href="#124" id="124">124</a>
+<a href="#125" id="125">125</a>
+<a href="#126" id="126">126</a>
+<a href="#127" id="127">127</a>
+<a href="#128" id="128">128</a>
+<a href="#129" id="129">129</a>
+<a href="#130" id="130">130</a>
+<a href="#131" id="131">131</a>
+<a href="#132" id="132">132</a>
+<a href="#133" id="133">133</a>
+<a href="#134" id="134">134</a>
+<a href="#135" id="135">135</a>
+<a href="#136" id="136">136</a>
+<a href="#137" id="137">137</a>
+<a href="#138" id="138">138</a>
+<a href="#139" id="139">139</a>
+<a href="#140" id="140">140</a>
+<a href="#141" id="141">141</a>
+<a href="#142" id="142">142</a>
 </pre><pre class="rust"><code><span class="kw">use </span>std::{
     io::Write,
     net::{SocketAddr, TcpStream},
 };
 
+<span class="doccomment">/// State of the [`TcpStream`]
+///
+/// Because the [`TcpClient`] lazily connects on [`TcpClient::send`], it needs a
+/// very simple state machine to track the state of the connection. A trinary
+/// state is used to specifically differentiate between
+/// [`TcpStreamState::Pending`] which is still a nominal state for any new tcp
+/// connection, and [`TcpStreamState::Disconnected`] which implies either a
+/// failure to connect, or an error on an already established stream.
+</span><span class="kw">enum </span>TcpStreamState {
+    <span class="doccomment">/// The [`TcpStream`] is yet to be connected.
+    ///
+    /// Behavior: Try to connect on next [`TcpClient::send()`]
+    ///
+    /// Transitions:
+    ///  - Pending -&gt; Connected on successful connection.
+    ///  - Pending -&gt; Disconnected on failed connection.
+    </span>Pending,
+
+    <span class="doccomment">/// A healthy [`TcpStream`] ready to send packets
+    ///
+    /// Behavior: Send packets on [`TcpClient::send()`]
+    ///
+    /// Transitions:
+    ///  - Connected -&gt; Disconnected on send error
+    ///  - Connected -&gt; Pending on [`TcpClient::set_addr`]
+    </span>Connected(TcpStream),
+
+    <span class="doccomment">/// A broken [`TcpStream`] which experienced a failure to connect or send
+    ///
+    /// Behavior: Try to re-connect on next [`TcpClient::send()`]
+    ///
+    /// Transitions:
+    ///  - Disconnected -&gt; Connected on successful connection.
+    ///  - Disconnected -&gt; Pending on [`TcpClient::set_addr`]
+    </span>Disconnected,
+}
+
 <span class="doccomment">/// Connect to a rerun server and send log messages.
 </span><span class="kw">pub struct </span>TcpClient {
     addrs: Vec&lt;SocketAddr&gt;,
-    stream: <span class="prelude-ty">Option</span>&lt;TcpStream&gt;,
+    stream_state: TcpStreamState,
 }
 
 <span class="kw">impl </span>Default <span class="kw">for </span>TcpClient {
@@ -115,7 +198,7 @@
     <span class="kw">pub fn </span>new(addr: SocketAddr) -&gt; <span class="self">Self </span>{
         <span class="self">Self </span>{
             addrs: <span class="macro">vec!</span>[addr],
-            stream: <span class="prelude-val">None</span>,
+            stream_state: TcpStreamState::Pending,
         }
     }
 
@@ -123,26 +206,28 @@
         <span class="kw">let </span>addrs = <span class="macro">vec!</span>[addr];
         <span class="kw">if </span>addrs != <span class="self">self</span>.addrs {
             <span class="self">self</span>.addrs = addrs;
-            <span class="self">self</span>.stream = <span class="prelude-val">None</span>;
+            <span class="self">self</span>.stream_state = TcpStreamState::Pending;
         }
     }
 
     <span class="doccomment">/// return `false` on failure. Does nothing if already connected.
     </span><span class="kw">pub fn </span>connect(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; anyhow::Result&lt;()&gt; {
-        <span class="kw">if </span><span class="self">self</span>.stream.is_some() {
+        <span class="kw">if let </span>TcpStreamState::Connected(<span class="kw">_</span>) = <span class="self">self</span>.stream_state {
             <span class="prelude-val">Ok</span>(())
         } <span class="kw">else </span>{
             <span class="macro">re_log::debug!</span>(<span class="string">&quot;Connecting to {:?}…&quot;</span>, <span class="self">self</span>.addrs);
             <span class="kw">match </span>TcpStream::connect(<span class="kw-2">&amp;</span><span class="self">self</span>.addrs[..]) {
                 <span class="prelude-val">Ok</span>(<span class="kw-2">mut </span>stream) =&gt; {
                     <span class="kw">if let </span><span class="prelude-val">Err</span>(err) = stream.write(<span class="kw-2">&amp;</span><span class="kw">crate</span>::PROTOCOL_VERSION.to_le_bytes()) {
+                        <span class="self">self</span>.stream_state = TcpStreamState::Disconnected;
                         <span class="macro">anyhow::bail!</span>(<span class="string">&quot;Failed to send to Rerun server at {:?}: {err}&quot;</span>, <span class="self">self</span>.addrs);
                     } <span class="kw">else </span>{
-                        <span class="self">self</span>.stream = <span class="prelude-val">Some</span>(stream);
+                        <span class="self">self</span>.stream_state = TcpStreamState::Connected(stream);
                         <span class="prelude-val">Ok</span>(())
                     }
                 }
                 <span class="prelude-val">Err</span>(err) =&gt; {
+                    <span class="self">self</span>.stream_state = TcpStreamState::Disconnected;
                     <span class="macro">anyhow::bail!</span>(
                         <span class="string">&quot;Failed to connect to Rerun server at {:?}: {err}&quot;</span>,
                         <span class="self">self</span>.addrs
@@ -158,15 +243,15 @@
 
         <span class="self">self</span>.connect()<span class="question-mark">?</span>;
 
-        <span class="kw">if let </span><span class="prelude-val">Some</span>(stream) = <span class="kw-2">&amp;mut </span><span class="self">self</span>.stream {
+        <span class="kw">if let </span>TcpStreamState::Connected(stream) = <span class="kw-2">&amp;mut </span><span class="self">self</span>.stream_state {
             <span class="macro">re_log::trace!</span>(<span class="string">&quot;Sending a packet of size {}…&quot;</span>, packet.len());
             <span class="kw">if let </span><span class="prelude-val">Err</span>(err) = stream.write(<span class="kw-2">&amp;</span>(packet.len() <span class="kw">as </span>u32).to_le_bytes()) {
-                <span class="self">self</span>.stream = <span class="prelude-val">None</span>;
+                <span class="self">self</span>.stream_state = TcpStreamState::Disconnected;
                 <span class="macro">anyhow::bail!</span>(<span class="string">&quot;Failed to send to Rerun server at {:?}: {err}&quot;</span>, <span class="self">self</span>.addrs);
             }
 
             <span class="kw">if let </span><span class="prelude-val">Err</span>(err) = stream.write(packet) {
-                <span class="self">self</span>.stream = <span class="prelude-val">None</span>;
+                <span class="self">self</span>.stream_state = TcpStreamState::Disconnected;
                 <span class="macro">anyhow::bail!</span>(<span class="string">&quot;Failed to send to Rerun server at {:?}: {err}&quot;</span>, <span class="self">self</span>.addrs);
             }
 
@@ -178,17 +263,24 @@
 
     <span class="doccomment">/// Wait until all logged data have been sent.
     </span><span class="kw">pub fn </span>flush(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
-        <span class="kw">if let </span><span class="prelude-val">Some</span>(stream) = <span class="kw-2">&amp;mut </span><span class="self">self</span>.stream {
+        <span class="kw">if let </span>TcpStreamState::Connected(stream) = <span class="kw-2">&amp;mut </span><span class="self">self</span>.stream_state {
             <span class="kw">if let </span><span class="prelude-val">Err</span>(err) = stream.flush() {
                 <span class="macro">re_log::warn!</span>(<span class="string">&quot;Failed to flush: {err}&quot;</span>);
+                <span class="self">self</span>.stream_state = TcpStreamState::Disconnected;
             }
         }
         <span class="macro">re_log::trace!</span>(<span class="string">&quot;TCP stream flushed.&quot;</span>);
     }
 
-    <span class="kw">pub fn </span>is_connected(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
-        <span class="self">self</span>.stream.is_some()
+    <span class="doccomment">/// Check if the underlying [`TcpStream`] has entered the [`TcpStreamState::Disconnected`] state
+    ///
+    /// Note that this only occurs after a failure to connect or a failure to send.
+    </span><span class="kw">pub fn </span>has_disconnected(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="kw">match </span><span class="self">self</span>.stream_state {
+            TcpStreamState::Pending | TcpStreamState::Connected(<span class="kw">_</span>) =&gt; <span class="bool-val">false</span>,
+            TcpStreamState::Disconnected =&gt; <span class="bool-val">true</span>,
+        }
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="re_sdk_comms" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.0 (fc594f156 2023-01-24)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="re_sdk_comms" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.1 (d5a82bbd2 2023-02-07)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>

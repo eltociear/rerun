@@ -314,10 +314,11 @@
 <span class="kw">use </span>anyhow::anyhow;
 <span class="kw">use </span>bytes::Bytes;
 <span class="kw">use </span>clap::Parser;
+<span class="kw">use </span>rerun::components::{Mesh3D, MeshId, RawMesh3D, Transform, Vec4D, ViewCoordinates};
+<span class="kw">use </span>rerun::time::{TimeType, Timeline};
 <span class="kw">use </span>rerun::{
     external::{re_log, re_memory::AccountingAllocator},
-    ApplicationId, EntityPath, Mesh3D, MeshId, MsgSender, RawMesh3D, RecordingId, Session,
-    TimeType, Timeline, Transform, Vec4D, ViewCoordinates,
+    ApplicationId, EntityPath, MsgSender, RecordingId, Session,
 };
 
 <span class="comment">// TODO(cmc): This example needs to support animations to showcase Rerun&#39;s time capabilities.
@@ -357,14 +358,14 @@
 <span class="comment">// Declare how to turn a glTF transform into a Rerun component (`Transform`).
 </span><span class="kw">impl </span>From&lt;GltfTransform&gt; <span class="kw">for </span>Transform {
     <span class="kw">fn </span>from(transform: GltfTransform) -&gt; <span class="self">Self </span>{
-        Transform::Rigid3(rerun::Rigid3 {
-            rotation: rerun::Quaternion {
+        Transform::Rigid3(rerun::components::Rigid3 {
+            rotation: rerun::components::Quaternion {
                 x: transform.r[<span class="number">0</span>],
                 y: transform.r[<span class="number">1</span>],
                 z: transform.r[<span class="number">2</span>],
                 w: transform.r[<span class="number">3</span>],
             },
-            translation: rerun::Vec3D(transform.t),
+            translation: rerun::components::Vec3D(transform.t),
         })
     }
 }
@@ -442,7 +443,7 @@
     <span class="kw">let </span>args = Args::parse();
     <span class="kw">let </span>addr = <span class="kw">match </span>args.connect.as_ref() {
         <span class="prelude-val">Some</span>(<span class="prelude-val">Some</span>(addr)) =&gt; <span class="prelude-val">Some</span>(addr.parse()<span class="question-mark">?</span>),
-        <span class="prelude-val">Some</span>(<span class="prelude-val">None</span>) =&gt; <span class="prelude-val">Some</span>(rerun::default_server_addr()),
+        <span class="prelude-val">Some</span>(<span class="prelude-val">None</span>) =&gt; <span class="prelude-val">Some</span>(rerun::log::default_server_addr()),
         <span class="prelude-val">None </span>=&gt; <span class="prelude-val">None</span>,
     };
 
@@ -472,8 +473,7 @@
     // TODO(cmc): missing flags: save, serve
     // TODO(cmc): expose an easy to use async local mode.
     </span><span class="kw">if </span>args.connect.is_none() {
-        <span class="kw">let </span>log_messages = session.drain_log_messages_buffer();
-        rerun::viewer::show(log_messages)<span class="question-mark">?</span>;
+        session.show()<span class="question-mark">?</span>;
     }
 
     <span class="prelude-val">Ok</span>(())
@@ -601,4 +601,4 @@
     })
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="raw_mesh" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.0 (fc594f156 2023-01-24)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="raw_mesh" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.1 (d5a82bbd2 2023-02-07)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>

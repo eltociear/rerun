@@ -76,6 +76,16 @@
 <a href="#76" id="76">76</a>
 <a href="#77" id="77">77</a>
 <a href="#78" id="78">78</a>
+<a href="#79" id="79">79</a>
+<a href="#80" id="80">80</a>
+<a href="#81" id="81">81</a>
+<a href="#82" id="82">82</a>
+<a href="#83" id="83">83</a>
+<a href="#84" id="84">84</a>
+<a href="#85" id="85">85</a>
+<a href="#86" id="86">86</a>
+<a href="#87" id="87">87</a>
+<a href="#88" id="88">88</a>
 </pre><pre class="rust"><code><span class="kw">use </span>arrow2_convert::{ArrowDeserialize, ArrowField, ArrowSerialize};
 
 <span class="kw">use </span><span class="kw">crate</span>::msg_bundle::Component;
@@ -106,6 +116,16 @@
 </span><span class="kw">pub struct </span>ColorRGBA(<span class="kw">pub </span>u32);
 
 <span class="kw">impl </span>ColorRGBA {
+    <span class="attr">#[inline]
+    </span><span class="kw">pub fn </span>from_rgb(r: u8, g: u8, b: u8) -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::from([r, g, b, <span class="number">255</span>])
+    }
+
+    <span class="attr">#[inline]
+    </span><span class="kw">pub fn </span>from_rgba(r: u8, g: u8, b: u8, a: u8) -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::from([r, g, b, a])
+    }
+
     <span class="attr">#[inline]
     </span><span class="kw">pub fn </span>to_array(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; [u8; <span class="number">4</span>] {
         [
@@ -155,4 +175,4 @@
     <span class="macro">assert_eq!</span>(colors_in, colors_out);
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="re_log_types" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.0 (fc594f156 2023-01-24)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="re_log_types" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.1 (d5a82bbd2 2023-02-07)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>

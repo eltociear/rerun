@@ -281,6 +281,13 @@
 <a href="#281" id="281">281</a>
 <a href="#282" id="282">282</a>
 <a href="#283" id="283">283</a>
+<a href="#284" id="284">284</a>
+<a href="#285" id="285">285</a>
+<a href="#286" id="286">286</a>
+<a href="#287" id="287">287</a>
+<a href="#288" id="288">288</a>
+<a href="#289" id="289">289</a>
+<a href="#290" id="290">290</a>
 </pre><pre class="rust"><code><span class="doccomment">//! Types used for the log data.
 //!
 //! ## Feature flags
@@ -311,6 +318,9 @@
 <span class="kw">pub mod </span>external {
     <span class="kw">pub use </span>arrow2;
     <span class="kw">pub use </span>arrow2_convert;
+
+    <span class="attr">#[cfg(feature = <span class="string">&quot;glam&quot;</span>)]
+    </span><span class="kw">pub use </span>glam;
 }
 
 <span class="kw">pub use </span><span class="self">self</span>::component_types::context;
@@ -403,7 +413,10 @@
 </span><span class="kw">pub struct </span>ApplicationId(<span class="kw">pub </span>String);
 
 <span class="kw">impl </span>ApplicationId {
-    <span class="kw">pub fn </span>unknown() -&gt; <span class="self">Self </span>{
+    <span class="doccomment">/// The default [`ApplicationId`] if the user hasn&#39;t set one.
+    ///
+    /// Currently: `&quot;unknown_app_id&quot;`.
+    </span><span class="kw">pub fn </span>unknown() -&gt; <span class="self">Self </span>{
         <span class="self">Self</span>(<span class="string">&quot;unknown_app_id&quot;</span>.to_owned())
     }
 }
@@ -517,13 +530,14 @@
     </span><span class="kw">pub </span>path_op: PathOp,
 }
 
-<span class="attr">#[derive(Clone, Debug, PartialEq, Eq)]
+<span class="doccomment">/// Operation to perform on an [`EntityPath`], e.g. clearing all components.
+</span><span class="attr">#[derive(Clone, Debug, PartialEq, Eq)]
 #[cfg_attr(feature = <span class="string">&quot;serde&quot;</span>, derive(serde::Deserialize, serde::Serialize))]
 </span><span class="kw">pub enum </span>PathOp {
-    <span class="comment">// Clear all the components stored at an [`EntityPath`]
+    <span class="doccomment">/// Clear all the components stored at an [`EntityPath`]
     </span>ClearComponents(EntityPath),
 
-    <span class="comment">// Clear all the components of an `[EntityPath]` and any descendants.
+    <span class="doccomment">/// Clear all the components of an `[EntityPath]` and any descendants.
     </span>ClearRecursive(EntityPath),
 }
 
@@ -565,4 +579,4 @@
     };
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="re_log_types" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.0 (fc594f156 2023-01-24)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="re_log_types" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.1 (d5a82bbd2 2023-02-07)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>

@@ -136,9 +136,27 @@
 <a href="#136" id="136">136</a>
 <a href="#137" id="137">137</a>
 <a href="#138" id="138">138</a>
+<a href="#139" id="139">139</a>
+<a href="#140" id="140">140</a>
+<a href="#141" id="141">141</a>
+<a href="#142" id="142">142</a>
+<a href="#143" id="143">143</a>
+<a href="#144" id="144">144</a>
+<a href="#145" id="145">145</a>
+<a href="#146" id="146">146</a>
+<a href="#147" id="147">147</a>
+<a href="#148" id="148">148</a>
+<a href="#149" id="149">149</a>
+<a href="#150" id="150">150</a>
+<a href="#151" id="151">151</a>
+<a href="#152" id="152">152</a>
+<a href="#153" id="153">153</a>
+<a href="#154" id="154">154</a>
+<a href="#155" id="155">155</a>
+<a href="#156" id="156">156</a>
 </pre><pre class="rust"><code><span class="kw">use </span><span class="kw">crate</span>::time::{Duration, Time};
 
-<span class="doccomment">/// Either nanoseconds or sequence numbers.
+<span class="doccomment">/// A 64-bit number describing either nanoseconds OR sequence numbers.
 ///
 /// Must be matched with a [`crate::TimeType`] to know what.
 ///
@@ -158,10 +176,28 @@
     </span><span class="comment">// The reason we don&#39;t use i64::MIN is because in the time panel we need
     // to be able to pan to before the `TimeInt::BEGINNING`, and so we need
     // a bit of leeway.
-    </span><span class="kw">pub const </span>BEGINNING: TimeInt = TimeInt(i64::MIN / <span class="number">2</span>);
+    </span><span class="kw">pub const </span>BEGINNING: <span class="self">Self </span>= <span class="self">Self</span>(i64::MIN / <span class="number">2</span>);
 
-    <span class="kw">pub const </span>MIN: TimeInt = TimeInt(i64::MIN);
-    <span class="kw">pub const </span>MAX: TimeInt = TimeInt(i64::MAX);
+    <span class="kw">pub const </span>MIN: <span class="self">Self </span>= <span class="self">Self</span>(i64::MIN);
+    <span class="kw">pub const </span>MAX: <span class="self">Self </span>= <span class="self">Self</span>(i64::MAX);
+
+    <span class="doccomment">/// For time timelines.
+    </span><span class="attr">#[inline]
+    </span><span class="kw">pub fn </span>from_nanos(nanos: i64) -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>(nanos)
+    }
+
+    <span class="doccomment">/// For time timelines.
+    </span><span class="attr">#[inline]
+    </span><span class="kw">pub fn </span>from_seconds(seconds: i64) -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::from_nanos(seconds.saturating_mul(<span class="number">1_000_000_000</span>))
+    }
+
+    <span class="doccomment">/// For sequence timelines.
+    </span><span class="attr">#[inline]
+    </span><span class="kw">pub fn </span>from_sequence(sequence: i64) -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>(sequence)
+    }
 
     <span class="attr">#[inline]
     </span><span class="kw">pub fn </span>as_i64(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; i64 {
@@ -275,4 +311,4 @@
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="re_log_types" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.0 (fc594f156 2023-01-24)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="re_log_types" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.1 (d5a82bbd2 2023-02-07)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>

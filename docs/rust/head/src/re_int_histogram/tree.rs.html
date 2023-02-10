@@ -955,7 +955,7 @@
     /// To get all individual entries, use `cutoff_size&lt;=1`.
     /// When `cutoff_size &gt; 1` you will get approximate ranges, which may cover elements that has no count.
     ///
-    /// For instance, inserting tow elements at `10` and `15` and setting a `cutoff_size=10`
+    /// For example, inserting two elements at `10` and `15` and setting a `cutoff_size=10`
     /// you may get a single range `[8, 16]` with the total count.
     </span><span class="kw">pub fn </span>range(<span class="kw-2">&amp;</span><span class="self">self</span>, range: <span class="kw">impl </span>std::ops::RangeBounds&lt;i64&gt;, cutoff_size: u64) -&gt; Iter&lt;<span class="lifetime">&#39;_</span>&gt; {
         <span class="kw">let </span>range = range_u64_from_range_bounds(range);
@@ -1627,4 +1627,4 @@
     );
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="re_int_histogram" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.0 (fc594f156 2023-01-24)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="re_int_histogram" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.1 (d5a82bbd2 2023-02-07)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>

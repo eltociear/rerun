@@ -659,6 +659,13 @@
 <a href="#659" id="659">659</a>
 <a href="#660" id="660">660</a>
 <a href="#661" id="661">661</a>
+<a href="#662" id="662">662</a>
+<a href="#663" id="663">663</a>
+<a href="#664" id="664">664</a>
+<a href="#665" id="665">665</a>
+<a href="#666" id="666">666</a>
+<a href="#667" id="667">667</a>
+<a href="#668" id="668">668</a>
 </pre><pre class="rust"><code><span class="kw">use </span>std::sync::Arc;
 
 <span class="kw">use </span>arrow2::array::{FixedSizeBinaryArray, MutableFixedSizeBinaryArray};
@@ -913,16 +920,19 @@
     }
 }
 
-<span class="comment">// TODO(jleibs) This should be extended to include things like rgb vs bgr
+<span class="doccomment">/// How to interpret the contents of a tensor.
+</span><span class="comment">// TODO(jleibs) This should be extended to include things like rgb vs bgr
 </span><span class="attr">#[derive(Clone, Copy, Debug, PartialEq, Eq, ArrowField, ArrowSerialize, ArrowDeserialize)]
 #[cfg_attr(feature = <span class="string">&quot;serde&quot;</span>, derive(serde::Deserialize, serde::Serialize))]
 #[arrow_field(<span class="kw">type </span>= <span class="string">&quot;dense&quot;</span>)]
 </span><span class="kw">pub enum </span>TensorDataMeaning {
     <span class="doccomment">/// Default behavior: guess based on shape
     </span>Unknown,
+
     <span class="doccomment">/// The data is an annotated [`crate::component_types::ClassId`] which should be
     /// looked up using the appropriate [`crate::context::AnnotationContext`]
     </span>ClassId,
+
     <span class="doccomment">/// Image data interpreted as depth map.
     </span>Depth,
 }
@@ -970,13 +980,17 @@
 </span><span class="kw">pub struct </span>Tensor {
     <span class="doccomment">/// Unique identifier for the tensor
     </span><span class="kw">pub </span>tensor_id: TensorId,
+
     <span class="doccomment">/// Dimensionality and length
     </span><span class="kw">pub </span>shape: Vec&lt;TensorDimension&gt;,
+
     <span class="doccomment">/// Data payload
     </span><span class="kw">pub </span>data: TensorData,
+
     <span class="doccomment">/// The per-element data meaning
     /// Used to indicated if the data should be interpreted as color, class_id, etc.
     </span><span class="kw">pub </span>meaning: TensorDataMeaning,
+
     <span class="doccomment">/// Reciprocal scale of meter unit for depth images
     </span><span class="kw">pub </span>meter: <span class="prelude-ty">Option</span>&lt;f32&gt;,
 }
@@ -1321,4 +1335,4 @@
     <span class="macro">assert_eq!</span>(tensor2[<span class="number">0</span>], tensor_out[<span class="number">0</span>]);
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="re_log_types" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.0 (fc594f156 2023-01-24)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="re_log_types" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.1 (d5a82bbd2 2023-02-07)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>

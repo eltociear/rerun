@@ -542,6 +542,8 @@
 <a href="#542" id="542">542</a>
 <a href="#543" id="543">543</a>
 <a href="#544" id="544">544</a>
+<a href="#545" id="545">545</a>
+<a href="#546" id="546">546</a>
 </pre><pre class="rust"><code><span class="doccomment">//! Example of using the Rerun SDK to log [the Objectron dataset](https://github.com/google-research-datasets/Objectron).
 //!
 //! Usage:
@@ -564,8 +566,8 @@
 <span class="kw">use </span>anyhow::{anyhow, Context <span class="kw">as _</span>};
 
 <span class="kw">use </span>rerun::external::re_log;
+<span class="kw">use </span>rerun::time::{Time, TimePoint, TimeType, Timeline};
 <span class="kw">use </span>rerun::{ApplicationId, MsgSender, RecordingId, Session};
-<span class="kw">use </span>rerun::{Time, TimePoint, TimeType, Timeline};
 
 <span class="comment">// --- Rerun logging ---
 
@@ -619,7 +621,7 @@
     ent_path: <span class="kw">impl </span>Into&lt;rerun::EntityPath&gt;,
     axes: <span class="kw-2">&amp;</span>str,
 ) -&gt; anyhow::Result&lt;()&gt; {
-    <span class="kw">let </span>view_coords: rerun::ViewCoordinates = axes
+    <span class="kw">let </span>view_coords: rerun::components::ViewCoordinates = axes
         .parse()
         .map_err(|err| <span class="macro">anyhow!</span>(<span class="string">&quot;couldn&#39;t parse {axes:?} as ViewCoordinates: {err}&quot;</span>))<span class="question-mark">?</span>;
     MsgSender::new(ent_path)
@@ -658,6 +660,8 @@
     session: <span class="kw-2">&amp;mut </span>Session,
     objects: <span class="kw-2">&amp;</span>[objectron::Object],
 ) -&gt; anyhow::Result&lt;()&gt; {
+    <span class="kw">use </span>rerun::components::{Box3D, ColorRGBA, Label, Rigid3, Transform};
+
     <span class="kw">let </span>boxes = objects.iter().filter_map(|object| {
         <span class="prelude-val">Some</span>({
             <span class="kw">if </span>object.r#type != objectron::object::Type::BoundingBox <span class="kw">as </span>i32 {
@@ -665,18 +669,18 @@
                 <span class="kw">return </span><span class="prelude-val">None</span>;
             }
 
-            <span class="kw">let </span>box3: rerun::Box3D = glam::Vec3::from_slice(<span class="kw-2">&amp;</span>object.scale).into();
+            <span class="kw">let </span>box3: Box3D = glam::Vec3::from_slice(<span class="kw-2">&amp;</span>object.scale).into();
             <span class="kw">let </span>transform = {
                 <span class="kw">let </span>translation = glam::Vec3::from_slice(<span class="kw-2">&amp;</span>object.translation).into();
                 <span class="comment">// NOTE: the dataset is all row-major, transpose those matrices!
                 </span><span class="kw">let </span>rotation = glam::Mat3::from_cols_slice(<span class="kw-2">&amp;</span>object.rotation).transpose();
                 <span class="kw">let </span>rotation = glam::Quat::from_mat3(<span class="kw-2">&amp;</span>rotation).into();
-                rerun::Transform::Rigid3(rerun::Rigid3 {
+                Transform::Rigid3(Rigid3 {
                     rotation,
                     translation,
                 })
             };
-            <span class="kw">let </span>label = rerun::Label(object.category.clone());
+            <span class="kw">let </span>label = Label(object.category.clone());
 
             (object.id, box3, transform, label)
         })
@@ -688,7 +692,7 @@
             .with_component(<span class="kw-2">&amp;</span>[bbox])<span class="question-mark">?
             </span>.with_component(<span class="kw-2">&amp;</span>[transform])<span class="question-mark">?
             </span>.with_component(<span class="kw-2">&amp;</span>[label])<span class="question-mark">?
-            </span>.with_splat(rerun::ColorRGBA::from([<span class="number">160</span>, <span class="number">230</span>, <span class="number">130</span>, <span class="number">255</span>]))<span class="question-mark">?
+            </span>.with_splat(ColorRGBA::from_rgb(<span class="number">160</span>, <span class="number">230</span>, <span class="number">130</span>))<span class="question-mark">?
             </span>.send(session)<span class="question-mark">?</span>;
     }
 
@@ -703,7 +707,7 @@
     <span class="macro">assert_eq!</span>(jpeg.color_type(), image::ColorType::Rgb8); <span class="comment">// TODO(emilk): support gray-scale jpeg aswell
     </span><span class="kw">let </span>(w, h) = jpeg.dimensions();
 
-    <span class="kw">use </span>rerun::{Tensor, TensorData, TensorDataMeaning, TensorDimension, TensorId};
+    <span class="kw">use </span>rerun::components::{Tensor, TensorData, TensorDataMeaning, TensorDimension, TensorId};
     MsgSender::new(<span class="string">&quot;world/camera/video&quot;</span>)
         .with_timepoint(ar_frame.timepoint.clone())
         <span class="comment">// TODO(cmc): `Tensor` should have an `image` integration really
@@ -751,17 +755,17 @@
     <span class="comment">// TODO(cmc): I can&#39;t figure out why I need to do this
     </span><span class="kw">let </span>rot = rot * glam::Quat::from_axis_angle(glam::Vec3::X, std::f32::consts::TAU / <span class="number">2.0</span>);
 
+    <span class="kw">use </span>rerun::components::{Pinhole, Rigid3, Transform};
     MsgSender::new(<span class="string">&quot;world/camera&quot;</span>)
         .with_timepoint(timepoint.clone())
-        .with_component(<span class="kw-2">&amp;</span>[rerun::Transform::Rigid3(rerun::Rigid3 {
+        .with_component(<span class="kw-2">&amp;</span>[Transform::Rigid3(Rigid3 {
             rotation: rot.into(),
             translation: translation.into(),
         })])<span class="question-mark">?
         </span>.send(session)<span class="question-mark">?</span>;
-
     MsgSender::new(<span class="string">&quot;world/camera/video&quot;</span>)
         .with_timepoint(timepoint)
-        .with_component(<span class="kw-2">&amp;</span>[rerun::Transform::Pinhole(rerun::Pinhole {
+        .with_component(<span class="kw-2">&amp;</span>[Transform::Pinhole(Pinhole {
             image_from_cam: intrinsics.into(),
             resolution: <span class="prelude-val">Some</span>(resolution.into()),
         })])<span class="question-mark">?
@@ -775,14 +779,16 @@
     timepoint: TimePoint,
     points: <span class="kw-2">&amp;</span>objectron::ArPointCloud,
 ) -&gt; anyhow::Result&lt;()&gt; {
+    <span class="kw">use </span>rerun::components::{ColorRGBA, InstanceKey, Point3D};
+
     <span class="kw">let </span>ids = points.identifier.iter();
     <span class="kw">let </span>points = points.point.iter();
     <span class="kw">let </span>(ids, points): (Vec&lt;<span class="kw">_</span>&gt;, Vec&lt;<span class="kw">_</span>&gt;) = ids
         .zip(points)
         .map(|(id, p)| {
             (
-                rerun::InstanceKey(<span class="kw-2">*</span>id <span class="kw">as _</span>),
-                rerun::Point3D::new(
+                InstanceKey(<span class="kw-2">*</span>id <span class="kw">as _</span>),
+                Point3D::new(
                     p.x.unwrap_or_default(),
                     p.y.unwrap_or_default(),
                     p.z.unwrap_or_default(),
@@ -795,7 +801,7 @@
         .with_timepoint(timepoint)
         .with_component(<span class="kw-2">&amp;</span>points)<span class="question-mark">?
         </span>.with_component(<span class="kw-2">&amp;</span>ids)<span class="question-mark">?
-        </span>.with_splat(rerun::ColorRGBA::from([<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>]))<span class="question-mark">?
+        </span>.with_splat(ColorRGBA::from_rgb(<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>))<span class="question-mark">?
         </span>.send(session)<span class="question-mark">?</span>;
 
     <span class="prelude-val">Ok</span>(())
@@ -806,6 +812,8 @@
     timepoint: <span class="kw-2">&amp;</span>TimePoint,
     annotations: <span class="kw-2">&amp;</span>objectron::FrameAnnotation,
 ) -&gt; anyhow::Result&lt;()&gt; {
+    <span class="kw">use </span>rerun::components::{ColorRGBA, InstanceKey, LineStrip2D, Point2D};
+
     <span class="kw">for </span>ann <span class="kw">in </span><span class="kw-2">&amp;</span>annotations.annotations {
         <span class="comment">// TODO(cmc): we shouldn&#39;t be using those preprojected 2D points to begin with, Rerun is
         // capable of projecting the actual 3D points in real time now.
@@ -815,7 +823,7 @@
             .filter_map(|kp| {
                 kp.point_2d
                     .as_ref()
-                    .map(|p| (rerun::InstanceKey(kp.id <span class="kw">as _</span>), [p.x * <span class="number">1440.0</span>, p.y * <span class="number">1920.0</span>]))
+                    .map(|p| (InstanceKey(kp.id <span class="kw">as _</span>), [p.x * <span class="number">1440.0</span>, p.y * <span class="number">1920.0</span>]))
             })
             .unzip();
 
@@ -824,12 +832,12 @@
             ann.object_id
         ))
         .with_timepoint(timepoint.clone())
-        .with_splat(rerun::ColorRGBA::from([<span class="number">130</span>, <span class="number">160</span>, <span class="number">250</span>, <span class="number">255</span>]))<span class="question-mark">?</span>;
+        .with_splat(ColorRGBA::from_rgb(<span class="number">130</span>, <span class="number">160</span>, <span class="number">250</span>))<span class="question-mark">?</span>;
 
         <span class="kw">if </span>points.len() == <span class="number">9 </span>{
             <span class="comment">// Build the preprojected bounding box out of 2D line segments.
             </span><span class="attr">#[rustfmt::skip]
-            </span><span class="kw">fn </span>linestrips(points: <span class="kw-2">&amp;</span>[[f32; <span class="number">2</span>]]) -&gt; Vec&lt;rerun::LineStrip2D&gt; {
+            </span><span class="kw">fn </span>linestrips(points: <span class="kw-2">&amp;</span>[[f32; <span class="number">2</span>]]) -&gt; Vec&lt;LineStrip2D&gt; {
                 <span class="macro">vec!</span>[
                     <span class="macro">vec!</span>[
                          points[<span class="number">2</span>], points[<span class="number">1</span>],
@@ -859,12 +867,9 @@
             }
             msg = msg.with_component(<span class="kw-2">&amp;</span>linestrips(<span class="kw-2">&amp;</span>points))<span class="question-mark">?</span>;
         } <span class="kw">else </span>{
-            msg = msg.with_component(<span class="kw-2">&amp;</span>ids)<span class="question-mark">?</span>.with_component(
-                <span class="kw-2">&amp;</span>points
-                    .into_iter()
-                    .map(rerun::Point2D::from)
-                    .collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;(),
-            )<span class="question-mark">?</span>;
+            msg = msg
+                .with_component(<span class="kw-2">&amp;</span>ids)<span class="question-mark">?
+                </span>.with_component(<span class="kw-2">&amp;</span>points.into_iter().map(Point2D::from).collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;())<span class="question-mark">?</span>;
         }
 
         msg.send(session)<span class="question-mark">?</span>;
@@ -932,7 +937,7 @@
     <span class="kw">let </span>args = Args::parse();
     <span class="kw">let </span>addr = <span class="kw">match </span>args.connect {
         <span class="prelude-val">Some</span>(<span class="prelude-val">Some</span>(addr)) =&gt; <span class="prelude-val">Some</span>(addr),
-        <span class="prelude-val">Some</span>(<span class="prelude-val">None</span>) =&gt; <span class="prelude-val">Some</span>(rerun::default_server_addr()),
+        <span class="prelude-val">Some</span>(<span class="prelude-val">None</span>) =&gt; <span class="prelude-val">Some</span>(rerun::log::default_server_addr()),
         <span class="prelude-val">None </span>=&gt; <span class="prelude-val">None</span>,
     };
 
@@ -1012,8 +1017,7 @@
     // TODO(cmc): missing flags: save, serve
     // TODO(cmc): expose an easy to use async local mode.
     </span><span class="kw">if </span>args.connect.is_none() {
-        <span class="kw">let </span>log_messages = session.drain_log_messages_buffer();
-        rerun::viewer::show(log_messages)<span class="question-mark">?</span>;
+        session.show()<span class="question-mark">?</span>;
     }
 
     <span class="prelude-val">Ok</span>(())
@@ -1087,4 +1091,4 @@
 <span class="attr">#[rustfmt::skip]
 </span><span class="kw">mod </span>objectron;
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="objectron" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.0 (fc594f156 2023-01-24)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="objectron" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.1 (d5a82bbd2 2023-02-07)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>

@@ -1731,7 +1731,7 @@
         primary: ComponentName,
         components: <span class="kw-2">&amp;</span>[ComponentName; N],
     ) -&gt; <span class="prelude-ty">Option</span>&lt;[<span class="prelude-ty">Option</span>&lt;RowIndex&gt;; N]&gt; {
-        <span class="kw">if </span><span class="self">self</span>.nb_rows == <span class="number">0 </span>{
+        <span class="kw">if </span><span class="self">self</span>.num_rows == <span class="number">0 </span>{
             <span class="kw">return </span><span class="prelude-val">None</span>;
         }
 
@@ -1749,7 +1749,7 @@
         </span>);
 
         <span class="comment">// find the primary index&#39;s row.
-        </span><span class="kw">let </span>primary_idx = <span class="self">self</span>.nb_rows - <span class="number">1</span>;
+        </span><span class="kw">let </span>primary_idx = <span class="self">self</span>.num_rows - <span class="number">1</span>;
 
         <span class="macro">trace!</span>(
             kind = <span class="string">&quot;latest_at&quot;</span>,
@@ -1830,7 +1830,7 @@
         // configuration there are only 1024 of them (times the number of components).
         </span><span class="kw">let </span>comp_indices = <span class="self">self</span>.indices.clone();
 
-        <span class="kw">let </span>row_indices = (<span class="number">0</span>..<span class="self">self</span>.nb_rows).filter_map(<span class="kw">move </span>|comp_idx_row_nr| {
+        <span class="kw">let </span>row_indices = (<span class="number">0</span>..<span class="self">self</span>.num_rows).filter_map(<span class="kw">move </span>|comp_idx_row_nr| {
             <span class="kw">let </span>comp_idx_row_nr = IndexRowNr(comp_idx_row_nr);
 
             <span class="kw">let </span><span class="kw-2">mut </span>row_indices = [<span class="prelude-val">None</span>; N];
@@ -2437,4 +2437,4 @@
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="re_arrow_store" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.0 (fc594f156 2023-01-24)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="re_arrow_store" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.1 (d5a82bbd2 2023-02-07)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>

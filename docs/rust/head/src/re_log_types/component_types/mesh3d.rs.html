@@ -412,6 +412,12 @@
 <a href="#412" id="412">412</a>
 <a href="#413" id="413">413</a>
 <a href="#414" id="414">414</a>
+<a href="#415" id="415">415</a>
+<a href="#416" id="416">416</a>
+<a href="#417" id="417">417</a>
+<a href="#418" id="418">418</a>
+<a href="#419" id="419">419</a>
+<a href="#420" id="420">420</a>
 </pre><pre class="rust"><code><span class="kw">use </span>std::sync::Arc;
 
 <span class="kw">use </span>arrow2::array::{FixedSizeBinaryArray, MutableFixedSizeBinaryArray};
@@ -729,13 +735,19 @@
 
 <span class="comment">// ----------------------------------------------------------------------------
 
+</span><span class="doccomment">/// The format of a binary mesh file, e.g. `GLTF`, `GLB`, `OBJ`
 </span><span class="attr">#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, ArrowField, ArrowSerialize, ArrowDeserialize)]
 #[arrow_field(<span class="kw">type </span>= <span class="string">&quot;dense&quot;</span>)]
 #[cfg_attr(feature = <span class="string">&quot;serde&quot;</span>, derive(serde::Deserialize, serde::Serialize))]
 </span><span class="kw">pub enum </span>MeshFormat {
-    Gltf,
-    Glb,
-    Obj,
+    <span class="doccomment">/// [`glTF`](https://en.wikipedia.org/wiki/GlTF).
+    </span>Gltf,
+
+    <span class="doccomment">/// Binary [`glTF`](https://en.wikipedia.org/wiki/GlTF).
+    </span>Glb,
+
+    <span class="doccomment">/// [Wavefront .obj](https://en.wikipedia.org/wiki/Wavefront_.obj_file).
+    </span>Obj,
 }
 
 <span class="kw">impl </span>std::fmt::Display <span class="kw">for </span>MeshFormat {
@@ -827,4 +839,4 @@
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="re_log_types" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.0 (fc594f156 2023-01-24)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="re_log_types" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.1 (d5a82bbd2 2023-02-07)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>
