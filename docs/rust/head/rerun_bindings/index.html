@@ -4,6 +4,18 @@ It compiles into a Python wheel using <a href="https://github.com/PyO3/pyo3">htt
 <h3 id="feature-flags"><a href="#feature-flags">Feature flags</a></h3>
 <ul>
 <li>
+<p><strong><code>pypi</code></strong> —  The features we turn on when building the PyPi package.</p>
+</li>
+<li>
+<p><strong><code>extension-module</code></strong> <em>(enabled by default)</em> —  We need to enable the <code>pyo3/extension-module</code> when building the SDK,
+but we cannot enable it when building tests and benchmarks, so we
+must make it an opt-in feature.</p>
+<ul>
+<li><a href="https://pyo3.rs/latest/faq.html#i-cant-run-cargo-test-or-i-cant-build-in-a-cargo-workspace-im-having-linker-issues-like-symbol-not-found-or-undefined-reference-to-_pyexc_systemerror">https://pyo3.rs/latest/faq.html#i-cant-run-cargo-test-or-i-cant-build-in-a-cargo-workspace-im-having-linker-issues-like-symbol-not-found-or-undefined-reference-to-_pyexc_systemerror</a></li>
+<li><a href="https://pyo3.rs/latest/building_and_distribution.html#building-python-extension-modules">https://pyo3.rs/latest/building_and_distribution.html#building-python-extension-modules</a></li>
+</ul>
+</li>
+<li>
 <p><strong><code>web</code></strong> —  Support serving a web viewer over HTTP.</p>
 <p>Enabling this adds quite a bit to the compile time and binary size,
 since it requires compiling and bundling the viewer as wasm.</p>
