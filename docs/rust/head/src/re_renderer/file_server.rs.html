@@ -264,6 +264,15 @@
 <a href="#264" id="264">264</a>
 <a href="#265" id="265">265</a>
 <a href="#266" id="266">266</a>
+<a href="#267" id="267">267</a>
+<a href="#268" id="268">268</a>
+<a href="#269" id="269">269</a>
+<a href="#270" id="270">270</a>
+<a href="#271" id="271">271</a>
+<a href="#272" id="272">272</a>
+<a href="#273" id="273">273</a>
+<a href="#274" id="274">274</a>
+<a href="#275" id="275">275</a>
 </pre><pre class="rust"><code><span class="doccomment">/// A macro to read the contents of a file on disk, and resolve #import clauses as required.
 ///
 /// - On Wasm and/or release builds, this will behave like the standard [`include_str`]
@@ -317,7 +326,16 @@
                 .unwrap()
                 .join(<span class="macro-nonterminal">$path</span>);
 
-            <span class="comment">// The path returned by the `file!()` macro is always hermetic, and we pre-load
+            <span class="comment">// If an external project imports `rerun` as a dependency, `file!()` will _not_ behave
+            // hermetically... so we need to make sure workspace prefix always get stripped no
+            // matter what before we move on.
+            </span><span class="kw">let </span>manifest_path = ::std::path::PathBuf::from(<span class="macro">env!</span>(<span class="string">&quot;CARGO_MANIFEST_DIR&quot;</span>));
+            <span class="kw">let </span>workspace_path = manifest_path.parent().unwrap().parent().unwrap();
+            <span class="kw">let </span>path = path
+                .strip_prefix(workspace_path)
+                .map_or_else(|<span class="kw">_</span>| path.clone(), ToOwned::to_owned);
+
+            <span class="comment">// At this point our path is guaranteed to be hermetic, and we pre-load
             // our run-time virtual filesystem using the exact same hermetic prefix.
             //
             // Therefore, the in-memory filesystem will actually be able to find this path,
