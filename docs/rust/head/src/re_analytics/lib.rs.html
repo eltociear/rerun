@@ -224,7 +224,11 @@
 <a href="#224" id="224">224</a>
 <a href="#225" id="225">225</a>
 <a href="#226" id="226">226</a>
+<a href="#227" id="227">227</a>
+<a href="#228" id="228">228</a>
 </pre><pre class="rust"><code><span class="doccomment">//! Rerun&#39;s analytics SDK.
+//!
+//! All the event we collect analytics about can be found in [`events`].
 
 </span><span class="kw">use </span>std::borrow::Cow;
 <span class="kw">use </span>std::collections::HashMap;
@@ -240,7 +244,7 @@
 </span><span class="kw">pub enum </span>EventKind {
     <span class="doccomment">/// Append a new event to the time series associated with this analytics ID.
     ///
-    /// Used e.g. to send an event everytime the app start.
+    /// Used e.g. to send an event every time the app start.
     </span>Append,
 
     <span class="doccomment">/// Update the permanent state associated with this analytics ID.

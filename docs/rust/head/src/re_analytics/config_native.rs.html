@@ -110,6 +110,7 @@
 <a href="#110" id="110">110</a>
 <a href="#111" id="111">111</a>
 <a href="#112" id="112">112</a>
+<a href="#113" id="113">113</a>
 </pre><pre class="rust"><code><span class="kw">use </span>std::{
     collections::HashMap,
     fs::File,
@@ -141,6 +142,7 @@
 </span><span class="kw">pub struct </span>Config {
     <span class="attr">#[serde(rename = <span class="string">&quot;analytics_enabled&quot;</span>)]
     </span><span class="kw">pub </span>analytics_enabled: bool,
+
     <span class="comment">// NOTE: not a UUID on purpose, it is sometimes useful to use handcrafted IDs.
     </span><span class="attr">#[serde(rename = <span class="string">&quot;analytics_id&quot;</span>)]
     </span><span class="kw">pub </span>analytics_id: String,

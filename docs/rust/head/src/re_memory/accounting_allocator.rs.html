@@ -346,6 +346,19 @@
 <a href="#346" id="346">346</a>
 <a href="#347" id="347">347</a>
 <a href="#348" id="348">348</a>
+<a href="#349" id="349">349</a>
+<a href="#350" id="350">350</a>
+<a href="#351" id="351">351</a>
+<a href="#352" id="352">352</a>
+<a href="#353" id="353">353</a>
+<a href="#354" id="354">354</a>
+<a href="#355" id="355">355</a>
+<a href="#356" id="356">356</a>
+<a href="#357" id="357">357</a>
+<a href="#358" id="358">358</a>
+<a href="#359" id="359">359</a>
+<a href="#360" id="360">360</a>
+<a href="#361" id="361">361</a>
 </pre><pre class="rust"><code><span class="doccomment">//! Track allocations and memory use.
 
 </span><span class="kw">use </span>std::sync::atomic::{AtomicBool, AtomicUsize, Ordering::Relaxed};
@@ -461,17 +474,25 @@
     (count_and_size.count &gt; <span class="number">0</span>).then_some(count_and_size)
 }
 
-<span class="doccomment">/// Are we doing (rather expensive) tracking of the callstacks of large allocations?
+<span class="doccomment">/// Are we doing (slightly expensive) tracking of the callstacks of large allocations?
 </span><span class="kw">pub fn </span>is_tracking_callstacks() -&gt; bool {
     GLOBAL_STATS.track_callstacks.load(Relaxed)
 }
 
-<span class="doccomment">/// Should we do (rather expensive) tracking of the callstacks of large allocations?
+<span class="doccomment">/// Should we do (slightly expensive) tracking of the callstacks of large allocations?
+///
+/// See also [`turn_on_tracking_if_env_var`].
+///
+/// Requires that you have installed the [`AccountingAllocator`].
 </span><span class="kw">pub fn </span>set_tracking_callstacks(track: bool) {
     GLOBAL_STATS.track_callstacks.store(track, Relaxed);
 }
 
-<span class="doccomment">/// Turn on callstack tracking (rather expensive) if a given env-var is set.
+<span class="doccomment">/// Turn on callstack tracking (slightly expensive) if a given env-var is set.
+///
+/// See also [`set_tracking_callstacks`].
+///
+/// Requires that you have installed the [`AccountingAllocator`].
 </span><span class="attr">#[cfg(not(target_arch = <span class="string">&quot;wasm32&quot;</span>))]
 </span><span class="kw">pub fn </span>turn_on_tracking_if_env_var(env_var: <span class="kw-2">&amp;</span>str) {
     <span class="kw">if </span>std::env::var(env_var).is_ok() {
@@ -507,6 +528,8 @@
 <span class="doccomment">/// Gather statistics from the live tracking, if enabled.
 ///
 /// Enable this with [`set_tracking_callstacks`], preferably the first thing you do in `main`.
+///
+/// Requires that you have installed the [`AccountingAllocator`].
 </span><span class="kw">pub fn </span>tracking_stats() -&gt; <span class="prelude-ty">Option</span>&lt;TrackingStatistics&gt; {
     <span class="doccomment">/// NOTE: we use a rather large [`smallvec::SmallVec`] here to avoid dynamic allocations,
     /// which would otherwise confuse the memory tracking.
@@ -554,6 +577,9 @@
 <span class="comment">// ----------------------------------------------------------------------------
 
 </span><span class="doccomment">/// Install this as the global allocator to get memory usage tracking.
+///
+/// Use [`set_tracking_callstacks`] or [`turn_on_tracking_if_env_var`] to turn on memory tracking.
+/// Collect the stats with [`tracking_stats`].
 ///
 /// Usage:
 /// ```
