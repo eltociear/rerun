@@ -1625,6 +1625,31 @@
 <a href="#1625" id="1625">1625</a>
 <a href="#1626" id="1626">1626</a>
 <a href="#1627" id="1627">1627</a>
+<a href="#1628" id="1628">1628</a>
+<a href="#1629" id="1629">1629</a>
+<a href="#1630" id="1630">1630</a>
+<a href="#1631" id="1631">1631</a>
+<a href="#1632" id="1632">1632</a>
+<a href="#1633" id="1633">1633</a>
+<a href="#1634" id="1634">1634</a>
+<a href="#1635" id="1635">1635</a>
+<a href="#1636" id="1636">1636</a>
+<a href="#1637" id="1637">1637</a>
+<a href="#1638" id="1638">1638</a>
+<a href="#1639" id="1639">1639</a>
+<a href="#1640" id="1640">1640</a>
+<a href="#1641" id="1641">1641</a>
+<a href="#1642" id="1642">1642</a>
+<a href="#1643" id="1643">1643</a>
+<a href="#1644" id="1644">1644</a>
+<a href="#1645" id="1645">1645</a>
+<a href="#1646" id="1646">1646</a>
+<a href="#1647" id="1647">1647</a>
+<a href="#1648" id="1648">1648</a>
+<a href="#1649" id="1649">1649</a>
+<a href="#1650" id="1650">1650</a>
+<a href="#1651" id="1651">1651</a>
+<a href="#1652" id="1652">1652</a>
 </pre><pre class="rust"><code><span class="kw">use </span>std::{any::Any, hash::Hash};
 
 <span class="kw">use </span>ahash::HashMap;
@@ -2092,6 +2117,8 @@
             .frame(main_panel_frame)
             .show(egui_ctx, |ui| {
                 paint_background_fill(ui);
+
+                warning_panel(<span class="kw-2">&amp;</span><span class="self">self</span>.re_ui, ui, frame);
 
                 top_panel(ui, frame, <span class="self">self</span>, <span class="kw-2">&amp;</span>gpu_resource_stats);
 
@@ -2585,6 +2612,29 @@
         <span class="kw">if </span>WATERMARK {
             re_ui.paint_watermark();
         }
+    }
+}
+
+<span class="kw">fn </span>warning_panel(re_ui: <span class="kw-2">&amp;</span>re_ui::ReUi, ui: <span class="kw-2">&amp;mut </span>egui::Ui, frame: <span class="kw-2">&amp;mut </span>eframe::Frame) {
+    <span class="comment">// We have some bugs when running the web viewer on Windows.
+    // See https://github.com/rerun-io/rerun/issues/1206
+    </span><span class="kw">if </span>frame.is_web() &amp;&amp; ui.ctx().os() == egui::os::OperatingSystem::Windows {
+        <span class="kw">let </span>frame = egui::Frame {
+            fill: ui.visuals().panel_fill,
+            ..re_ui.bottom_panel_frame()
+        };
+
+        egui::TopBottomPanel::bottom(<span class="string">&quot;warning_panel&quot;</span>)
+            .resizable(<span class="bool-val">false</span>)
+            .frame(frame)
+            .show_inside(ui, |ui| {
+                ui.centered_and_justified(|ui| {
+                    <span class="kw">let </span>text = re_ui.warning_text(
+                        <span class="string">&quot;The web viewer has some known issues on Windows. Click for details.&quot;</span>,
+                    );
+                    ui.hyperlink_to(text, <span class="string">&quot;https://github.com/rerun-io/rerun/issues/1206&quot;</span>);
+                });
+            });
     }
 }
 
