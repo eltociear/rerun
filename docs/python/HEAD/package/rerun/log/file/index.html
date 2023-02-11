@@ -1712,14 +1712,16 @@ transform=np.array([
 
 
 <h4 id="rerun.log.file.log_image_file" class="doc doc-heading">
-<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_image_file</span><span class="p">(</span><span class="n">entity_path</span><span class="p">,</span> <span class="n">img_path</span><span class="p">,</span> <span class="n">img_format</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_image_file</span><span class="p">(</span><span class="n">entity_path</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">img_bytes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">img_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">img_format</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
 </h4>
 
 
   <div class="doc doc-contents ">
   
-      <p>Log the contents of an image file (only JPEGs supported for now).</p>
+      <p>Log an image file given its contents or path on disk.</p>
+<p>Only JPEGs supported right now.</p>
+<p>You must pass either <code>img_bytes</code> or <code>img_path</code>.</p>
 <p>If no <code>img_format</code> is specified, we will try and guess it.</p>
 
   <p><strong>Parameters:</strong></p>
@@ -1744,13 +1746,23 @@ transform=np.array([
           </td>
         </tr>
         <tr>
+          <td><code>img_bytes</code></td>
+          <td>
+                <code><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a>[<a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#bytes">bytes</a>]</code>
+          </td>
+          <td><p>Content of an image file, e.g. a <code>.jpg</code>.</p></td>
+          <td>
+                <code>None</code>
+          </td>
+        </tr>
+        <tr>
           <td><code>img_path</code></td>
           <td>
-                <code><a class="autorefs autorefs-external" title="pathlib.Path" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path">Path</a></code>
+                <code><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a>[<a class="autorefs autorefs-external" title="pathlib.Path" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path">Path</a>]</code>
           </td>
-          <td><p>Path to the image file.</p></td>
+          <td><p>Path to an image file, e.g. a <code>.jpg</code>.</p></td>
           <td>
-              <em>required</em>
+                <code>None</code>
           </td>
         </tr>
         <tr>
