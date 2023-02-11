@@ -150,8 +150,8 @@
             Rect2D::YXHW(Vec4D([y, x, _h, _w])) =&gt; [<span class="kw-2">*</span>x, <span class="kw-2">*</span>y],
             Rect2D::XYXY(Vec4D([x0, y0, _x1, _y1])) =&gt; [<span class="kw-2">*</span>x0, <span class="kw-2">*</span>y0],
             Rect2D::YXYX(Vec4D([y0, x0, _y1, _x1])) =&gt; [<span class="kw-2">*</span>x0, <span class="kw-2">*</span>y0],
-            Rect2D::XCYCWH(Vec4D([x_cen, y_cen, w, h])) =&gt; [x_cen - (w / <span class="number">2.0</span>), y_cen + (h / <span class="number">2.0</span>)],
-            Rect2D::XCYCW2H2(Vec4D([x_cen, y_cen, w_2, h_2])) =&gt; [x_cen - w_2, y_cen + h_2],
+            Rect2D::XCYCWH(Vec4D([x_cen, y_cen, w, h])) =&gt; [x_cen - (w / <span class="number">2.0</span>), y_cen - (h / <span class="number">2.0</span>)],
+            Rect2D::XCYCW2H2(Vec4D([x_cen, y_cen, w_2, h_2])) =&gt; [x_cen - w_2, y_cen - h_2],
         }
     }
 
