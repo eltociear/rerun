@@ -639,11 +639,6 @@
 <a href="#639" id="639">639</a>
 <a href="#640" id="640">640</a>
 <a href="#641" id="641">641</a>
-<a href="#642" id="642">642</a>
-<a href="#643" id="643">643</a>
-<a href="#644" id="644">644</a>
-<a href="#645" id="645">645</a>
-<a href="#646" id="646">646</a>
 </pre><pre class="rust"><code><span class="kw">use </span>eframe::{emath::RectTransform, epaint::text::TextWrapping};
 <span class="kw">use </span>egui::{
     pos2, vec2, Align, Align2, Color32, NumExt <span class="kw">as _</span>, Pos2, Rect, Response, ScrollArea, Shape,
@@ -989,12 +984,7 @@
 
     // Check if we&#39;re hovering any hover primitive.
     </span><span class="kw">let </span><span class="kw-2">mut </span>depth_at_pointer = <span class="prelude-val">None</span>;
-
-    <span class="comment">// No hover effect when user is dragging something (e.g. rotating the camera)
-    </span><span class="kw">let </span>is_anything_being_dragged = parent_ui
-        .ctx()
-        .memory(|mem| mem.is_anything_being_dragged());
-    <span class="kw">if let </span>(<span class="bool-val">false</span>, <span class="prelude-val">Some</span>(pointer_pos_ui)) = (is_anything_being_dragged, response.hover_pos()) {
+    <span class="kw">if let </span><span class="prelude-val">Some</span>(pointer_pos_ui) = response.hover_pos() {
         <span class="kw">let </span>pointer_pos_space = space_from_ui.transform_pos(pointer_pos_ui);
         <span class="kw">let </span>hover_radius = space_from_ui.scale().y * <span class="number">5.0</span>; <span class="comment">// TODO(emilk): from egui?
         </span><span class="kw">let </span>picking_result = scene.picking(
