@@ -671,6 +671,8 @@
 <a href="#671" id="671">671</a>
 <a href="#672" id="672">672</a>
 <a href="#673" id="673">673</a>
+<a href="#674" id="674">674</a>
+<a href="#675" id="675">675</a>
 </pre><pre class="rust"><code><span class="kw">use </span>egui::NumExt <span class="kw">as _</span>;
 <span class="kw">use </span>glam::Affine3A;
 <span class="kw">use </span>macaw::{vec3, BoundingBox, Quat, Vec3};
@@ -969,7 +971,9 @@
     }
 
     <span class="comment">// TODO(andreas): We&#39;re very close making the hover reaction of ui2d and ui3d the same. Finish the job!
-    </span><span class="kw">if let </span><span class="prelude-val">Some</span>(pointer_pos) = response.hover_pos() {
+    // No hover effect when user is dragging something (e.g. rotating the camera)
+    </span><span class="kw">let </span>is_anything_being_dragged = ui.ctx().memory(|mem| mem.is_anything_being_dragged());
+    <span class="kw">if let </span>(<span class="bool-val">false</span>, <span class="prelude-val">Some</span>(pointer_pos)) = (is_anything_being_dragged, response.hover_pos()) {
         <span class="kw">let </span>picking_result =
             scene.picking(glam::vec2(pointer_pos.x, pointer_pos.y), <span class="kw-2">&amp;</span>rect, <span class="kw-2">&amp;</span>eye, <span class="number">5.0</span>);
 
