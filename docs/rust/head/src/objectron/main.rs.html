@@ -533,22 +533,6 @@
 <a href="#533" id="533">533</a>
 <a href="#534" id="534">534</a>
 <a href="#535" id="535">535</a>
-<a href="#536" id="536">536</a>
-<a href="#537" id="537">537</a>
-<a href="#538" id="538">538</a>
-<a href="#539" id="539">539</a>
-<a href="#540" id="540">540</a>
-<a href="#541" id="541">541</a>
-<a href="#542" id="542">542</a>
-<a href="#543" id="543">543</a>
-<a href="#544" id="544">544</a>
-<a href="#545" id="545">545</a>
-<a href="#546" id="546">546</a>
-<a href="#547" id="547">547</a>
-<a href="#548" id="548">548</a>
-<a href="#549" id="549">549</a>
-<a href="#550" id="550">550</a>
-<a href="#551" id="551">551</a>
 </pre><pre class="rust"><code><span class="doccomment">//! Example of using the Rerun SDK to log [the Objectron dataset](https://github.com/google-research-datasets/Objectron).
 //!
 //! Usage:
@@ -705,28 +689,12 @@
 }
 
 <span class="kw">fn </span>log_video_frame(session: <span class="kw-2">&amp;mut </span>Session, ar_frame: <span class="kw-2">&amp;</span>ArFrame) -&gt; anyhow::Result&lt;()&gt; {
-    <span class="kw">use </span>image::ImageDecoder <span class="kw">as _</span>;
     <span class="kw">let </span>image_path = ar_frame.dir.join(<span class="macro">format!</span>(<span class="string">&quot;video/{}.jpg&quot;</span>, ar_frame.index));
-    <span class="kw">let </span>jpeg_bytes = std::fs::read(image_path)<span class="question-mark">?</span>;
-    <span class="kw">let </span>jpeg = image::codecs::jpeg::JpegDecoder::new(std::io::Cursor::new(<span class="kw-2">&amp;</span>jpeg_bytes))<span class="question-mark">?</span>;
-    <span class="macro">assert_eq!</span>(jpeg.color_type(), image::ColorType::Rgb8); <span class="comment">// TODO(emilk): support gray-scale jpeg aswell
-    </span><span class="kw">let </span>(w, h) = jpeg.dimensions();
+    <span class="kw">let </span>tensor = rerun::components::Tensor::tensor_from_jpeg_file(image_path)<span class="question-mark">?</span>;
 
-    <span class="kw">use </span>rerun::components::{Tensor, TensorData, TensorDataMeaning, TensorDimension, TensorId};
     MsgSender::new(<span class="string">&quot;world/camera/video&quot;</span>)
         .with_timepoint(ar_frame.timepoint.clone())
-        <span class="comment">// TODO(cmc): `Tensor` should have an `image` integration really
-        </span>.with_component(<span class="kw-2">&amp;</span>[Tensor {
-            tensor_id: TensorId::random(),
-            shape: <span class="macro">vec!</span>[
-                TensorDimension::height(h <span class="kw">as _</span>),
-                TensorDimension::width(w <span class="kw">as _</span>),
-                TensorDimension::depth(<span class="number">3</span>),
-            ],
-            data: TensorData::JPEG(jpeg_bytes),
-            meaning: TensorDataMeaning::Unknown,
-            meter: <span class="prelude-val">None</span>,
-        }])<span class="question-mark">?
+        .with_component(<span class="kw-2">&amp;</span>[tensor])<span class="question-mark">?
         </span>.send(session)<span class="question-mark">?</span>;
 
     <span class="prelude-val">Ok</span>(())
