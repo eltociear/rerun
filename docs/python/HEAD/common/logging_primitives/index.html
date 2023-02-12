@@ -415,8 +415,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#rerun.log_path" class="md-nav__link">
-    log_path()
+  <a href="#rerun.log_line_strip" class="md-nav__link">
+    log_line_strip()
   </a>
   
 </li>
@@ -1434,8 +1434,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#rerun.log_path" class="md-nav__link">
-    log_path()
+  <a href="#rerun.log_line_strip" class="md-nav__link">
+    log_line_strip()
   </a>
   
 </li>
@@ -1484,7 +1484,7 @@
 
   <div class="doc doc-contents ">
   
-      <p>Log a 2D or 3D point, with optional color.</p>
+      <p>Log a 2D or 3D point, with a positions and optional colors, radii, label, etc.</p>
 <p>Logging again to the same <code>entity_path</code> will replace the previous point.</p>
 <p>Colors should either be in 0-255 gamma space or in 0-1 linear space.
 Colors can be RGB or RGBA. You can supply no colors, one color,
@@ -1622,7 +1622,7 @@ See <a class="autorefs autorefs-internal" href="../../package/rerun/__init__/#re
 
   <div class="doc doc-contents ">
   
-      <p>Log 2D or 3D points, with optional colors.</p>
+      <p>Log 2D or 3D points, with positions and optional colors, radii, labels, etc.</p>
 <p>Logging again to the same <code>entity_path</code> will replace all the previous points.</p>
 <p>Colors should either be in 0-255 gamma space or in 0-1 linear space.
 Colors can be RGB or RGBA. You can supply no colors, one color,
@@ -2018,7 +2018,7 @@ See <a class="autorefs autorefs-internal" href="../../package/rerun/__init__/#re
 
   <div class="doc doc-contents ">
   
-      <p>Log a 3D oriented bounding box, defined by its half size.</p>
+      <p>Log a 3D oriented bounding box.</p>
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -2142,16 +2142,16 @@ See <a class="autorefs autorefs-internal" href="../../package/rerun/__init__/#re
 
 
 
-<h3 id="rerun.log_path" class="doc doc-heading">
-<code class="highlight language-python"><span class="k">def</span> <span class="nf">rerun</span><span class="o">.</span><span class="n">log_path</span><span class="p">(</span><span class="n">entity_path</span><span class="p">,</span> <span class="n">positions</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">stroke_width</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+<h3 id="rerun.log_line_strip" class="doc doc-heading">
+<code class="highlight language-python"><span class="k">def</span> <span class="nf">rerun</span><span class="o">.</span><span class="n">log_line_strip</span><span class="p">(</span><span class="n">entity_path</span><span class="p">,</span> <span class="n">positions</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">stroke_width</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
 </h3>
 
 
   <div class="doc doc-contents ">
   
-      <p>Log a 3D path.</p>
-<p>A path is a list of points connected by line segments. It can be used to draw approximations of smooth curves.</p>
+      <p>Log a line strip through 3D space.</p>
+<p>A line strip is a list of points connected by line segments. It can be used to draw approximations of smooth curves.</p>
 <p>The points will be connected in order, like so:
 <div class="highlight"><pre><span></span><code>       2------3     5
       /        \   /
