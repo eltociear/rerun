@@ -54,7 +54,7 @@
         .map(|v| ColorRGBA::from_rgb(v.x <span class="kw">as </span>u8, v.y <span class="kw">as </span>u8, v.z <span class="kw">as </span>u8))
         .collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;();
 
-    MsgSender::new(<span class="string">&quot;my_point&quot;</span>)
+    MsgSender::new(<span class="string">&quot;my_points&quot;</span>)
         .with_component(<span class="kw-2">&amp;</span>points)<span class="question-mark">?
         </span>.with_component(<span class="kw-2">&amp;</span>colors)<span class="question-mark">?
         </span>.send(<span class="kw-2">&amp;mut </span>session)<span class="question-mark">?</span>;

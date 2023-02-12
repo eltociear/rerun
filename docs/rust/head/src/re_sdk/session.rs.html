@@ -283,6 +283,7 @@
 <a href="#283" id="283">283</a>
 <a href="#284" id="284">284</a>
 <a href="#285" id="285">285</a>
+<a href="#286" id="286">286</a>
 </pre><pre class="rust"><code><span class="kw">use </span>std::net::SocketAddr;
 
 <span class="kw">use </span>re_log_types::{
@@ -292,6 +293,7 @@
 
 <span class="doccomment">/// This is the main object you need to create to use the Rerun SDK.
 ///
+/// You should ideally create one session object and reuse it.
 /// For convenience, there is a global [`Session`] object you can access with [`crate::global_session`].
 </span><span class="kw">pub struct </span>Session {
     <span class="attr">#[cfg(feature = <span class="string">&quot;web&quot;</span>)]
