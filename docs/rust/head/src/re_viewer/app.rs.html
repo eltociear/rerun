@@ -1650,6 +1650,17 @@
 <a href="#1650" id="1650">1650</a>
 <a href="#1651" id="1651">1651</a>
 <a href="#1652" id="1652">1652</a>
+<a href="#1653" id="1653">1653</a>
+<a href="#1654" id="1654">1654</a>
+<a href="#1655" id="1655">1655</a>
+<a href="#1656" id="1656">1656</a>
+<a href="#1657" id="1657">1657</a>
+<a href="#1658" id="1658">1658</a>
+<a href="#1659" id="1659">1659</a>
+<a href="#1660" id="1660">1660</a>
+<a href="#1661" id="1661">1661</a>
+<a href="#1662" id="1662">1662</a>
+<a href="#1663" id="1663">1663</a>
 </pre><pre class="rust"><code><span class="kw">use </span>std::{any::Any, hash::Hash};
 
 <span class="kw">use </span>ahash::HashMap;
@@ -1669,12 +1680,15 @@
 <span class="kw">use </span>re_ui::Command;
 
 <span class="kw">use crate</span>::{
+    app_icon::setup_app_icon,
     misc::{AppOptions, Caches, RecordingConfig, ViewerContext},
     ui::{data_ui::ComponentUiRegistry, Blueprint},
 };
 
 <span class="attr">#[cfg(not(target_arch = <span class="string">&quot;wasm32&quot;</span>))]
 </span><span class="kw">use </span>re_log_types::TimeRangeF;
+
+<span class="kw">use </span><span class="kw">super</span>::app_icon::AppIconStatus;
 
 <span class="kw">const </span>WATERMARK: bool = <span class="bool-val">false</span>; <span class="comment">// Nice for recording media material
 
@@ -1739,6 +1753,8 @@
     // the same time opting out of analytics at run-time.
     </span><span class="attr">#[cfg(all(not(target_arch = <span class="string">&quot;wasm32&quot;</span>), feature = <span class="string">&quot;analytics&quot;</span>))]
     </span>analytics: <span class="prelude-ty">Option</span>&lt;re_analytics::Analytics&gt;,
+
+    icon_status: AppIconStatus,
 }
 
 <span class="kw">impl </span>App {
@@ -1829,6 +1845,8 @@
 
             <span class="attr">#[cfg(all(not(target_arch = <span class="string">&quot;wasm32&quot;</span>), feature = <span class="string">&quot;analytics&quot;</span>))]
             </span>analytics,
+
+            icon_status: AppIconStatus::NotSetTryAgain,
         }
     }
 
@@ -2071,6 +2089,10 @@
 
     <span class="kw">fn </span>update(<span class="kw-2">&amp;mut </span><span class="self">self</span>, egui_ctx: <span class="kw-2">&amp;</span>egui::Context, frame: <span class="kw-2">&amp;mut </span>eframe::Frame) {
         <span class="kw">let </span>frame_start = Instant::now();
+
+        <span class="kw">if </span><span class="self">self</span>.icon_status == AppIconStatus::NotSetTryAgain {
+            <span class="self">self</span>.icon_status = setup_app_icon();
+        }
 
         <span class="attr">#[cfg(not(target_arch = <span class="string">&quot;wasm32&quot;</span>))]
         </span><span class="kw">if </span><span class="self">self</span>.ctrl_c.load(std::sync::atomic::Ordering::Relaxed) {
