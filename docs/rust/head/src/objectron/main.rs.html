@@ -578,6 +578,10 @@
 <a href="#578" id="578">578</a>
 <a href="#579" id="579">579</a>
 <a href="#580" id="580">580</a>
+<a href="#581" id="581">581</a>
+<a href="#582" id="582">582</a>
+<a href="#583" id="583">583</a>
+<a href="#584" id="584">584</a>
 </pre><pre class="rust"><code><span class="doccomment">//! Example of using the Rerun SDK to log [the Objectron dataset](https://github.com/google-research-datasets/Objectron).
 //!
 //! Usage:
@@ -1082,6 +1086,10 @@
     }
 
     run(<span class="kw-2">&amp;mut </span>session, <span class="kw-2">&amp;</span>args)<span class="question-mark">?</span>;
+
+    <span class="kw">if let </span>Behavior::Save(path) = behavior {
+        session.save(path)<span class="question-mark">?</span>;
+    }
 
     <span class="prelude-val">Ok</span>(())
 }

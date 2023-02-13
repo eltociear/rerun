@@ -385,6 +385,10 @@
 <a href="#385" id="385">385</a>
 <a href="#386" id="386">386</a>
 <a href="#387" id="387">387</a>
+<a href="#388" id="388">388</a>
+<a href="#389" id="389">389</a>
+<a href="#390" id="390">390</a>
+<a href="#391" id="391">391</a>
 </pre><pre class="rust"><code><span class="doccomment">//! This example demonstrates how to use the Rerun Rust SDK to log raw 3D meshes (so-called
 //! &quot;triangle soups&quot;) and their transform hierarchy.
 //!
@@ -647,6 +651,10 @@
     }
 
     run(<span class="kw-2">&amp;mut </span>session, <span class="kw-2">&amp;</span>args)<span class="question-mark">?</span>;
+
+    <span class="kw">if let </span>Behavior::Save(path) = behavior {
+        session.save(path)<span class="question-mark">?</span>;
+    }
 
     <span class="prelude-val">Ok</span>(())
 }
