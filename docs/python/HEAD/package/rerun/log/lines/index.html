@@ -213,7 +213,7 @@
 
 
   <li class="md-tabs__item">
-    <a href="../../../../docs/" class="md-tabs__link">
+    <a href="../../../../writing_docs/" class="md-tabs__link">
       Writing Docs
     </a>
   </li>
@@ -282,9 +282,7 @@
       
       
       
-        
-      
-      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
       
       
         
@@ -473,6 +471,8 @@
         
           
         
+          
+        
       
       
         
@@ -575,9 +575,7 @@
       
       
       
-        
-      
-      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2_3" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_3" >
       
       
         
@@ -1093,8 +1091,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#rerun.log.lines.log_path" class="md-nav__link">
-    log_path()
+  <a href="#rerun.log.lines.log_line_strip" class="md-nav__link">
+    log_line_strip()
   </a>
   
 </li>
@@ -1246,6 +1244,106 @@
 
             
           
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+          rerun_demo/
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          rerun_demo/
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../rerun_demo/__init__/" class="md-nav__link">
+        __init__.py
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../rerun_demo/data/" class="md-nav__link">
+        data.py
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../rerun_demo/turbo/" class="md-nav__link">
+        turbo.py
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../rerun_demo/util/" class="md-nav__link">
+        util.py
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -1260,7 +1358,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../docs/" class="md-nav__link">
+      <a href="../../../../writing_docs/" class="md-nav__link">
         Writing Docs
       </a>
     </li>
@@ -1300,8 +1398,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#rerun.log.lines.log_path" class="md-nav__link">
-    log_path()
+  <a href="#rerun.log.lines.log_line_strip" class="md-nav__link">
+    log_line_strip()
   </a>
   
 </li>
@@ -1364,16 +1462,16 @@
 
 
 
-<h4 id="rerun.log.lines.log_path" class="doc doc-heading">
-<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_path</span><span class="p">(</span><span class="n">entity_path</span><span class="p">,</span> <span class="n">positions</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">stroke_width</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+<h4 id="rerun.log.lines.log_line_strip" class="doc doc-heading">
+<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_line_strip</span><span class="p">(</span><span class="n">entity_path</span><span class="p">,</span> <span class="n">positions</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">stroke_width</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
 </h4>
 
 
   <div class="doc doc-contents ">
   
-      <p>Log a 3D path.</p>
-<p>A path is a list of points connected by line segments. It can be used to draw approximations of smooth curves.</p>
+      <p>Log a line strip through 3D space.</p>
+<p>A line strip is a list of points connected by line segments. It can be used to draw approximations of smooth curves.</p>
 <p>The points will be connected in order, like so:
 <div class="highlight"><pre><span></span><code>       2------3     5
       /        \   /
@@ -1601,7 +1699,7 @@
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.expand", "navigation.indexes", "navigation.instant", "navigation.tabs", "navigation.tabs.sticky", "navigation.tracking"], "search": "../../../../assets/javascripts/workers/search.db81ec45.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.indexes", "navigation.instant", "navigation.tabs", "navigation.tabs.sticky", "navigation.tracking"], "search": "../../../../assets/javascripts/workers/search.db81ec45.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
     
     
       <script src="../../../../assets/javascripts/bundle.4b2c34cd.min.js"></script>

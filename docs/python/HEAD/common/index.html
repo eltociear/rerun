@@ -69,7 +69,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#common-apis" class="md-skip">
+        <a href="#examples" class="md-skip">
           Skip to content
         </a>
       
@@ -211,7 +211,7 @@
 
 
   <li class="md-tabs__item">
-    <a href="../docs/" class="md-tabs__link">
+    <a href="../writing_docs/" class="md-tabs__link">
       Writing Docs
     </a>
   </li>
@@ -461,14 +461,14 @@
       
       
       
-        
-      
-      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
       
       
         
           
             
+          
+        
           
         
           
@@ -506,9 +506,7 @@
       
       
       
-        
-      
-      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
       
       
         
@@ -575,9 +573,7 @@
       
       
       
-        
-      
-      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2_3" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_3" >
       
       
         
@@ -869,9 +865,7 @@
       
       
       
-        
-      
-      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2_4" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_4" >
       
       
         
@@ -1189,6 +1183,106 @@
 
             
           
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+          rerun_demo/
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          rerun_demo/
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../package/rerun_demo/__init__/" class="md-nav__link">
+        __init__.py
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../package/rerun_demo/data/" class="md-nav__link">
+        data.py
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../package/rerun_demo/turbo/" class="md-nav__link">
+        turbo.py
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../package/rerun_demo/util/" class="md-nav__link">
+        util.py
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -1203,7 +1297,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../docs/" class="md-nav__link">
+      <a href="../writing_docs/" class="md-nav__link">
         Writing Docs
       </a>
     </li>
@@ -1232,70 +1326,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#initialization" class="md-nav__link">
-    Initialization
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#logging-primitives" class="md-nav__link">
-    Logging Primitives
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#logging-images" class="md-nav__link">
-    Logging Images
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#annotations" class="md-nav__link">
-    Annotations
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#extension-components" class="md-nav__link">
-    Extension Components
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#plotting" class="md-nav__link">
-    Plotting
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#transforms" class="md-nav__link">
-    Transforms
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#helpers" class="md-nav__link">
-    Helpers
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -1310,6 +1340,11 @@
 
 
 
+<h1 id="examples">Examples</h1>
+<p>You can find examples on our GitHub <a href="https://github.com/rerun-io/rerun/tree/latest/examples/python">here</a>.</p>
+<h1 id="troubleshooting">Troubleshooting</h1>
+<p>You can set <code>RUST_LOG=debug</code> before running your Python script
+and/or <code>rerun</code> process to get some verbose logging output.</p>
 <h1 id="common-apis">Common APIs</h1>
 <h2 id="initialization">Initialization</h2>
 <table>
@@ -1349,11 +1384,11 @@
 <tbody>
 <tr>
 <td><a href="logging_primitives#rerun.log_point"><code>rerun.log_point()</code></a></td>
-<td>Log a 2D or 3D point, with optional color.</td>
+<td>Log a 2D or 3D point, with a positions and optional colors, radii, label, etc.</td>
 </tr>
 <tr>
 <td><a href="logging_primitives#rerun.log_points"><code>rerun.log_points()</code></a></td>
-<td>Log 2D or 3D points, with optional colors.</td>
+<td>Log 2D or 3D points, with positions and optional colors, radii, labels, etc.</td>
 </tr>
 <tr>
 <td><a href="logging_primitives#rerun.log_rect"><code>rerun.log_rect()</code></a></td>
@@ -1365,11 +1400,11 @@
 </tr>
 <tr>
 <td><a href="logging_primitives#rerun.log_obb"><code>rerun.log_obb()</code></a></td>
-<td>Log a 3D oriented bounding box, defined by its half size.</td>
+<td>Log a 3D oriented bounding box.</td>
 </tr>
 <tr>
-<td><a href="logging_primitives#rerun.log_path"><code>rerun.log_path()</code></a></td>
-<td>Log a 3D path.</td>
+<td><a href="logging_primitives#rerun.log_line_strip"><code>rerun.log_line_strip()</code></a></td>
+<td>Log a line strip through 3D space.</td>
 </tr>
 <tr>
 <td><a href="logging_primitives#rerun.log_line_segments"><code>rerun.log_line_segments()</code></a></td>
@@ -1396,7 +1431,7 @@
 </tr>
 <tr>
 <td><a href="logging_images#rerun.log_image_file"><code>rerun.log_image_file()</code></a></td>
-<td>Log the contents of an image file (only JPEGs supported for now).</td>
+<td>Log an image file given its contents or path on disk.</td>
 </tr>
 <tr>
 <td><a href="logging_images#rerun.log_depth_image"><code>rerun.log_depth_image()</code></a></td>
@@ -1542,7 +1577,7 @@
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand", "navigation.indexes", "navigation.instant", "navigation.tabs", "navigation.tabs.sticky", "navigation.tracking"], "search": "../assets/javascripts/workers/search.db81ec45.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.indexes", "navigation.instant", "navigation.tabs", "navigation.tabs.sticky", "navigation.tracking"], "search": "../assets/javascripts/workers/search.db81ec45.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
     
     
       <script src="../assets/javascripts/bundle.4b2c34cd.min.js"></script>
