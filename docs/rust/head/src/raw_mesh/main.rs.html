@@ -389,6 +389,8 @@
 <a href="#389" id="389">389</a>
 <a href="#390" id="390">390</a>
 <a href="#391" id="391">391</a>
+<a href="#392" id="392">392</a>
+<a href="#393" id="393">393</a>
 </pre><pre class="rust"><code><span class="doccomment">//! This example demonstrates how to use the Rerun Rust SDK to log raw 3D meshes (so-called
 //! &quot;triangle soups&quot;) and their transform hierarchy.
 //!
@@ -645,14 +647,16 @@
                 .spawn(<span class="kw">move </span>|<span class="kw-2">mut </span>session| run(<span class="kw-2">&amp;mut </span>session, <span class="kw-2">&amp;</span>args))
                 .map_err(Into::into)
         }
-        <span class="kw">_ </span>=&gt; {
-            <span class="comment">// TODO(cmc): handle serve
-        </span>}
+        Behavior::Serve =&gt; session.serve(<span class="bool-val">true</span>),
+        Behavior::Save(<span class="kw">_</span>) =&gt; {}
     }
 
     run(<span class="kw-2">&amp;mut </span>session, <span class="kw-2">&amp;</span>args)<span class="question-mark">?</span>;
 
-    <span class="kw">if let </span>Behavior::Save(path) = behavior {
+    <span class="kw">if </span><span class="macro">matches!</span>(behavior, Behavior::Serve) {
+        <span class="macro">eprintln!</span>(<span class="string">&quot;Sleeping while serving the web viewer. Abort with Ctrl-C&quot;</span>);
+        std::thread::sleep(std::time::Duration::from_secs(<span class="number">1_000_000</span>));
+    } <span class="kw">else if let </span>Behavior::Save(path) = behavior {
         session.save(path)<span class="question-mark">?</span>;
     }
 

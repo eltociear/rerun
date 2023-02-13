@@ -582,6 +582,8 @@
 <a href="#582" id="582">582</a>
 <a href="#583" id="583">583</a>
 <a href="#584" id="584">584</a>
+<a href="#585" id="585">585</a>
+<a href="#586" id="586">586</a>
 </pre><pre class="rust"><code><span class="doccomment">//! Example of using the Rerun SDK to log [the Objectron dataset](https://github.com/google-research-datasets/Objectron).
 //!
 //! Usage:
@@ -1080,14 +1082,16 @@
                 .spawn(<span class="kw">move </span>|<span class="kw-2">mut </span>session| run(<span class="kw-2">&amp;mut </span>session, <span class="kw-2">&amp;</span>args))
                 .map_err(Into::into)
         }
-        <span class="kw">_ </span>=&gt; {
-            <span class="comment">// TODO(cmc): handle serve
-        </span>}
+        Behavior::Serve =&gt; session.serve(<span class="bool-val">true</span>),
+        Behavior::Save(<span class="kw">_</span>) =&gt; {}
     }
 
     run(<span class="kw-2">&amp;mut </span>session, <span class="kw-2">&amp;</span>args)<span class="question-mark">?</span>;
 
-    <span class="kw">if let </span>Behavior::Save(path) = behavior {
+    <span class="kw">if </span><span class="macro">matches!</span>(behavior, Behavior::Serve) {
+        <span class="macro">eprintln!</span>(<span class="string">&quot;Sleeping while serving the web viewer. Abort with Ctrl-C&quot;</span>);
+        std::thread::sleep(std::time::Duration::from_secs(<span class="number">1_000_000</span>));
+    } <span class="kw">else if let </span>Behavior::Save(path) = behavior {
         session.save(path)<span class="question-mark">?</span>;
     }
 

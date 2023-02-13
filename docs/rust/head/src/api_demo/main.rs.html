@@ -724,6 +724,8 @@
 <a href="#724" id="724">724</a>
 <a href="#725" id="725">725</a>
 <a href="#726" id="726">726</a>
+<a href="#727" id="727">727</a>
+<a href="#728" id="728">728</a>
 </pre><pre class="rust"><code><span class="doccomment">//! An amalgamation of various usages of the API with synthetic &quot;data&quot; without any particular focus.
 //!
 //! It uses a lot of different aspects of the Rerun API in order to test it.
@@ -1437,14 +1439,16 @@
                 .spawn(<span class="kw">move </span>|<span class="kw-2">mut </span>session| run(<span class="kw-2">&amp;mut </span>session, <span class="kw-2">&amp;</span>args))
                 .map_err(Into::into)
         }
-        <span class="kw">_ </span>=&gt; {
-            <span class="comment">// TODO(cmc): handle serve
-        </span>}
+        Behavior::Serve =&gt; session.serve(<span class="bool-val">true</span>),
+        Behavior::Save(<span class="kw">_</span>) =&gt; {}
     }
 
     run(<span class="kw-2">&amp;mut </span>session, <span class="kw-2">&amp;</span>args)<span class="question-mark">?</span>;
 
-    <span class="kw">if let </span>Behavior::Save(path) = behavior {
+    <span class="kw">if </span><span class="macro">matches!</span>(behavior, Behavior::Serve) {
+        <span class="macro">eprintln!</span>(<span class="string">&quot;Sleeping while serving the web viewer. Abort with Ctrl-C&quot;</span>);
+        std::thread::sleep(std::time::Duration::from_secs(<span class="number">1_000_000</span>));
+    } <span class="kw">else if let </span>Behavior::Save(path) = behavior {
         session.save(path)<span class="question-mark">?</span>;
     }
 
