@@ -128,11 +128,11 @@
         <span class="kw">let </span>rsp = Response::builder();
 
         <span class="kw">let </span>bytes = <span class="kw">match </span>req.uri().path() {
-            <span class="string">&quot;/&quot; </span>| <span class="string">&quot;/index.html&quot; </span>=&gt; <span class="kw-2">&amp;</span><span class="macro">include_bytes!</span>(<span class="string">&quot;../../../web_viewer/index.html&quot;</span>)[..],
-            <span class="string">&quot;/favicon.ico&quot; </span>=&gt; <span class="kw-2">&amp;</span><span class="macro">include_bytes!</span>(<span class="string">&quot;../../../web_viewer/favicon.ico&quot;</span>)[..],
-            <span class="string">&quot;/sw.js&quot; </span>=&gt; <span class="kw-2">&amp;</span><span class="macro">include_bytes!</span>(<span class="string">&quot;../../../web_viewer/sw.js&quot;</span>)[..],
-            <span class="string">&quot;/re_viewer_bg.wasm&quot; </span>=&gt; <span class="kw-2">&amp;</span><span class="macro">include_bytes!</span>(<span class="string">&quot;../../../web_viewer/re_viewer_bg.wasm&quot;</span>)[..],
-            <span class="string">&quot;/re_viewer.js&quot; </span>=&gt; <span class="kw-2">&amp;</span><span class="macro">include_bytes!</span>(<span class="string">&quot;../../../web_viewer/re_viewer.js&quot;</span>)[..],
+            <span class="string">&quot;/&quot; </span>| <span class="string">&quot;/index.html&quot; </span>=&gt; <span class="kw-2">&amp;</span><span class="macro">include_bytes!</span>(<span class="string">&quot;../web_viewer/index.html&quot;</span>)[..],
+            <span class="string">&quot;/favicon.ico&quot; </span>=&gt; <span class="kw-2">&amp;</span><span class="macro">include_bytes!</span>(<span class="string">&quot;../web_viewer/favicon.ico&quot;</span>)[..],
+            <span class="string">&quot;/sw.js&quot; </span>=&gt; <span class="kw-2">&amp;</span><span class="macro">include_bytes!</span>(<span class="string">&quot;../web_viewer/sw.js&quot;</span>)[..],
+            <span class="string">&quot;/re_viewer_bg.wasm&quot; </span>=&gt; <span class="kw-2">&amp;</span><span class="macro">include_bytes!</span>(<span class="string">&quot;../web_viewer/re_viewer_bg.wasm&quot;</span>)[..],
+            <span class="string">&quot;/re_viewer.js&quot; </span>=&gt; <span class="kw-2">&amp;</span><span class="macro">include_bytes!</span>(<span class="string">&quot;../web_viewer/re_viewer.js&quot;</span>)[..],
             <span class="kw">_ </span>=&gt; {
                 <span class="macro">re_log::warn!</span>(<span class="string">&quot;404 path: {}&quot;</span>, req.uri().path());
                 <span class="kw">let </span>body = Body::from(Vec::new());
