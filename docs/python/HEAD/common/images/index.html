@@ -9,24 +9,24 @@
       
       
       
-        <link rel="prev" href="../turbo/">
+        <link rel="prev" href="../spatial_primitives/">
       
       
-        <link rel="next" href="../../../writing_docs/">
+        <link rel="next" href="../tensors/">
       
-      <link rel="icon" href="../../../assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.12">
     
     
       
-        <title>util.py - Rerun Python APIs</title>
+        <title>Images - Rerun Python APIs</title>
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.0d440cfe.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.0d440cfe.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.2505c338.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.2505c338.min.css">
       
       
 
@@ -42,11 +42,11 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/_mkdocstrings.css">
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
     
-      <link rel="stylesheet" href="../../../css/mkdocstrings.css">
+      <link rel="stylesheet" href="../../css/mkdocstrings.css">
     
-    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -71,7 +71,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#rerun_demo.util" class="md-skip">
+        <a href="#rerun.log_image" class="md-skip">
           Skip to content
         </a>
       
@@ -91,7 +91,7 @@
 
 <header class="md-header md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../.." title="Rerun Python APIs" class="md-header__button md-logo" aria-label="Rerun Python APIs" data-md-component="logo">
+    <a href="../.." title="Rerun Python APIs" class="md-header__button md-logo" aria-label="Rerun Python APIs" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -110,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              util.py
+              Images
             
           </span>
         </div>
@@ -176,13 +176,15 @@
         
   
   
+    
+  
 
 
   
   
   
     <li class="md-tabs__item">
-      <a href="../../../common/" class="md-tabs__link">
+      <a href="../" class="md-tabs__link md-tabs__link--active">
         Common APIs
       </a>
     </li>
@@ -192,15 +194,13 @@
         
   
   
-    
-  
 
 
   
   
   
     <li class="md-tabs__item">
-      <a href="../../" class="md-tabs__link md-tabs__link--active">
+      <a href="../../package/" class="md-tabs__link">
         Package Listing
       </a>
     </li>
@@ -213,7 +213,7 @@
 
 
   <li class="md-tabs__item">
-    <a href="../../../writing_docs/" class="md-tabs__link">
+    <a href="../../writing_docs/" class="md-tabs__link">
       Writing Docs
     </a>
   </li>
@@ -246,7 +246,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../.." title="Rerun Python APIs" class="md-nav__button md-logo" aria-label="Rerun Python APIs" data-md-component="logo">
+    <a href="../.." title="Rerun Python APIs" class="md-nav__button md-logo" aria-label="Rerun Python APIs" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -275,14 +275,16 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
       
       
         
@@ -313,7 +315,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../../common/">Common APIs</a>
+          <a href="../">Common APIs</a>
           
             <label for="__nav_1">
               <span class="md-nav__icon md-icon"></span>
@@ -321,7 +323,7 @@
           
         </div>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_1">
           <span class="md-nav__icon md-icon"></span>
           Common APIs
@@ -336,7 +338,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../common/initialization/" class="md-nav__link">
+      <a href="../initialization/" class="md-nav__link">
         Initialization
       </a>
     </li>
@@ -350,7 +352,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../common/spatial_primitives/" class="md-nav__link">
+      <a href="../spatial_primitives/" class="md-nav__link">
         Spatial Primitives
       </a>
     </li>
@@ -362,11 +364,69 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../../../common/images/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Images
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Images
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#rerun.log_image" class="md-nav__link">
+    log_image()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rerun.log_image_file" class="md-nav__link">
+    log_image_file()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rerun.log_depth_image" class="md-nav__link">
+    log_depth_image()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rerun.log_segmentation_image" class="md-nav__link">
+    log_segmentation_image()
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -378,7 +438,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../common/tensors/" class="md-nav__link">
+      <a href="../tensors/" class="md-nav__link">
         Tensors
       </a>
     </li>
@@ -392,7 +452,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../common/annotations/" class="md-nav__link">
+      <a href="../annotations/" class="md-nav__link">
         Annotations
       </a>
     </li>
@@ -406,7 +466,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../common/extension_components/" class="md-nav__link">
+      <a href="../extension_components/" class="md-nav__link">
         Extension Components
       </a>
     </li>
@@ -420,7 +480,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../common/plotting/" class="md-nav__link">
+      <a href="../plotting/" class="md-nav__link">
         Plotting
       </a>
     </li>
@@ -434,7 +494,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../common/transforms/" class="md-nav__link">
+      <a href="../transforms/" class="md-nav__link">
         Transforms
       </a>
     </li>
@@ -448,7 +508,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../common/helpers/" class="md-nav__link">
+      <a href="../helpers/" class="md-nav__link">
         Helpers
       </a>
     </li>
@@ -468,16 +528,14 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
       
       
         
@@ -494,7 +552,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../">Package Listing</a>
+          <a href="../../package/">Package Listing</a>
           
             <label for="__nav_2">
               <span class="md-nav__icon md-icon"></span>
@@ -502,7 +560,7 @@
           
         </div>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_2">
           <span class="md-nav__icon md-icon"></span>
           Package Listing
@@ -556,7 +614,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../rerun/__init__/" class="md-nav__link">
+      <a href="../../package/rerun/__init__/" class="md-nav__link">
         __init__.py
       </a>
     </li>
@@ -570,7 +628,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../rerun/color_conversion/" class="md-nav__link">
+      <a href="../../package/rerun/color_conversion/" class="md-nav__link">
         color_conversion.py
       </a>
     </li>
@@ -645,7 +703,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../rerun/components/__init__/" class="md-nav__link">
+      <a href="../../package/rerun/components/__init__/" class="md-nav__link">
         __init__.py
       </a>
     </li>
@@ -659,7 +717,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../rerun/components/annotation/" class="md-nav__link">
+      <a href="../../package/rerun/components/annotation/" class="md-nav__link">
         annotation.py
       </a>
     </li>
@@ -673,7 +731,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../rerun/components/arrow/" class="md-nav__link">
+      <a href="../../package/rerun/components/arrow/" class="md-nav__link">
         arrow.py
       </a>
     </li>
@@ -687,7 +745,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../rerun/components/box/" class="md-nav__link">
+      <a href="../../package/rerun/components/box/" class="md-nav__link">
         box.py
       </a>
     </li>
@@ -701,7 +759,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../rerun/components/color/" class="md-nav__link">
+      <a href="../../package/rerun/components/color/" class="md-nav__link">
         color.py
       </a>
     </li>
@@ -715,7 +773,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../rerun/components/instance/" class="md-nav__link">
+      <a href="../../package/rerun/components/instance/" class="md-nav__link">
         instance.py
       </a>
     </li>
@@ -729,7 +787,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../rerun/components/label/" class="md-nav__link">
+      <a href="../../package/rerun/components/label/" class="md-nav__link">
         label.py
       </a>
     </li>
@@ -743,7 +801,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../rerun/components/linestrip/" class="md-nav__link">
+      <a href="../../package/rerun/components/linestrip/" class="md-nav__link">
         linestrip.py
       </a>
     </li>
@@ -757,7 +815,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../rerun/components/point/" class="md-nav__link">
+      <a href="../../package/rerun/components/point/" class="md-nav__link">
         point.py
       </a>
     </li>
@@ -771,7 +829,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../rerun/components/quaternion/" class="md-nav__link">
+      <a href="../../package/rerun/components/quaternion/" class="md-nav__link">
         quaternion.py
       </a>
     </li>
@@ -785,7 +843,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../rerun/components/radius/" class="md-nav__link">
+      <a href="../../package/rerun/components/radius/" class="md-nav__link">
         radius.py
       </a>
     </li>
@@ -799,7 +857,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../rerun/components/rect2d/" class="md-nav__link">
+      <a href="../../package/rerun/components/rect2d/" class="md-nav__link">
         rect2d.py
       </a>
     </li>
@@ -813,7 +871,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../rerun/components/scalar/" class="md-nav__link">
+      <a href="../../package/rerun/components/scalar/" class="md-nav__link">
         scalar.py
       </a>
     </li>
@@ -827,7 +885,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../rerun/components/tensor/" class="md-nav__link">
+      <a href="../../package/rerun/components/tensor/" class="md-nav__link">
         tensor.py
       </a>
     </li>
@@ -841,7 +899,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../rerun/components/text_entry/" class="md-nav__link">
+      <a href="../../package/rerun/components/text_entry/" class="md-nav__link">
         text_entry.py
       </a>
     </li>
@@ -855,7 +913,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../rerun/components/vec/" class="md-nav__link">
+      <a href="../../package/rerun/components/vec/" class="md-nav__link">
         vec.py
       </a>
     </li>
@@ -939,7 +997,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../rerun/log/__init__/" class="md-nav__link">
+      <a href="../../package/rerun/log/__init__/" class="md-nav__link">
         __init__.py
       </a>
     </li>
@@ -953,7 +1011,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../rerun/log/annotation/" class="md-nav__link">
+      <a href="../../package/rerun/log/annotation/" class="md-nav__link">
         annotation.py
       </a>
     </li>
@@ -967,7 +1025,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../rerun/log/arrow/" class="md-nav__link">
+      <a href="../../package/rerun/log/arrow/" class="md-nav__link">
         arrow.py
       </a>
     </li>
@@ -981,7 +1039,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../rerun/log/bounding_box/" class="md-nav__link">
+      <a href="../../package/rerun/log/bounding_box/" class="md-nav__link">
         bounding_box.py
       </a>
     </li>
@@ -995,7 +1053,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../rerun/log/camera/" class="md-nav__link">
+      <a href="../../package/rerun/log/camera/" class="md-nav__link">
         camera.py
       </a>
     </li>
@@ -1009,7 +1067,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../rerun/log/error_utils/" class="md-nav__link">
+      <a href="../../package/rerun/log/error_utils/" class="md-nav__link">
         error_utils.py
       </a>
     </li>
@@ -1023,7 +1081,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../rerun/log/extension_components/" class="md-nav__link">
+      <a href="../../package/rerun/log/extension_components/" class="md-nav__link">
         extension_components.py
       </a>
     </li>
@@ -1037,7 +1095,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../rerun/log/file/" class="md-nav__link">
+      <a href="../../package/rerun/log/file/" class="md-nav__link">
         file.py
       </a>
     </li>
@@ -1051,7 +1109,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../rerun/log/image/" class="md-nav__link">
+      <a href="../../package/rerun/log/image/" class="md-nav__link">
         image.py
       </a>
     </li>
@@ -1065,7 +1123,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../rerun/log/lines/" class="md-nav__link">
+      <a href="../../package/rerun/log/lines/" class="md-nav__link">
         lines.py
       </a>
     </li>
@@ -1079,7 +1137,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../rerun/log/mesh/" class="md-nav__link">
+      <a href="../../package/rerun/log/mesh/" class="md-nav__link">
         mesh.py
       </a>
     </li>
@@ -1093,7 +1151,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../rerun/log/points/" class="md-nav__link">
+      <a href="../../package/rerun/log/points/" class="md-nav__link">
         points.py
       </a>
     </li>
@@ -1107,7 +1165,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../rerun/log/rects/" class="md-nav__link">
+      <a href="../../package/rerun/log/rects/" class="md-nav__link">
         rects.py
       </a>
     </li>
@@ -1121,7 +1179,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../rerun/log/scalar/" class="md-nav__link">
+      <a href="../../package/rerun/log/scalar/" class="md-nav__link">
         scalar.py
       </a>
     </li>
@@ -1135,7 +1193,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../rerun/log/tensor/" class="md-nav__link">
+      <a href="../../package/rerun/log/tensor/" class="md-nav__link">
         tensor.py
       </a>
     </li>
@@ -1149,7 +1207,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../rerun/log/text/" class="md-nav__link">
+      <a href="../../package/rerun/log/text/" class="md-nav__link">
         text.py
       </a>
     </li>
@@ -1163,7 +1221,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../rerun/log/transform/" class="md-nav__link">
+      <a href="../../package/rerun/log/transform/" class="md-nav__link">
         transform.py
       </a>
     </li>
@@ -1184,7 +1242,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../rerun/script_helpers/" class="md-nav__link">
+      <a href="../../package/rerun/script_helpers/" class="md-nav__link">
         script_helpers.py
       </a>
     </li>
@@ -1203,16 +1261,14 @@
               
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" checked>
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
       
       
         
@@ -1231,7 +1287,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="true">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_2_3">
           <span class="md-nav__icon md-icon"></span>
           rerun_demo/
@@ -1244,7 +1300,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../__init__/" class="md-nav__link">
+      <a href="../../package/rerun_demo/__init__/" class="md-nav__link">
         __init__.py
       </a>
     </li>
@@ -1258,7 +1314,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../data/" class="md-nav__link">
+      <a href="../../package/rerun_demo/data/" class="md-nav__link">
         data.py
       </a>
     </li>
@@ -1272,7 +1328,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../turbo/" class="md-nav__link">
+      <a href="../../package/rerun_demo/turbo/" class="md-nav__link">
         turbo.py
       </a>
     </li>
@@ -1284,68 +1340,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          util.py
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../package/rerun_demo/util/" class="md-nav__link">
         util.py
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#rerun_demo.util" class="md-nav__link">
-    util
-  </a>
-  
-    <nav class="md-nav" aria-label="util">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#rerun_demo.util.bounce_lerp" class="md-nav__link">
-    bounce_lerp()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#rerun_demo.util.interleave" class="md-nav__link">
-    interleave()
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1372,7 +1371,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../writing_docs/" class="md-nav__link">
+      <a href="../../writing_docs/" class="md-nav__link">
         Writing Docs
       </a>
     </li>
@@ -1404,29 +1403,30 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#rerun_demo.util" class="md-nav__link">
-    util
-  </a>
-  
-    <nav class="md-nav" aria-label="util">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#rerun_demo.util.bounce_lerp" class="md-nav__link">
-    bounce_lerp()
+  <a href="#rerun.log_image" class="md-nav__link">
+    log_image()
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#rerun_demo.util.interleave" class="md-nav__link">
-    interleave()
+      
+        <li class="md-nav__item">
+  <a href="#rerun.log_image_file" class="md-nav__link">
+    log_image_file()
   </a>
   
 </li>
-        
-      </ul>
-    </nav>
+      
+        <li class="md-nav__item">
+  <a href="#rerun.log_depth_image" class="md-nav__link">
+    log_depth_image()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rerun.log_segmentation_image" class="md-nav__link">
+    log_segmentation_image()
+  </a>
   
 </li>
       
@@ -1446,47 +1446,30 @@
 
 
 
-  <h1>util.py</h1>
+  <h1>Images</h1>
 
-<div class="doc doc-object doc-module">
+<div class="doc doc-object doc-function">
 
 
 
-<h3 id="rerun_demo.util" class="doc doc-heading">
-          <code>rerun_demo.util</code>
-
+<h3 id="rerun.log_image" class="doc doc-heading">
+<code class="highlight language-python"><span class="k">def</span> <span class="nf">rerun</span><span class="o">.</span><span class="n">log_image</span><span class="p">(</span><span class="n">entity_path</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
 </h3>
 
-  <div class="doc doc-contents first">
-  
-      <p>Simpe utilities to be used for Rerun demos.</p>
-
-  
-
-  <div class="doc doc-children">
-
-
-
-
-
-
-
-
-
-<div class="doc doc-object doc-function">
-
-
-
-<h4 id="rerun_demo.util.bounce_lerp" class="doc doc-heading">
-<code class="highlight language-python"><span class="k">def</span> <span class="nf">bounce_lerp</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span></code>
-
-</h4>
-
 
   <div class="doc doc-contents ">
   
-      <p>A linear interpolator that bounces between <code>a</code> and <code>b</code> as <code>t</code> goes above <code>1.0</code>.</p>
+      <p>Log a gray or color image.</p>
+<p>The image should either have 1, 3 or 4 channels (gray, RGB or RGBA).</p>
+<h5 id="rerun.log_image--supported-dtypes">Supported dtypes</h5>
+<ul>
+<li>uint8: color components should be in 0-255 sRGB gamma space, except for alpha which should be in 0-255 linear
+space.</li>
+<li>uint16: color components should be in 0-65535 sRGB gamma space, except for alpha which should be in 0-65535
+linear space.</li>
+<li>float32, float64: all color components should be in 0-1 linear space.</li>
+</ul>
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -1500,30 +1483,43 @@
     </thead>
     <tbody>
         <tr>
-          <td><code>a</code></td>
+          <td><code>entity_path</code></td>
           <td>
+                <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
           </td>
-          <td><p>Start value (t == 0).</p></td>
+          <td><p>Path to the image in the space hierarchy.</p></td>
           <td>
               <em>required</em>
           </td>
         </tr>
         <tr>
-          <td><code>b</code></td>
+          <td><code>image</code></td>
           <td>
+                <code><a class="autorefs autorefs-internal" title="rerun.log.tensor.Tensor" href="../../package/rerun/log/tensor/#rerun.log.tensor.Tensor">Tensor</a></code>
           </td>
-          <td><p>End value (t == 1).</p></td>
+          <td><p>A <a class="autorefs autorefs-internal" href="../../package/rerun/log/tensor/#rerun.log.tensor.Tensor">Tensor</a> representing the image to log.</p></td>
           <td>
               <em>required</em>
           </td>
         </tr>
         <tr>
-          <td><code>t</code></td>
+          <td><code>ext</code></td>
           <td>
+                <code><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a>[<a class="autorefs autorefs-external" title="typing.Dict" href="https://docs.python.org/3/library/typing.html#typing.Dict">Dict</a>[<a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a>, <a class="autorefs autorefs-external" title="typing.Any" href="https://docs.python.org/3/library/typing.html#typing.Any">Any</a>]]</code>
           </td>
-          <td><p>Interpolation coefficient.</p></td>
+          <td><p>Optional dictionary of extension components. See <a class="autorefs autorefs-internal" href="../../package/rerun/__init__/#rerun.log_extension_components">rerun.log_extension_components</a></p></td>
           <td>
-              <em>required</em>
+                <code>None</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>timeless</code></td>
+          <td>
+                <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></code>
+          </td>
+          <td><p>If true, the image will be timeless (default: False).</p></td>
+          <td>
+                <code>False</code>
           </td>
         </tr>
     </tbody>
@@ -1537,15 +1533,18 @@
 
 
 
-<h4 id="rerun_demo.util.interleave" class="doc doc-heading">
-<code class="highlight language-python"><span class="k">def</span> <span class="nf">interleave</span><span class="p">(</span><span class="n">arr1</span><span class="p">,</span> <span class="n">arr2</span><span class="p">)</span></code>
+<h3 id="rerun.log_image_file" class="doc doc-heading">
+<code class="highlight language-python"><span class="k">def</span> <span class="nf">rerun</span><span class="o">.</span><span class="n">log_image_file</span><span class="p">(</span><span class="n">entity_path</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">img_bytes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">img_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">img_format</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
-</h4>
+</h3>
 
 
   <div class="doc doc-contents ">
   
-      <p>Interleaves two numpy arrays.</p>
+      <p>Log an image file given its contents or path on disk.</p>
+<p>Only JPEGs supported right now.</p>
+<p>You must pass either <code>img_bytes</code> or <code>img_path</code>.</p>
+<p>If no <code>img_format</code> is specified, we will try and guess it.</p>
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -1559,21 +1558,53 @@
     </thead>
     <tbody>
         <tr>
-          <td><code>arr1</code></td>
+          <td><code>entity_path</code></td>
           <td>
+                <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
           </td>
-          <td><p>A numpy array of arbitrary shape and length.</p></td>
+          <td><p>Path to the image in the space hierarchy.</p></td>
           <td>
               <em>required</em>
           </td>
         </tr>
         <tr>
-          <td><code>arr2</code></td>
+          <td><code>img_bytes</code></td>
           <td>
+                <code><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a>[<a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#bytes">bytes</a>]</code>
           </td>
-          <td><p>A numpy array with the same shape and length as <code>arr1</code>.</p></td>
+          <td><p>Content of an image file, e.g. a <code>.jpg</code>.</p></td>
           <td>
-              <em>required</em>
+                <code>None</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>img_path</code></td>
+          <td>
+                <code><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a>[<a class="autorefs autorefs-external" title="pathlib.Path" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path">Path</a>]</code>
+          </td>
+          <td><p>Path to an image file, e.g. a <code>.jpg</code>.</p></td>
+          <td>
+                <code>None</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>img_format</code></td>
+          <td>
+                <code><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a>[<a class="autorefs autorefs-internal" title="rerun.log.file.ImageFormat" href="../../package/rerun/log/file/#rerun.log.file.ImageFormat">ImageFormat</a>]</code>
+          </td>
+          <td><p>Format of the image file.</p></td>
+          <td>
+                <code>None</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>timeless</code></td>
+          <td>
+                <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></code>
+          </td>
+          <td><p>If true, the image will be timeless (default: False).</p></td>
+          <td>
+                <code>False</code>
           </td>
         </tr>
     </tbody>
@@ -1583,9 +1614,165 @@
 
 </div>
 
+<div class="doc doc-object doc-function">
 
+
+
+<h3 id="rerun.log_depth_image" class="doc doc-heading">
+<code class="highlight language-python"><span class="k">def</span> <span class="nf">rerun</span><span class="o">.</span><span class="n">log_depth_image</span><span class="p">(</span><span class="n">entity_path</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">meter</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Log a depth image.</p>
+<p>The image must be a 2D array.</p>
+<h5 id="rerun.log_depth_image--supported-dtypes">Supported dtypes</h5>
+<p>uint8, uint16, float32, float64</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>entity_path</code></td>
+          <td>
+                <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
+          </td>
+          <td><p>Path to the image in the space hierarchy.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>image</code></td>
+          <td>
+                <code><a class="autorefs autorefs-internal" title="rerun.log.tensor.Tensor" href="../../package/rerun/log/tensor/#rerun.log.tensor.Tensor">Tensor</a></code>
+          </td>
+          <td><p>A <a class="autorefs autorefs-internal" href="../../package/rerun/log/tensor/#rerun.log.tensor.Tensor">Tensor</a> representing the depth image to log.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>meter</code></td>
+          <td>
+                <code><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a>[<a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a>]</code>
+          </td>
+          <td><p>How long is a meter in the given dtype?
+For instance: with uint16, perhaps meter=1000 which would mean
+you have millimeter precision and a range of up to ~65 meters (2^16 / 1000).</p></td>
+          <td>
+                <code>None</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>ext</code></td>
+          <td>
+                <code><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a>[<a class="autorefs autorefs-external" title="typing.Dict" href="https://docs.python.org/3/library/typing.html#typing.Dict">Dict</a>[<a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a>, <a class="autorefs autorefs-external" title="typing.Any" href="https://docs.python.org/3/library/typing.html#typing.Any">Any</a>]]</code>
+          </td>
+          <td><p>Optional dictionary of extension components. See <a class="autorefs autorefs-internal" href="../../package/rerun/__init__/#rerun.log_extension_components">rerun.log_extension_components</a></p></td>
+          <td>
+                <code>None</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>timeless</code></td>
+          <td>
+                <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></code>
+          </td>
+          <td><p>If true, the image will be timeless (default: False).</p></td>
+          <td>
+                <code>False</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
 
   </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="rerun.log_segmentation_image" class="doc doc-heading">
+<code class="highlight language-python"><span class="k">def</span> <span class="nf">rerun</span><span class="o">.</span><span class="n">log_segmentation_image</span><span class="p">(</span><span class="n">entity_path</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Log an image made up of integer class-ids.</p>
+<p>The image should have 1 channel, i.e. be either <code>H x W</code> or <code>H x W x 1</code>.</p>
+<p>See: <a class="autorefs autorefs-internal" href="../../package/rerun/__init__/#rerun.log_annotation_context">rerun.log_annotation_context</a> for information on how to map the class-ids to
+colors and labels.</p>
+<h5 id="rerun.log_segmentation_image--supported-dtypes">Supported dtypes</h5>
+<p>uint8, uint16</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>entity_path</code></td>
+          <td>
+                <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
+          </td>
+          <td><p>Path to the image in the space hierarchy.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>image</code></td>
+          <td>
+                <code><a class="autorefs autorefs-external" title="numpy.typing" href="https://numpy.org/doc/stable/reference/typing.html#module-numpy.typing">npt</a>.<a class="autorefs autorefs-external" title="numpy.typing.ArrayLike" href="https://numpy.org/doc/stable/reference/typing.html#numpy.typing.ArrayLike">ArrayLike</a></code>
+          </td>
+          <td><p>A <a class="autorefs autorefs-internal" href="../../package/rerun/log/tensor/#rerun.log.tensor.Tensor">Tensor</a> representing the segmentation image to log.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>ext</code></td>
+          <td>
+                <code><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a>[<a class="autorefs autorefs-external" title="typing.Dict" href="https://docs.python.org/3/library/typing.html#typing.Dict">Dict</a>[<a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a>, <a class="autorefs autorefs-external" title="typing.Any" href="https://docs.python.org/3/library/typing.html#typing.Any">Any</a>]]</code>
+          </td>
+          <td><p>Optional dictionary of extension components. See <a class="autorefs autorefs-internal" href="../../package/rerun/__init__/#rerun.log_extension_components">rerun.log_extension_components</a></p></td>
+          <td>
+                <code>None</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>timeless</code></td>
+          <td>
+                <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></code>
+          </td>
+          <td><p>If true, the image will be timeless (default: False).</p></td>
+          <td>
+                <code>False</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
 
   </div>
 
@@ -1627,10 +1814,10 @@
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.indexes", "navigation.instant", "navigation.tabs", "navigation.tabs.sticky", "navigation.tracking"], "search": "../../../assets/javascripts/workers/search.db81ec45.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.indexes", "navigation.instant", "navigation.tabs", "navigation.tabs.sticky", "navigation.tracking"], "search": "../../assets/javascripts/workers/search.db81ec45.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.4b2c34cd.min.js"></script>
+      <script src="../../assets/javascripts/bundle.4b2c34cd.min.js"></script>
       
     
   </body>

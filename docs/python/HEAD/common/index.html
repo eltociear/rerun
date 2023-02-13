@@ -308,6 +308,8 @@
         
           
         
+          
+        
       
       
         
@@ -350,8 +352,8 @@
   
   
     <li class="md-nav__item">
-      <a href="logging_primitives/" class="md-nav__link">
-        Logging Primitives
+      <a href="spatial_primitives/" class="md-nav__link">
+        Spatial Primitives
       </a>
     </li>
   
@@ -364,8 +366,22 @@
   
   
     <li class="md-nav__item">
-      <a href="logging_images/" class="md-nav__link">
-        Logging Images
+      <a href="images/" class="md-nav__link">
+        Images
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tensors/" class="md-nav__link">
+        Tensors
       </a>
     </li>
   
@@ -1373,7 +1389,7 @@ and/or <code>rerun</code> process to get some verbose logging output.</p>
 </tr>
 </tbody>
 </table>
-<h2 id="logging-primitives">Logging Primitives</h2>
+<h2 id="spatial-primitives">Spatial Primitives</h2>
 <table>
 <thead>
 <tr>
@@ -1383,40 +1399,40 @@ and/or <code>rerun</code> process to get some verbose logging output.</p>
 </thead>
 <tbody>
 <tr>
-<td><a href="logging_primitives#rerun.log_point"><code>rerun.log_point()</code></a></td>
+<td><a href="spatial_primitives#rerun.log_point"><code>rerun.log_point()</code></a></td>
 <td>Log a 2D or 3D point, with a positions and optional colors, radii, label, etc.</td>
 </tr>
 <tr>
-<td><a href="logging_primitives#rerun.log_points"><code>rerun.log_points()</code></a></td>
+<td><a href="spatial_primitives#rerun.log_points"><code>rerun.log_points()</code></a></td>
 <td>Log 2D or 3D points, with positions and optional colors, radii, labels, etc.</td>
 </tr>
 <tr>
-<td><a href="logging_primitives#rerun.log_rect"><code>rerun.log_rect()</code></a></td>
+<td><a href="spatial_primitives#rerun.log_rect"><code>rerun.log_rect()</code></a></td>
 <td>Log a 2D rectangle.</td>
 </tr>
 <tr>
-<td><a href="logging_primitives#rerun.log_rects"><code>rerun.log_rects()</code></a></td>
+<td><a href="spatial_primitives#rerun.log_rects"><code>rerun.log_rects()</code></a></td>
 <td>Log multiple 2D rectangles.</td>
 </tr>
 <tr>
-<td><a href="logging_primitives#rerun.log_obb"><code>rerun.log_obb()</code></a></td>
+<td><a href="spatial_primitives#rerun.log_obb"><code>rerun.log_obb()</code></a></td>
 <td>Log a 3D oriented bounding box.</td>
 </tr>
 <tr>
-<td><a href="logging_primitives#rerun.log_line_strip"><code>rerun.log_line_strip()</code></a></td>
+<td><a href="spatial_primitives#rerun.log_line_strip"><code>rerun.log_line_strip()</code></a></td>
 <td>Log a line strip through 3D space.</td>
 </tr>
 <tr>
-<td><a href="logging_primitives#rerun.log_line_segments"><code>rerun.log_line_segments()</code></a></td>
+<td><a href="spatial_primitives#rerun.log_line_segments"><code>rerun.log_line_segments()</code></a></td>
 <td>Log many 2D or 3D line segments.</td>
 </tr>
 <tr>
-<td><a href="logging_primitives#rerun.log_arrow"><code>rerun.log_arrow()</code></a></td>
+<td><a href="spatial_primitives#rerun.log_arrow"><code>rerun.log_arrow()</code></a></td>
 <td>Log a 3D arrow.</td>
 </tr>
 </tbody>
 </table>
-<h2 id="logging-images">Logging Images</h2>
+<h2 id="images">Images</h2>
 <table>
 <thead>
 <tr>
@@ -1426,20 +1442,35 @@ and/or <code>rerun</code> process to get some verbose logging output.</p>
 </thead>
 <tbody>
 <tr>
-<td><a href="logging_images#rerun.log_image"><code>rerun.log_image()</code></a></td>
+<td><a href="images#rerun.log_image"><code>rerun.log_image()</code></a></td>
 <td>Log a gray or color image.</td>
 </tr>
 <tr>
-<td><a href="logging_images#rerun.log_image_file"><code>rerun.log_image_file()</code></a></td>
+<td><a href="images#rerun.log_image_file"><code>rerun.log_image_file()</code></a></td>
 <td>Log an image file given its contents or path on disk.</td>
 </tr>
 <tr>
-<td><a href="logging_images#rerun.log_depth_image"><code>rerun.log_depth_image()</code></a></td>
+<td><a href="images#rerun.log_depth_image"><code>rerun.log_depth_image()</code></a></td>
 <td>Log a depth image.</td>
 </tr>
 <tr>
-<td><a href="logging_images#rerun.log_segmentation_image"><code>rerun.log_segmentation_image()</code></a></td>
+<td><a href="images#rerun.log_segmentation_image"><code>rerun.log_segmentation_image()</code></a></td>
 <td>Log an image made up of integer class-ids.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tensors">Tensors</h2>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="tensors#rerun.log_tensor"><code>rerun.log_tensor()</code></a></td>
+<td>Log an arbitrary-dimensional tensor.</td>
 </tr>
 </tbody>
 </table>
