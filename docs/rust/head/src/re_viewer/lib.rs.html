@@ -124,6 +124,38 @@
 <a href="#124" id="124">124</a>
 <a href="#125" id="125">125</a>
 <a href="#126" id="126">126</a>
+<a href="#127" id="127">127</a>
+<a href="#128" id="128">128</a>
+<a href="#129" id="129">129</a>
+<a href="#130" id="130">130</a>
+<a href="#131" id="131">131</a>
+<a href="#132" id="132">132</a>
+<a href="#133" id="133">133</a>
+<a href="#134" id="134">134</a>
+<a href="#135" id="135">135</a>
+<a href="#136" id="136">136</a>
+<a href="#137" id="137">137</a>
+<a href="#138" id="138">138</a>
+<a href="#139" id="139">139</a>
+<a href="#140" id="140">140</a>
+<a href="#141" id="141">141</a>
+<a href="#142" id="142">142</a>
+<a href="#143" id="143">143</a>
+<a href="#144" id="144">144</a>
+<a href="#145" id="145">145</a>
+<a href="#146" id="146">146</a>
+<a href="#147" id="147">147</a>
+<a href="#148" id="148">148</a>
+<a href="#149" id="149">149</a>
+<a href="#150" id="150">150</a>
+<a href="#151" id="151">151</a>
+<a href="#152" id="152">152</a>
+<a href="#153" id="153">153</a>
+<a href="#154" id="154">154</a>
+<a href="#155" id="155">155</a>
+<a href="#156" id="156">156</a>
+<a href="#157" id="157">157</a>
+<a href="#158" id="158">158</a>
 </pre><pre class="rust"><code><span class="doccomment">//! Rerun Viewer GUI.
 //!
 //! This crate contains all the GUI code for the Rerun Viewer,
@@ -144,6 +176,7 @@
 
 <span class="kw">pub mod </span>external {
     <span class="kw">pub use </span>eframe;
+    <span class="kw">pub use </span>egui;
 }
 
 <span class="comment">// ----------------------------------------------------------------------------
@@ -249,6 +282,37 @@
     }
 
     re_ui::ReUi::load_and_apply(<span class="kw-2">&amp;</span>cc.egui_ctx)
+}
+
+<span class="comment">// ---------------------------------------------------------------------------
+
+</span><span class="doccomment">/// This wakes up the ui thread each time we receive a new message.
+</span><span class="attr">#[cfg(not(feature = <span class="string">&quot;web&quot;</span>))]
+#[cfg(not(target_arch = <span class="string">&quot;wasm32&quot;</span>))]
+</span><span class="kw">pub fn </span>wake_up_ui_thread_on_each_msg&lt;T: Send + <span class="lifetime">&#39;static</span>&gt;(
+    rx: re_smart_channel::Receiver&lt;T&gt;,
+    ctx: egui::Context,
+) -&gt; re_smart_channel::Receiver&lt;T&gt; {
+    <span class="comment">// We need to intercept messages to wake up the ui thread.
+    // For that, we need a new channel.
+    // However, we want to make sure the channel latency numbers are from the start
+    // of the first channel, to the end of the second.
+    // For that we need to use `chained_channel`, `recv_with_send_time` and `send_at`.
+    </span><span class="kw">let </span>(tx, new_rx) = rx.chained_channel();
+    std::thread::Builder::new()
+        .name(<span class="string">&quot;ui_waker&quot;</span>.to_owned())
+        .spawn(<span class="kw">move </span>|| {
+            <span class="kw">while let </span><span class="prelude-val">Ok</span>((sent_at, msg)) = rx.recv_with_send_time() {
+                <span class="kw">if </span>tx.send_at(sent_at, msg).is_ok() {
+                    ctx.request_repaint();
+                } <span class="kw">else </span>{
+                    <span class="kw">break</span>;
+                }
+            }
+            <span class="macro">re_log::debug!</span>(<span class="string">&quot;Shutting down ui_waker thread&quot;</span>);
+        })
+        .unwrap();
+    new_rx
 }
 </code></pre></div>
 </section></div></main><div id="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="re_viewer" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.1 (d5a82bbd2 2023-02-07)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>

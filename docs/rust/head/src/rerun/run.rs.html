@@ -321,33 +321,6 @@
 <a href="#321" id="321">321</a>
 <a href="#322" id="322">322</a>
 <a href="#323" id="323">323</a>
-<a href="#324" id="324">324</a>
-<a href="#325" id="325">325</a>
-<a href="#326" id="326">326</a>
-<a href="#327" id="327">327</a>
-<a href="#328" id="328">328</a>
-<a href="#329" id="329">329</a>
-<a href="#330" id="330">330</a>
-<a href="#331" id="331">331</a>
-<a href="#332" id="332">332</a>
-<a href="#333" id="333">333</a>
-<a href="#334" id="334">334</a>
-<a href="#335" id="335">335</a>
-<a href="#336" id="336">336</a>
-<a href="#337" id="337">337</a>
-<a href="#338" id="338">338</a>
-<a href="#339" id="339">339</a>
-<a href="#340" id="340">340</a>
-<a href="#341" id="341">341</a>
-<a href="#342" id="342">342</a>
-<a href="#343" id="343">343</a>
-<a href="#344" id="344">344</a>
-<a href="#345" id="345">345</a>
-<a href="#346" id="346">346</a>
-<a href="#347" id="347">347</a>
-<a href="#348" id="348">348</a>
-<a href="#349" id="349">349</a>
-<a href="#350" id="350">350</a>
 </pre><pre class="rust"><code><span class="kw">use </span>re_format::parse_duration;
 <span class="kw">use </span>re_log_types::LogMsg;
 <span class="kw">use </span>re_smart_channel::Receiver;
@@ -583,7 +556,7 @@
         </span><span class="macro">anyhow::bail!</span>(<span class="string">&quot;Can&#39;t host web-viewer - rerun was not compiled with the &#39;web&#39; feature&quot;</span>);
     } <span class="kw">else </span>{
         re_viewer::run_native_app(Box::new(<span class="kw">move </span>|cc, re_ui| {
-            <span class="kw">let </span>rx = wake_up_ui_thread_on_each_msg(rx, cc.egui_ctx.clone());
+            <span class="kw">let </span>rx = re_viewer::wake_up_ui_thread_on_each_msg(rx, cc.egui_ctx.clone());
             <span class="kw">let </span><span class="kw-2">mut </span>app = re_viewer::App::from_receiver(startup_options, re_ui, cc.storage, rx);
             app.set_profiler(profiler);
             Box::new(app)
@@ -662,33 +635,6 @@
 <span class="attr">#[cfg(not(feature = <span class="string">&quot;web&quot;</span>))]
 </span><span class="kw">async fn </span>host_web_viewer(_rerun_ws_server_url: String) -&gt; anyhow::Result&lt;()&gt; {
     <span class="macro">panic!</span>(<span class="string">&quot;Can&#39;t host web-viewer - rerun was not compiled with the &#39;web&#39; feature&quot;</span>);
-}
-
-<span class="doccomment">/// This wakes up the ui thread each time we receive a new message.
-</span><span class="kw">fn </span>wake_up_ui_thread_on_each_msg&lt;T: Send + <span class="lifetime">&#39;static</span>&gt;(
-    rx: Receiver&lt;T&gt;,
-    ctx: egui::Context,
-) -&gt; re_smart_channel::Receiver&lt;T&gt; {
-    <span class="comment">// We need to intercept messages to wake up the ui thread.
-    // For that, we need a new channel.
-    // However, we want to make sure the channel latency numbers are from the start
-    // of the first channel, to the end of the second.
-    // For that we need to use `chained_channel`, `recv_with_send_time` and `send_at`.
-    </span><span class="kw">let </span>(tx, new_rx) = rx.chained_channel();
-    std::thread::Builder::new()
-        .name(<span class="string">&quot;ui_waker&quot;</span>.to_owned())
-        .spawn(<span class="kw">move </span>|| {
-            <span class="kw">while let </span><span class="prelude-val">Ok</span>((sent_at, msg)) = rx.recv_with_send_time() {
-                <span class="kw">if </span>tx.send_at(sent_at, msg).is_ok() {
-                    ctx.request_repaint();
-                } <span class="kw">else </span>{
-                    <span class="kw">break</span>;
-                }
-            }
-            <span class="macro">re_log::debug!</span>(<span class="string">&quot;Shutting down ui_waker thread&quot;</span>);
-        })
-        .unwrap();
-    new_rx
 }
 
 <span class="attr">#[cfg(feature = <span class="string">&quot;server&quot;</span>)]
