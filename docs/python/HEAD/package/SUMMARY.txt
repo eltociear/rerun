@@ -38,8 +38,3 @@
         * [text.py](rerun/log/text.md)
         * [transform.py](rerun/log/transform.md)
     * [script_helpers.py](rerun/script_helpers.md)
-* rerun_demo/
-    * [\__init__.py](rerun_demo/__init__.md)
-    * [data.py](rerun_demo/data.md)
-    * [turbo.py](rerun_demo/turbo.md)
-    * [util.py](rerun_demo/util.md)
