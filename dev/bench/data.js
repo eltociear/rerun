@@ -1,176 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1676297461672,
+  "lastUpdate": 1676301489038,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
-      {
-        "commit": {
-          "author": {
-            "email": "emil@rerun.io",
-            "name": "Emil Ernerfeldt",
-            "username": "emilk"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "9506e1d699e641cd02f091f17284afa3547cedda",
-          "message": "Enable `--web-viewer` in the Python Wheels (#1182)\n\n* Make 'web' a default feature of the python sdk\r\n\r\n* Add sanity-checking to crates/re_web_server/build.rs\r\n\r\n* Allow crates/re_web_server/build.rs to be run from any CWD\r\n\r\n* Run setup_web.sh on the Python CI\r\n\r\n* Turn on the web feature on the CI\r\n\r\n* Only enable the web feature when building pypi package\r\n\r\n* Improve setup_web.sh\r\n\r\n* Add winget package manager to setup_web.sh\r\n\r\n* Print out what is happening\r\n\r\n* Add shell: bash\r\n\r\n* Try getting wasm-opt into the windows build\r\n\r\n* Correct path to exe\r\n\r\n* run setup_web.sh but allow it to fail\r\n\r\n---------\r\n\r\nCo-authored-by: Jeremy Leibs <jeremy@rerun.io>",
-          "timestamp": "2023-02-11T00:14:27-05:00",
-          "tree_id": "afc5ddc1d2ca5fca7c341399f66ad2065756f6d5",
-          "url": "https://github.com/rerun-io/rerun/commit/9506e1d699e641cd02f091f17284afa3547cedda"
-        },
-        "date": 1676092979445,
-        "tool": "cargo",
-        "benches": [
-          {
-            "name": "datastore/insert/batch/rects/insert",
-            "value": 553018,
-            "range": "± 3376",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "datastore/latest_at/batch/rects/query",
-            "value": 1828,
-            "range": "± 7",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "datastore/latest_at/missing_components/primary",
-            "value": 352,
-            "range": "± 2",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "datastore/latest_at/missing_components/secondaries",
-            "value": 422,
-            "range": "± 2",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "datastore/range/batch/rects/query",
-            "value": 154866,
-            "range": "± 824",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "mono_points_arrow/generate_message_bundles",
-            "value": 48278873,
-            "range": "± 1477847",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "mono_points_arrow/generate_messages",
-            "value": 137953593,
-            "range": "± 1247528",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "mono_points_arrow/encode_log_msg",
-            "value": 162850883,
-            "range": "± 847852",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "mono_points_arrow/encode_total",
-            "value": 353017712,
-            "range": "± 2633798",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "mono_points_arrow/decode_log_msg",
-            "value": 186737412,
-            "range": "± 1242579",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "mono_points_arrow/decode_message_bundles",
-            "value": 74965622,
-            "range": "± 1012341",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "mono_points_arrow/decode_total",
-            "value": 257161092,
-            "range": "± 1707763",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "batch_points_arrow/generate_message_bundles",
-            "value": 288542,
-            "range": "± 986",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "batch_points_arrow/generate_messages",
-            "value": 6220,
-            "range": "± 22",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "batch_points_arrow/encode_log_msg",
-            "value": 364869,
-            "range": "± 1596",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "batch_points_arrow/encode_total",
-            "value": 679283,
-            "range": "± 3611",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "batch_points_arrow/decode_log_msg",
-            "value": 344516,
-            "range": "± 1106",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "batch_points_arrow/decode_message_bundles",
-            "value": 2109,
-            "range": "± 15",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "batch_points_arrow/decode_total",
-            "value": 353668,
-            "range": "± 1629",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "arrow_mono_points/insert",
-            "value": 7057570757,
-            "range": "± 7367410",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "arrow_mono_points/query",
-            "value": 1656057,
-            "range": "± 17390",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "arrow_batch_points/insert",
-            "value": 2600099,
-            "range": "± 22285",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "arrow_batch_points/query",
-            "value": 16814,
-            "range": "± 100",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "tuid/Tuid::random",
-            "value": 34,
-            "range": "± 0",
-            "unit": "ns/iter"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -5038,6 +4870,174 @@ window.BENCHMARK_DATA = {
           {
             "name": "tuid/Tuid::random",
             "value": 33,
+            "range": "± 0",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "john@rerun.io",
+            "name": "John Hughes",
+            "username": "jondo2010"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "0fa51fd0a902f94284ad7bf9bfea67f0287c11a0",
+          "message": "Use the semver package for `version_util.py` (#1244)\n\n* Use the semver package for `version_util.py`\r\n* Explicitly install requirements-build.txt in Python workflow",
+          "timestamp": "2023-02-13T16:08:13+01:00",
+          "tree_id": "85f40d3a50e194d0b5f0cdfdea13cb8a017ed940",
+          "url": "https://github.com/rerun-io/rerun/commit/0fa51fd0a902f94284ad7bf9bfea67f0287c11a0"
+        },
+        "date": 1676301486175,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/insert/batch/rects/insert",
+            "value": 546259,
+            "range": "± 1591",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/latest_at/batch/rects/query",
+            "value": 1781,
+            "range": "± 3",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/latest_at/missing_components/primary",
+            "value": 350,
+            "range": "± 34",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/latest_at/missing_components/secondaries",
+            "value": 420,
+            "range": "± 0",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/range/batch/rects/query",
+            "value": 150105,
+            "range": "± 177",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/generate_message_bundles",
+            "value": 49179552,
+            "range": "± 1370963",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/generate_messages",
+            "value": 136973374,
+            "range": "± 1365440",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/encode_log_msg",
+            "value": 160520421,
+            "range": "± 1529550",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/encode_total",
+            "value": 350398276,
+            "range": "± 2878489",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/decode_log_msg",
+            "value": 182857077,
+            "range": "± 1332198",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/decode_message_bundles",
+            "value": 72776180,
+            "range": "± 1127647",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/decode_total",
+            "value": 252549650,
+            "range": "± 2207543",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/generate_message_bundles",
+            "value": 357592,
+            "range": "± 636",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/generate_messages",
+            "value": 6205,
+            "range": "± 19",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/encode_log_msg",
+            "value": 368588,
+            "range": "± 1224",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/encode_total",
+            "value": 744339,
+            "range": "± 2480",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/decode_log_msg",
+            "value": 350548,
+            "range": "± 913",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/decode_message_bundles",
+            "value": 1995,
+            "range": "± 2",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/decode_total",
+            "value": 354516,
+            "range": "± 1317",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_mono_points/insert",
+            "value": 6934724579,
+            "range": "± 24021020",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_mono_points/query",
+            "value": 1665327,
+            "range": "± 12491",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_batch_points/insert",
+            "value": 2661367,
+            "range": "± 15925",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_batch_points/query",
+            "value": 17383,
+            "range": "± 59",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "tuid/Tuid::random",
+            "value": 34,
             "range": "± 0",
             "unit": "ns/iter"
           }
