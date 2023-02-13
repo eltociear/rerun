@@ -284,6 +284,57 @@
 <a href="#284" id="284">284</a>
 <a href="#285" id="285">285</a>
 <a href="#286" id="286">286</a>
+<a href="#287" id="287">287</a>
+<a href="#288" id="288">288</a>
+<a href="#289" id="289">289</a>
+<a href="#290" id="290">290</a>
+<a href="#291" id="291">291</a>
+<a href="#292" id="292">292</a>
+<a href="#293" id="293">293</a>
+<a href="#294" id="294">294</a>
+<a href="#295" id="295">295</a>
+<a href="#296" id="296">296</a>
+<a href="#297" id="297">297</a>
+<a href="#298" id="298">298</a>
+<a href="#299" id="299">299</a>
+<a href="#300" id="300">300</a>
+<a href="#301" id="301">301</a>
+<a href="#302" id="302">302</a>
+<a href="#303" id="303">303</a>
+<a href="#304" id="304">304</a>
+<a href="#305" id="305">305</a>
+<a href="#306" id="306">306</a>
+<a href="#307" id="307">307</a>
+<a href="#308" id="308">308</a>
+<a href="#309" id="309">309</a>
+<a href="#310" id="310">310</a>
+<a href="#311" id="311">311</a>
+<a href="#312" id="312">312</a>
+<a href="#313" id="313">313</a>
+<a href="#314" id="314">314</a>
+<a href="#315" id="315">315</a>
+<a href="#316" id="316">316</a>
+<a href="#317" id="317">317</a>
+<a href="#318" id="318">318</a>
+<a href="#319" id="319">319</a>
+<a href="#320" id="320">320</a>
+<a href="#321" id="321">321</a>
+<a href="#322" id="322">322</a>
+<a href="#323" id="323">323</a>
+<a href="#324" id="324">324</a>
+<a href="#325" id="325">325</a>
+<a href="#326" id="326">326</a>
+<a href="#327" id="327">327</a>
+<a href="#328" id="328">328</a>
+<a href="#329" id="329">329</a>
+<a href="#330" id="330">330</a>
+<a href="#331" id="331">331</a>
+<a href="#332" id="332">332</a>
+<a href="#333" id="333">333</a>
+<a href="#334" id="334">334</a>
+<a href="#335" id="335">335</a>
+<a href="#336" id="336">336</a>
+<a href="#337" id="337">337</a>
 </pre><pre class="rust"><code><span class="kw">use </span>std::net::SocketAddr;
 
 <span class="kw">use </span>re_log_types::{
@@ -296,6 +347,10 @@
 /// You should ideally create one session object and reuse it.
 /// For convenience, there is a global [`Session`] object you can access with [`crate::global_session`].
 </span><span class="kw">pub struct </span>Session {
+    <span class="doccomment">/// Is this session enabled?
+    /// If not, all calls into it are ignored!
+    </span>enabled: bool,
+
     <span class="attr">#[cfg(feature = <span class="string">&quot;web&quot;</span>)]
     </span>tokio_rt: tokio::runtime::Runtime,
 
@@ -308,14 +363,35 @@
     has_sent_begin_recording_msg: bool,
 }
 
+<span class="kw">impl </span>Default <span class="kw">for </span>Session {
+    <span class="kw">fn </span>default() -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::with_default_enabled(<span class="bool-val">true</span>)
+    }
+}
+
 <span class="kw">impl </span>Session {
     <span class="doccomment">/// Construct a new session.
     ///
     /// Usually you should only call this once and then reuse the same [`Session`].
     ///
     /// For convenience, there is also a global [`Session`] object you can access with [`crate::global_session`].
+    ///
+    /// Logging is enabled by default, but can be turned off with the `RERUN` environment variable
+    /// or by calling [`Self::set_enabled`].
     </span><span class="kw">pub fn </span>new() -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::with_default_enabled(<span class="bool-val">true</span>)
+    }
+
+    <span class="doccomment">/// Construct a new session, with control of wether or not logging is enabled by default.
+    ///
+    /// The default can always be overridden using the `RERUN` environment variable
+    /// or by calling [`Self::set_enabled`].
+    </span><span class="kw">pub fn </span>with_default_enabled(default_enabled: bool) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>enabled = <span class="kw">crate</span>::decide_logging_enabled(default_enabled);
+
         <span class="self">Self </span>{
+            enabled,
+
             <span class="attr">#[cfg(feature = <span class="string">&quot;web&quot;</span>)]
             </span>tokio_rt: tokio::runtime::Runtime::new().unwrap(),
 
@@ -325,6 +401,16 @@
             is_official_example: <span class="prelude-val">None</span>,
             has_sent_begin_recording_msg: <span class="bool-val">false</span>,
         }
+    }
+
+    <span class="doccomment">/// Check if logging is enabled on this `Session`.
+    </span><span class="kw">pub fn </span>is_enabled(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="self">self</span>.enabled
+    }
+
+    <span class="doccomment">/// Enable or disable logging on this `Session`.
+    </span><span class="kw">pub fn </span>set_enabled(<span class="kw-2">&amp;mut </span><span class="self">self</span>, enabled: bool) {
+        <span class="self">self</span>.enabled = enabled;
     }
 
     <span class="doccomment">/// Set the [`ApplicationId`] to use for the following stream of log messages.
@@ -369,6 +455,11 @@
     ///
     /// Disconnect with [`Self::disconnect`].
     </span><span class="kw">pub fn </span>connect(<span class="kw-2">&amp;mut </span><span class="self">self</span>, addr: SocketAddr) {
+        <span class="kw">if </span>!<span class="self">self</span>.enabled {
+            <span class="macro">re_log::debug!</span>(<span class="string">&quot;Rerun disabled - call to connect() ignored&quot;</span>);
+            <span class="kw">return</span>;
+        }
+
         <span class="kw">match </span><span class="kw-2">&amp;mut </span><span class="self">self</span>.sender {
             Sender::Remote(remote) =&gt; {
                 remote.set_addr(addr);
@@ -396,6 +487,11 @@
     /// will be opened to show the viewer.
     </span><span class="attr">#[cfg(feature = <span class="string">&quot;web&quot;</span>)]
     </span><span class="kw">pub fn </span>serve(<span class="kw-2">&amp;mut </span><span class="self">self</span>, open_browser: bool) {
+        <span class="kw">if </span>!<span class="self">self</span>.enabled {
+            <span class="macro">re_log::debug!</span>(<span class="string">&quot;Rerun disabled - call to serve() ignored&quot;</span>);
+            <span class="kw">return</span>;
+        }
+
         <span class="kw">let </span>(rerun_tx, rerun_rx) = re_smart_channel::smart_channel(re_smart_channel::Source::Sdk);
 
         <span class="kw">let </span>web_server_join_handle = <span class="self">self</span>.tokio_rt.spawn(<span class="kw">async move </span>{
@@ -475,6 +571,13 @@
 
     <span class="doccomment">/// Send a [`LogMsg`].
     </span><span class="kw">pub fn </span>send(<span class="kw-2">&amp;mut </span><span class="self">self</span>, log_msg: LogMsg) {
+        <span class="kw">if </span>!<span class="self">self</span>.enabled {
+            <span class="comment">// It&#39;s intended that the logging SDK should drop messages earlier than this if logging is disabled. This
+            // check here is just a safety net.
+            </span><span class="macro">re_log::debug_once!</span>(<span class="string">&quot;Logging is disabled, dropping message.&quot;</span>);
+            <span class="kw">return</span>;
+        }
+
         <span class="kw">if </span>!<span class="self">self</span>.has_sent_begin_recording_msg {
             <span class="kw">if let </span><span class="prelude-val">Some</span>(recording_id) = <span class="self">self</span>.recording_id {
                 <span class="kw">let </span>application_id = <span class="self">self
@@ -523,15 +626,14 @@
     <span class="doccomment">/// Drains all pending log messages and starts a Rerun viewer to visualize everything that has
     /// been logged so far.
     </span><span class="kw">pub fn </span>show(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; re_viewer::external::eframe::Result&lt;()&gt; {
+        <span class="kw">if </span>!<span class="self">self</span>.enabled {
+            <span class="macro">re_log::debug!</span>(<span class="string">&quot;Rerun disabled - call to show() ignored&quot;</span>);
+            <span class="kw">return </span><span class="prelude-val">Ok</span>(());
+        }
+
         <span class="kw">let </span>log_messages = <span class="self">self</span>.drain_log_messages_buffer();
         <span class="kw">let </span>startup_options = re_viewer::StartupOptions::default();
         re_viewer::run_native_viewer_with_messages(startup_options, log_messages)
-    }
-}
-
-<span class="kw">impl </span>Default <span class="kw">for </span>Session {
-    <span class="kw">fn </span>default() -&gt; <span class="self">Self </span>{
-        <span class="self">Self</span>::new()
     }
 }
 

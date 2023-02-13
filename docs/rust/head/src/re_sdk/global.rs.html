@@ -8,14 +8,44 @@
 <a href="#8" id="8">8</a>
 <a href="#9" id="9">9</a>
 <a href="#10" id="10">10</a>
+<a href="#11" id="11">11</a>
+<a href="#12" id="12">12</a>
+<a href="#13" id="13">13</a>
+<a href="#14" id="14">14</a>
+<a href="#15" id="15">15</a>
+<a href="#16" id="16">16</a>
+<a href="#17" id="17">17</a>
+<a href="#18" id="18">18</a>
+<a href="#19" id="19">19</a>
+<a href="#20" id="20">20</a>
+<a href="#21" id="21">21</a>
+<a href="#22" id="22">22</a>
+<a href="#23" id="23">23</a>
+<a href="#24" id="24">24</a>
+<a href="#25" id="25">25</a>
 </pre><pre class="rust"><code><span class="kw">use </span><span class="kw">crate</span>::session::Session;
 
 <span class="doccomment">/// Access a global [`Session`] singleton for convenient logging.
+///
+/// By default, logging is enabled. To disable logging, call `set_enabled(false)` on the global `Session`, or
+/// set the `RERUN` environment variable to `false`.
 </span><span class="kw">pub fn </span>global_session() -&gt; std::sync::MutexGuard&lt;<span class="lifetime">&#39;static</span>, Session&gt; {
+    <span class="kw">let </span>default_enabled = <span class="bool-val">true</span>;
+    global_session_with_default_enabled(default_enabled)
+}
+
+<span class="doccomment">/// Access a global [`Session`] singleton for convenient logging.
+///
+/// The given variable controls if Rerun is enabled by default.
+/// It can be overridden with the `RERUN` environment variable.
+</span><span class="kw">pub fn </span>global_session_with_default_enabled(
+    default_enabled: bool,
+) -&gt; std::sync::MutexGuard&lt;<span class="lifetime">&#39;static</span>, Session&gt; {
     <span class="kw">use </span>once_cell::sync::OnceCell;
     <span class="kw">use </span>std::sync::Mutex;
     <span class="kw">static </span>INSTANCE: OnceCell&lt;Mutex&lt;Session&gt;&gt; = OnceCell::new();
-    <span class="kw">let </span>mutex = INSTANCE.get_or_init(|| Mutex::new(Session::new()));
+
+    <span class="kw">let </span>mutex = INSTANCE.get_or_init(|| Mutex::new(Session::with_default_enabled(default_enabled)));
     mutex.lock().unwrap()
 }
 </code></pre></div>

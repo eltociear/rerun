@@ -932,6 +932,29 @@
 <a href="#932" id="932">932</a>
 <a href="#933" id="933">933</a>
 <a href="#934" id="934">934</a>
+<a href="#935" id="935">935</a>
+<a href="#936" id="936">936</a>
+<a href="#937" id="937">937</a>
+<a href="#938" id="938">938</a>
+<a href="#939" id="939">939</a>
+<a href="#940" id="940">940</a>
+<a href="#941" id="941">941</a>
+<a href="#942" id="942">942</a>
+<a href="#943" id="943">943</a>
+<a href="#944" id="944">944</a>
+<a href="#945" id="945">945</a>
+<a href="#946" id="946">946</a>
+<a href="#947" id="947">947</a>
+<a href="#948" id="948">948</a>
+<a href="#949" id="949">949</a>
+<a href="#950" id="950">950</a>
+<a href="#951" id="951">951</a>
+<a href="#952" id="952">952</a>
+<a href="#953" id="953">953</a>
+<a href="#954" id="954">954</a>
+<a href="#955" id="955">955</a>
+<a href="#956" id="956">956</a>
+<a href="#957" id="957">957</a>
 </pre><pre class="rust"><code><span class="attr">#![allow(clippy::needless_pass_by_value)] </span><span class="comment">// A lot of arguments to #[pufunction] need to be by value
 </span><span class="attr">#![allow(clippy::borrow_deref_ref)] </span><span class="comment">// False positive due to #[pufunction] macro
 </span><span class="attr">#![allow(unsafe_op_in_unsafe_fn)] </span><span class="comment">// False positive due to #[pufunction] macro
@@ -944,9 +967,12 @@
     types::PyDict,
 };
 
-<span class="kw">use </span>rerun::log::{LogMsg, MsgBundle, MsgId, PathOp};
-<span class="kw">use </span>rerun::time::{Time, TimeInt, TimePoint, TimeType, Timeline};
-<span class="kw">use </span>rerun::{global_session, ApplicationId, EntityPath, RecordingId};
+<span class="kw">use </span>rerun::{
+    global_session,
+    log::{LogMsg, MsgBundle, MsgId, PathOp},
+    time::{Time, TimeInt, TimePoint, TimeType, Timeline},
+    ApplicationId, EntityPath, RecordingId,
+};
 
 <span class="kw">pub use </span>rerun::{
     components::{
@@ -1033,6 +1059,8 @@
     m.add_function(<span class="macro">wrap_pyfunction!</span>(connect, m)<span class="question-mark">?</span>)<span class="question-mark">?</span>;
     m.add_function(<span class="macro">wrap_pyfunction!</span>(serve, m)<span class="question-mark">?</span>)<span class="question-mark">?</span>;
     m.add_function(<span class="macro">wrap_pyfunction!</span>(shutdown, m)<span class="question-mark">?</span>)<span class="question-mark">?</span>;
+    m.add_function(<span class="macro">wrap_pyfunction!</span>(is_enabled, m)<span class="question-mark">?</span>)<span class="question-mark">?</span>;
+    m.add_function(<span class="macro">wrap_pyfunction!</span>(set_enabled, m)<span class="question-mark">?</span>)<span class="question-mark">?</span>;
 
     <span class="attr">#[cfg(feature = <span class="string">&quot;re_viewer&quot;</span>)]
     </span>{
@@ -1161,7 +1189,8 @@ authkey = multiprocessing.current_process().authkey
 }
 
 <span class="attr">#[pyfunction]
-</span><span class="kw">fn </span>init(application_id: String, application_path: <span class="prelude-ty">Option</span>&lt;PathBuf&gt;) {
+#[pyo3(signature = (application_id, application_path=<span class="prelude-val">None</span>, default_enabled=<span class="bool-val">true</span>))]
+</span><span class="kw">fn </span>init(application_id: String, application_path: <span class="prelude-ty">Option</span>&lt;PathBuf&gt;, default_enabled: bool) {
     <span class="comment">// The sentinel file we use to identify the official examples directory.
     </span><span class="kw">const </span>SENTINEL_FILENAME: <span class="kw-2">&amp;</span>str = <span class="string">&quot;.rerun_examples&quot;</span>;
     <span class="kw">let </span>is_official_example = application_path.map_or(<span class="bool-val">false</span>, |<span class="kw-2">mut </span>path| {
@@ -1175,7 +1204,9 @@ authkey = multiprocessing.current_process().authkey
         <span class="bool-val">false
     </span>});
 
-    global_session().set_application_id(ApplicationId(application_id), is_official_example);
+    <span class="kw">let </span><span class="kw-2">mut </span>session = rerun::global_session_with_default_enabled(default_enabled);
+
+    session.set_application_id(ApplicationId(application_id), is_official_example);
 }
 
 <span class="attr">#[pyfunction]
@@ -1219,6 +1250,21 @@ authkey = multiprocessing.current_process().authkey
         session.flush();
         session.disconnect();
     });
+}
+
+<span class="doccomment">/// Is logging enabled in the global session?
+</span><span class="attr">#[pyfunction]
+</span><span class="kw">fn </span>is_enabled() -&gt; bool {
+    global_session().is_enabled()
+}
+
+<span class="doccomment">/// Enable or disable logging in the global session.
+///
+/// This is a global setting that affects all threads.
+/// By default logging is enabled.
+</span><span class="attr">#[pyfunction]
+</span><span class="kw">fn </span>set_enabled(enabled: bool) {
+    global_session().set_enabled(enabled);
 }
 
 <span class="doccomment">/// Disconnect from remote server (if any).
