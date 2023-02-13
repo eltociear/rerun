@@ -66,6 +66,9 @@
 <a href="#66" id="66">66</a>
 <a href="#67" id="67">67</a>
 <a href="#68" id="68">68</a>
+<a href="#69" id="69">69</a>
+<a href="#70" id="70">70</a>
+<a href="#71" id="71">71</a>
 </pre><pre class="rust"><code><span class="doccomment">//! The Rerun SDK
 //!
 //! ## Feature flags
@@ -82,6 +85,9 @@
 <span class="kw">pub use </span><span class="self">self</span>::global::global_session;
 <span class="kw">pub use </span><span class="self">self</span>::msg_sender::{MsgSender, MsgSenderError};
 <span class="kw">pub use </span><span class="self">self</span>::session::Session;
+
+<span class="attr">#[cfg(feature = <span class="string">&quot;demo&quot;</span>)]
+</span><span class="kw">pub mod </span>demo_util;
 
 <span class="comment">// ---
 

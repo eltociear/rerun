@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"fn":[["grid",""],["lerp",""],["linspace",""],["main",""]]};
+window.SIDEBAR_ITEMS = {"fn":[["main",""]]};

@@ -26,23 +26,14 @@
 <a href="#26" id="26">26</a>
 <a href="#27" id="27">27</a>
 <a href="#28" id="28">28</a>
-<a href="#29" id="29">29</a>
-<a href="#30" id="30">30</a>
-<a href="#31" id="31">31</a>
-<a href="#32" id="32">32</a>
-<a href="#33" id="33">33</a>
-<a href="#34" id="34">34</a>
-<a href="#35" id="35">35</a>
-<a href="#36" id="36">36</a>
-<a href="#37" id="37">37</a>
-<a href="#38" id="38">38</a>
-<a href="#39" id="39">39</a>
-<a href="#40" id="40">40</a>
 </pre><pre class="rust"><code><span class="doccomment">//! Demonstrates the most barebone usage of the Rerun SDK.
 
-</span><span class="kw">use </span>rerun::components::{ColorRGBA, Point3D};
+</span><span class="kw">use </span>rerun::demo_util::grid;
 <span class="kw">use </span>rerun::external::glam;
-<span class="kw">use </span>rerun::{MsgSender, Session};
+<span class="kw">use </span>rerun::{
+    components::{ColorRGBA, Point3D},
+    MsgSender, Session,
+};
 
 <span class="kw">fn </span>main() -&gt; <span class="prelude-ty">Result</span>&lt;(), Box&lt;<span class="kw">dyn </span>std::error::Error&gt;&gt; {
     <span class="kw">let </span><span class="kw-2">mut </span>session = Session::new();
@@ -62,21 +53,6 @@
     session.show()<span class="question-mark">?</span>;
 
     <span class="prelude-val">Ok</span>(())
-}
-
-<span class="kw">fn </span>lerp(a: f32, b: f32, t: f32) -&gt; f32 {
-    a * t + (<span class="number">1.0 </span>- t) * b
-}
-
-<span class="kw">fn </span>linspace(a: f32, b: f32, steps: usize) -&gt; <span class="kw">impl </span>Iterator&lt;Item = f32&gt; {
-    (<span class="number">0</span>..steps).map(<span class="kw">move </span>|t| lerp(a, b, t <span class="kw">as </span>f32 / (steps - <span class="number">1</span>) <span class="kw">as </span>f32))
-}
-
-<span class="kw">fn </span>grid(from: glam::Vec3, to: glam::Vec3, steps: usize) -&gt; <span class="kw">impl </span>Iterator&lt;Item = glam::Vec3&gt; {
-    linspace(from.z, to.z, steps).flat_map(<span class="kw">move </span>|z| {
-        linspace(from.y, to.y, steps)
-            .flat_map(<span class="kw">move </span>|y| linspace(from.x, to.x, steps).map(<span class="kw">move </span>|x| (x, y, z).into()))
-    })
 }
 </code></pre></div>
 </section></div></main><div id="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="minimal" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.1 (d5a82bbd2 2023-02-07)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>

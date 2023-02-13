@@ -14,7 +14,7 @@ var sourcesIndex = JSON.parse('{\
 "re_memory":["",[],["accounting_allocator.rs","allocation_tracker.rs","lib.rs","memory_history.rs","memory_limit.rs","memory_use.rs","util.rs"]],\
 "re_query":["",[],["dataframe_util.rs","entity_view.rs","lib.rs","query.rs","range.rs","util.rs","visit.rs"]],\
 "re_renderer":["",[["importer",[],["gltf.rs","mod.rs","obj.rs"]],["renderer",[],["compositor.rs","generic_skybox.rs","lines.rs","mesh_renderer.rs","mod.rs","point_cloud.rs","rectangles.rs","test_triangle.rs"]],["resource_managers",[],["mesh_manager.rs","mod.rs","resource_manager.rs","texture_manager.rs"]],["wgpu_resources",[],["bind_group_layout_pool.rs","bind_group_pool.rs","buffer_pool.rs","dynamic_resource_pool.rs","mod.rs","pipeline_layout_pool.rs","render_pipeline_pool.rs","resource.rs","sampler_pool.rs","shader_module_pool.rs","static_resource_pool.rs","texture_pool.rs"]]],["config.rs","context.rs","debug_label.rs","depth_offset.rs","error_tracker.rs","file_resolver.rs","file_server.rs","file_system.rs","global_bindings.rs","lib.rs","line_strip_builder.rs","mesh.rs","point_cloud_builder.rs","size.rs","view_builder.rs","wgpu_buffer_types.rs"]],\
-"re_sdk":["",[],["global.rs","lib.rs","msg_sender.rs","session.rs"]],\
+"re_sdk":["",[],["demo_util.rs","global.rs","lib.rs","msg_sender.rs","session.rs"]],\
 "re_sdk_comms":["",[],["buffered_client.rs","lib.rs","server.rs","tcp_client.rs"]],\
 "re_smart_channel":["",[],["lib.rs"]],\
 "re_string_interner":["",[],["lib.rs"]],\
