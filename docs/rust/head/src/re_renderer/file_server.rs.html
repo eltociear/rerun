@@ -268,11 +268,6 @@
 <a href="#268" id="268">268</a>
 <a href="#269" id="269">269</a>
 <a href="#270" id="270">270</a>
-<a href="#271" id="271">271</a>
-<a href="#272" id="272">272</a>
-<a href="#273" id="273">273</a>
-<a href="#274" id="274">274</a>
-<a href="#275" id="275">275</a>
 </pre><pre class="rust"><code><span class="doccomment">/// A macro to read the contents of a file on disk, and resolve #import clauses as required.
 ///
 /// - On Wasm and/or release builds, this will behave like the standard [`include_str`]
@@ -285,30 +280,17 @@
     (<span class="macro-nonterminal">$path</span>:expr $(,)<span class="question-mark">?</span>) =&gt; {{
         <span class="attr">#[cfg(all(not(target_arch = <span class="string">&quot;wasm32&quot;</span>), debug_assertions))] </span><span class="comment">// non-wasm + debug build
         </span>{
-            <span class="kw">let </span><span class="kw-2">mut </span>resolver = <span class="macro-nonterminal">$crate::new_recommended_file_resolver</span>();
+            <span class="comment">// Native debug build, we have access to the disk both while building and while
+            // running, we just need to interpolated the relative paths passed into the macro.
 
-            <span class="comment">// There&#39;s no guarantee that users will `cargo run` from the workspace root, so
-            // we need to know where that is and make sure we look for shaders from there.
-            //
-            // Note that we grab the env-var at _compile time_, that way this will work for
-            // all cases: `cargo run`, `./rerun`, `python example.py`.
-            </span><span class="kw">let </span>manifest_path = ::std::path::PathBuf::from(<span class="macro">env!</span>(<span class="string">&quot;CARGO_MANIFEST_DIR&quot;</span>));
-            <span class="kw">let </span>workspace_path = manifest_path.parent().unwrap().parent().unwrap();
+            </span><span class="kw">let </span><span class="kw-2">mut </span>resolver = <span class="macro-nonterminal">$crate::new_recommended_file_resolver</span>();
 
-            <span class="comment">// The path returned by the `file!()` macro is always hermetic, which is actually
-            // an issue for us in this case since we allow non-hermetic imports in debug
-            // builds (we encourage them, even!).
-            //
-            // Thus, we need to do an actual OS canonicalization here, but it turns out that
-            // `FileServer::watch()` already does it for us, so we&#39;re covered.
-            </span><span class="kw">let </span>file_path = ::std::path::Path::new(<span class="macro">file!</span>())
+            <span class="kw">let </span>file_path = ::std::path::Path::new(<span class="macro">file!</span>())
                 .parent()
                 .unwrap()
                 .join(<span class="macro-nonterminal">$path</span>);
 
-            <span class="kw">let </span>path = ::std::path::Path::new(<span class="kw-2">&amp;</span>workspace_path).join(<span class="kw-2">&amp;</span>file_path);
-
-            <span class="macro-nonterminal">$crate::FileServer::get_mut</span>(|fs| fs.watch(<span class="kw-2">&amp;mut </span>resolver, <span class="kw-2">&amp;</span>path, <span class="bool-val">false</span>)).unwrap()
+            <span class="macro-nonterminal">$crate::FileServer::get_mut</span>(|fs| fs.watch(<span class="kw-2">&amp;mut </span>resolver, <span class="kw-2">&amp;</span>file_path, <span class="bool-val">false</span>)).unwrap()
         }
 
         <span class="attr">#[cfg(not(all(not(target_arch = <span class="string">&quot;wasm32&quot;</span>), debug_assertions)))] </span><span class="comment">// otherwise
@@ -326,13 +308,21 @@
                 .unwrap()
                 .join(<span class="macro-nonterminal">$path</span>);
 
-            <span class="comment">// If an external project imports `rerun` as a dependency, `file!()` will _not_ behave
-            // hermetically... so we need to make sure workspace prefix always get stripped no
-            // matter what before we move on.
+            <span class="comment">// If we&#39;re building from within the workspace, `file!()` will return a relative path
+            // starting at the workspace root.
+            // We&#39;re packing shaders using the re_renderer crate as root instead (to avoid nasty
+            // problems when publishing: as we lose workspace information when publishing!), so we
+            // need to make sure to strip the path down.
+            </span><span class="kw">let </span>path = path
+                .strip_prefix(<span class="string">&quot;crates/re_renderer&quot;</span>)
+                .map_or_else(|<span class="kw">_</span>| path.clone(), ToOwned::to_owned);
+
+            <span class="comment">// If we&#39;re building from outside the workspace, `file!()` will return an absolute path
+            // that might point to anywhere: it doesn&#39;t matter, just strip it down to a relative
+            // re_renderer path no matter what.
             </span><span class="kw">let </span>manifest_path = ::std::path::PathBuf::from(<span class="macro">env!</span>(<span class="string">&quot;CARGO_MANIFEST_DIR&quot;</span>));
-            <span class="kw">let </span>workspace_path = manifest_path.parent().unwrap().parent().unwrap();
             <span class="kw">let </span>path = path
-                .strip_prefix(workspace_path)
+                .strip_prefix(<span class="kw-2">&amp;</span>manifest_path)
                 .map_or_else(|<span class="kw">_</span>| path.clone(), ToOwned::to_owned);
 
             <span class="comment">// At this point our path is guaranteed to be hermetic, and we pre-load
