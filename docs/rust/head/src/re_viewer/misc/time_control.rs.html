@@ -574,6 +574,18 @@
 <a href="#574" id="574">574</a>
 <a href="#575" id="575">575</a>
 <a href="#576" id="576">576</a>
+<a href="#577" id="577">577</a>
+<a href="#578" id="578">578</a>
+<a href="#579" id="579">579</a>
+<a href="#580" id="580">580</a>
+<a href="#581" id="581">581</a>
+<a href="#582" id="582">582</a>
+<a href="#583" id="583">583</a>
+<a href="#584" id="584">584</a>
+<a href="#585" id="585">585</a>
+<a href="#586" id="586">586</a>
+<a href="#587" id="587">587</a>
+<a href="#588" id="588">588</a>
 </pre><pre class="rust"><code><span class="kw">use </span>std::collections::{BTreeMap, BTreeSet};
 
 <span class="kw">use </span>egui::NumExt <span class="kw">as _</span>;
@@ -698,7 +710,19 @@
         };
 
         <span class="kw">match </span><span class="self">self</span>.play_state() {
-            PlayState::Paused =&gt; {}
+            PlayState::Paused =&gt; {
+                <span class="comment">// It&#39;s possible that the playback is paused because e.g. it reached its end, but
+                // then the user decides to switch timelines.
+                // When they do so, it might be the case that they switch to a timeline they&#39;ve
+                // never interacted with before, in which case we don&#39;t even have a time state yet.
+                </span><span class="self">self</span>.states.entry(<span class="self">self</span>.timeline).or_insert_with(|| {
+                    TimeState::new(<span class="kw">if </span><span class="self">self</span>.following {
+                        full_range.max
+                    } <span class="kw">else </span>{
+                        full_range.min
+                    })
+                });
+            }
             PlayState::Playing =&gt; {
                 <span class="kw">let </span>dt = egui_ctx.input(|i| i.stable_dt).at_most(<span class="number">0.1</span>) * <span class="self">self</span>.speed;
 
