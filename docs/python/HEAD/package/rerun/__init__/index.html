@@ -5202,14 +5202,15 @@ until the next call to <code>set_time_sequence</code>.</p>
   
       <p>Set the current time for this thread in seconds.</p>
 <p>Used for all subsequent logging on the same thread,
-until the next call to <code>set_time_seconds</code>.</p>
+until the next call to <a class="autorefs autorefs-internal" href="#rerun.set_time_seconds"><code>rerun.set_time_seconds</code></a> or <a class="autorefs autorefs-internal" href="#rerun.set_time_nanos"><code>rerun.set_time_nanos</code></a>.</p>
 <p>For example: <code>set_time_seconds("capture_time", seconds_since_unix_epoch)</code>.</p>
 <p>You can remove a timeline again using <code>set_time_seconds("capture_time", None)</code>.</p>
-<p>The argument should be in seconds, and should be measured either from the
-unix epoch (1970-01-01), or from some recent time (e.g. your program startup).</p>
+<p>Very large values will automatically be interpreted as seconds since unix epoch (1970-01-01).
+Small values (less than a few years) will be interpreted as relative
+some unknown point in time, and will be shown as e.g. <code>+3.132s</code>.</p>
 <p>The bindings has a built-in time which is <code>log_time</code>, and is logged as seconds
 since unix epoch.</p>
-<p>There is no requirement of monoticity. You can move the time backwards if you like.</p>
+<p>There is no requirement of monotonicity. You can move the time backwards if you like.</p>
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -5263,14 +5264,15 @@ since unix epoch.</p>
   
       <p>Set the current time for this thread.</p>
 <p>Used for all subsequent logging on the same thread,
-until the next call to <code>set_time_nanos</code>.</p>
+until the next call to <a class="autorefs autorefs-internal" href="#rerun.set_time_nanos"><code>rerun.set_time_nanos</code></a> or <a class="autorefs autorefs-internal" href="#rerun.set_time_seconds"><code>rerun.set_time_seconds</code></a>.</p>
 <p>For example: <code>set_time_nanos("capture_time", nanos_since_unix_epoch)</code>.</p>
 <p>You can remove a timeline again using <code>set_time_nanos("capture_time", None)</code>.</p>
-<p>The argument should be in nanoseconds, and should be measured either from the
-unix epoch (1970-01-01), or from some recent time (e.g. your program startup).</p>
+<p>Very large values will automatically be interpreted as nanoseconds since unix epoch (1970-01-01).
+Small values (less than a few years) will be interpreted as relative
+some unknown point in time, and will be shown as e.g. <code>+3.132s</code>.</p>
 <p>The bindings has a built-in time which is <code>log_time</code>, and is logged as nanos since
 unix epoch.</p>
-<p>There is no requirement of monoticity. You can move the time backwards if you like.</p>
+<p>There is no requirement of monotonicity. You can move the time backwards if you like.</p>
 
   <p><strong>Parameters:</strong></p>
   <table>
