@@ -1,5 +1,6 @@
 var sourcesIndex = JSON.parse('{\
 "api_demo":["",[],["main.rs"]],\
+"dna":["",[],["main.rs"]],\
 "minimal":["",[],["main.rs"]],\
 "objectron":["",[],["main.rs","objectron.rs"]],\
 "raw_mesh":["",[],["main.rs"]],\

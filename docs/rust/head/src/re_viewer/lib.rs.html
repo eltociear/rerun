@@ -156,6 +156,7 @@
 <a href="#156" id="156">156</a>
 <a href="#157" id="157">157</a>
 <a href="#158" id="158">158</a>
+<a href="#159" id="159">159</a>
 </pre><pre class="rust"><code><span class="doccomment">//! Rerun Viewer GUI.
 //!
 //! This crate contains all the GUI code for the Rerun Viewer,
@@ -168,6 +169,7 @@
 <span class="kw">mod </span>remote_viewer_app;
 <span class="kw">mod </span>ui;
 
+<span class="kw">pub use </span><span class="self">self</span>::misc::color_map;
 <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">use </span>misc::{mesh_loader, Item, TimeControl, TimeView, ViewerContext};
 <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">use </span>ui::{event_log_view, memory_panel, selection_panel, time_panel, UiVerbosity};
 
