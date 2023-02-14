@@ -414,6 +414,11 @@
 <a href="#414" id="414">414</a>
 <a href="#415" id="415">415</a>
 <a href="#416" id="416">416</a>
+<a href="#417" id="417">417</a>
+<a href="#418" id="418">418</a>
+<a href="#419" id="419">419</a>
+<a href="#420" id="420">420</a>
+<a href="#421" id="421">421</a>
 </pre><pre class="rust"><code><span class="kw">use </span>re_data_store::EntityPath;
 <span class="kw">use </span>re_format::format_f32;
 
@@ -525,13 +530,18 @@
     }
 
     <span class="kw">pub fn </span>default_point_radius(<span class="kw-2">&amp;</span><span class="self">self</span>, viewport_size_in_points: egui::Vec2) -&gt; re_renderer::Size {
-        <span class="kw">let </span>num_points = <span class="self">self</span>.scene_num_primitives; <span class="comment">// approximately the same thing when there are many points
+        <span class="comment">// More points -&gt; smaller points.
+        </span><span class="kw">let </span>num_points = <span class="self">self</span>.scene_num_primitives; <span class="comment">// approximately the same thing when there are many points
 
         // Larger view -&gt; larger points.
         </span><span class="kw">let </span>viewport_area = viewport_size_in_points.x * viewport_size_in_points.y;
 
-        <span class="comment">// More points -&gt; smaller points.
-        </span><span class="kw">let </span>radius = (<span class="number">0.3 </span>* (viewport_area / (num_points + <span class="number">1</span>) <span class="kw">as </span>f32).sqrt()).clamp(<span class="number">0.2</span>, <span class="number">5.0</span>);
+        <span class="kw">const </span>RADIUS_MULTIPLIER: f32 = <span class="number">0.15</span>;
+        <span class="kw">const </span>MIN_POINT_RADIUS: f32 = <span class="number">0.2</span>;
+        <span class="kw">const </span>MAX_POINT_RADIUS: f32 = <span class="number">3.0</span>;
+
+        <span class="kw">let </span>radius = (RADIUS_MULTIPLIER * (viewport_area / (num_points + <span class="number">1</span>) <span class="kw">as </span>f32).sqrt())
+            .clamp(MIN_POINT_RADIUS, MAX_POINT_RADIUS);
 
         re_renderer::Size::new_points(radius)
     }
