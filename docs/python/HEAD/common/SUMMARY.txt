@@ -1,5 +1,6 @@
 * [index](index.md)
 * [Initialization](initialization.md)
+* [Time](time.md)
 * [Spatial Primitives](spatial_primitives.md)
 * [Images](images.md)
 * [Tensors](tensors.md)
@@ -7,4 +8,5 @@
 * [Extension Components](extension_components.md)
 * [Plotting](plotting.md)
 * [Transforms](transforms.md)
+* [Text](text.md)
 * [Helpers](helpers.md)

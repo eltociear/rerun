@@ -310,6 +310,10 @@
         
           
         
+          
+        
+          
+        
       
       
         
@@ -340,6 +344,20 @@
     <li class="md-nav__item">
       <a href="initialization/" class="md-nav__link">
         Initialization
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="time/" class="md-nav__link">
+        Time
       </a>
     </li>
   
@@ -438,6 +456,20 @@
     <li class="md-nav__item">
       <a href="transforms/" class="md-nav__link">
         Transforms
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="text/" class="md-nav__link">
+        Text
       </a>
     </li>
   
@@ -1389,6 +1421,29 @@ and/or <code>rerun</code> process to get some verbose logging output.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="time">Time</h2>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="time#rerun.set_time_sequence"><code>rerun.set_time_sequence()</code></a></td>
+<td>Set the current time for this thread as an integer sequence.</td>
+</tr>
+<tr>
+<td><a href="time#rerun.set_time_seconds"><code>rerun.set_time_seconds()</code></a></td>
+<td>Set the current time for this thread in seconds.</td>
+</tr>
+<tr>
+<td><a href="time#rerun.set_time_nanos"><code>rerun.set_time_nanos()</code></a></td>
+<td>Set the current time for this thread.</td>
+</tr>
+</tbody>
+</table>
 <h2 id="spatial-primitives">Spatial Primitives</h2>
 <table>
 <thead>
@@ -1429,6 +1484,18 @@ and/or <code>rerun</code> process to get some verbose logging output.</p>
 <tr>
 <td><a href="spatial_primitives#rerun.log_arrow"><code>rerun.log_arrow()</code></a></td>
 <td>Log a 3D arrow.</td>
+</tr>
+<tr>
+<td><a href="spatial_primitives#rerun.log_mesh"><code>rerun.log_mesh()</code></a></td>
+<td>Log a raw 3D mesh by specifying its vertex positions, and optionally indices, normals and albedo factor.</td>
+</tr>
+<tr>
+<td><a href="spatial_primitives#rerun.log_meshes"><code>rerun.log_meshes()</code></a></td>
+<td>Log multiple raw 3D meshes by specifying their different buffers and albedo factors.</td>
+</tr>
+<tr>
+<td><a href="spatial_primitives#rerun.log_mesh_file"><code>rerun.log_mesh_file()</code></a></td>
+<td>Log the contents of a mesh file (.gltf, .glb, .obj, …).</td>
 </tr>
 </tbody>
 </table>
@@ -1543,6 +1610,21 @@ and/or <code>rerun</code> process to get some verbose logging output.</p>
 <tr>
 <td><a href="transforms#rerun.log_view_coordinates"><code>rerun.log_view_coordinates()</code></a></td>
 <td>Log the view coordinates for an entity.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="text">Text</h2>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="text#rerun.log_text_entry"><code>rerun.log_text_entry()</code></a></td>
+<td>Log a text entry, with optional level.</td>
 </tr>
 </tbody>
 </table>
