@@ -306,14 +306,6 @@
         
           
         
-          
-        
-          
-        
-          
-        
-          
-        
       
       
         
@@ -356,8 +348,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../common/viewer_control/" class="md-nav__link">
-        Viewer Control
+      <a href="../../../common/logging_primitives/" class="md-nav__link">
+        Logging Primitives
       </a>
     </li>
   
@@ -370,50 +362,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../common/time/" class="md-nav__link">
-        Time
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../common/spatial_primitives/" class="md-nav__link">
-        Spatial Primitives
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../common/images/" class="md-nav__link">
-        Images
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../common/tensors/" class="md-nav__link">
-        Tensors
+      <a href="../../../common/logging_images/" class="md-nav__link">
+        Logging Images
       </a>
     </li>
   
@@ -470,20 +420,6 @@
     <li class="md-nav__item">
       <a href="../../../common/transforms/" class="md-nav__link">
         Transforms
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../common/text/" class="md-nav__link">
-        Text
       </a>
     </li>
   
@@ -1270,8 +1206,6 @@
         
           
         
-          
-        
       
       
         <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
@@ -1358,13 +1292,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#rerun_demo.data.color_spiral" class="md-nav__link">
-    color_spiral
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#rerun_demo.data.build_color_grid" class="md-nav__link">
     build_color_grid()
   </a>
@@ -1374,13 +1301,6 @@
           <li class="md-nav__item">
   <a href="#rerun_demo.data.build_rect_pyramid" class="md-nav__link">
     build_rect_pyramid()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#rerun_demo.data.build_color_spiral" class="md-nav__link">
-    build_color_spiral()
   </a>
   
 </li>
@@ -1407,20 +1327,6 @@
     <li class="md-nav__item">
       <a href="../turbo/" class="md-nav__link">
         turbo.py
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../util/" class="md-nav__link">
-        util.py
       </a>
     </li>
   
@@ -1502,13 +1408,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#rerun_demo.data.color_spiral" class="md-nav__link">
-    color_spiral
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#rerun_demo.data.build_color_grid" class="md-nav__link">
     build_color_grid()
   </a>
@@ -1518,13 +1417,6 @@
           <li class="md-nav__item">
   <a href="#rerun_demo.data.build_rect_pyramid" class="md-nav__link">
     build_rect_pyramid()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#rerun_demo.data.build_color_spiral" class="md-nav__link">
-    build_color_spiral()
   </a>
   
 </li>
@@ -1564,7 +1456,7 @@
 
   <div class="doc doc-contents first">
   
-      <p>Simple data to be used for Rerun demos.</p>
+      <p>Simple data to be used for rerun demos.</p>
 
   
 
@@ -1618,27 +1510,6 @@
 
 </div>
 
-<div class="doc doc-object doc-attribute">
-
-
-
-<h4 id="rerun_demo.data.color_spiral" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">color_spiral</span> <span class="o">=</span> <span class="n">build_color_spiral</span><span class="p">()</span></code>
-  
-  <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-module-attribute"><code>module-attribute</code></small>
-  </span>
-
-</h4>
-
-
-  <div class="doc doc-contents ">
-  
-      <p>Default color spiral</p>
-  </div>
-
-</div>
-
 
 
 <div class="doc doc-object doc-function">
@@ -1646,7 +1517,7 @@
 
 
 <h4 id="rerun_demo.data.build_color_grid" class="doc doc-heading">
-<code class="highlight language-python"><span class="k">def</span> <span class="nf">build_color_grid</span><span class="p">(</span><span class="n">x_count</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">y_count</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">z_count</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">twist</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="k">def</span> <span class="nf">build_color_grid</span><span class="p">(</span><span class="n">x_count</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">y_count</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">z_count</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span></code>
 
 </h4>
 
@@ -1673,7 +1544,7 @@
           </td>
           <td><p>Number of points in each dimension.</p></td>
           <td>
-                <code>10</code>
+                <code>6</code>
           </td>
         </tr>
         <tr>
@@ -1682,7 +1553,7 @@
           </td>
           <td><p>Number of points in each dimension.</p></td>
           <td>
-                <code>10</code>
+                <code>6</code>
           </td>
         </tr>
         <tr>
@@ -1691,16 +1562,7 @@
           </td>
           <td><p>Number of points in each dimension.</p></td>
           <td>
-                <code>10</code>
-          </td>
-        </tr>
-        <tr>
-          <td><code>twist</code></td>
-          <td>
-          </td>
-          <td><p>Angle to twist from bottom to top of the cube</p></td>
-          <td>
-                <code>0</code>
+                <code>6</code>
           </td>
         </tr>
     </tbody>
@@ -1760,83 +1622,6 @@
           <td><p>Height of the pyramid.</p></td>
           <td>
                 <code>100</code>
-          </td>
-        </tr>
-    </tbody>
-  </table>
-
-  </div>
-
-</div>
-
-<div class="doc doc-object doc-function">
-
-
-
-<h4 id="rerun_demo.data.build_color_spiral" class="doc doc-heading">
-<code class="highlight language-python"><span class="k">def</span> <span class="nf">build_color_spiral</span><span class="p">(</span><span class="n">num_points</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">angular_step</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span> <span class="n">angular_offset</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">z_step</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span></code>
-
-</h4>
-
-
-  <div class="doc doc-contents ">
-  
-      <p>Create a spiral of points with colors along the Z axis.</p>
-
-  <p><strong>Parameters:</strong></p>
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-        <th>Default</th>
-      </tr>
-    </thead>
-    <tbody>
-        <tr>
-          <td><code>num_points</code></td>
-          <td>
-          </td>
-          <td><p>Total number of points.</p></td>
-          <td>
-                <code>100</code>
-          </td>
-        </tr>
-        <tr>
-          <td><code>radius</code></td>
-          <td>
-          </td>
-          <td><p>The radius of the spiral.</p></td>
-          <td>
-                <code>2</code>
-          </td>
-        </tr>
-        <tr>
-          <td><code>angular_step</code></td>
-          <td>
-          </td>
-          <td><p>The factor applied between each step along the trigonemetric circle.</p></td>
-          <td>
-                <code>0.02</code>
-          </td>
-        </tr>
-        <tr>
-          <td><code>angular_offset</code></td>
-          <td>
-          </td>
-          <td><p>Offsets the starting position on the trigonemetric circle.</p></td>
-          <td>
-                <code>0</code>
-          </td>
-        </tr>
-        <tr>
-          <td><code>z_step</code></td>
-          <td>
-          </td>
-          <td><p>The factor applied between between each step along the Z axis.</p></td>
-          <td>
-                <code>0.1</code>
           </td>
         </tr>
     </tbody>

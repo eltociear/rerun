@@ -306,14 +306,6 @@
         
           
         
-          
-        
-          
-        
-          
-        
-          
-        
       
       
         
@@ -356,8 +348,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../common/viewer_control/" class="md-nav__link">
-        Viewer Control
+      <a href="../../../../common/logging_primitives/" class="md-nav__link">
+        Logging Primitives
       </a>
     </li>
   
@@ -370,50 +362,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../common/time/" class="md-nav__link">
-        Time
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../../common/spatial_primitives/" class="md-nav__link">
-        Spatial Primitives
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../../common/images/" class="md-nav__link">
-        Images
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../../common/tensors/" class="md-nav__link">
-        Tensors
+      <a href="../../../../common/logging_images/" class="md-nav__link">
+        Logging Images
       </a>
     </li>
   
@@ -470,20 +420,6 @@
     <li class="md-nav__item">
       <a href="../../../../common/transforms/" class="md-nav__link">
         Transforms
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../../common/text/" class="md-nav__link">
-        Text
       </a>
     </li>
   
@@ -1336,8 +1272,6 @@
         
           
         
-          
-        
       
       
         <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
@@ -1388,20 +1322,6 @@
     <li class="md-nav__item">
       <a href="../../../rerun_demo/turbo/" class="md-nav__link">
         turbo.py
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../rerun_demo/util/" class="md-nav__link">
-        util.py
       </a>
     </li>
   
@@ -1602,14 +1522,14 @@
 
 
 <h4 id="rerun.log.tensor.log_tensor" class="doc doc-heading">
-<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_tensor</span><span class="p">(</span><span class="n">entity_path</span><span class="p">,</span> <span class="n">tensor</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">meter</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_tensor</span><span class="p">(</span><span class="n">entity_path</span><span class="p">,</span> <span class="n">tensor</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">meter</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
 </h4>
 
 
   <div class="doc doc-contents ">
   
-      <p>Log an n-dimensional tensor.</p>
+      <p>Log an arbitrary-dimensional tensor.</p>
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -1637,7 +1557,7 @@
           <td>
                 <code><a class="autorefs autorefs-external" title="numpy.typing" href="https://numpy.org/doc/stable/reference/typing.html#module-numpy.typing">npt</a>.<a class="autorefs autorefs-external" title="numpy.typing.ArrayLike" href="https://numpy.org/doc/stable/reference/typing.html#numpy.typing.ArrayLike">ArrayLike</a></code>
           </td>
-          <td><p>A <a class="autorefs autorefs-internal" href="#rerun.log.tensor.Tensor">Tensor</a> object.</p></td>
+          <td><p>A <a class="autorefs autorefs-internal" href="#rerun.log.tensor.Tensor">Tensor</a> objector.</p></td>
           <td>
               <em>required</em>
           </td>

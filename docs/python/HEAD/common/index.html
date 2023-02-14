@@ -69,7 +69,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#getting-started" class="md-skip">
+        <a href="#examples" class="md-skip">
           Skip to content
         </a>
       
@@ -308,14 +308,6 @@
         
           
         
-          
-        
-          
-        
-          
-        
-          
-        
       
       
         
@@ -358,8 +350,8 @@
   
   
     <li class="md-nav__item">
-      <a href="viewer_control/" class="md-nav__link">
-        Viewer Control
+      <a href="logging_primitives/" class="md-nav__link">
+        Logging Primitives
       </a>
     </li>
   
@@ -372,50 +364,8 @@
   
   
     <li class="md-nav__item">
-      <a href="time/" class="md-nav__link">
-        Time
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="spatial_primitives/" class="md-nav__link">
-        Spatial Primitives
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="images/" class="md-nav__link">
-        Images
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="tensors/" class="md-nav__link">
-        Tensors
+      <a href="logging_images/" class="md-nav__link">
+        Logging Images
       </a>
     </li>
   
@@ -472,20 +422,6 @@
     <li class="md-nav__item">
       <a href="transforms/" class="md-nav__link">
         Transforms
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="text/" class="md-nav__link">
-        Text
       </a>
     </li>
   
@@ -1268,8 +1204,6 @@
         
           
         
-          
-        
       
       
         <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
@@ -1320,20 +1254,6 @@
     <li class="md-nav__item">
       <a href="../package/rerun_demo/turbo/" class="md-nav__link">
         turbo.py
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../package/rerun_demo/util/" class="md-nav__link">
-        util.py
       </a>
     </li>
   
@@ -1404,14 +1324,12 @@
 
 
 
-<h1 id="getting-started">Getting Started</h1>
-<ul>
-<li><a href="https://www.rerun.io/docs/getting-started/python">Quick start</a></li>
-<li><a href="https://www.rerun.io/docs/getting-started/logging-python">Tutorial</a></li>
-<li><a href="https://github.com/rerun-io/rerun/tree/latest/examples/python">Examples on Github</a></li>
-<li><a href="https://www.rerun.io/docs/getting-started/troubleshooting">Troubleshooting</a></li>
-</ul>
-<h1 id="apis">APIs</h1>
+<h1 id="examples">Examples</h1>
+<p>You can find examples on our GitHub <a href="https://github.com/rerun-io/rerun/tree/main/examples/python">here</a>.</p>
+<h1 id="troubleshooting">Troubleshooting</h1>
+<p>You can set <code>RUST_LOG=debug</code> before running your Python script
+and/or <code>rerun</code> process to get some verbose logging output.</p>
+<h1 id="common-apis">Common APIs</h1>
 <h2 id="initialization">Initialization</h2>
 <table>
 <thead>
@@ -1426,24 +1344,20 @@
 <td>Initialize the Rerun SDK with a user-chosen application id (name).</td>
 </tr>
 <tr>
-<td><a href="initialization#rerun.connect"><code>rerun.connect()</code></a></td>
-<td>Connect to a remote Rerun Viewer on the given ip:port.</td>
+<td><a href="initialization#rerun.set_recording_id"><code>rerun.set_recording_id()</code></a></td>
+<td>Set the recording ID that this process is logging to, as a UUIDv4.</td>
 </tr>
 <tr>
-<td><a href="initialization#rerun.disconnect"><code>rerun.disconnect()</code></a></td>
-<td>Disconnect from the remote rerun server (if any).</td>
+<td><a href="initialization#rerun.connect"><code>rerun.connect()</code></a></td>
+<td>Connect to a remote Rerun Viewer on the given ip:port.</td>
 </tr>
 <tr>
 <td><a href="initialization#rerun.spawn"><code>rerun.spawn()</code></a></td>
 <td>Spawn a Rerun Viewer, listening on the given port.</td>
 </tr>
-<tr>
-<td><a href="initialization#rerun.serve"><code>rerun.serve()</code></a></td>
-<td>Serve a Rerun Web Viewer.</td>
-</tr>
 </tbody>
 </table>
-<h2 id="viewer-control">Viewer Control</h2>
+<h2 id="logging-primitives">Logging Primitives</h2>
 <table>
 <thead>
 <tr>
@@ -1453,94 +1367,40 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="viewer_control#rerun.set_recording_id"><code>rerun.set_recording_id()</code></a></td>
-<td>Set the recording ID that this process is logging to, as a UUIDv4.</td>
-</tr>
-<tr>
-<td><a href="viewer_control#rerun.save"><code>rerun.save()</code></a></td>
-<td>Save previously logged data to a file.</td>
-</tr>
-</tbody>
-</table>
-<h2 id="time">Time</h2>
-<table>
-<thead>
-<tr>
-<th>Function</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="time#rerun.set_time_sequence"><code>rerun.set_time_sequence()</code></a></td>
-<td>Set the current time for this thread as an integer sequence.</td>
-</tr>
-<tr>
-<td><a href="time#rerun.set_time_seconds"><code>rerun.set_time_seconds()</code></a></td>
-<td>Set the current time for this thread in seconds.</td>
-</tr>
-<tr>
-<td><a href="time#rerun.set_time_nanos"><code>rerun.set_time_nanos()</code></a></td>
-<td>Set the current time for this thread.</td>
-</tr>
-</tbody>
-</table>
-<h2 id="spatial-primitives">Spatial Primitives</h2>
-<table>
-<thead>
-<tr>
-<th>Function</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="spatial_primitives#rerun.log_point"><code>rerun.log_point()</code></a></td>
+<td><a href="logging_primitives#rerun.log_point"><code>rerun.log_point()</code></a></td>
 <td>Log a 2D or 3D point, with a positions and optional colors, radii, label, etc.</td>
 </tr>
 <tr>
-<td><a href="spatial_primitives#rerun.log_points"><code>rerun.log_points()</code></a></td>
+<td><a href="logging_primitives#rerun.log_points"><code>rerun.log_points()</code></a></td>
 <td>Log 2D or 3D points, with positions and optional colors, radii, labels, etc.</td>
 </tr>
 <tr>
-<td><a href="spatial_primitives#rerun.log_rect"><code>rerun.log_rect()</code></a></td>
+<td><a href="logging_primitives#rerun.log_rect"><code>rerun.log_rect()</code></a></td>
 <td>Log a 2D rectangle.</td>
 </tr>
 <tr>
-<td><a href="spatial_primitives#rerun.log_rects"><code>rerun.log_rects()</code></a></td>
+<td><a href="logging_primitives#rerun.log_rects"><code>rerun.log_rects()</code></a></td>
 <td>Log multiple 2D rectangles.</td>
 </tr>
 <tr>
-<td><a href="spatial_primitives#rerun.log_obb"><code>rerun.log_obb()</code></a></td>
-<td>Log a 3D Oriented Bounding Box, or OBB.</td>
+<td><a href="logging_primitives#rerun.log_obb"><code>rerun.log_obb()</code></a></td>
+<td>Log a 3D oriented bounding box.</td>
 </tr>
 <tr>
-<td><a href="spatial_primitives#rerun.log_line_strip"><code>rerun.log_line_strip()</code></a></td>
+<td><a href="logging_primitives#rerun.log_line_strip"><code>rerun.log_line_strip()</code></a></td>
 <td>Log a line strip through 3D space.</td>
 </tr>
 <tr>
-<td><a href="spatial_primitives#rerun.log_line_segments"><code>rerun.log_line_segments()</code></a></td>
+<td><a href="logging_primitives#rerun.log_line_segments"><code>rerun.log_line_segments()</code></a></td>
 <td>Log many 2D or 3D line segments.</td>
 </tr>
 <tr>
-<td><a href="spatial_primitives#rerun.log_arrow"><code>rerun.log_arrow()</code></a></td>
+<td><a href="logging_primitives#rerun.log_arrow"><code>rerun.log_arrow()</code></a></td>
 <td>Log a 3D arrow.</td>
-</tr>
-<tr>
-<td><a href="spatial_primitives#rerun.log_mesh"><code>rerun.log_mesh()</code></a></td>
-<td>Log a raw 3D mesh by specifying its vertex positions, and optionally indices, normals and albedo factor.</td>
-</tr>
-<tr>
-<td><a href="spatial_primitives#rerun.log_meshes"><code>rerun.log_meshes()</code></a></td>
-<td>Log multiple raw 3D meshes by specifying their different buffers and albedo factors.</td>
-</tr>
-<tr>
-<td><a href="spatial_primitives#rerun.log_mesh_file"><code>rerun.log_mesh_file()</code></a></td>
-<td>Log the contents of a mesh file (.gltf, .glb, .obj, …).</td>
 </tr>
 </tbody>
 </table>
-<h2 id="images">Images</h2>
+<h2 id="logging-images">Logging Images</h2>
 <table>
 <thead>
 <tr>
@@ -1550,35 +1410,20 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="images#rerun.log_image"><code>rerun.log_image()</code></a></td>
+<td><a href="logging_images#rerun.log_image"><code>rerun.log_image()</code></a></td>
 <td>Log a gray or color image.</td>
 </tr>
 <tr>
-<td><a href="images#rerun.log_image_file"><code>rerun.log_image_file()</code></a></td>
+<td><a href="logging_images#rerun.log_image_file"><code>rerun.log_image_file()</code></a></td>
 <td>Log an image file given its contents or path on disk.</td>
 </tr>
 <tr>
-<td><a href="images#rerun.log_depth_image"><code>rerun.log_depth_image()</code></a></td>
+<td><a href="logging_images#rerun.log_depth_image"><code>rerun.log_depth_image()</code></a></td>
 <td>Log a depth image.</td>
 </tr>
 <tr>
-<td><a href="images#rerun.log_segmentation_image"><code>rerun.log_segmentation_image()</code></a></td>
+<td><a href="logging_images#rerun.log_segmentation_image"><code>rerun.log_segmentation_image()</code></a></td>
 <td>Log an image made up of integer class-ids.</td>
-</tr>
-</tbody>
-</table>
-<h2 id="tensors">Tensors</h2>
-<table>
-<thead>
-<tr>
-<th>Function</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="tensors#rerun.log_tensor"><code>rerun.log_tensor()</code></a></td>
-<td>Log an n-dimensional tensor.</td>
 </tr>
 </tbody>
 </table>
@@ -1654,21 +1499,6 @@
 </tr>
 </tbody>
 </table>
-<h2 id="text">Text</h2>
-<table>
-<thead>
-<tr>
-<th>Function</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="text#rerun.log_text_entry"><code>rerun.log_text_entry()</code></a></td>
-<td>Log a text entry, with optional level.</td>
-</tr>
-</tbody>
-</table>
 <h2 id="helpers">Helpers</h2>
 <table>
 <thead>
@@ -1692,11 +1522,6 @@
 </tr>
 </tbody>
 </table>
-<h1 id="troubleshooting">Troubleshooting</h1>
-<p>You can set <code>RUST_LOG=debug</code> before running your Python script
-and/or <code>rerun</code> process to get some verbose logging output.</p>
-<p>If you run into any issues don't hesitate to <a href="https://github.com/rerun-io/rerun/issues/new/choose">open a ticket</a>
-or <a href="https://discord.gg/Gcm8BbTaAj">join our Discord</a>.</p>
 
 
 
