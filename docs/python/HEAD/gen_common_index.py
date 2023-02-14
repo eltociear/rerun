@@ -50,10 +50,20 @@ SECTION_TABLE: Final[List[Section]] = [
     Section(
         title="Initialization",
         module_summary=None,
-        func_list=["init", "set_recording_id", "connect", "spawn"],
+        func_list=["init", "connect", "disconnect", "spawn", "serve"],
     ),
     Section(
-        title="Logging Primitives",
+        title="Viewer Control",
+        module_summary=None,
+        func_list=["set_recording_id", "save"],
+    ),
+    Section(
+        title="Time",
+        module_summary=None,
+        func_list=["set_time_sequence", "set_time_seconds", "set_time_nanos"],
+    ),
+    Section(
+        title="Spatial Primitives",
         module_summary=None,
         func_list=[
             "log_point",
@@ -64,12 +74,20 @@ SECTION_TABLE: Final[List[Section]] = [
             "log_line_strip",
             "log_line_segments",
             "log_arrow",
+            "log_mesh",
+            "log_meshes",
+            "log_mesh_file",
         ],
     ),
     Section(
-        title="Logging Images",
+        title="Images",
         module_summary=None,
         func_list=["log_image", "log_image_file", "log_depth_image", "log_segmentation_image"],
+    ),
+    Section(
+        title="Tensors",
+        module_summary=None,
+        func_list=["log_tensor"],
     ),
     Section(
         title="Annotations",
@@ -88,8 +106,15 @@ SECTION_TABLE: Final[List[Section]] = [
     ),
     Section(
         title="Transforms",
-        module_summary=None,
+        module_summary="log.transform",
         func_list=["log_rigid3", "log_pinhole", "log_unknown_transform", "log_view_coordinates"],
+    ),
+    Section(
+        title="Text",
+        module_summary=None,
+        # TODO(#1251): Classes aren't supported yet
+        # "LogLevel", "LoggingHandler"
+        func_list=["log_text_entry"],
     ),
     Section(
         title="Helpers",
@@ -133,14 +158,13 @@ with mkdocs_gen_files.open(index_path, "w") as index_file:
 hide:
     - toc
 ---
-# Examples
-You can find examples on our GitHub [here](https://github.com/rerun-io/rerun/tree/latest/examples/python).
+# Getting Started
+* [Quick start](https://www.rerun.io/docs/getting-started/python)
+* [Tutorial](https://www.rerun.io/docs/getting-started/logging-python)
+* [Examples on Github](https://github.com/rerun-io/rerun/tree/latest/examples/python)
+* [Troubleshooting](https://www.rerun.io/docs/getting-started/troubleshooting)
 
-# Troubleshooting
-You can set `RUST_LOG=debug` before running your Python script
-and/or `rerun` process to get some verbose logging output.
-
-# Common APIs
+# APIs
 """
     )
 
@@ -170,7 +194,19 @@ and/or `rerun` process to get some verbose logging output.
         for func_name in section.func_list:
             func = rerun_pkg[func_name]
             index_file.write(f"[`rerun.{func_name}()`]({md_name}#rerun.{func_name}) | {func.docstring.lines[0]}\n")
+
         index_file.write("\n")
+
+    index_file.write(
+        """
+# Troubleshooting
+You can set `RUST_LOG=debug` before running your Python script
+and/or `rerun` process to get some verbose logging output.
+
+If you run into any issues don't hesitate to [open a ticket](https://github.com/rerun-io/rerun/issues/new/choose)
+or [join our Discord](https://discord.gg/Gcm8BbTaAj).
+"""
+    )
 
 
 # Generate the SUMMARY.txt file

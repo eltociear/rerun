@@ -306,6 +306,14 @@
         
           
         
+          
+        
+          
+        
+          
+        
+          
+        
       
       
         
@@ -348,8 +356,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../common/logging_primitives/" class="md-nav__link">
-        Logging Primitives
+      <a href="../../../../common/viewer_control/" class="md-nav__link">
+        Viewer Control
       </a>
     </li>
   
@@ -362,8 +370,50 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../common/logging_images/" class="md-nav__link">
-        Logging Images
+      <a href="../../../../common/time/" class="md-nav__link">
+        Time
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../common/spatial_primitives/" class="md-nav__link">
+        Spatial Primitives
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../common/images/" class="md-nav__link">
+        Images
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../common/tensors/" class="md-nav__link">
+        Tensors
       </a>
     </li>
   
@@ -420,6 +470,20 @@
     <li class="md-nav__item">
       <a href="../../../../common/transforms/" class="md-nav__link">
         Transforms
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../common/text/" class="md-nav__link">
+        Text
       </a>
     </li>
   
@@ -1463,7 +1527,7 @@
 
 
 <h4 id="rerun.log.points.log_point" class="doc doc-heading">
-<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_point</span><span class="p">(</span><span class="n">entity_path</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">class_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">keypoint_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_point</span><span class="p">(</span><span class="n">entity_path</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">class_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">keypoint_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
 </h4>
 
@@ -1506,11 +1570,11 @@ space.</li>
         <tr>
           <td><code>position</code></td>
           <td>
-                <code><a class="autorefs autorefs-external" title="typing.Union" href="https://docs.python.org/3/library/typing.html#typing.Union">Union</a>[<a class="autorefs autorefs-external" title="typing.Sequence" href="https://docs.python.org/3/library/typing.html#typing.Sequence">Sequence</a>[<a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a>], <a class="autorefs autorefs-external" title="numpy.typing" href="https://numpy.org/doc/stable/reference/typing.html#module-numpy.typing">npt</a>.<a class="autorefs autorefs-external" title="numpy.typing.NDArray" href="https://numpy.org/doc/stable/reference/typing.html#numpy.typing.NDArray">NDArray</a>[<a class="autorefs autorefs-external" title="numpy" href="https://numpy.org/doc/stable/reference/index.html#module-numpy">np</a>.<a class="autorefs autorefs-external" title="numpy.float32" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float32">float32</a>], None]</code>
+                <code><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a>[<a class="autorefs autorefs-external" title="numpy.typing" href="https://numpy.org/doc/stable/reference/typing.html#module-numpy.typing">npt</a>.<a class="autorefs autorefs-external" title="numpy.typing.ArrayLike" href="https://numpy.org/doc/stable/reference/typing.html#numpy.typing.ArrayLike">ArrayLike</a>]</code>
           </td>
           <td><p>2x1 or 3x1 array.</p></td>
           <td>
-              <em>required</em>
+                <code>None</code>
           </td>
         </tr>
         <tr>
@@ -1601,7 +1665,7 @@ See <a class="autorefs autorefs-internal" href="../../__init__/#rerun.log_annota
 
 
 <h4 id="rerun.log.points.log_points" class="doc doc-heading">
-<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_points</span><span class="p">(</span><span class="n">entity_path</span><span class="p">,</span> <span class="n">positions</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">identifiers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">radii</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">class_ids</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">keypoint_ids</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_points</span><span class="p">(</span><span class="n">entity_path</span><span class="p">,</span> <span class="n">positions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">identifiers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">radii</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">class_ids</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">keypoint_ids</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
 </h4>
 
@@ -1644,17 +1708,17 @@ space.</li>
         <tr>
           <td><code>positions</code></td>
           <td>
-                <code><a class="autorefs autorefs-external" title="typing.Union" href="https://docs.python.org/3/library/typing.html#typing.Union">Union</a>[<a class="autorefs autorefs-external" title="typing.Sequence" href="https://docs.python.org/3/library/typing.html#typing.Sequence">Sequence</a>[<a class="autorefs autorefs-external" title="typing.Sequence" href="https://docs.python.org/3/library/typing.html#typing.Sequence">Sequence</a>[<a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a>]], <a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a>[<a class="autorefs autorefs-external" title="numpy.typing" href="https://numpy.org/doc/stable/reference/typing.html#module-numpy.typing">npt</a>.<a class="autorefs autorefs-external" title="numpy.typing.NDArray" href="https://numpy.org/doc/stable/reference/typing.html#numpy.typing.NDArray">NDArray</a>[<a class="autorefs autorefs-external" title="numpy" href="https://numpy.org/doc/stable/reference/index.html#module-numpy">np</a>.<a class="autorefs autorefs-external" title="numpy.float32" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float32">float32</a>]]]</code>
+                <code><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a>[<a class="autorefs autorefs-external" title="numpy.typing" href="https://numpy.org/doc/stable/reference/typing.html#module-numpy.typing">npt</a>.<a class="autorefs autorefs-external" title="numpy.typing.ArrayLike" href="https://numpy.org/doc/stable/reference/typing.html#numpy.typing.ArrayLike">ArrayLike</a>]</code>
           </td>
           <td><p>Nx2 or Nx3 array</p></td>
           <td>
-              <em>required</em>
+                <code>None</code>
           </td>
         </tr>
         <tr>
           <td><code>identifiers</code></td>
           <td>
-                <code><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a>[<a class="autorefs autorefs-external" title="typing.Union" href="https://docs.python.org/3/library/typing.html#typing.Union">Union</a>[<a class="autorefs autorefs-external" title="typing.Sequence" href="https://docs.python.org/3/library/typing.html#typing.Sequence">Sequence</a>[<a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a>], <a class="autorefs autorefs-external" title="numpy.typing" href="https://numpy.org/doc/stable/reference/typing.html#module-numpy.typing">npt</a>.<a class="autorefs autorefs-external" title="numpy.typing.NDArray" href="https://numpy.org/doc/stable/reference/typing.html#numpy.typing.NDArray">NDArray</a>[<a class="autorefs autorefs-external" title="typing.Any" href="https://docs.python.org/3/library/typing.html#typing.Any">Any</a>]]]</code>
+                <code><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a>[<a class="autorefs autorefs-external" title="numpy.typing" href="https://numpy.org/doc/stable/reference/typing.html#module-numpy.typing">npt</a>.<a class="autorefs autorefs-external" title="numpy.typing.ArrayLike" href="https://numpy.org/doc/stable/reference/typing.html#numpy.typing.ArrayLike">ArrayLike</a>]</code>
           </td>
           <td><p>Unique numeric id that shows up when you hover or select the point.</p></td>
           <td>

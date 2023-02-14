@@ -12,7 +12,7 @@
         <link rel="prev" href="../plotting/">
       
       
-        <link rel="next" href="../helpers/">
+        <link rel="next" href="../text/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.12">
@@ -71,7 +71,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#rerun.log_rigid3" class="md-skip">
+        <a href="#rerun.log.transform" class="md-skip">
           Skip to content
         </a>
       
@@ -308,6 +308,14 @@
         
           
         
+          
+        
+          
+        
+          
+        
+          
+        
       
       
         
@@ -350,8 +358,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../logging_primitives/" class="md-nav__link">
-        Logging Primitives
+      <a href="../viewer_control/" class="md-nav__link">
+        Viewer Control
       </a>
     </li>
   
@@ -364,8 +372,50 @@
   
   
     <li class="md-nav__item">
-      <a href="../logging_images/" class="md-nav__link">
-        Logging Images
+      <a href="../time/" class="md-nav__link">
+        Time
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../spatial_primitives/" class="md-nav__link">
+        Spatial Primitives
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../images/" class="md-nav__link">
+        Images
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tensors/" class="md-nav__link">
+        Tensors
       </a>
     </li>
   
@@ -450,6 +500,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#rerun.log.transform" class="md-nav__link">
+    rerun.log.transform
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#rerun.log_rigid3" class="md-nav__link">
     log_rigid3()
   </a>
@@ -481,6 +538,20 @@
   
 </nav>
       
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../text/" class="md-nav__link">
+        Text
+      </a>
     </li>
   
 
@@ -1387,6 +1458,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#rerun.log.transform" class="md-nav__link">
+    rerun.log.transform
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#rerun.log_rigid3" class="md-nav__link">
     log_rigid3()
   </a>
@@ -1432,6 +1510,36 @@
 
   <h1>Transforms</h1>
 
+<div class="doc doc-object doc-module">
+
+
+<a id="rerun.log.transform"></a>
+  <div class="doc doc-contents first">
+  
+      <p>Methods for logging transforms on entity paths.</p>
+<p>Learn more about transforms <a href="https://www.rerun.io/docs/concepts/spaces-and-transforms">in the manual</a></p>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+  </div>
+
+</div><hr />
+
+
 <div class="doc doc-object doc-function">
 
 
@@ -1453,8 +1561,10 @@ The resulting transform from child to parent corresponds to taking a point in th
 rotating it by the given rotations, and then translating it by the given translation:</p>
 <p><code>point_parent = translation + quat * point_child * quat*</code></p>
 <h5 id="rerun.log_rigid3--example">Example</h5>
-<div class="highlight"><pre><span></span><code>rerun.log_rigid3(&quot;world/camera&quot;, parent_from_child=(t,q))
-rerun.log_pinhole(&quot;world/camera/image&quot;, …)
+<div class="highlight"><pre><span></span><code>t = 0.0
+translation = [math.sin(t), math.cos(t), 0.0] # circle around origin
+rotation = [0.5, 0.0, 0.0, np.sin(np.pi/3)] # 60 degrees around x-axis
+rerun.log_rigid3(&quot;sun/planet&quot;, parent_from_child=(translation, rotation))
 </code></pre></div>
 
   <p><strong>Parameters:</strong></p>
@@ -1545,8 +1655,18 @@ point_image = point_image_hom[:,1] / point_image_hom[2]
 </code></pre></div></p>
 <p>Where <code>point_image_hom</code> is the projected point in the image space expressed in homogeneous coordinates.</p>
 <h5 id="rerun.log_pinhole--example">Example</h5>
-<div class="highlight"><pre><span></span><code>rerun.log_rigid3(&quot;world/camera&quot;, …)
-rerun.log_pinhole(&quot;world/camera/image&quot;, …)
+<div class="highlight"><pre><span></span><code>width = 640
+height = 480
+u_cen = width / 2
+v_cen = height / 2
+f_len = (height * width) ** 0.5
+
+rerun.log_pinhole(&quot;world/camera/image&quot;,
+                  child_from_parent = [[f_len, 0,     u_c],
+                                       [0,     f_len, v_c],
+                                       [0,     0,     1  ]],
+                  width = width,
+                  height = height)
 </code></pre></div>
 
   <p><strong>Parameters:</strong></p>
@@ -1585,7 +1705,7 @@ rerun.log_pinhole(&quot;world/camera/image&quot;, …)
           <td>
                 <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
           </td>
-          <td><p>Horizontal resolution of the child space.</p></td>
+          <td><p>Width of the image in pixels.</p></td>
           <td>
               <em>required</em>
           </td>
@@ -1595,7 +1715,7 @@ rerun.log_pinhole(&quot;world/camera/image&quot;, …)
           <td>
                 <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
           </td>
-          <td><p>Vertical resolution of the child space.</p></td>
+          <td><p>Height of the image in pixels.</p></td>
           <td>
               <em>required</em>
           </td>

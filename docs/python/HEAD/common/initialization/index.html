@@ -12,7 +12,7 @@
         <link rel="prev" href="../">
       
       
-        <link rel="next" href="../logging_primitives/">
+        <link rel="next" href="../viewer_control/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.12">
@@ -308,6 +308,14 @@
         
           
         
+          
+        
+          
+        
+          
+        
+          
+        
       
       
         
@@ -373,13 +381,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#rerun.set_recording_id" class="md-nav__link">
-    set_recording_id()
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#rerun.connect" class="md-nav__link">
     connect()
   </a>
@@ -387,8 +388,22 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#rerun.disconnect" class="md-nav__link">
+    disconnect()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#rerun.spawn" class="md-nav__link">
     spawn()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rerun.serve" class="md-nav__link">
+    serve()
   </a>
   
 </li>
@@ -408,8 +423,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../logging_primitives/" class="md-nav__link">
-        Logging Primitives
+      <a href="../viewer_control/" class="md-nav__link">
+        Viewer Control
       </a>
     </li>
   
@@ -422,8 +437,50 @@
   
   
     <li class="md-nav__item">
-      <a href="../logging_images/" class="md-nav__link">
-        Logging Images
+      <a href="../time/" class="md-nav__link">
+        Time
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../spatial_primitives/" class="md-nav__link">
+        Spatial Primitives
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../images/" class="md-nav__link">
+        Images
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tensors/" class="md-nav__link">
+        Tensors
       </a>
     </li>
   
@@ -480,6 +537,20 @@
     <li class="md-nav__item">
       <a href="../transforms/" class="md-nav__link">
         Transforms
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../text/" class="md-nav__link">
+        Text
       </a>
     </li>
   
@@ -1394,13 +1465,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#rerun.set_recording_id" class="md-nav__link">
-    set_recording_id()
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#rerun.connect" class="md-nav__link">
     connect()
   </a>
@@ -1408,8 +1472,22 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#rerun.disconnect" class="md-nav__link">
+    disconnect()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#rerun.spawn" class="md-nav__link">
     spawn()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rerun.serve" class="md-nav__link">
+    serve()
   </a>
   
 </li>
@@ -1437,7 +1515,7 @@
 
 
 <h3 id="rerun.init" class="doc doc-heading">
-<code class="highlight language-python"><span class="k">def</span> <span class="nf">rerun</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">application_id</span><span class="p">,</span> <span class="n">spawn</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="k">def</span> <span class="nf">rerun</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">application_id</span><span class="p">,</span> <span class="n">spawn</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default_enabled</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code>
 
 </h3>
 
@@ -1484,53 +1562,15 @@ you call either <code>connect</code>, <code>show</code>, or <code>save</code></p
                 <code>False</code>
           </td>
         </tr>
-    </tbody>
-  </table>
-
-  </div>
-
-</div>
-
-<div class="doc doc-object doc-function">
-
-
-
-<h3 id="rerun.set_recording_id" class="doc doc-heading">
-<code class="highlight language-python"><span class="k">def</span> <span class="nf">rerun</span><span class="o">.</span><span class="n">set_recording_id</span><span class="p">(</span><span class="n">value</span><span class="p">)</span></code>
-
-</h3>
-
-
-  <div class="doc doc-contents ">
-  
-      <p>Set the recording ID that this process is logging to, as a UUIDv4.</p>
-<p>The default recording_id is based on <code>multiprocessing.current_process().authkey</code>
-which means that all processes spawned with <code>multiprocessing</code>
-will have the same default recording_id.</p>
-<p>If you are not using <code>multiprocessing</code> and still want several different Python
-processes to log to the same Rerun instance (and be part of the same recording),
-you will need to manually assign them all the same recording_id.
-Any random UUIDv4 will work, or copy the recording id for the parent process.</p>
-
-  <p><strong>Parameters:</strong></p>
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-        <th>Default</th>
-      </tr>
-    </thead>
-    <tbody>
         <tr>
-          <td><code>value</code></td>
+          <td><code>default_enabled</code></td>
           <td>
-                <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
+                <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></code>
           </td>
-          <td><p>The recording ID to use for this process.</p></td>
+          <td><p>Should Rerun logging be on by default?
+Can overridden with the RERUN env-var, e.g. <code>RERUN=on</code> or <code>RERUN=off</code>.</p></td>
           <td>
-              <em>required</em>
+                <code>True</code>
           </td>
         </tr>
     </tbody>
@@ -1569,7 +1609,7 @@ Any random UUIDv4 will work, or copy the recording id for the parent process.</p
         <tr>
           <td><code>addr</code></td>
           <td>
-                <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
+                <code><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a>[<a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a>]</code>
           </td>
           <td><p>The ip:port to connect to</p></td>
           <td>
@@ -1578,6 +1618,24 @@ Any random UUIDv4 will work, or copy the recording id for the parent process.</p
         </tr>
     </tbody>
   </table>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="rerun.disconnect" class="doc doc-heading">
+<code class="highlight language-python"><span class="k">def</span> <span class="nf">rerun</span><span class="o">.</span><span class="n">disconnect</span><span class="p">()</span></code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Disconnect from the remote rerun server (if any).</p>
 
   </div>
 
@@ -1627,6 +1685,49 @@ Just call this once at the start of your program.</p>
                 <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></code>
           </td>
           <td><p>also connect to the viewer and stream logging data to it.</p></td>
+          <td>
+                <code>True</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="rerun.serve" class="doc doc-heading">
+<code class="highlight language-python"><span class="k">def</span> <span class="nf">rerun</span><span class="o">.</span><span class="n">serve</span><span class="p">(</span><span class="n">open_browser</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Serve a Rerun Web Viewer.</p>
+<p>WARNING: This is an experimental feature.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>open_browser</code></td>
+          <td>
+                <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></code>
+          </td>
+          <td><p>Open the default browser to the viewer.</p></td>
           <td>
                 <code>True</code>
           </td>

@@ -306,6 +306,14 @@
         
           
         
+          
+        
+          
+        
+          
+        
+          
+        
       
       
         
@@ -348,8 +356,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../common/logging_primitives/" class="md-nav__link">
-        Logging Primitives
+      <a href="../../../common/viewer_control/" class="md-nav__link">
+        Viewer Control
       </a>
     </li>
   
@@ -362,8 +370,50 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../common/logging_images/" class="md-nav__link">
-        Logging Images
+      <a href="../../../common/time/" class="md-nav__link">
+        Time
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../common/spatial_primitives/" class="md-nav__link">
+        Spatial Primitives
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../common/images/" class="md-nav__link">
+        Images
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../common/tensors/" class="md-nav__link">
+        Tensors
       </a>
     </li>
   
@@ -420,6 +470,20 @@
     <li class="md-nav__item">
       <a href="../../../common/transforms/" class="md-nav__link">
         Transforms
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../common/text/" class="md-nav__link">
+        Text
       </a>
     </li>
   
@@ -1582,7 +1646,7 @@
 
 
 <h4 id="rerun_demo.data.build_color_grid" class="doc doc-heading">
-<code class="highlight language-python"><span class="k">def</span> <span class="nf">build_color_grid</span><span class="p">(</span><span class="n">x_count</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">y_count</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">z_count</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="k">def</span> <span class="nf">build_color_grid</span><span class="p">(</span><span class="n">x_count</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">y_count</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">z_count</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">twist</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code>
 
 </h4>
 
@@ -1609,7 +1673,7 @@
           </td>
           <td><p>Number of points in each dimension.</p></td>
           <td>
-                <code>6</code>
+                <code>10</code>
           </td>
         </tr>
         <tr>
@@ -1618,7 +1682,7 @@
           </td>
           <td><p>Number of points in each dimension.</p></td>
           <td>
-                <code>6</code>
+                <code>10</code>
           </td>
         </tr>
         <tr>
@@ -1627,7 +1691,16 @@
           </td>
           <td><p>Number of points in each dimension.</p></td>
           <td>
-                <code>6</code>
+                <code>10</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>twist</code></td>
+          <td>
+          </td>
+          <td><p>Angle to twist from bottom to top of the cube</p></td>
+          <td>
+                <code>0</code>
           </td>
         </tr>
     </tbody>

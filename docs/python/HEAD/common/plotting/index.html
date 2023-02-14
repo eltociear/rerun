@@ -308,6 +308,14 @@
         
           
         
+          
+        
+          
+        
+          
+        
+          
+        
       
       
         
@@ -350,8 +358,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../logging_primitives/" class="md-nav__link">
-        Logging Primitives
+      <a href="../viewer_control/" class="md-nav__link">
+        Viewer Control
       </a>
     </li>
   
@@ -364,8 +372,50 @@
   
   
     <li class="md-nav__item">
-      <a href="../logging_images/" class="md-nav__link">
-        Logging Images
+      <a href="../time/" class="md-nav__link">
+        Time
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../spatial_primitives/" class="md-nav__link">
+        Spatial Primitives
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../images/" class="md-nav__link">
+        Images
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tensors/" class="md-nav__link">
+        Tensors
       </a>
     </li>
   
@@ -459,6 +509,20 @@
     <li class="md-nav__item">
       <a href="../transforms/" class="md-nav__link">
         Transforms
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../text/" class="md-nav__link">
+        Text
       </a>
     </li>
   
@@ -1405,8 +1469,8 @@
       <p>Log a double-precision scalar that will be visualized as a timeseries plot.</p>
 <p>The current simulation time will be used for the time/X-axis, hence scalars
 cannot be timeless!</p>
-<p>See also examples/python/plots.</p>
-<p>Understanding the plot and attributes hierarchy</p>
+<p>See <a href="https://github.com/rerun-io/rerun/blob/main/examples/python/plots/main.py">here</a> for a larger example.</p>
+<h5 id="rerun.log_scalar--understanding-the-plot-and-attributes-hierarchy">Understanding the plot and attributes hierarchy</h5>
 <p>Timeseries come in three parts: points, lines and finally the plots
 themselves. As a user of the Rerun SDK, your one and only entrypoint into
 that hierarchy is through the lowest-level layer: the points.</p>
@@ -1422,8 +1486,9 @@ will be inferred in turn!</p>
 <li>Each logged scalar is a point.</li>
 </ul>
 <p>E.g. the following:
-<div class="highlight"><pre><span></span><code>rerun.log_scalar(&quot;trig/sin&quot;, sin(t), label=&quot;sin(t)&quot;, color=RED)
-rerun.log_scalar(&quot;trig/cos&quot;, cos(t), label=&quot;cos(t)&quot;, color=BLUE)
+<div class="highlight"><pre><span></span><code>t=1.0
+rerun.log_scalar(&quot;trig/sin&quot;, math.sin(t), label=&quot;sin(t)&quot;, color=[255, 0, 0])
+rerun.log_scalar(&quot;trig/cos&quot;, math.cos(t), label=&quot;cos(t)&quot;, color=[0, 0, 255])
 </code></pre></div>
 will yield a single plot (space = <code>trig</code>), comprised of two lines
 (entity paths <code>trig/sin</code> and <code>trig/cos</code>).</p>
@@ -1466,11 +1531,12 @@ will yield a single plot (space = <code>trig</code>), comprised of two lines
           </td>
           <td><p>An optional label for the point.</p>
 <p>This won't show up on points at the moment, as our plots don't yet
-support displaying labels for individual points. If all points within a
-single entity path (i.e. a line) share the same label, then this label
-will be used as the label for the line itself. Otherwise, the line will
-be named after the entity path. The plot itself is named after the space
-it's in.</p></td>
+support displaying labels for individual points
+TODO(https://github.com/rerun-io/rerun/issues/1289). If all points
+within a single entity path (i.e. a line) share the same label, then
+this label will be used as the label for the line itself. Otherwise, the
+line will be named after the entity path. The plot itself is named after
+the space it's in.</p></td>
           <td>
                 <code>None</code>
           </td>
