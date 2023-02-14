@@ -312,6 +312,8 @@
         
           
         
+          
+        
       
       
         
@@ -342,6 +344,20 @@
     <li class="md-nav__item">
       <a href="../../../common/initialization/" class="md-nav__link">
         Initialization
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../common/viewer_control/" class="md-nav__link">
+        Viewer Control
       </a>
     </li>
   
@@ -642,13 +658,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#rerun.log_view_coordinates" class="md-nav__link">
-    log_view_coordinates()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#rerun.log_image" class="md-nav__link">
     log_image()
   </a>
@@ -665,6 +674,13 @@
           <li class="md-nav__item">
   <a href="#rerun.log_arrow" class="md-nav__link">
     log_arrow()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rerun.log_view_coordinates" class="md-nav__link">
+    log_view_coordinates()
   </a>
   
 </li>
@@ -775,15 +791,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#rerun.log_unknown_transform" class="md-nav__link">
-    log_unknown_transform()
+  <a href="#rerun.log_image_file" class="md-nav__link">
+    log_image_file()
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#rerun.log_image_file" class="md-nav__link">
-    log_image_file()
+  <a href="#rerun.log_unknown_transform" class="md-nav__link">
+    log_unknown_transform()
   </a>
   
 </li>
@@ -796,15 +812,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#rerun.log_rigid3" class="md-nav__link">
-    log_rigid3()
+  <a href="#rerun.set_recording_id" class="md-nav__link">
+    set_recording_id()
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#rerun.set_recording_id" class="md-nav__link">
-    set_recording_id()
+  <a href="#rerun.log_rigid3" class="md-nav__link">
+    log_rigid3()
   </a>
   
 </li>
@@ -1738,13 +1754,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#rerun.log_view_coordinates" class="md-nav__link">
-    log_view_coordinates()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#rerun.log_image" class="md-nav__link">
     log_image()
   </a>
@@ -1761,6 +1770,13 @@
           <li class="md-nav__item">
   <a href="#rerun.log_arrow" class="md-nav__link">
     log_arrow()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rerun.log_view_coordinates" class="md-nav__link">
+    log_view_coordinates()
   </a>
   
 </li>
@@ -1871,15 +1887,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#rerun.log_unknown_transform" class="md-nav__link">
-    log_unknown_transform()
+  <a href="#rerun.log_image_file" class="md-nav__link">
+    log_image_file()
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#rerun.log_image_file" class="md-nav__link">
-    log_image_file()
+  <a href="#rerun.log_unknown_transform" class="md-nav__link">
+    log_unknown_transform()
   </a>
   
 </li>
@@ -1892,15 +1908,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#rerun.log_rigid3" class="md-nav__link">
-    log_rigid3()
+  <a href="#rerun.set_recording_id" class="md-nav__link">
+    set_recording_id()
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#rerun.set_recording_id" class="md-nav__link">
-    set_recording_id()
+  <a href="#rerun.log_rigid3" class="md-nav__link">
+    log_rigid3()
   </a>
   
 </li>
@@ -2271,115 +2287,6 @@ albedo_factor = np.array([1.0, 0.0, 0.0])
 
 
 
-<h4 id="rerun.log_view_coordinates" class="doc doc-heading">
-<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_view_coordinates</span><span class="p">(</span><span class="n">entity_path</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">xyz</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">up</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">right_handed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
-
-</h4>
-
-
-  <div class="doc doc-contents ">
-  
-      <p>Log the view coordinates for an entity.</p>
-<p>Each entity defines its own coordinate system, called a space.
-By logging view coordinates you can give semantic meaning to the XYZ axes of the space.
-This is for example useful for camera entities ("what axis is forward?").</p>
-<p>For full control, set the <code>xyz</code> parameter to a three-letter acronym (<code>xyz="RDF"</code>). Each letter represents:</p>
-<ul>
-<li>R: Right</li>
-<li>L: Left</li>
-<li>U: Up</li>
-<li>D: Down</li>
-<li>F: Forward</li>
-<li>B: Back</li>
-</ul>
-<p>Some of the most common are:</p>
-<ul>
-<li>"RDF": X=Right Y=Down Z=Forward  (right-handed)</li>
-<li>"RUB"  X=Right Y=Up   Z=Back     (right-handed)</li>
-<li>"RDB": X=Right Y=Down Z=Back     (left-handed)</li>
-<li>"RUF": X=Right Y=Up   Z=Forward  (left-handed)</li>
-</ul>
-<h6 id="rerun.log_view_coordinates--example">Example</h6>
-<div class="highlight"><pre><span></span><code>rerun.log_view_coordinates(&quot;world/camera&quot;, xyz=&quot;RUB&quot;)
-</code></pre></div>
-<p>For world-coordinates it's often convenient to just specify an up-axis.
-You can do so by using the <code>up</code>-parameter (where <code>up</code> is one of "+X", "-X", "+Y", "-Y", "+Z", "-Z"):</p>
-<div class="highlight"><pre><span></span><code>rerun.log_view_coordinates(&quot;world&quot;, up=&quot;+Z&quot;, right_handed=True, timeless=True)
-rerun.log_view_coordinates(&quot;world&quot;, up=&quot;-Y&quot;, right_handed=False, timeless=True)
-</code></pre></div>
-
-  <p><strong>Parameters:</strong></p>
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-        <th>Default</th>
-      </tr>
-    </thead>
-    <tbody>
-        <tr>
-          <td><code>entity_path</code></td>
-          <td>
-                <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
-          </td>
-          <td><p>Path in the space hierarchy where the view coordinate will be set.</p></td>
-          <td>
-              <em>required</em>
-          </td>
-        </tr>
-        <tr>
-          <td><code>xyz</code></td>
-          <td>
-                <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
-          </td>
-          <td><p>Three-letter acronym for the view coordinate axes.</p></td>
-          <td>
-                <code>&#39;&#39;</code>
-          </td>
-        </tr>
-        <tr>
-          <td><code>up</code></td>
-          <td>
-                <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
-          </td>
-          <td><p>Which axis is up? One of "+X", "-X", "+Y", "-Y", "+Z", "-Z".</p></td>
-          <td>
-                <code>&#39;&#39;</code>
-          </td>
-        </tr>
-        <tr>
-          <td><code>right_handed</code></td>
-          <td>
-                <code><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a>[<a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a>]</code>
-          </td>
-          <td><p>If True, the coordinate system is right-handed. If False, it is left-handed.</p></td>
-          <td>
-                <code>None</code>
-          </td>
-        </tr>
-        <tr>
-          <td><code>timeless</code></td>
-          <td>
-                <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></code>
-          </td>
-          <td><p>If true, the view coordinates will be timeless (default: False).</p></td>
-          <td>
-                <code>False</code>
-          </td>
-        </tr>
-    </tbody>
-  </table>
-
-  </div>
-
-</div>
-
-<div class="doc doc-object doc-function">
-
-
-
 <h4 id="rerun.log_image" class="doc doc-heading">
 <code class="highlight language-python"><span class="k">def</span> <span class="nf">log_image</span><span class="p">(</span><span class="n">entity_path</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
@@ -2711,6 +2618,115 @@ The tip is rendered as a cone with <code>height = 2.0 * width_scale</code> and <
                 <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></code>
           </td>
           <td><p>The entity is not time-dependent, and will be visible at any time point.</p></td>
+          <td>
+                <code>False</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h4 id="rerun.log_view_coordinates" class="doc doc-heading">
+<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_view_coordinates</span><span class="p">(</span><span class="n">entity_path</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">xyz</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">up</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">right_handed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+
+</h4>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Log the view coordinates for an entity.</p>
+<p>Each entity defines its own coordinate system, called a space.
+By logging view coordinates you can give semantic meaning to the XYZ axes of the space.
+This is for example useful for camera entities ("what axis is forward?").</p>
+<p>For full control, set the <code>xyz</code> parameter to a three-letter acronym (<code>xyz="RDF"</code>). Each letter represents:</p>
+<ul>
+<li>R: Right</li>
+<li>L: Left</li>
+<li>U: Up</li>
+<li>D: Down</li>
+<li>F: Forward</li>
+<li>B: Back</li>
+</ul>
+<p>Some of the most common are:</p>
+<ul>
+<li>"RDF": X=Right Y=Down Z=Forward  (right-handed)</li>
+<li>"RUB"  X=Right Y=Up   Z=Back     (right-handed)</li>
+<li>"RDB": X=Right Y=Down Z=Back     (left-handed)</li>
+<li>"RUF": X=Right Y=Up   Z=Forward  (left-handed)</li>
+</ul>
+<h6 id="rerun.log_view_coordinates--example">Example</h6>
+<div class="highlight"><pre><span></span><code>rerun.log_view_coordinates(&quot;world/camera&quot;, xyz=&quot;RUB&quot;)
+</code></pre></div>
+<p>For world-coordinates it's often convenient to just specify an up-axis.
+You can do so by using the <code>up</code>-parameter (where <code>up</code> is one of "+X", "-X", "+Y", "-Y", "+Z", "-Z"):</p>
+<div class="highlight"><pre><span></span><code>rerun.log_view_coordinates(&quot;world&quot;, up=&quot;+Z&quot;, right_handed=True, timeless=True)
+rerun.log_view_coordinates(&quot;world&quot;, up=&quot;-Y&quot;, right_handed=False, timeless=True)
+</code></pre></div>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>entity_path</code></td>
+          <td>
+                <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
+          </td>
+          <td><p>Path in the space hierarchy where the view coordinate will be set.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>xyz</code></td>
+          <td>
+                <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
+          </td>
+          <td><p>Three-letter acronym for the view coordinate axes.</p></td>
+          <td>
+                <code>&#39;&#39;</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>up</code></td>
+          <td>
+                <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
+          </td>
+          <td><p>Which axis is up? One of "+X", "-X", "+Y", "-Y", "+Z", "-Z".</p></td>
+          <td>
+                <code>&#39;&#39;</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>right_handed</code></td>
+          <td>
+                <code><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a>[<a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a>]</code>
+          </td>
+          <td><p>If True, the coordinate system is right-handed. If False, it is left-handed.</p></td>
+          <td>
+                <code>None</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>timeless</code></td>
+          <td>
+                <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></code>
+          </td>
+          <td><p>If true, the view coordinates will be timeless (default: False).</p></td>
           <td>
                 <code>False</code>
           </td>
@@ -3944,24 +3960,6 @@ you have millimeter precision and a range of up to ~65 meters (2^16 / 1000).</p>
 
 
 
-<h4 id="rerun.log_unknown_transform" class="doc doc-heading">
-<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_unknown_transform</span><span class="p">(</span><span class="n">entity_path</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
-
-</h4>
-
-
-  <div class="doc doc-contents ">
-  
-      <p>Log that this entity is NOT in the same space as the parent, but you do not (yet) know how they relate.</p>
-
-  </div>
-
-</div>
-
-<div class="doc doc-object doc-function">
-
-
-
 <h4 id="rerun.log_image_file" class="doc doc-heading">
 <code class="highlight language-python"><span class="k">def</span> <span class="nf">log_image_file</span><span class="p">(</span><span class="n">entity_path</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">img_bytes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">img_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">img_format</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
@@ -4038,6 +4036,24 @@ you have millimeter precision and a range of up to ~65 meters (2^16 / 1000).</p>
         </tr>
     </tbody>
   </table>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h4 id="rerun.log_unknown_transform" class="doc doc-heading">
+<code class="highlight language-python"><span class="k">def</span> <span class="nf">log_unknown_transform</span><span class="p">(</span><span class="n">entity_path</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+
+</h4>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Log that this entity is NOT in the same space as the parent, but you do not (yet) know how they relate.</p>
 
   </div>
 
@@ -4141,6 +4157,55 @@ from <a class="autorefs autorefs-internal" href="../log/text/#rerun.log.text.Log
 
 
 
+<h4 id="rerun.set_recording_id" class="doc doc-heading">
+<code class="highlight language-python"><span class="k">def</span> <span class="nf">set_recording_id</span><span class="p">(</span><span class="n">value</span><span class="p">)</span></code>
+
+</h4>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Set the recording ID that this process is logging to, as a UUIDv4.</p>
+<p>The default recording_id is based on <code>multiprocessing.current_process().authkey</code>
+which means that all processes spawned with <code>multiprocessing</code>
+will have the same default recording_id.</p>
+<p>If you are not using <code>multiprocessing</code> and still want several different Python
+processes to log to the same Rerun instance (and be part of the same recording),
+you will need to manually assign them all the same recording_id.
+Any random UUIDv4 will work, or copy the recording id for the parent process.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>value</code></td>
+          <td>
+                <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
+          </td>
+          <td><p>The recording ID to use for this process.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
 <h4 id="rerun.log_rigid3" class="doc doc-heading">
 <code class="highlight language-python"><span class="k">def</span> <span class="nf">log_rigid3</span><span class="p">(</span><span class="n">entity_path</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">parent_from_child</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">child_from_parent</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">xyz</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">timeless</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
@@ -4222,55 +4287,6 @@ This is a convenience for also calling <a class="autorefs autorefs-internal" hre
           <td><p>If true, the transform will be timeless (default: False).</p></td>
           <td>
                 <code>False</code>
-          </td>
-        </tr>
-    </tbody>
-  </table>
-
-  </div>
-
-</div>
-
-<div class="doc doc-object doc-function">
-
-
-
-<h4 id="rerun.set_recording_id" class="doc doc-heading">
-<code class="highlight language-python"><span class="k">def</span> <span class="nf">set_recording_id</span><span class="p">(</span><span class="n">value</span><span class="p">)</span></code>
-
-</h4>
-
-
-  <div class="doc doc-contents ">
-  
-      <p>Set the recording ID that this process is logging to, as a UUIDv4.</p>
-<p>The default recording_id is based on <code>multiprocessing.current_process().authkey</code>
-which means that all processes spawned with <code>multiprocessing</code>
-will have the same default recording_id.</p>
-<p>If you are not using <code>multiprocessing</code> and still want several different Python
-processes to log to the same Rerun instance (and be part of the same recording),
-you will need to manually assign them all the same recording_id.
-Any random UUIDv4 will work, or copy the recording id for the parent process.</p>
-
-  <p><strong>Parameters:</strong></p>
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-        <th>Default</th>
-      </tr>
-    </thead>
-    <tbody>
-        <tr>
-          <td><code>value</code></td>
-          <td>
-                <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
-          </td>
-          <td><p>The recording ID to use for this process.</p></td>
-          <td>
-              <em>required</em>
           </td>
         </tr>
     </tbody>

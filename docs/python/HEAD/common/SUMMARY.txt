@@ -1,5 +1,6 @@
 * [index](index.md)
 * [Initialization](initialization.md)
+* [Viewer Control](viewer_control.md)
 * [Time](time.md)
 * [Spatial Primitives](spatial_primitives.md)
 * [Images](images.md)

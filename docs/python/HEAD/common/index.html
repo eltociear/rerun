@@ -69,7 +69,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#examples" class="md-skip">
+        <a href="#getting-started" class="md-skip">
           Skip to content
         </a>
       
@@ -314,6 +314,8 @@
         
           
         
+          
+        
       
       
         
@@ -344,6 +346,20 @@
     <li class="md-nav__item">
       <a href="initialization/" class="md-nav__link">
         Initialization
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="viewer_control/" class="md-nav__link">
+        Viewer Control
       </a>
     </li>
   
@@ -1388,12 +1404,13 @@
 
 
 
-<h1 id="examples">Examples</h1>
-<p>You can find examples on our GitHub <a href="https://github.com/rerun-io/rerun/tree/latest/examples/python">here</a>.</p>
-<h1 id="troubleshooting">Troubleshooting</h1>
-<p>You can set <code>RUST_LOG=debug</code> before running your Python script
-and/or <code>rerun</code> process to get some verbose logging output.</p>
-<h1 id="common-apis">Common APIs</h1>
+<h1 id="getting-started">Getting Started</h1>
+<ul>
+<li><a href="https://www.rerun.io/docs/getting-started/python">Quick start</a></li>
+<li><a href="https://www.rerun.io/docs/getting-started/logging-python">Tutorial</a></li>
+<li><a href="https://github.com/rerun-io/rerun/tree/latest/examples/python">Examples on Github</a></li>
+</ul>
+<h1 id="apis">APIs</h1>
 <h2 id="initialization">Initialization</h2>
 <table>
 <thead>
@@ -1408,16 +1425,39 @@ and/or <code>rerun</code> process to get some verbose logging output.</p>
 <td>Initialize the Rerun SDK with a user-chosen application id (name).</td>
 </tr>
 <tr>
-<td><a href="initialization#rerun.set_recording_id"><code>rerun.set_recording_id()</code></a></td>
-<td>Set the recording ID that this process is logging to, as a UUIDv4.</td>
-</tr>
-<tr>
 <td><a href="initialization#rerun.connect"><code>rerun.connect()</code></a></td>
 <td>Connect to a remote Rerun Viewer on the given ip:port.</td>
 </tr>
 <tr>
+<td><a href="initialization#rerun.disconnect"><code>rerun.disconnect()</code></a></td>
+<td>Disconnect from the remote rerun server (if any).</td>
+</tr>
+<tr>
 <td><a href="initialization#rerun.spawn"><code>rerun.spawn()</code></a></td>
 <td>Spawn a Rerun Viewer, listening on the given port.</td>
+</tr>
+<tr>
+<td><a href="initialization#rerun.serve"><code>rerun.serve()</code></a></td>
+<td>Serve a Rerun Web Viewer.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="viewer-control">Viewer Control</h2>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="viewer_control#rerun.set_recording_id"><code>rerun.set_recording_id()</code></a></td>
+<td>Set the recording ID that this process is logging to, as a UUIDv4.</td>
+</tr>
+<tr>
+<td><a href="viewer_control#rerun.save"><code>rerun.save()</code></a></td>
+<td>Save previously logged data to a file.</td>
 </tr>
 </tbody>
 </table>
@@ -1651,6 +1691,11 @@ and/or <code>rerun</code> process to get some verbose logging output.</p>
 </tr>
 </tbody>
 </table>
+<h1 id="troubleshooting">Troubleshooting</h1>
+<p>You can set <code>RUST_LOG=debug</code> before running your Python script
+and/or <code>rerun</code> process to get some verbose logging output.</p>
+<p>If you run into any issues don't hesitate to <a href="https://github.com/rerun-io/rerun/issues/new/choose">open a ticket</a>
+or <a href="https://discord.gg/Gcm8BbTaAj">join our Discord</a>.</p>
 
 
 
