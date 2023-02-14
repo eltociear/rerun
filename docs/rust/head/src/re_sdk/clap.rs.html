@@ -113,7 +113,7 @@
 
 <span class="comment">// ---
 
-</span><span class="attr">#[derive(Debug, Clone)]
+</span><span class="attr">#[derive(Debug, Clone, PartialEq, Eq)]
 </span><span class="kw">enum </span>RerunBehavior {
     Save(PathBuf),
     <span class="attr">#[cfg(feature = <span class="string">&quot;web&quot;</span>)]
@@ -183,7 +183,7 @@
         <span class="kw">let </span>behavior = <span class="self">self</span>.to_behavior();
 
         <span class="attr">#[cfg(feature = <span class="string">&quot;web&quot;</span>)]
-        </span><span class="kw">if </span><span class="macro">matches!</span>(behavior, RerunBehavior::Serve) {
+        </span><span class="kw">if </span>behavior == RerunBehavior::Serve {
             <span class="macro">eprintln!</span>(<span class="string">&quot;Sleeping while serving the web viewer. Abort with Ctrl-C&quot;</span>);
             std::thread::sleep(std::time::Duration::from_secs(<span class="number">1_000_000</span>));
         }
@@ -207,7 +207,7 @@
 
         <span class="kw">match </span><span class="self">self</span>.connect {
             <span class="prelude-val">Some</span>(<span class="prelude-val">Some</span>(addr)) =&gt; <span class="kw">return </span>RerunBehavior::Connect(addr),
-            <span class="prelude-val">Some</span>(<span class="prelude-val">None</span>) =&gt; <span class="kw">return </span>RerunBehavior::Connect(<span class="kw">crate</span>::log::default_server_addr()),
+            <span class="prelude-val">Some</span>(<span class="prelude-val">None</span>) =&gt; <span class="kw">return </span>RerunBehavior::Connect(<span class="kw">crate</span>::default_server_addr()),
             <span class="prelude-val">None </span>=&gt; {}
         }
 
