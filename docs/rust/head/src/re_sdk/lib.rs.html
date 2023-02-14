@@ -115,6 +115,9 @@
 <a href="#115" id="115">115</a>
 <a href="#116" id="116">116</a>
 <a href="#117" id="117">117</a>
+<a href="#118" id="118">118</a>
+<a href="#119" id="119">119</a>
+<a href="#120" id="120">120</a>
 </pre><pre class="rust"><code><span class="doccomment">//! The Rerun SDK
 //!
 //! ## Feature flags
@@ -132,8 +135,56 @@
 <span class="kw">pub use </span><span class="self">self</span>::msg_sender::{MsgSender, MsgSenderError};
 <span class="kw">pub use </span><span class="self">self</span>::session::Session;
 
+<span class="attr">#[cfg(not(target_arch = <span class="string">&quot;wasm32&quot;</span>))]
+</span><span class="kw">pub mod </span>clap;
+
 <span class="attr">#[cfg(feature = <span class="string">&quot;demo&quot;</span>)]
 </span><span class="kw">pub mod </span>demo_util;
+
+<span class="doccomment">/// Things directly related to logging.
+</span><span class="kw">pub mod </span>log {
+    <span class="kw">pub use </span>re_log_types::{
+        msg_bundle::{ComponentBundle, MsgBundle},
+        LogMsg, MsgId, PathOp,
+    };
+    <span class="kw">pub use </span>re_sdk_comms::default_server_addr;
+}
+
+<span class="doccomment">/// Time-related types.
+</span><span class="kw">pub mod </span>time {
+    <span class="kw">pub use </span>re_log_types::{Time, TimeInt, TimePoint, TimeType, Timeline};
+}
+
+<span class="doccomment">/// These are the different _components_ you can log.
+///
+/// They all implement the [`Component`] trait,
+/// and can be used in [`MsgSender::with_component`].
+</span><span class="kw">pub mod </span>components {
+    <span class="kw">pub use </span>re_log_types::component_types::{
+        AnnotationContext, AnnotationInfo, Arrow3D, Box3D, ClassDescription, ClassId, ColorRGBA,
+        EncodedMesh3D, InstanceKey, KeypointId, Label, LineStrip2D, LineStrip3D, Mat3x3, Mesh3D,
+        MeshFormat, MeshId, Pinhole, Point2D, Point3D, Quaternion, Radius, RawMesh3D, Rect2D,
+        Rigid3, Scalar, ScalarPlotProps, Size3D, Tensor, TensorData, TensorDataMeaning,
+        TensorDimension, TensorId, TensorTrait, TextEntry, Transform, Vec2D, Vec3D, Vec4D,
+        ViewCoordinates,
+    };
+}
+
+<span class="doccomment">/// Coordinate system helpers, for use with [`components::ViewCoordinates`].
+</span><span class="kw">pub mod </span>coordinates {
+    <span class="kw">pub use </span>re_log_types::coordinates::{Axis3, Handedness, Sign, SignedAxis3};
+}
+
+<span class="doccomment">/// Re-exports of other crates.
+</span><span class="kw">pub mod </span>external {
+    <span class="kw">pub use </span>re_log;
+    <span class="kw">pub use </span>re_log_types;
+    <span class="kw">pub use </span>re_memory;
+    <span class="kw">pub use </span>re_sdk_comms;
+
+    <span class="attr">#[cfg(feature = <span class="string">&quot;glam&quot;</span>)]
+    </span><span class="kw">pub use </span>re_log_types::external::glam;
+}
 
 <span class="comment">// ---
 
@@ -186,51 +237,6 @@
             default_enabled
         }
     }
-}
-
-<span class="doccomment">/// Things directly related to logging.
-</span><span class="kw">pub mod </span>log {
-    <span class="kw">pub use </span>re_log_types::{
-        msg_bundle::{ComponentBundle, MsgBundle},
-        LogMsg, MsgId, PathOp,
-    };
-    <span class="kw">pub use </span>re_sdk_comms::default_server_addr;
-}
-
-<span class="doccomment">/// Time-related types.
-</span><span class="kw">pub mod </span>time {
-    <span class="kw">pub use </span>re_log_types::{Time, TimeInt, TimePoint, TimeType, Timeline};
-}
-
-<span class="doccomment">/// These are the different _components_ you can log.
-///
-/// They all implement the [`Component`] trait,
-/// and can be used in [`MsgSender::with_component`].
-</span><span class="kw">pub mod </span>components {
-    <span class="kw">pub use </span>re_log_types::component_types::{
-        AnnotationContext, AnnotationInfo, Arrow3D, Box3D, ClassDescription, ClassId, ColorRGBA,
-        EncodedMesh3D, InstanceKey, KeypointId, Label, LineStrip2D, LineStrip3D, Mat3x3, Mesh3D,
-        MeshFormat, MeshId, Pinhole, Point2D, Point3D, Quaternion, Radius, RawMesh3D, Rect2D,
-        Rigid3, Scalar, ScalarPlotProps, Size3D, Tensor, TensorData, TensorDataMeaning,
-        TensorDimension, TensorId, TensorTrait, TextEntry, Transform, Vec2D, Vec3D, Vec4D,
-        ViewCoordinates,
-    };
-}
-
-<span class="doccomment">/// Coordinate system helpers, for use with [`components::ViewCoordinates`].
-</span><span class="kw">pub mod </span>coordinates {
-    <span class="kw">pub use </span>re_log_types::coordinates::{Axis3, Handedness, Sign, SignedAxis3};
-}
-
-<span class="doccomment">/// Re-exports of other crates.
-</span><span class="kw">pub mod </span>external {
-    <span class="kw">pub use </span>re_log;
-    <span class="kw">pub use </span>re_log_types;
-    <span class="kw">pub use </span>re_memory;
-    <span class="kw">pub use </span>re_sdk_comms;
-
-    <span class="attr">#[cfg(feature = <span class="string">&quot;glam&quot;</span>)]
-    </span><span class="kw">pub use </span>re_log_types::external::glam;
 }
 </code></pre></div>
 </section></div></main><div id="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="re_sdk" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.1 (d5a82bbd2 2023-02-07)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>
