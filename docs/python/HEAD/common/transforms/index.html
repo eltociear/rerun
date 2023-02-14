@@ -1653,8 +1653,18 @@ point_image = point_image_hom[:,1] / point_image_hom[2]
 </code></pre></div></p>
 <p>Where <code>point_image_hom</code> is the projected point in the image space expressed in homogeneous coordinates.</p>
 <h5 id="rerun.log_pinhole--example">Example</h5>
-<div class="highlight"><pre><span></span><code>rerun.log_rigid3(&quot;world/camera&quot;, …)
-rerun.log_pinhole(&quot;world/camera/image&quot;, …)
+<div class="highlight"><pre><span></span><code>width = 640
+height = 480
+u_cen = width / 2
+v_cen = height / 2
+f_len = (height * width) ** 0.5
+
+rerun.log_pinhole(&quot;world/camera/image&quot;,
+                  child_from_parent = [[f_len, 0,     u_c],
+                                       [0,     f_len, v_c],
+                                       [0,     0,     1  ]],
+                  width = width,
+                  height = height)
 </code></pre></div>
 
   <p><strong>Parameters:</strong></p>
@@ -1693,7 +1703,7 @@ rerun.log_pinhole(&quot;world/camera/image&quot;, …)
           <td>
                 <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
           </td>
-          <td><p>Horizontal resolution of the child space.</p></td>
+          <td><p>Width of the image in pixels.</p></td>
           <td>
               <em>required</em>
           </td>
@@ -1703,7 +1713,7 @@ rerun.log_pinhole(&quot;world/camera/image&quot;, …)
           <td>
                 <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></code>
           </td>
-          <td><p>Vertical resolution of the child space.</p></td>
+          <td><p>Height of the image in pixels.</p></td>
           <td>
               <em>required</em>
           </td>
