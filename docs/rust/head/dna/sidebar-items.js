@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"constant":[["NUM_POINTS",""]],"fn":[["main",""]]};
+window.SIDEBAR_ITEMS = {"constant":[["NUM_POINTS",""]],"fn":[["main",""],["run",""]]};

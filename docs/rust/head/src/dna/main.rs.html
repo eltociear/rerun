@@ -98,6 +98,8 @@
 <a href="#98" id="98">98</a>
 <a href="#99" id="99">99</a>
 <a href="#100" id="100">100</a>
+<a href="#101" id="101">101</a>
+<a href="#102" id="102">102</a>
 </pre><pre class="rust"><code><span class="doccomment">//! The example from our Getting Started page.
 
 </span><span class="kw">use </span>std::f32::consts::TAU;
@@ -110,13 +112,11 @@
 <span class="kw">use </span>rerun::demo_util::{bounce_lerp, color_spiral};
 <span class="kw">use </span>rerun::external::glam;
 <span class="kw">use </span>rerun::time::{Time, TimeType, Timeline};
-<span class="kw">use </span>rerun::{MsgSender, Session};
+<span class="kw">use </span>rerun::{MsgSender, MsgSenderError, Session};
 
 <span class="kw">const </span>NUM_POINTS: usize = <span class="number">100</span>;
 
-<span class="kw">fn </span>main() -&gt; <span class="prelude-ty">Result</span>&lt;(), Box&lt;<span class="kw">dyn </span>std::error::Error&gt;&gt; {
-    <span class="kw">let </span><span class="kw-2">mut </span>session = Session::init(<span class="string">&quot;DNA Abacus&quot;</span>, <span class="bool-val">true</span>);
-
+<span class="kw">fn </span>run(<span class="kw-2">mut </span>session: Session) -&gt; <span class="prelude-ty">Result</span>&lt;(), MsgSenderError&gt; {
     <span class="kw">let </span>stable_time = Timeline::new(<span class="string">&quot;stable_time&quot;</span>, TimeType::Time);
 
     <span class="kw">let </span>(points1, colors1) = color_spiral(NUM_POINTS, <span class="number">2.0</span>, <span class="number">0.02</span>, <span class="number">0.0</span>, <span class="number">0.1</span>);
@@ -194,9 +194,13 @@
             </span>.send(<span class="kw-2">&amp;mut </span>session)<span class="question-mark">?</span>;
     }
 
-    session.show()<span class="question-mark">?</span>;
-
     <span class="prelude-val">Ok</span>(())
+}
+
+<span class="kw">fn </span>main() {
+    <span class="kw">let </span>session = Session::init(<span class="string">&quot;DNA Abacus&quot;</span>, <span class="bool-val">true</span>);
+
+    session.spawn(run).unwrap();
 }
 </code></pre></div>
 </section></div></main><div id="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="dna" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.1 (d5a82bbd2 2023-02-07)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>
