@@ -1661,6 +1661,38 @@
 <a href="#1661" id="1661">1661</a>
 <a href="#1662" id="1662">1662</a>
 <a href="#1663" id="1663">1663</a>
+<a href="#1664" id="1664">1664</a>
+<a href="#1665" id="1665">1665</a>
+<a href="#1666" id="1666">1666</a>
+<a href="#1667" id="1667">1667</a>
+<a href="#1668" id="1668">1668</a>
+<a href="#1669" id="1669">1669</a>
+<a href="#1670" id="1670">1670</a>
+<a href="#1671" id="1671">1671</a>
+<a href="#1672" id="1672">1672</a>
+<a href="#1673" id="1673">1673</a>
+<a href="#1674" id="1674">1674</a>
+<a href="#1675" id="1675">1675</a>
+<a href="#1676" id="1676">1676</a>
+<a href="#1677" id="1677">1677</a>
+<a href="#1678" id="1678">1678</a>
+<a href="#1679" id="1679">1679</a>
+<a href="#1680" id="1680">1680</a>
+<a href="#1681" id="1681">1681</a>
+<a href="#1682" id="1682">1682</a>
+<a href="#1683" id="1683">1683</a>
+<a href="#1684" id="1684">1684</a>
+<a href="#1685" id="1685">1685</a>
+<a href="#1686" id="1686">1686</a>
+<a href="#1687" id="1687">1687</a>
+<a href="#1688" id="1688">1688</a>
+<a href="#1689" id="1689">1689</a>
+<a href="#1690" id="1690">1690</a>
+<a href="#1691" id="1691">1691</a>
+<a href="#1692" id="1692">1692</a>
+<a href="#1693" id="1693">1693</a>
+<a href="#1694" id="1694">1694</a>
+<a href="#1695" id="1695">1695</a>
 </pre><pre class="rust"><code><span class="kw">use </span>std::{any::Any, hash::Hash};
 
 <span class="kw">use </span>ahash::HashMap;
@@ -1718,7 +1750,7 @@
 
     component_ui_registry: ComponentUiRegistry,
 
-    rx: <span class="prelude-ty">Option</span>&lt;Receiver&lt;LogMsg&gt;&gt;,
+    rx: Receiver&lt;LogMsg&gt;,
 
     <span class="doccomment">/// Where the logs are stored.
     </span>log_dbs: IntMap&lt;RecordingId, LogDb&gt;,
@@ -1765,20 +1797,14 @@
         storage: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span><span class="kw">dyn </span>eframe::Storage&gt;,
         rx: Receiver&lt;LogMsg&gt;,
     ) -&gt; <span class="self">Self </span>{
-        <span class="self">Self</span>::new(
-            startup_options,
-            re_ui,
-            storage,
-            <span class="prelude-val">Some</span>(rx),
-            Default::default(),
-        )
+        <span class="self">Self</span>::new(startup_options, re_ui, storage, rx, Default::default())
     }
 
     <span class="kw">fn </span>new(
         startup_options: StartupOptions,
         re_ui: re_ui::ReUi,
         storage: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span><span class="kw">dyn </span>eframe::Storage&gt;,
-        rx: <span class="prelude-ty">Option</span>&lt;Receiver&lt;LogMsg&gt;&gt;,
+        rx: Receiver&lt;LogMsg&gt;,
         log_db: LogDb,
     ) -&gt; <span class="self">Self </span>{
         <span class="attr">#[cfg(not(target_arch = <span class="string">&quot;wasm32&quot;</span>))]
@@ -2154,12 +2180,14 @@
                     });
                 <span class="kw">let </span>blueprint = <span class="self">self</span>.state.blueprints.entry(selected_app_id).or_default();
 
-                <span class="self">self</span>.state
-                    .recording_configs
-                    .entry(<span class="self">self</span>.state.selected_rec_id)
-                    .or_default()
-                    .selection_state
-                    .on_frame_start(log_db, blueprint);
+                recording_config_entry(
+                    <span class="kw-2">&amp;mut </span><span class="self">self</span>.state.recording_configs,
+                    <span class="self">self</span>.state.selected_rec_id,
+                    <span class="self">self</span>.rx.source(),
+                    log_db,
+                )
+                .selection_state
+                .on_frame_start(log_db, blueprint);
 
                 {
                     <span class="comment">// TODO(andreas): store the re_renderer somewhere else.
@@ -2173,8 +2201,8 @@
                         .unwrap();
                     render_ctx.frame_maintenance();
 
-                    <span class="kw">if let </span>(<span class="bool-val">true</span>, <span class="prelude-val">Some</span>(rx)) = (log_db.is_empty(), <span class="kw-2">&amp;</span><span class="self">self</span>.rx) {
-                        wait_screen_ui(ui, rx);
+                    <span class="kw">if </span>log_db.is_empty() {
+                        wait_screen_ui(ui, <span class="kw-2">&amp;</span><span class="self">self</span>.rx);
                     } <span class="kw">else </span>{
                         <span class="self">self</span>.state.show(
                             ui,
@@ -2182,6 +2210,7 @@
                             log_db,
                             <span class="kw-2">&amp;</span><span class="self">self</span>.re_ui,
                             <span class="kw-2">&amp;</span><span class="self">self</span>.component_ui_registry,
+                            <span class="self">self</span>.rx.source(),
                         );
                     }
                 }
@@ -2282,59 +2311,58 @@
 
 <span class="kw">impl </span>App {
     <span class="kw">fn </span>receive_messages(<span class="kw-2">&amp;mut </span><span class="self">self</span>, egui_ctx: <span class="kw-2">&amp;</span>egui::Context) {
-        <span class="kw">if let </span><span class="prelude-val">Some</span>(rx) = <span class="kw-2">&amp;mut </span><span class="self">self</span>.rx {
-            <span class="macro">crate::profile_function!</span>();
-            <span class="kw">let </span>start = instant::Instant::now();
+        <span class="macro">crate::profile_function!</span>();
 
-            <span class="kw">while let </span><span class="prelude-val">Ok</span>(msg) = rx.try_recv() {
-                <span class="kw">if let </span>LogMsg::BeginRecordingMsg(msg) = <span class="kw-2">&amp;</span>msg {
-                    <span class="macro">re_log::debug!</span>(<span class="string">&quot;Beginning a new recording: {:?}&quot;</span>, msg.info);
-                    <span class="self">self</span>.state.selected_rec_id = msg.info.recording_id;
+        <span class="kw">let </span>start = instant::Instant::now();
 
-                    <span class="attr">#[cfg(all(not(target_arch = <span class="string">&quot;wasm32&quot;</span>), feature = <span class="string">&quot;analytics&quot;</span>))]
-                    </span><span class="kw">if let </span><span class="prelude-val">Some</span>(analytics) = <span class="self">self</span>.analytics.as_mut() {
-                        <span class="kw">use </span>re_analytics::Property;
-                        analytics.default_append_props_mut().extend([
-                            (<span class="string">&quot;application_id&quot;</span>.into(), {
-                                <span class="kw">let </span>prop: Property = msg.info.application_id.<span class="number">0</span>.clone().into();
-                                <span class="kw">if </span>msg.info.is_official_example {
-                                    prop
-                                } <span class="kw">else </span>{
-                                    prop.hashed()
-                                }
-                            }),
-                            (<span class="string">&quot;recording_id&quot;</span>.into(), {
-                                <span class="kw">let </span>prop: Property = msg.info.recording_id.to_string().into();
-                                <span class="kw">if </span>msg.info.is_official_example {
-                                    prop
-                                } <span class="kw">else </span>{
-                                    prop.hashed()
-                                }
-                            }),
-                            (
-                                <span class="string">&quot;recording_source&quot;</span>.into(),
-                                msg.info.recording_source.to_string().into(),
-                            ),
-                            (
-                                <span class="string">&quot;is_official_example&quot;</span>.into(),
-                                msg.info.is_official_example.into(),
-                            ),
-                        ]);
+        <span class="kw">while let </span><span class="prelude-val">Ok</span>(msg) = <span class="self">self</span>.rx.try_recv() {
+            <span class="kw">if let </span>LogMsg::BeginRecordingMsg(msg) = <span class="kw-2">&amp;</span>msg {
+                <span class="macro">re_log::debug!</span>(<span class="string">&quot;Beginning a new recording: {:?}&quot;</span>, msg.info);
+                <span class="self">self</span>.state.selected_rec_id = msg.info.recording_id;
 
-                        analytics.record(re_analytics::Event::data_source_opened());
-                    }
+                <span class="attr">#[cfg(all(not(target_arch = <span class="string">&quot;wasm32&quot;</span>), feature = <span class="string">&quot;analytics&quot;</span>))]
+                </span><span class="kw">if let </span><span class="prelude-val">Some</span>(analytics) = <span class="self">self</span>.analytics.as_mut() {
+                    <span class="kw">use </span>re_analytics::Property;
+                    analytics.default_append_props_mut().extend([
+                        (<span class="string">&quot;application_id&quot;</span>.into(), {
+                            <span class="kw">let </span>prop: Property = msg.info.application_id.<span class="number">0</span>.clone().into();
+                            <span class="kw">if </span>msg.info.is_official_example {
+                                prop
+                            } <span class="kw">else </span>{
+                                prop.hashed()
+                            }
+                        }),
+                        (<span class="string">&quot;recording_id&quot;</span>.into(), {
+                            <span class="kw">let </span>prop: Property = msg.info.recording_id.to_string().into();
+                            <span class="kw">if </span>msg.info.is_official_example {
+                                prop
+                            } <span class="kw">else </span>{
+                                prop.hashed()
+                            }
+                        }),
+                        (
+                            <span class="string">&quot;recording_source&quot;</span>.into(),
+                            msg.info.recording_source.to_string().into(),
+                        ),
+                        (
+                            <span class="string">&quot;is_official_example&quot;</span>.into(),
+                            msg.info.is_official_example.into(),
+                        ),
+                    ]);
+
+                    analytics.record(re_analytics::Event::data_source_opened());
                 }
-
-                <span class="kw">let </span>log_db = <span class="self">self</span>.log_dbs.entry(<span class="self">self</span>.state.selected_rec_id).or_default();
-
-                <span class="kw">if let </span><span class="prelude-val">Err</span>(err) = log_db.add(msg) {
-                    <span class="macro">re_log::error!</span>(<span class="string">&quot;Failed to add incoming msg: {err}&quot;</span>);
-                };
-                <span class="kw">if </span>start.elapsed() &gt; instant::Duration::from_millis(<span class="number">10</span>) {
-                    egui_ctx.request_repaint(); <span class="comment">// make sure we keep receiving messages asap
-                    </span><span class="kw">break</span>; <span class="comment">// don&#39;t block the main thread for too long
-                </span>}
             }
+
+            <span class="kw">let </span>log_db = <span class="self">self</span>.log_dbs.entry(<span class="self">self</span>.state.selected_rec_id).or_default();
+
+            <span class="kw">if let </span><span class="prelude-val">Err</span>(err) = log_db.add(msg) {
+                <span class="macro">re_log::error!</span>(<span class="string">&quot;Failed to add incoming msg: {err}&quot;</span>);
+            };
+            <span class="kw">if </span>start.elapsed() &gt; instant::Duration::from_millis(<span class="number">10</span>) {
+                egui_ctx.request_repaint(); <span class="comment">// make sure we keep receiving messages asap
+                </span><span class="kw">break</span>; <span class="comment">// don&#39;t block the main thread for too long
+            </span>}
         }
     }
 
@@ -2572,6 +2600,7 @@
         log_db: <span class="kw-2">&amp;</span>LogDb,
         re_ui: <span class="kw-2">&amp;</span>re_ui::ReUi,
         component_ui_registry: <span class="kw-2">&amp;</span>ComponentUiRegistry,
+        data_source: <span class="kw-2">&amp;</span>re_smart_channel::Source,
     ) {
         <span class="macro">crate::profile_function!</span>();
 
@@ -2589,7 +2618,8 @@
                 </span>profiler: <span class="kw">_</span>,
         } = <span class="self">self</span>;
 
-        <span class="kw">let </span>rec_cfg = recording_configs.entry(<span class="kw-2">*</span>selected_rec_id).or_default();
+        <span class="kw">let </span>rec_cfg =
+            recording_config_entry(recording_configs, <span class="kw-2">*</span>selected_rec_id, data_source, log_db);
         <span class="kw">let </span>selected_app_id = log_db
             .recording_info()
             .map_or_else(ApplicationId::unknown, |rec_info| {
@@ -2894,43 +2924,41 @@
 }
 
 <span class="kw">fn </span>input_latency_label_ui(ui: <span class="kw-2">&amp;mut </span>egui::Ui, app: <span class="kw-2">&amp;mut </span>App) {
-    <span class="kw">if let </span><span class="prelude-val">Some</span>(rx) = <span class="kw-2">&amp;</span>app.rx {
-        <span class="comment">// TODO(emilk): it would be nice to know if the network stream is still open
-        </span><span class="kw">let </span>is_latency_interesting = rx.source().is_network();
+    <span class="comment">// TODO(emilk): it would be nice to know if the network stream is still open
+    </span><span class="kw">let </span>is_latency_interesting = app.rx.source().is_network();
 
-        <span class="kw">let </span>queue_len = rx.len();
+    <span class="kw">let </span>queue_len = app.rx.len();
 
-        <span class="comment">// empty queue == unreliable latency
-        </span><span class="kw">let </span>latency_sec = rx.latency_ns() <span class="kw">as </span>f32 / <span class="number">1e9</span>;
-        <span class="kw">if </span>queue_len &gt; <span class="number">0
-            </span>&amp;&amp; (!is_latency_interesting || app.state.app_options.warn_latency &lt; latency_sec)
-        {
-            <span class="comment">// we use this to avoid flicker
-            </span>app.latest_queue_interest = instant::Instant::now();
-        }
+    <span class="comment">// empty queue == unreliable latency
+    </span><span class="kw">let </span>latency_sec = app.rx.latency_ns() <span class="kw">as </span>f32 / <span class="number">1e9</span>;
+    <span class="kw">if </span>queue_len &gt; <span class="number">0
+        </span>&amp;&amp; (!is_latency_interesting || app.state.app_options.warn_latency &lt; latency_sec)
+    {
+        <span class="comment">// we use this to avoid flicker
+        </span>app.latest_queue_interest = instant::Instant::now();
+    }
 
-        <span class="kw">if </span>app.latest_queue_interest.elapsed().as_secs_f32() &lt; <span class="number">1.0 </span>{
-            ui.separator();
-            <span class="kw">if </span>is_latency_interesting {
-                <span class="kw">let </span>text = <span class="macro">format!</span>(
-                    <span class="string">&quot;Latency: {:.2}s, queue: {}&quot;</span>,
-                    latency_sec,
-                    format_number(queue_len),
-                );
-                <span class="kw">let </span>hover_text =
+    <span class="kw">if </span>app.latest_queue_interest.elapsed().as_secs_f32() &lt; <span class="number">1.0 </span>{
+        ui.separator();
+        <span class="kw">if </span>is_latency_interesting {
+            <span class="kw">let </span>text = <span class="macro">format!</span>(
+                <span class="string">&quot;Latency: {:.2}s, queue: {}&quot;</span>,
+                latency_sec,
+                format_number(queue_len),
+            );
+            <span class="kw">let </span>hover_text =
                     <span class="string">&quot;When more data is arriving over network than the Rerun Viewer can index, a queue starts building up, leading to latency and increased RAM use.\n\
                     This latency does NOT include network latency.&quot;</span>;
 
-                <span class="kw">if </span>latency_sec &lt; app.state.app_options.warn_latency {
-                    ui.weak(text).on_hover_text(hover_text);
-                } <span class="kw">else </span>{
-                    ui.label(app.re_ui.warning_text(text))
-                        .on_hover_text(hover_text);
-                }
+            <span class="kw">if </span>latency_sec &lt; app.state.app_options.warn_latency {
+                ui.weak(text).on_hover_text(hover_text);
             } <span class="kw">else </span>{
-                ui.weak(<span class="macro">format!</span>(<span class="string">&quot;Queue: {}&quot;</span>, format_number(queue_len)))
-                    .on_hover_text(<span class="string">&quot;Number of messages in the inbound queue&quot;</span>);
+                ui.label(app.re_ui.warning_text(text))
+                    .on_hover_text(hover_text);
             }
+        } <span class="kw">else </span>{
+            ui.weak(<span class="macro">format!</span>(<span class="string">&quot;Queue: {}&quot;</span>, format_number(queue_len)))
+                .on_hover_text(<span class="string">&quot;Number of messages in the inbound queue&quot;</span>);
         }
     }
 }
@@ -3323,6 +3351,42 @@
             <span class="prelude-val">None
         </span>}
     }
+}
+
+<span class="kw">fn </span>recording_config_entry&lt;<span class="lifetime">&#39;cfgs</span>&gt;(
+    configs: <span class="kw-2">&amp;</span><span class="lifetime">&#39;cfgs </span><span class="kw-2">mut </span>IntMap&lt;RecordingId, RecordingConfig&gt;,
+    id: RecordingId,
+    data_source: <span class="kw-2">&amp;</span><span class="lifetime">&#39;_ </span>re_smart_channel::Source,
+    log_db: <span class="kw-2">&amp;</span><span class="lifetime">&#39;_ </span>LogDb,
+) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;cfgs </span><span class="kw-2">mut </span>RecordingConfig {
+    configs
+        .entry(id)
+        .or_insert_with(|| new_recording_confg(data_source, log_db))
+}
+
+<span class="kw">fn </span>new_recording_confg(
+    data_source: <span class="kw-2">&amp;</span><span class="lifetime">&#39;_ </span>re_smart_channel::Source,
+    log_db: <span class="kw-2">&amp;</span><span class="lifetime">&#39;_ </span>LogDb,
+) -&gt; RecordingConfig {
+    <span class="kw">use </span><span class="kw">crate</span>::misc::time_control::PlayState;
+
+    <span class="kw">let </span>play_state = <span class="kw">match </span>data_source {
+        <span class="comment">// Play files from the start by default - it feels nice and alive
+        </span>re_smart_channel::Source::File { .. } =&gt; PlayState::Playing,
+
+        <span class="comment">// Live data - follow it!
+        </span>re_smart_channel::Source::Sdk
+        | re_smart_channel::Source::WsClient { .. }
+        | re_smart_channel::Source::TcpServer { .. } =&gt; PlayState::Following,
+    };
+
+    <span class="kw">let </span><span class="kw-2">mut </span>rec_cfg = RecordingConfig::default();
+
+    rec_cfg
+        .time_ctrl
+        .set_play_state(log_db.times_per_timeline(), play_state);
+
+    rec_cfg
 }
 </code></pre></div>
 </section></div></main><div id="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="re_viewer" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.1 (d5a82bbd2 2023-02-07)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>
