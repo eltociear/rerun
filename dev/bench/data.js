@@ -1,176 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1676394601551,
+  "lastUpdate": 1676396924074,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Rust Benchmark": [
-      {
-        "commit": {
-          "author": {
-            "email": "emil.ernerfeldt@gmail.com",
-            "name": "Emil Ernerfeldt",
-            "username": "emilk"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "2ef9330031ab119cbedc698b3fe5f8e95c99dcc5",
-          "message": "Release `0.2.0-alpha.0` (#1229)\n\n* fix release tag matching\r\n\r\n* Update release instructions\r\n\r\n* Bump version to 0.2.0-alpha.0\r\n\r\n* Turn on all features for all crates when building the docs\r\n\r\n* Add badges to all the crates\r\n\r\n* put internal crates as workspace items with version numbers\r\n\r\n* re_renderer/build.rs: only touch file on disk if it changed\r\n\r\n* Don't call cargofmt from re_renderer build.rs\r\n\r\n* Add sanity-check to re_renderer/build.rs\r\n\r\n* Make the sanity check sane\r\n\r\n* include shaders in re_renderer package\r\n\r\n* fix publishing of re_ui\r\n\r\n* Improve error message from re_web_server/build.rs\r\n\r\n* re_web_server/build.rs: handle building outside of rerun workspace\r\n\r\n* fix re_sdk_comms path\r\n\r\n* Just include shaders under re_renderer/shader\r\n\r\n* Only run our build.rs files when in our workspace\r\n\r\n* Fix publishing or re_web_server\r\n\r\n* Fix publishing re_renderer/build.rs\r\n\r\n* Remove wrong badge\r\n\r\n* Clean up RELEASES.md\r\n\r\n* nit\r\n\r\n* Clean up RELEASES.md\r\n\r\n* Revert \"re_web_server/build.rs: handle building outside of rerun workspace\"\r\n\r\nThis reverts commit c055908d6aca4be88dcc915736c02714d12e9fc0.\r\n\r\n* fix rerun badges\r\n\r\nCo-authored-by: Clement Rey <cr.rey.clement@gmail.com>\r\n\r\n* Better comment\r\n\r\n---------\r\n\r\nCo-authored-by: Clement Rey <cr.rey.clement@gmail.com>",
-          "timestamp": "2023-02-13T11:04:15+01:00",
-          "tree_id": "4d71945c5934005bac19dbda59268bf76fa71421",
-          "url": "https://github.com/rerun-io/rerun/commit/2ef9330031ab119cbedc698b3fe5f8e95c99dcc5"
-        },
-        "date": 1676283346677,
-        "tool": "cargo",
-        "benches": [
-          {
-            "name": "datastore/insert/batch/rects/insert",
-            "value": 542799,
-            "range": "± 3520",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "datastore/latest_at/batch/rects/query",
-            "value": 1760,
-            "range": "± 2",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "datastore/latest_at/missing_components/primary",
-            "value": 350,
-            "range": "± 2",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "datastore/latest_at/missing_components/secondaries",
-            "value": 420,
-            "range": "± 1",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "datastore/range/batch/rects/query",
-            "value": 150004,
-            "range": "± 583",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "mono_points_arrow/generate_message_bundles",
-            "value": 48683301,
-            "range": "± 1799355",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "mono_points_arrow/generate_messages",
-            "value": 136460703,
-            "range": "± 1349970",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "mono_points_arrow/encode_log_msg",
-            "value": 162777447,
-            "range": "± 1946387",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "mono_points_arrow/encode_total",
-            "value": 353191824,
-            "range": "± 8114959",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "mono_points_arrow/decode_log_msg",
-            "value": 183971863,
-            "range": "± 1941936",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "mono_points_arrow/decode_message_bundles",
-            "value": 75297514,
-            "range": "± 1308672",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "mono_points_arrow/decode_total",
-            "value": 254192792,
-            "range": "± 2547842",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "batch_points_arrow/generate_message_bundles",
-            "value": 358279,
-            "range": "± 1146",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "batch_points_arrow/generate_messages",
-            "value": 6123,
-            "range": "± 98",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "batch_points_arrow/encode_log_msg",
-            "value": 363170,
-            "range": "± 1641",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "batch_points_arrow/encode_total",
-            "value": 754025,
-            "range": "± 3953",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "batch_points_arrow/decode_log_msg",
-            "value": 348161,
-            "range": "± 2739",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "batch_points_arrow/decode_message_bundles",
-            "value": 2012,
-            "range": "± 7",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "batch_points_arrow/decode_total",
-            "value": 352319,
-            "range": "± 1723",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "arrow_mono_points/insert",
-            "value": 6937726477,
-            "range": "± 24369894",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "arrow_mono_points/query",
-            "value": 1642271,
-            "range": "± 351715",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "arrow_batch_points/insert",
-            "value": 2608549,
-            "range": "± 30054",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "arrow_batch_points/query",
-            "value": 17182,
-            "range": "± 231",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "tuid/Tuid::random",
-            "value": 34,
-            "range": "± 0",
-            "unit": "ns/iter"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -5033,6 +4865,174 @@ window.BENCHMARK_DATA = {
             "name": "arrow_batch_points/query",
             "value": 17149,
             "range": "± 28",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "tuid/Tuid::random",
+            "value": 34,
+            "range": "± 0",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "cr.rey.clement@gmail.com",
+            "name": "Clement Rey",
+            "username": "teh-cmc"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "1d09a2817ce0cb43d2f4bb91c126484bd190a5f6",
+          "message": "readme: link to troubleshooting page (#1297)\n\n* link to troubleshooting page\r\n\r\n* Update README.md\r\n\r\nCo-authored-by: Emil Ernerfeldt <emil.ernerfeldt@gmail.com>\r\n\r\n* link to troubleshooting doc everywhere\r\n\r\n---------\r\n\r\nCo-authored-by: Emil Ernerfeldt <emil.ernerfeldt@gmail.com>",
+          "timestamp": "2023-02-14T18:38:42+01:00",
+          "tree_id": "ede345ef6f5d6fa5749322f86d6fa269f30c7869",
+          "url": "https://github.com/rerun-io/rerun/commit/1d09a2817ce0cb43d2f4bb91c126484bd190a5f6"
+        },
+        "date": 1676396919946,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datastore/insert/batch/rects/insert",
+            "value": 550403,
+            "range": "± 5680",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/latest_at/batch/rects/query",
+            "value": 1747,
+            "range": "± 9",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/latest_at/missing_components/primary",
+            "value": 355,
+            "range": "± 4",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/latest_at/missing_components/secondaries",
+            "value": 418,
+            "range": "± 4",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datastore/range/batch/rects/query",
+            "value": 147366,
+            "range": "± 362",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/generate_message_bundles",
+            "value": 47180205,
+            "range": "± 1606197",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/generate_messages",
+            "value": 135462563,
+            "range": "± 1457042",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/encode_log_msg",
+            "value": 160731290,
+            "range": "± 889762",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/encode_total",
+            "value": 351288662,
+            "range": "± 2206225",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/decode_log_msg",
+            "value": 184301505,
+            "range": "± 4721636",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/decode_message_bundles",
+            "value": 72251563,
+            "range": "± 1370784",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "mono_points_arrow/decode_total",
+            "value": 251379731,
+            "range": "± 2143564",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/generate_message_bundles",
+            "value": 330511,
+            "range": "± 5587",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/generate_messages",
+            "value": 6186,
+            "range": "± 47",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/encode_log_msg",
+            "value": 353748,
+            "range": "± 2276",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/encode_total",
+            "value": 720297,
+            "range": "± 2029",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/decode_log_msg",
+            "value": 347393,
+            "range": "± 907",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/decode_message_bundles",
+            "value": 2028,
+            "range": "± 6",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "batch_points_arrow/decode_total",
+            "value": 353646,
+            "range": "± 2176",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_mono_points/insert",
+            "value": 7102383023,
+            "range": "± 24505300",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_mono_points/query",
+            "value": 1677055,
+            "range": "± 14257",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_batch_points/insert",
+            "value": 2657653,
+            "range": "± 12101",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "arrow_batch_points/query",
+            "value": 17084,
+            "range": "± 36",
             "unit": "ns/iter"
           },
           {
