@@ -488,6 +488,9 @@
 <a href="#488" id="488">488</a>
 <a href="#489" id="489">489</a>
 <a href="#490" id="490">490</a>
+<a href="#491" id="491">491</a>
+<a href="#492" id="492">492</a>
+<a href="#493" id="493">493</a>
 </pre><pre class="rust"><code><span class="kw">use </span>std::net::SocketAddr;
 
 <span class="kw">use </span>re_log_types::{
@@ -570,10 +573,12 @@
     ///
     /// Usually you should only call this once and then reuse the same [`Session`].
     ///
-    /// For convenience, there is also a global [`Session`] object you can access with [`crate::global_session`].
+    /// For convenience, there is also a global [`Session`] object you can access with
+    /// [`crate::global_session`].
     ///
     /// Logging is enabled by default, but can be turned off with the `RERUN` environment variable
     /// or by calling [`Self::set_enabled`].
+    </span><span class="attr">#[doc(hidden)]
     </span><span class="kw">pub fn </span>new() -&gt; <span class="self">Self </span>{
         <span class="self">Self</span>::with_default_enabled(<span class="bool-val">true</span>)
     }
@@ -582,6 +587,7 @@
     ///
     /// The default can always be overridden using the `RERUN` environment variable
     /// or by calling [`Self::set_enabled`].
+    </span><span class="attr">#[doc(hidden)]
     </span><span class="kw">pub fn </span>with_default_enabled(default_enabled: bool) -&gt; <span class="self">Self </span>{
         <span class="kw">let </span>enabled = <span class="kw">crate</span>::decide_logging_enabled(default_enabled);
 

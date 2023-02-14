@@ -103,6 +103,9 @@
 <a href="#103" id="103">103</a>
 <a href="#104" id="104">104</a>
 <a href="#105" id="105">105</a>
+<a href="#106" id="106">106</a>
+<a href="#107" id="107">107</a>
+<a href="#108" id="108">108</a>
 </pre><pre class="rust"><code><span class="doccomment">//! This module provides integration with integration with [`clap`](https://github.com/clap-rs/clap).
 
 </span><span class="kw">use </span><span class="kw">crate</span>::Session;
@@ -179,10 +182,13 @@
     </span><span class="kw">pub fn </span>on_teardown(<span class="kw-2">&amp;</span><span class="self">self</span>, session: <span class="kw-2">&amp;mut </span>Session) -&gt; anyhow::Result&lt;()&gt; {
         <span class="kw">let </span>behavior = <span class="self">self</span>.to_behavior();
 
-        <span class="kw">if </span><span class="macro">matches!</span>(behavior, RerunBehavior::Serve) {
+        <span class="attr">#[cfg(feature = <span class="string">&quot;web&quot;</span>)]
+        </span><span class="kw">if </span><span class="macro">matches!</span>(behavior, RerunBehavior::Serve) {
             <span class="macro">eprintln!</span>(<span class="string">&quot;Sleeping while serving the web viewer. Abort with Ctrl-C&quot;</span>);
             std::thread::sleep(std::time::Duration::from_secs(<span class="number">1_000_000</span>));
-        } <span class="kw">else if let </span>RerunBehavior::Save(path) = behavior {
+        }
+
+        <span class="kw">if let </span>RerunBehavior::Save(path) = behavior {
             session.save(path)<span class="question-mark">?</span>;
         }
 
