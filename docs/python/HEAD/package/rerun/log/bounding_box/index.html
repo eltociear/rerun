@@ -1520,7 +1520,10 @@
 
   <div class="doc doc-contents ">
   
-      <p>Log a 3D oriented bounding box.</p>
+      <p>Log a 3D Oriented Bounding Box, or OBB.</p>
+<h6 id="rerun.log.bounding_box.log_obb--example">Example:</h6>
+<div class="highlight"><pre><span></span><code>rr.log_obb(&quot;my_obb&quot;, half_size=[1.0, 2.0, 3.0], position=[0, 0, 0], rotation_q=[0, 0, 0, 1])
+</code></pre></div>
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -1558,7 +1561,7 @@
           <td>
                 <code><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a>[<a class="autorefs autorefs-external" title="numpy.typing" href="https://numpy.org/doc/stable/reference/typing.html#module-numpy.typing">npt</a>.<a class="autorefs autorefs-external" title="numpy.typing.ArrayLike" href="https://numpy.org/doc/stable/reference/typing.html#numpy.typing.ArrayLike">ArrayLike</a>]</code>
           </td>
-          <td><p>Array with [x, y, z] position of the OBB in world space.</p></td>
+          <td><p>Optional array with [x, y, z] position of the OBB in world space.</p></td>
           <td>
                 <code>None</code>
           </td>
@@ -1568,7 +1571,7 @@
           <td>
                 <code><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a>[<a class="autorefs autorefs-external" title="numpy.typing" href="https://numpy.org/doc/stable/reference/typing.html#module-numpy.typing">npt</a>.<a class="autorefs autorefs-external" title="numpy.typing.ArrayLike" href="https://numpy.org/doc/stable/reference/typing.html#numpy.typing.ArrayLike">ArrayLike</a>]</code>
           </td>
-          <td><p>Array with quaternion coordinates [x, y, z, w] for the rotation from model to world space.</p></td>
+          <td><p>Optional array with quaternion coordinates [x, y, z, w] for the rotation from model to world space.</p></td>
           <td>
                 <code>None</code>
           </td>
@@ -1588,7 +1591,7 @@
           <td>
                 <code><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a>[<a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a>]</code>
           </td>
-          <td><p>Optional width of the OBB edges.</p></td>
+          <td><p>Optional width of the line edges.</p></td>
           <td>
                 <code>None</code>
           </td>

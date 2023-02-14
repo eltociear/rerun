@@ -2762,7 +2762,10 @@ rerun.log_view_coordinates(&quot;world&quot;, up=&quot;-Y&quot;, right_handed=Fa
 
   <div class="doc doc-contents ">
   
-      <p>Log a 3D oriented bounding box.</p>
+      <p>Log a 3D Oriented Bounding Box, or OBB.</p>
+<h6 id="rerun.log_obb--example">Example:</h6>
+<div class="highlight"><pre><span></span><code>rr.log_obb(&quot;my_obb&quot;, half_size=[1.0, 2.0, 3.0], position=[0, 0, 0], rotation_q=[0, 0, 0, 1])
+</code></pre></div>
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -2800,7 +2803,7 @@ rerun.log_view_coordinates(&quot;world&quot;, up=&quot;-Y&quot;, right_handed=Fa
           <td>
                 <code><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a>[<a class="autorefs autorefs-external" title="numpy.typing" href="https://numpy.org/doc/stable/reference/typing.html#module-numpy.typing">npt</a>.<a class="autorefs autorefs-external" title="numpy.typing.ArrayLike" href="https://numpy.org/doc/stable/reference/typing.html#numpy.typing.ArrayLike">ArrayLike</a>]</code>
           </td>
-          <td><p>Array with [x, y, z] position of the OBB in world space.</p></td>
+          <td><p>Optional array with [x, y, z] position of the OBB in world space.</p></td>
           <td>
                 <code>None</code>
           </td>
@@ -2810,7 +2813,7 @@ rerun.log_view_coordinates(&quot;world&quot;, up=&quot;-Y&quot;, right_handed=Fa
           <td>
                 <code><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a>[<a class="autorefs autorefs-external" title="numpy.typing" href="https://numpy.org/doc/stable/reference/typing.html#module-numpy.typing">npt</a>.<a class="autorefs autorefs-external" title="numpy.typing.ArrayLike" href="https://numpy.org/doc/stable/reference/typing.html#numpy.typing.ArrayLike">ArrayLike</a>]</code>
           </td>
-          <td><p>Array with quaternion coordinates [x, y, z, w] for the rotation from model to world space.</p></td>
+          <td><p>Optional array with quaternion coordinates [x, y, z, w] for the rotation from model to world space.</p></td>
           <td>
                 <code>None</code>
           </td>
@@ -2830,7 +2833,7 @@ rerun.log_view_coordinates(&quot;world&quot;, up=&quot;-Y&quot;, right_handed=Fa
           <td>
                 <code><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a>[<a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a>]</code>
           </td>
-          <td><p>Optional width of the OBB edges.</p></td>
+          <td><p>Optional width of the line edges.</p></td>
           <td>
                 <code>None</code>
           </td>
@@ -4235,8 +4238,10 @@ The resulting transform from child to parent corresponds to taking a point in th
 rotating it by the given rotations, and then translating it by the given translation:</p>
 <p><code>point_parent = translation + quat * point_child * quat*</code></p>
 <h6 id="rerun.log_rigid3--example">Example</h6>
-<div class="highlight"><pre><span></span><code>rerun.log_rigid3(&quot;world/camera&quot;, parent_from_child=(t,q))
-rerun.log_pinhole(&quot;world/camera/image&quot;, …)
+<div class="highlight"><pre><span></span><code>t = 0.0
+translation = [math.sin(t), math.cos(t), 0.0] # circle around origin
+rotation = [0.5, 0.0, 0.0, np.sin(np.pi/3)] # 60 degrees around x-axis
+rerun.log_rigid3(&quot;sun/planet&quot;, parent_from_child=(translation, rotation))
 </code></pre></div>
 
   <p><strong>Parameters:</strong></p>
