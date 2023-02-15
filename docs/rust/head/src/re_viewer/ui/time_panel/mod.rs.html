@@ -1233,6 +1233,7 @@
 <a href="#1233" id="1233">1233</a>
 <a href="#1234" id="1234">1234</a>
 <a href="#1235" id="1235">1235</a>
+<a href="#1236" id="1236">1236</a>
 </pre><pre class="rust"><code><span class="kw">mod </span>ball_scatterer;
 <span class="kw">mod </span>paint_ticks;
 <span class="kw">mod </span>time_axis;
@@ -1446,6 +1447,7 @@
             <span class="kw">let </span>size = egui::vec2(<span class="self">self</span>.prev_col_width, <span class="number">28.0</span>);
             ui.allocate_ui_with_layout(size, egui::Layout::top_down(egui::Align::LEFT), |ui| {
                 ui.set_min_size(size);
+                ui.style_mut().wrap = <span class="prelude-val">Some</span>(<span class="bool-val">false</span>);
                 ui.add_space(<span class="number">4.0</span>); <span class="comment">// hack to vertically center the text
                 </span>ui.strong(<span class="string">&quot;Streams&quot;</span>);
             })
