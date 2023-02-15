@@ -1,3 +1,0 @@
-* [Common APIs](common/)
-* [Package Listing](package/)
-* [Writing Docs](docs.md)
