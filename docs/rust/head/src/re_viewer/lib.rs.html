@@ -157,6 +157,8 @@
 <a href="#157" id="157">157</a>
 <a href="#158" id="158">158</a>
 <a href="#159" id="159">159</a>
+<a href="#160" id="160">160</a>
+<a href="#161" id="161">161</a>
 </pre><pre class="rust"><code><span class="doccomment">//! Rerun Viewer GUI.
 //!
 //! This crate contains all the GUI code for the Rerun Viewer,
@@ -255,6 +257,8 @@
             }),
             backends: re_renderer::config::supported_backends(),
             device_descriptor: <span class="kw">crate</span>::hardware_tier().device_descriptor(),
+            <span class="comment">// TODO(andreas): This should be the default for egui-wgpu.
+            </span>power_preference: wgpu::util::power_preference_from_env().unwrap_or(wgpu::PowerPreference::HighPerformance),
             ..Default::default()
         }
 }
