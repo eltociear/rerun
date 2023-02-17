@@ -321,6 +321,15 @@
 <a href="#321" id="321">321</a>
 <a href="#322" id="322">322</a>
 <a href="#323" id="323">323</a>
+<a href="#324" id="324">324</a>
+<a href="#325" id="325">325</a>
+<a href="#326" id="326">326</a>
+<a href="#327" id="327">327</a>
+<a href="#328" id="328">328</a>
+<a href="#329" id="329">329</a>
+<a href="#330" id="330">330</a>
+<a href="#331" id="331">331</a>
+<a href="#332" id="332">332</a>
 </pre><pre class="rust"><code><span class="kw">use </span>re_format::parse_duration;
 <span class="kw">use </span>re_log_types::LogMsg;
 <span class="kw">use </span>re_smart_channel::Receiver;
@@ -340,7 +349,16 @@
 ///
 /// Environment variables:
 ///
+/// * `RERUN`: force enable/disable logging with rerun (only relevant for the Rerun API, not the Viewer itself). Either `on`/`1`/`true` or `off`/`0`/`false`
+///
+/// * `RERUN_SHADER_PATH`: change the search path for shader/shader-imports. WARNING: Shaders are embedded in some build configurations.
+///
 /// * `RERUN_TRACK_ALLOCATIONS`: track all allocations in order to find memory leaks in the viewer. WARNING: slows down the viewer by a lot!
+///
+/// * `WGPU_BACKEND`: overwrites the graphics backend used, must be one of `vulkan`, `metal`, `dx12`, `dx11`, or `gl`.
+///     Naturally, support depends on your OS. Default is `vulkan` everywhere except on Mac where we use `metal`.
+///
+/// * `WGPU_POWER_PREF`: overwrites the power setting used for choosing a graphics adapter, must be `high` or `low`. (Default is `high`)
 </span><span class="attr">#[derive(Debug, clap::Parser)]
 #[clap(author, version, about)]
 </span><span class="kw">struct </span>Args {
