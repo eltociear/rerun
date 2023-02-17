@@ -274,6 +274,24 @@
 <a href="#274" id="274">274</a>
 <a href="#275" id="275">275</a>
 <a href="#276" id="276">276</a>
+<a href="#277" id="277">277</a>
+<a href="#278" id="278">278</a>
+<a href="#279" id="279">279</a>
+<a href="#280" id="280">280</a>
+<a href="#281" id="281">281</a>
+<a href="#282" id="282">282</a>
+<a href="#283" id="283">283</a>
+<a href="#284" id="284">284</a>
+<a href="#285" id="285">285</a>
+<a href="#286" id="286">286</a>
+<a href="#287" id="287">287</a>
+<a href="#288" id="288">288</a>
+<a href="#289" id="289">289</a>
+<a href="#290" id="290">290</a>
+<a href="#291" id="291">291</a>
+<a href="#292" id="292">292</a>
+<a href="#293" id="293">293</a>
+<a href="#294" id="294">294</a>
 </pre><pre class="rust"><code><span class="doccomment">/// A macro to read the contents of a file on disk, and resolve #import clauses as required.
 ///
 /// - On Wasm and/or release builds, this will behave like the standard [`include_str`]
@@ -291,14 +309,32 @@
 
             </span><span class="kw">let </span><span class="kw-2">mut </span>resolver = <span class="macro-nonterminal">$crate::new_recommended_file_resolver</span>();
 
-            <span class="kw">let </span>file_path = ::std::path::Path::new(<span class="macro">file!</span>())
+            <span class="kw">let </span>root_path = ::std::path::PathBuf::from(<span class="macro">file!</span>());
+
+            <span class="comment">// If we&#39;re building from within the workspace, `file!()` will return a relative path
+            // starting at the workspace root.
+            // We&#39;re packing shaders using the re_renderer crate as root instead (to avoid nasty
+            // problems when publishing: as we lose workspace information when publishing!), so we
+            // need to make sure to strip the path down.
+            </span><span class="kw">let </span>root_path = root_path
+                .strip_prefix(<span class="string">&quot;crates/re_renderer&quot;</span>)
+                .map_or_else(|<span class="kw">_</span>| root_path.clone(), ToOwned::to_owned);
+
+            <span class="kw">let </span>path = root_path
                 .parent()
                 .unwrap()
                 .join(<span class="macro-nonterminal">$path</span>);
 
+            <span class="comment">// If we&#39;re building from outside the workspace, `path` is an absolute path already and
+            // we&#39;re good to go; but if we&#39;re building from within, `path` is currently a relative
+            // path that assumes the CWD is the root of re_renderer, we need to make it absolute as
+            // there is no guarantee that this is where `cargo run` is being run from.
+            </span><span class="kw">let </span>manifest_path = ::std::path::PathBuf::from(<span class="macro">env!</span>(<span class="string">&quot;CARGO_MANIFEST_DIR&quot;</span>));
+            <span class="kw">let </span>path = manifest_path.join(path);
+
             <span class="kw">use </span>anyhow::Context <span class="kw">as _</span>;
-            <span class="macro-nonterminal">$crate::FileServer::get_mut</span>(|fs| fs.watch(<span class="kw-2">&amp;mut </span>resolver, <span class="kw-2">&amp;</span>file_path, <span class="bool-val">false</span>))
-                .with_context(|| <span class="macro">format!</span>(<span class="string">&quot;include_file!({}) (rooted at {:?}) failed while trying to import physical path {file_path:?}&quot;</span>, <span class="macro-nonterminal">$path</span>, <span class="macro">file!</span>()))
+            <span class="macro-nonterminal">$crate::FileServer::get_mut</span>(|fs| fs.watch(<span class="kw-2">&amp;mut </span>resolver, <span class="kw-2">&amp;</span>path, <span class="bool-val">false</span>))
+                .with_context(|| <span class="macro">format!</span>(<span class="string">&quot;include_file!({}) (rooted at {:?}) failed while trying to import physical path {path:?}&quot;</span>, <span class="macro-nonterminal">$path</span>, root_path))
                 .unwrap()
         }
 

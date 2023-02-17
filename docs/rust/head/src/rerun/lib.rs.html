@@ -97,6 +97,7 @@
 <a href="#97" id="97">97</a>
 <a href="#98" id="98">98</a>
 <a href="#99" id="99">99</a>
+<a href="#100" id="100">100</a>
 </pre><pre class="rust"><code><span class="doccomment">//! # Rerun - log point clouds, images, etc and visualize them effortlessly
 //!
 //! Add the `rerun` library to your crate with `cargo add rerun`.
@@ -189,7 +190,8 @@
 
 </span><span class="attr">#![warn(missing_docs)] </span><span class="comment">// Let&#39;s keep the this crate well-documented!
 
-</span><span class="kw">mod </span>run;
+</span><span class="kw">mod </span>crash_handler;
+<span class="kw">mod </span>run;
 
 <span class="kw">pub use </span>run::{run, CallSource};
 
