@@ -268,6 +268,12 @@
 <a href="#268" id="268">268</a>
 <a href="#269" id="269">269</a>
 <a href="#270" id="270">270</a>
+<a href="#271" id="271">271</a>
+<a href="#272" id="272">272</a>
+<a href="#273" id="273">273</a>
+<a href="#274" id="274">274</a>
+<a href="#275" id="275">275</a>
+<a href="#276" id="276">276</a>
 </pre><pre class="rust"><code><span class="doccomment">/// A macro to read the contents of a file on disk, and resolve #import clauses as required.
 ///
 /// - On Wasm and/or release builds, this will behave like the standard [`include_str`]
@@ -290,7 +296,10 @@
                 .unwrap()
                 .join(<span class="macro-nonterminal">$path</span>);
 
-            <span class="macro-nonterminal">$crate::FileServer::get_mut</span>(|fs| fs.watch(<span class="kw-2">&amp;mut </span>resolver, <span class="kw-2">&amp;</span>file_path, <span class="bool-val">false</span>)).unwrap()
+            <span class="kw">use </span>anyhow::Context <span class="kw">as _</span>;
+            <span class="macro-nonterminal">$crate::FileServer::get_mut</span>(|fs| fs.watch(<span class="kw-2">&amp;mut </span>resolver, <span class="kw-2">&amp;</span>file_path, <span class="bool-val">false</span>))
+                .with_context(|| <span class="macro">format!</span>(<span class="string">&quot;include_file!({}) (rooted at {:?}) failed while trying to import physical path {file_path:?}&quot;</span>, <span class="macro-nonterminal">$path</span>, <span class="macro">file!</span>()))
+                .unwrap()
         }
 
         <span class="attr">#[cfg(not(all(not(target_arch = <span class="string">&quot;wasm32&quot;</span>), debug_assertions)))] </span><span class="comment">// otherwise
@@ -330,7 +339,10 @@
             //
             // Therefore, the in-memory filesystem will actually be able to find this path,
             // and canonicalize it.
-            </span><span class="macro-nonterminal">$crate::get_filesystem</span>().canonicalize(<span class="kw-2">&amp;</span>path).unwrap()
+            </span><span class="kw">use </span>anyhow::Context <span class="kw">as _</span>;
+            <span class="macro-nonterminal">$crate::get_filesystem</span>().canonicalize(<span class="kw-2">&amp;</span>path)
+                .with_context(|| <span class="macro">format!</span>(<span class="string">&quot;include_file!({}) (rooted at {:?}) failed while trying to import virtual path {path:?}&quot;</span>, <span class="macro-nonterminal">$path</span>, <span class="macro">file!</span>()))
+                .unwrap()
         }
     }};
 }
